@@ -134,9 +134,9 @@ openocd -v
 ### 使用 VS Code 编辑
 
 * 用 VS Code  打开工程文件夹，目录结构如下
-  * 其中 `.cproject .mxproject .project` 均可删去；
-  * `.ld` 为链接脚本文件，在链接时使用，本目录下的 `.ld` 规定了设备内存相关信息；
-  * `Core/` `Drivers/` 为 CubeMX 按照模板生成的文件，除 `Core/Src/main.c` 外一般不做改动。
+    * 其中 `.cproject .mxproject .project` 均可删去；
+    * `.ld` 为链接脚本文件，在链接时使用，本目录下的 `.ld` 规定了设备内存相关信息；
+    * `Core/` `Drivers/` 为 CubeMX 按照模板生成的文件，除 `Core/Src/main.c` 外一般不做改动。
 
 ![vscode01](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/vscode01.png)
 
@@ -180,11 +180,11 @@ openocd -v
 
 * 运行配置：
 
-  * 可以通过更改构建类型来运行配置；
-  * 或者修改 CMakeLists 并保存，将自动配置；
-  * 或者通过从命令面板运行 *CMake: Configure* 命令；
-  * 或者在尚未进行配置时直接运行构建，其中包含了配置步骤；
-  * 或使用命令行：
+    * 可以通过更改构建类型来运行配置；
+    * 或者修改 CMakeLists 并保存，将自动配置；
+    * 或者通过从命令面板运行 *CMake: Configure* 命令；
+    * 或者在尚未进行配置时直接运行构建，其中包含了配置步骤；
+    * 或使用命令行：
 
   ```shell
   cd build
@@ -238,13 +238,13 @@ openocd -v
 
 * 使用 CMSIS-DAP 调试时，Ozone 会弹窗提示设备没有 License，此问题可通过在 J-Link License Manager 注册解决。若还不清楚如何用 Ozone 开启调试，可之后再进行此步骤。注册流程为：
 
-  * 下载 J-Link / J-Flash 注册机 [下载](https://g6ursaxeei.feishu.cn/wiki/wikcno8IDCTKHQWGDTOOzQFLyMg) ；
-
-  * 先用 Ozone 开启调试，然后点击 Windows 任务栏托盘区的 ![](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon-jl.png) 图标开启 J-Link 控制面板，读取序列号：
+    * 下载 J-Link / J-Flash 注册机 [下载](https://g6ursaxeei.feishu.cn/wiki/wikcno8IDCTKHQWGDTOOzQFLyMg) ； 
+  
+    * 先用 Ozone 开启调试，然后点击 Windows 任务栏托盘区的 ![](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon-jl.png) 图标开启 J-Link 控制面板，读取序列号：
 
     ![jl](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/panel-jl.png)
 
-  * 将序列号输入注册机生成 License，然后开启 J-Link License Manager（已与 J-Link 捆绑安装），添加 License：
+    * 将序列号输入注册机生成 License，然后开启 J-Link License Manager（已与 J-Link 捆绑安装），添加 License：
 
     ![lic](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/license-jl.png)
 
@@ -252,10 +252,10 @@ openocd -v
 #### 创建项目
 
 * 进入 Ozone，选择 `File-->New-->New Project Wizard` ：
-  * 选择目标开发板对应的 Device, Register Set，按 Next；
-  * 选择 Target Interface = SWD, Target Interface Speed  = 4MHz,  Host Interface = USB，按 Next；
-  * 选择要调试的可执行文件，按 Next；
-  * 如无特殊要求，其他选项保持默认即可。
+    * 选择目标开发板对应的 Device, Register Set，按 Next；
+    * 选择 Target Interface = SWD, Target Interface Speed  = 4MHz,  Host Interface = USB，按 Next；
+    * 选择要调试的可执行文件，按 Next；
+    * 如无特殊要求，其他选项保持默认即可。
 
 * 点击 `File-->Save Project as`，将 `.jdebug` 格式调试文件保存至工程根目录下。
 
