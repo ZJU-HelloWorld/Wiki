@@ -56,10 +56,12 @@
 
 ### 联系我们
 
-bilibili 
+bilibili：[浙江大学HelloWorld战队](https://space.bilibili.com/1882602720)
 
-微信公众号
+微信公众号：Hello World战队
 
-微博
+微博：浙江大学HelloWorld战队
+
+QQ咨询群：562563706
 
 
