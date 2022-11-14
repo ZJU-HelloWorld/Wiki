@@ -58,7 +58,7 @@
 
 bilibili：[浙江大学HelloWorld战队](https://space.bilibili.com/1882602720)
 
-微信公众号：Hello World战队
+公众号：Hello World战队
 
 微博：浙江大学HelloWorld战队
 
