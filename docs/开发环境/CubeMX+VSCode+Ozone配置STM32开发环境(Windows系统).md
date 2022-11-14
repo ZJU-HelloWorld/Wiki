@@ -240,7 +240,7 @@ openocd -v
 
   * 下载 J-Link / J-Flash 注册机 [下载](https://g6ursaxeei.feishu.cn/wiki/wikcno8IDCTKHQWGDTOOzQFLyMg) ；
 
-  * 先用 Ozone 开启调试，然后点击 Windows 任务栏托盘区的 ![](icon-jl.png) 图标开启 J-Link 控制面板，读取序列号：
+  * 先用 Ozone 开启调试，然后点击 Windows 任务栏托盘区的 ![](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon-jl.png) 图标开启 J-Link 控制面板，读取序列号：
 
     ![jl](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/panel-jl.png)
 
