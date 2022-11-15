@@ -7,8 +7,8 @@ repo_name: Wiki
 edit_uri: edit/main/docs/
 
 theme:
-  logo: img/rm.ico
-  favicon: img/rm.ico
+  logo: img/rm.svg
+  favicon: img/rm.svg
 
   icon:
     repo: fontawesome/brands/github
