@@ -41,9 +41,9 @@ id16-->id15
 
 * 此外，如果希望在 VS Code 中进行 GDB 调试，可使用 `Cortex-Debug + OpenOCD + 串口助手` 调试方案。由于配置比较麻烦，此方案不做详细介绍，可自行探索。
 
-  * Cortex-Debug 是一个扩展，用于将 ARM Cortex-M 设备的调试功能添加到 Visual Studio Code。
-  * OpenOCD（Open On-Chip Debugger）是一个开源的片上调试器，旨在提供针对嵌入式设备的调试、系统编程和边界扫描功能，支持 `J-Link, CMSIS-DAP, ST-Link` 等多种调试器。OpenOCD 提供了GDB Server，可以通过它进行 GDB 相关的调试操作。
-  * GDB 调试功能强大，唯一的缺点是无法实现实时变量监视，这时我们可以使用无线调试器的串口、占用开发板上的一个串口，来实现实时数据交互；开发板程序中则需要对应编写调试模块。上位机串口助手有多种选择，常用的如`VOFA+, MobaXTerm`等。 VOFA+ 除了拥有基本功能外，还能够显示浮点波形，功能丰富。MobaXTrem可以作为不错的调试终端。
+    * Cortex-Debug 是一个扩展，用于将 ARM Cortex-M 设备的调试功能添加到 Visual Studio Code。
+    * OpenOCD（Open On-Chip Debugger）是一个开源的片上调试器，旨在提供针对嵌入式设备的调试、系统编程和边界扫描功能，支持 `J-Link, CMSIS-DAP, ST-Link` 等多种调试器。OpenOCD 提供了GDB Server，可以通过它进行 GDB 相关的调试操作。
+    * GDB 调试功能强大，唯一的缺点是无法实现实时变量监视，这时我们可以使用无线调试器的串口、占用开发板上的一个串口，来实现实时数据交互；开发板程序中则需要对应编写调试模块。上位机串口助手有多种选择，常用的如`VOFA+, MobaXTerm`等。 VOFA+ 除了拥有基本功能外，还能够显示浮点波形，功能丰富。MobaXTrem可以作为不错的调试终端。
 
 
 
