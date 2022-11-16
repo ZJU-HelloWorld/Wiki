@@ -111,7 +111,7 @@ openocd -v
 
     * CMake Tools
 
-    * koroFileHeader（生成源码文件模板，具体配置内容请参考代码风格规范，可选）
+    * koroFileHeader（生成源码文件模板，具体配置内容请参考编程风格指南，可选）
 
     * Cortex-Debug（用于 GDB 调试，可选）
 
