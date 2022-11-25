@@ -46,7 +46,7 @@ id16-->id15
     
     * GDB Server 建立了调试器到 GDB 的连接。OpenOCD（Open On-Chip Debugger）是一个开源的片上调试器，旨在提供针对嵌入式设备的调试、系统编程和边界扫描功能，支持 `J-Link, CMSIS-DAP, ST-Link` 等多种调试器。OpenOCD 提供了GDB Server，可以通过它进行 GDB 相关的调试操作。此外，针对 J-Link，还可以选用 J-Link GDB Server.
     
-    * GDB 调试功能强大，同时可添加 CMSIS SVD (System View Description，系统视图描述文件，`*.svd`格式）以查看外设信息和其他设备参数。唯一的缺点是无法实现实时变量监视。一种解决方案是基于 STM32 的调试支持输出日志，可基于 Semihosting / SWO 实现，或采用更简洁和便捷的 J-Link RTT 方案；另一种方案是将通过串口实现实时数据交互，基于串口助手绘制波形。上位机串口助手有多种选择，常用的如 `VOFA+`，其除了拥有基本功能外，还能够显示浮点波形，功能丰富。MobaXTrem可以作为不错的调试终端。
+    * GDB 调试功能强大，同时可添加 CMSIS SVD (System View Description，系统视图描述文件，`*.svd`格式）以查看外设信息和其他设备参数。唯一的缺点是无法实现实时变量监视。一种解决方案是基于 STM32 的调试支持模块来输出日志，可基于 Semihosting / SWO 实现，或采用更简洁和便捷的 J-Link RTT 方案；另一种方案是通过串口实现实时数据交互，使用串口助手显示波形。上位机串口助手有多种选择，常用的如 `VOFA+`，其除了拥有基本功能外，还能够显示浮点波形，功能丰富。MobaXTrem可以作为不错的调试终端。
 
 
 ## 软件和工具下载
@@ -100,7 +100,7 @@ id16-->id15
 
 ## 环境配置
 
-* Windows 系统搜索 `环境变量-->编辑系统环境变量-->环境变量-->Path-->编辑-->新建`，添加`MinGW`、 `gcc-arm-none-eabi` 、 `OpenOCD`（可选）安装目录下 `bin` 的路径。
+* Windows 系统搜索 `环境变量-->编辑系统环境变量-->环境变量-->Path-->编辑-->新建`，添加 `MinGW`、 `gcc-arm-none-eabi` 、 `OpenOCD`（可选）安装目录下 `bin` 的路径。
 * 在终端测试是否安装成功
 
 ```shell
@@ -152,7 +152,7 @@ openocd -v
 
   > 注意：若开发工程与战队相关、需要队内共享或合作或开源，请遵循文件组织规范、代码架构规范和风格指南。
 
-* 更多快捷键列表可通过 `Ctrl + K, Ctrl + S` 唤出：
+* 一些常用的快捷键：
   
    |快捷键|说明|
    |--------|--------|
@@ -167,6 +167,8 @@ openocd -v
    | `Shift` + `Alt` + `F`|	格式化代码|
    | `F2` | 重命名变量 |
    |...|...|
+	
+  > 更多快捷键列表可通过 `Ctrl + K, Ctrl + S` 唤出.
    
 * 更多 VS Code 功能可参考[官方文档](https://code.visualstudio.com/docs)，从中选择感兴趣的话题学习。 
 
@@ -178,7 +180,7 @@ openocd -v
     * 文件路径；
     * FPU 的使用开关；
     * 编译优化等级，其中关于编译优化等级的说明可参考[官方文档](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#Optimize-Options)；
-    * 其他编译选项。
+    * 其他配置。
 
 
   > 注意：若更改 `CMakeLists.txt` 中的 `option`，运行配置并不会更新选项，需要删除 `build` 目录重新配置，或使用 `-D` 编译选项进行配置。如开启 `ENABLE_HARD_FP` 选项：
@@ -250,9 +252,6 @@ openocd -v
   ![cmake03](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/cmake03.png)
 
 * 默认情况下，CMake 工具将构建输出写入 `build/` 的子目录。该目录下可找到调试所需的 `.elf` 文件。
-  
-
-
 
 ## 调试
 
