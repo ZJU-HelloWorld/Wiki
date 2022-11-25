@@ -41,7 +41,7 @@ id16-->id15
 
 * 首选使用 `Ozone` 调试方案。Ozone 是用于 J-Link 和 J-Trace 的多平台调试器和性能分析器，功能齐全，可实时监看变量、显示波形等，只需载入可执行文件，便可独立进行调试；内置了调试终端，可基于 `J-Link RTT` 与开发板进行非侵入式实时数据交互，无需占用开发板串口资源。
 
-> 注意：在官方说明中，Ozone 仅支持 J-Link。但是我们发现有部分老版本 J-Link 驱动扩展了对 CMSIS-DAP 的支持。经过努力，我们成功对这些版本驱动进行逆向破解修改，使得 Ozone 在替换破解的 `JLink_x64.dll` 之后便能同时流畅支持 J-Link 和 CMSIS-DAP.
+> 注意：在官方说明中，Ozone 仅支持 J-Link。但是我们发现有部分老版本 J-Link 驱动扩展了对 CMSIS-DAP 的支持，但无法保证 J-Link 稳定工作。经过努力，我们成功对这些版本驱动进行逆向破解修改，使得 Ozone 在替换破解的 `JLink_x64.dll` 之后便能同时流畅支持 J-Link 和 CMSIS-DAP.
 
 * 此外，如果希望在 VSCode 中进行 GDB 调试，可使用 `Cortex-Debug 扩展 + GDB Server` 调试方案。此方案不做详细介绍，可自行探索。
 
@@ -49,7 +49,7 @@ id16-->id15
    
     * GDB Server 建立了调试器到 GDB 的连接。OpenOCD（Open On-Chip Debugger）是一个开源的片上调试器，旨在提供针对嵌入式设备的调试、系统编程和边界扫描功能，支持 `J-Link, CMSIS-DAP, ST-Link` 等多种调试器。OpenOCD 提供了GDB Server，可以通过它进行 GDB 相关的调试操作。此外，针对 J-Link，还可以选用 J-Link GDB Server.
    
-    * GDB 调试功能强大，唯一的缺点是无法实现实时变量监视。一种解决方案是打印日志，可基于 Semihosting / SWO 实现，或采用更简洁和便捷的 J-Link RTT 方案；另一种方案是将通过串口实现实时数据交互，基于串口助手绘制波形。上位机串口助手有多种选择，常用的如 `VOFA+`，其除了拥有基本功能外，还能够显示浮点波形，功能丰富。MobaXTrem可以作为不错的调试终端。
+    * GDB 调试功能强大，同时可添加 CMSIS SVD (System View Description，系统视图描述文件，`*.svd`格式）以查看外设信息和其他设备参数。唯一的缺点是无法实现实时变量监视。一种解决方案是基于 STM32 的调试支持输出日志，可基于 Semihosting / SWO 实现，或采用更简洁和便捷的 J-Link RTT 方案；另一种方案是将通过串口实现实时数据交互，基于串口助手绘制波形。上位机串口助手有多种选择，常用的如 `VOFA+`，其除了拥有基本功能外，还能够显示浮点波形，功能丰富。MobaXTrem可以作为不错的调试终端。
 
 
 ## 软件和工具下载
@@ -149,7 +149,7 @@ openocd -v
 
   > 注意：若开发工程与战队相关、需要队内共享或合作或开源，请遵循文件组织规范、代码架构规范和风格指南。
 
-* 使用VSCode，更多快捷键可参考 <https://www.dute.org/vscode-shortcut>：
+* 使用VSCode，更多快捷键可通过 `Ctrl + K, Ctrl + S` 唤出，或可参考 <https://www.dute.org/vscode-shortcut>：
    
    |快捷键|说明|
    |--------|--------|
@@ -157,15 +157,15 @@ openocd -v
    | `ctrl`+`p` |快速打开，转到文件|
    |  `ctrl`+`Tab` | 切换已打开的文件 |
    | `Ctrl` + `,`| 编辑器设置 |
-   | `Alt` + `→` / `←`|	 前进 / 后退|
-   | `Alt` + `↑`/ `↓` | 向上 / 向下移动行|
    | `Ctrl` + `F`  | 在当前文件中查找 |
    | `Ctrl` + `Shift` + `F`  | 在所有项目文件中查找 |
+   | `Alt` + `→` / `←`|	 前进 / 后退|
+   | `Alt` + `↑`/ `↓` | 向上 / 向下移动行|
    | `Shift` + `Alt` + `F`|	格式化代码|
-   | F2 | 重命名符号 |
+   | `F2` | 重命名变量 |
    |...|...|
    
-更多 VS Code 功能可参考[官方文档](https://code.visualstudio.com/docs)，从中选择感兴趣的话题学习。 
+* 更多 VS Code 功能可参考[官方文档](https://code.visualstudio.com/docs)，从中选择感兴趣的话题学习。 
 
 ### 配置 CMake 工程
 
@@ -174,9 +174,11 @@ openocd -v
     * 工程名；
     * 文件路径；
     * FPU 的使用开关；
-    * 编译优化等级等。
+    * 编译优化等级，其中关于编译优化等级说明可参考[官方文档](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#Optimize-Options)；
+    * 其他编译选项。
+   
 
-  > 注意：若更改 `CMakeLists.txt` 中的 `option`，运行配置并不会更新选项，需要删除 `build` 目录重新配置，或使用 `-D` 命令进行配置。如开启 `ENABLE_HARD_FP` 选项：
+  > 注意：若更改 `CMakeLists.txt` 中的 `option`，运行配置并不会更新选项，需要删除 `build` 目录重新配置，或使用 `-D` 编译选项进行配置。如开启 `ENABLE_HARD_FP` 选项：
   >
   > ```shell
   > cd build
@@ -244,8 +246,7 @@ openocd -v
   ![cmake03](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/cmake03.png)
 
 * 默认情况下，CMake 工具将构建输出写入 `build/` 的子目录。该目录下可找到调试所需的 `.elf` 文件。
-
-
+   
 
 ## 调试
 
@@ -257,13 +258,13 @@ openocd -v
 
 * 安装 Ozone 后，将目录下的 `JLink_x64.dll` 文件替换为破解版本 [下载](https://g6ursaxeei.feishu.cn/wiki/wikcno8IDCTKHQWGDTOOzQFLyMg)。
 
-* 使用 CMSIS-DAP 调试时，Ozone 会弹窗提示设备没有 License，此问题可通过在 J-Link License Manager 注册解决。若还不清楚如何用 Ozone 开启调试，可之后再进行此步骤。注册流程为：
+* 使用 CMSIS-DAP 调试时，Ozone 会弹窗提示设备没有 License，此问题可通过在 J-Link License Manager 注册解决。若还不清楚如何用 Ozone 创建项目，可之后再进行此步骤。注册流程为：
 
     * 下载 J-Link / J-Flash 注册机 [下载](https://g6ursaxeei.feishu.cn/wiki/wikcno8IDCTKHQWGDTOOzQFLyMg) ； 
+   
+    * 连接 CMSIS-DAP 调试器，nnn.
   
-    * 先用 Ozone 开启调试，然后点击 Windows 任务栏托盘区的 ![](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon-jl.png) 图标开启 J-Link 控制面板，读取序列号：
-
-    ![jl](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/panel-jl.png)
+> 或先用 Ozone 开启调试，然后点击 Windows 任务栏托盘区的 ![](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon-jl.png) 图标开启 J-Link 控制面板，也能够读取序列号：![jl](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/panel-jl.png)
 
     * 将序列号输入注册机生成 License，然后开启 J-Link License Manager（已与 J-Link 捆绑安装），添加 License：
 
