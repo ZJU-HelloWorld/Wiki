@@ -1,4 +1,4 @@
-# CubeMX + VS Code + Ozone 配置 STM32 开发环境 (Windows 系统)
+# CubeMX + VS Code + Ozone 配置 STM32 开发环境
 
 <img src = "https://img.shields.io/badge/version-1.0.111322-green"><sp> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey"><sp> <img src = "https://img.shields.io/badge/system-windows-blue">
 
@@ -24,27 +24,32 @@ id16-->id15
 
 
 ## 写在前面
+   
+针对原有 MDK-ARM 开发环境的诸多不便，我们尝试更换嵌入式开发工具链，以实现更便捷、高效、优雅的嵌入式开发。目前我们已成功配置基于 JetBrains 家族功能齐全的 CLion IDE 的开发方案，为嵌入式开发提供了完善支持，美中不足的是需收费、内存占用较高。另一种轻量化的开源方案是基于 Visual Studio Code，摒弃 IDE，深入掌控项目构建过程。两种方案都值得尝试。此外，我们强烈推荐使用 SEGGER Ozone 进行调试。
+
+下面将介绍使用 CubeMX + VS Code + Ozone 配置 STM32 开发环境所涉及的工具：
 
 `STM32CubeMX`  是一个图形工具，可以非常轻松地配置 STM32 微控制器和微处理器。从 MCU 选型，引脚配置，系统时钟以及外设时钟设置，到外设参数配置，中间件参数配置，它给 STM32 开发者们提供了一种简单，方便，并且直观的方式来完成这些工作。 所有的配置完成后，它还可以根据所选的 IDE 生成对应的工程和初始化 C 代码。
 
-`Visual Studio Code` 是一个轻量级但功能强大的源代码编辑器，可在您的桌面上运行，适用于 Windows、macOS 和 Linux。它内置了对 JavaScript、TypeScript 和 Node.js 的支持，并为其他语言和运行时（如 C++、C#、Java、Python、PHP、Go、.NET）提供了丰富的扩展生态系统。
+`Visual Studio Code` 是一个轻量级但功能强大的源代码编辑器，适用于 Windows、macOS 和 Linux。它内置了对 JavaScript、TypeScript 和 Node.js 的支持，并为其他语言和运行时（如 C++、C#、Java、Python、PHP、Go、.NET）提供了丰富的扩展生态系统。
 
-交叉编译工具链 `gcc-arm-none-eabi` 将⽂件编译成 arm 架构下的⽂件格式，如 `elf, bin`，从⽽供STM32设备使⽤。 	
+交叉编译工具链 `gcc-arm-none-eabi` 将⽂件编译成 arm 架构下的⽂件格式，如 `.elf`，从⽽供STM32设备使⽤。 	
 
 `CMake` 是一个开源、跨平台的工具系列，旨在构建、测试和打包软件。CMake 用于使用简单的平台和编译器独立配置文件（`CMakeLists.txt`）来控制软件编译过程，并生成可在您选择的编译器环境中使用的本机 makefile 和工作区。
 
-生成可执行文件后，选择合适的工具链方案进行调试：
+生成可执行文件后，可基于 STM32 设备的调试支持模块，选择合适的工具链方案进行调试：
 
 * 首选使用 `Ozone` 调试方案。Ozone 是用于 J-Link 和 J-Trace 的多平台调试器和性能分析器，功能齐全，可实时监看变量、显示波形等，只需载入可执行文件，便可独立进行调试；内置了调试终端，可基于 `J-Link RTT` 与开发板进行非侵入式实时数据交互，无需占用开发板串口资源。
 
-> 注意：在官方说明中，Ozone 仅支持 J-Link。但是我们发现有部分老版本 J-Link 驱动扩展了对 CMSIS-DAP 的支持。经过努力，我们成功对这些版本驱动进行逆向破解修改，使得 Ozone 在替换破解的 `JLink_x64.dll `  之后便能同时流畅支持 J-Link 和 CMSIS-DAP.
+> 注意：在官方说明中，Ozone 仅支持 J-Link。但是我们发现有部分老版本 J-Link 驱动扩展了对 CMSIS-DAP 的支持。经过努力，我们成功对这些版本驱动进行逆向破解修改，使得 Ozone 在替换破解的 `JLink_x64.dll` 之后便能同时流畅支持 J-Link 和 CMSIS-DAP.
 
-* 此外，如果希望在 VS Code 中进行 GDB 调试，可使用 `Cortex-Debug + OpenOCD + 串口助手` 调试方案。由于配置比较麻烦，此方案不做详细介绍，可自行探索。
+* 此外，如果希望在 VSCode 中进行 GDB 调试，可使用 `Cortex-Debug 扩展 + GDB Server` 调试方案。此方案不做详细介绍，可自行探索。
 
     * Cortex-Debug 是一个扩展，用于将 ARM Cortex-M 设备的调试功能添加到 Visual Studio Code。
-    * OpenOCD（Open On-Chip Debugger）是一个开源的片上调试器，旨在提供针对嵌入式设备的调试、系统编程和边界扫描功能，支持 `J-Link, CMSIS-DAP, ST-Link` 等多种调试器。OpenOCD 提供了GDB Server，可以通过它进行 GDB 相关的调试操作。
-    * GDB 调试功能强大，唯一的缺点是无法实现实时变量监视，这时我们可以使用无线调试器的串口、占用开发板上的一个串口，来实现实时数据交互；开发板程序中则需要对应编写调试模块。上位机串口助手有多种选择，常用的如`VOFA+, MobaXTerm`等。 VOFA+ 除了拥有基本功能外，还能够显示浮点波形，功能丰富。MobaXTrem可以作为不错的调试终端。
-
+   
+    * GDB Server 建立了调试器到 GDB 的连接。OpenOCD（Open On-Chip Debugger）是一个开源的片上调试器，旨在提供针对嵌入式设备的调试、系统编程和边界扫描功能，支持 `J-Link, CMSIS-DAP, ST-Link` 等多种调试器。OpenOCD 提供了GDB Server，可以通过它进行 GDB 相关的调试操作。此外，针对 J-Link，还可以选用 J-Link GDB Server.
+   
+    * GDB 调试功能强大，唯一的缺点是无法实现实时变量监视。一种解决方案是打印日志，可基于 Semihosting / SWO 实现，或采用更简洁和便捷的 J-Link RTT 方案；另一种方案是将通过串口实现实时数据交互，基于串口助手绘制波形。上位机串口助手有多种选择，常用的如 `VOFA+`，其除了拥有基本功能外，还能够显示浮点波形，功能丰富。MobaXTrem可以作为不错的调试终端。
 
 
 ## 软件和工具下载
@@ -144,7 +149,23 @@ openocd -v
 
   > 注意：若开发工程与战队相关、需要队内共享或合作或开源，请遵循文件组织规范、代码架构规范和风格指南。
 
-* `ctrl`+`shift`+`p` 显示命令面板；更多 VS Code 功能可参考[官方文档](https://code.visualstudio.com/docs)，从中选择感兴趣的话题学习。 
+* 使用VSCode，更多快捷键可参考 <https://www.dute.org/vscode-shortcut>：
+   
+   |快捷键|说明|
+   |--------|--------|
+   |`ctrl`+`shift`+`p`| 显示命令面板|
+   | `ctrl`+`p` |快速打开，转到文件|
+   |  `ctrl`+`Tab` | 切换已打开的文件 |
+   | `Ctrl` + `,`| 编辑器设置 |
+   | `Alt` + `→` / `←`|	 前进 / 后退|
+   | `Alt` + `↑`/ `↓` | 向上 / 向下移动行|
+   | `Ctrl` + `F`  | 在当前文件中查找 |
+   | `Ctrl` + `Shift` + `F`  | 在所有项目文件中查找 |
+   | `Shift` + `Alt` + `F`|	格式化代码|
+   | F2 | 重命名符号 |
+   |...|...|
+   
+更多 VS Code 功能可参考[官方文档](https://code.visualstudio.com/docs)，从中选择感兴趣的话题学习。 
 
 ### 配置 CMake 工程
 
@@ -211,7 +232,7 @@ openocd -v
 
   ![_images/build_button.png](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/build_button.png)
 
-* 或使用命令行：
+* 或使用命令行，加入 `-jn` 以使用 n 线程加快编译进度，如 `-j8`：
 
   ```shell
   cd build
