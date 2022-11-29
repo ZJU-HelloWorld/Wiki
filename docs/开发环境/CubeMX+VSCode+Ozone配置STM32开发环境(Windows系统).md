@@ -1,6 +1,6 @@
 # CubeMX + VS Code + Ozone 配置 STM32 开发环境
 
-<img src = "https://img.shields.io/badge/version-1.0.111322-green"><sp> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey"><sp> <img src = "https://img.shields.io/badge/system-windows-blue">
+<img src = "https://img.shields.io/badge/version-1.0.112922-green"><sp> <img src = "https://img.shields.io/badge/author-dungloi | kunzhen-lightgrey"><sp> <img src = "https://img.shields.io/badge/system-windows-blue">
 
 
 
@@ -180,7 +180,7 @@ openocd -v
     * 文件路径；
     * FPU 的使用开关；
     * DSP 库版本的选择；
-    * 编译优化等级，其中关于编译优化等级的说明可参考[官方文档](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#Optimize-Options)；
+    * 编译优化等级，相关说明可参考[官方文档](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#Optimize-Options)；
     * 其他配置。
 
 
@@ -241,7 +241,7 @@ openocd -v
 
   ![_images/build_button.png](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/build_button.png)
 
-* 或使用命令行，加入 `-jn` 以使用 `n` 线程编译，如 `-j8`：
+* 或使用命令行，加入 `-jn` 以使用 `n` 线程编译，如 `-j10`：
 
   ```shell
   cd build
@@ -336,10 +336,10 @@ openocd -v
 ### CMakeLists 模板
 
 ```cmake
-####################################################################
-###############        CMake Template (CUSTOM)       ###############
-###############    Copyright (c) 2022 Hello World    ###############
-####################################################################
+# #############################################################################
+# #################        CMake Template (CUSTOM)       ######################
+# #################    Copyright (c) 2022 Hello World    ######################
+# #############################################################################
 
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
@@ -359,44 +359,61 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 
-########################### USER CONFIG SECTION #####################
+# ########################## USER CONFIG SECTION ##############################
 # set up proj
 project(your_proj_name C CXX ASM) # TODO
 
-# !! rebuild or using command line `cmake .. -D` to switch option 
-# init floating point settings
+# ! rebuild or use command line `cmake .. -D` to switch option
+# floating point settings
 option(ENABLE_HARD_FP "enable hard floating point" OFF) # TODO
 option(ENABLE_SOFT_FP "enable soft floating point" OFF) # TODO
 option(USE_NEW_VERSION_DSP "DSP version >= 1.10.0" ON) # TODO
-# init minimal optimization
-option(MIN_OPT "minimal optimization" OFF) # TODO
+	
+# if use DSP, plz place DSP folder into Drivers/CMSIS/, and keep 
+# only sub folders required to build and use CMSIS-DSP Library
+set(CMSISDSP Drivers/CMSIS/your_dsp_folder_name) # TODO
 
-# add src and inc here
+# add src and inc here	
 include_directories(
   Core/Inc 
   Drivers/STM32F4xx_HAL_Driver/Inc
   Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
   Drivers/CMSIS/Device/ST/STM32F4xx/Include 
   Drivers/CMSIS/Include 
+	
+  if(ENABLE_HARD_FP)
+  if(USE_NEW_VERSION_DSP)
+  ${CMSISDSP}/Include/dsp
+  ${CMSISDSP}/Include
+  ${CMSISDSP}/PrivateInclude
+  else()
+  ${CMSISDSP}/Include
+  endif()
+	
   # TODO
 )
 
-file(GLOB_RECURSE SOURCES 
-"Core/*.*" 
-"Drivers/[^a]*.*" # change to "Drivers/*.*" when the DSP version < 1.10 
-# TODO
-)
-#####################################################################
+file(GLOB_RECURSE SOURCES
+  "Core/*.*"
+  "Drivers/[^a]*.*" # change to "Drivers/*.*" when the DSP version < 1.10
 
+  # TODO
+)
+
+# #############################################################################
 if(ENABLE_HARD_FP)
   message(STATUS "Use FPU")
+
   if(USE_NEW_VERSION_DSP)
-        add_compile_definitions(
-            ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
-    else()
-        add_compile_definitions(
-            ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING;__FPU_PRESENT=1U)
-    endif()
+    message(STATUS "DSP version >= 1.10.0")
+    add_compile_definitions(
+      ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
+  else()
+    message(STATUS "DSP version < 1.10.0")
+    add_compile_definitions(
+      ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING;__FPU_PRESENT=1U)
+  endif()
+
   add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
   add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 else()
@@ -408,16 +425,12 @@ if(ENABLE_SOFT_FP)
 endif()
 
 add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
-add_compile_options(-ffunction-sections -fdata-sections -fno-common
-                    -fmessage-length=0)
+add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
 
 # Enable assembler files preprocessing
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 
-if(MIN_OPT)
-  message(STATUS "Minimal optimization")
-  add_compile_options(-Og -g)
-elseif("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
   message(STATUS "Maximum optimization for speed")
   add_compile_options(-Ofast)
 elseif("${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo")
@@ -451,7 +464,7 @@ add_custom_command(
   POST_BUILD
   COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE}
   COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf>
-          ${BIN_FILE}
+  ${BIN_FILE}
   COMMENT "Building ${HEX_FILE}
 Building ${BIN_FILE}")
 ```
@@ -474,7 +487,7 @@ Building ${BIN_FILE}")
 
 | 版本号                                                | 发布日期   | 说明                           | 贡献者 |
 | ----------------------------------------------------- | ---------- | ------------------------------ | ------ |
-| ![hh](https://img.shields.io/badge/version-0.9-green) | 2022.11.10 | 预发布                         | 薛东来 |
-| ![hh](https://img.shields.io/badge/version-1.0-green) | 2022.11.13 | 首次发布                       | 薛东来 |
-| ![hh](https://img.shields.io/badge/version-1.1-green) | 2022.11.25 | 添加 make 部分，修正模糊的表述 | 薛东来 |
+| ![hh](https://img.shields.io/badge/version-0.9.0-green) | 2022.11.10 | 预发布                         | 薛东来 |
+| ![hh](https://img.shields.io/badge/version-1.0.0-green) | 2022.11.13 | 首次发布                       | 薛东来 |
+| ![hh](https://img.shields.io/badge/version-1.1.0-green) | 2022.11.25 | 添加 make 部分，修正模糊的表述 | 薛东来 |
 | ![hh](https://img.shields.io/badge/version-1.1.1-green) | 2022.11.29 | 修复不同版本dsp开启问题 | 蔡坤镇 |
