@@ -179,6 +179,7 @@ openocd -v
     * 工程名；
     * 文件路径；
     * FPU 的使用开关；
+    * DSP 库版本的选择；
     * 编译优化等级，其中关于编译优化等级的说明可参考[官方文档](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#Optimize-Options)；
     * 其他配置。
 
@@ -366,6 +367,7 @@ project(your_proj_name C CXX ASM) # TODO
 # init floating point settings
 option(ENABLE_HARD_FP "enable hard floating point" OFF) # TODO
 option(ENABLE_SOFT_FP "enable soft floating point" OFF) # TODO
+option(USE_NEW_VERSION_DSP "DSP version >= 1.10.0" ON) # TODO
 # init minimal optimization
 option(MIN_OPT "minimal optimization" OFF) # TODO
 
@@ -381,15 +383,20 @@ include_directories(
 
 file(GLOB_RECURSE SOURCES 
 "Core/*.*" 
-"Drivers/*.*"
+"Drivers/[^a]*.*" # change to "Drivers/*.*" when the DSP version < 1.10 
 # TODO
 )
 #####################################################################
 
 if(ENABLE_HARD_FP)
   message(STATUS "Use FPU")
-  add_compile_definitions(
-    ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING;__FPU_PRESENT=1U)
+  if(USE_NEW_VERSION_DSP)
+        add_compile_definitions(
+            ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING;__TARGET_FPU_VFP)
+    else()
+        add_compile_definitions(
+            ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING;__TARGET_FPU_VFP;__FPU_PRESENT=1U)
+    endif()
   add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
   add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 else()
@@ -470,3 +477,4 @@ Building ${BIN_FILE}")
 | ![hh](https://img.shields.io/badge/version-0.9-green) | 2022.11.10 | 预发布                         | 薛东来 |
 | ![hh](https://img.shields.io/badge/version-1.0-green) | 2022.11.13 | 首次发布                       | 薛东来 |
 | ![hh](https://img.shields.io/badge/version-1.1-green) | 2022.11.25 | 添加 make 部分，修正模糊的表述 | 薛东来 |
+| ![hh](https://img.shields.io/badge/version-1.1.1-green) | 2022.11.29 | 修复不同版本dsp开启问题 | 蔡坤镇 |
