@@ -392,10 +392,10 @@ if(ENABLE_HARD_FP)
   message(STATUS "Use FPU")
   if(USE_NEW_VERSION_DSP)
         add_compile_definitions(
-            ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING;__TARGET_FPU_VFP)
+            ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
     else()
         add_compile_definitions(
-            ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING;__TARGET_FPU_VFP;__FPU_PRESENT=1U)
+            ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING;__FPU_PRESENT=1U)
     endif()
   add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
   add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
