@@ -371,7 +371,6 @@ option(USE_NEW_VERSION_DSP "DSP version >= 1.10.0" ON) # TODO
 	
 # if use DSP, plz place DSP folder into Drivers/CMSIS/, and keep 
 # only sub folders required to build and use CMSIS-DSP Library
-set(CMSISDSP Drivers/CMSIS/your_dsp_folder_name) # TODO
 
 # add src and inc here	
 include_directories(
@@ -380,17 +379,7 @@ include_directories(
   Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
   Drivers/CMSIS/Device/ST/STM32F4xx/Include 
   Drivers/CMSIS/Include 
-	
-  if(ENABLE_HARD_FP)
-  if(USE_NEW_VERSION_DSP)
-  ${CMSISDSP}/Include/dsp
-  ${CMSISDSP}/Include
-  ${CMSISDSP}/PrivateInclude
-  else()
-  ${CMSISDSP}/Include
-  endif()
-  endif()
-	
+
   # TODO
 )
 
