@@ -389,6 +389,7 @@ include_directories(
   else()
   ${CMSISDSP}/Include
   endif()
+  endif()
 	
   # TODO
 )
