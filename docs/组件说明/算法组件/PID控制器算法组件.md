@@ -83,13 +83,13 @@ InitPidController(&pid, 1, PID_TYPE_MOTOR_RAD, &pid_node, &pid_node_param);
 ```c
 Td_t td;
 InitTd(&td, r, h, h0);
-pid->tdRegister(&pid, 0, &td);
+pid.tdRegister(&pid, 0, &td);
 ```
 
 计算控制量：
 
 ```c
-pid->calcPid(&pid, ref, &fdb, &out);	
+pid.calcPid(&pid, ref, &fdb, &out);	
 ```
 
 ### 组件说明
