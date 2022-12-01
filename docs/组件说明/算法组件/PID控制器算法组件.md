@@ -71,20 +71,20 @@ PidParams_t pid_node_param =
 /* pid_node_param[n] = {{...}，{...}, ...} for n-loop */
 ```
 
-初始化 PID 控制器，如针对角度单位为 $\rm rad$ 的电机设备的 PID 控制器（带过零处理）：
+初始化 PID 控制器，如针对电机设备角度（单位为 $\rm rad$ ）的 PID 控制器（带过零处理）：
 
 ```c
 InitPidController(&pid, 1, PID_TYPE_MOTOR_RAD, &pid_node, &pid_node_param);
-/* InitPidController(&pid, n, PID_TYPE_MOTOR_RAD, &pid_node, &pid_node_param) for n-loop */
+/* InitPidController(&pid, n, PID_TYPE_MOTOR_RAD, &pid_node[0], &pid_node_param[0]) for n-loop */
 ```
 
 > 若希望引入按输入前馈补偿，则需开启 `SETPOINT_FEED_FORWARD` 优化选项，并使用跟踪微分器，该组件位于 `Utils/filter.c` 中。实例化一个跟踪微分器并传入参数进行初始化，然后向已实例化的 PID 控制器指明节点编号（编号顺序为外回路 -> 内回路，从 0 开始），向该节点注册（线性）跟踪微分器：
 >```c
 >Td_t td;
->InitTd(&td, r, h, h0);
+>InitTd(&td, r, h0, 1.0f / CTRL_FREQ); // r 和 h0 参数可调
 >pid.tdRegister(&pid, 0, &td);
 >```
->关于其原理和参数调节规律详询沈组长:heart_eyes:
+>关于其原理和参数调节规律详询沈组长 :heart_eyes:
 
 计算控制量：
 
@@ -111,11 +111,12 @@ PID 控制器。
 | 名称                   | 参数说明                                                     | 描述                                                         |
 | :--------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
 | `PidControllerInit`    | 传入参数` loops` 标识本 PID 控制器级数；`type `标识 PID 类型；`node_list`指向存储最外回路 PID 节点内存地址，请开辟足够的内存，将按外回路 -> 内回路顺序读写数据；`params_list `指向存储最外回路 PID 参数结构体地址，请设定所有 loops 个节点参数，将按外回路 -> 内回路顺序读取数据 | 用传入的参数初始化一个 PID 控制器。                          |
-| `calcPid`              | 传入参数 `ref` 为最外回路给定值；`fdb` 指向反馈数据数组，按外回路 -> 内回路顺序存储；传入输出地址，请开辟足够的内存，将按外回路 -> 内回路顺序存储各级 PID 输出结果 | 根据输入的数据，计算 PID 控制器输出。                        |
+| `calcPid`              | 传入参数 `ref` 为最外回路给定值；`fdb` 指向反馈数据数组，按外回路 -> 内回路顺序存储；传入地址，存储最内回路（末级） PID 输出结果 | 根据输入的数据，计算 PID 控制器输出。                        |
 | `tdRegister`           | 传入参数 ` loop_no ` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；传入指定回路 ref 的跟踪微分器指针 `p_td` 以实现前馈 | 为对应 PID 节点注册跟踪微分器。                              |
 | `resetData`            | /                                                            | 重置所有回路 PID 中间项。                                    |
 | `resetNodeParamsK`     | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；另传入 PID 增益数值 | 重置对应节点 PID 参数。                                      |
 | `resetNodeImprvOption` | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；`options` 为优化选项 ，由所有需启用的优化枚举类型 `PidImprvType_t` 的优化选项 “按位与” 合成 `uint16_t`，将结果传入 | 根据传入的优化枚举类型“按位与”的结果，重置对应节点 PID 优化选项。 |
+| `getNode`              | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；返回类型 `PidNode_t*` | 返回对应 PID 节点指针。                                      |
 | `getNodeData`          | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；返回类型 `PidData_t*` | 返回对应 PID 节点中间项结构体指针。                          |
 | `getNodeParams`        | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；返回类型 `PidParams_t*` | 返回对应 PID 节点参数结构体指针。                            |
 
@@ -123,20 +124,18 @@ PID 控制器。
 
 存储 PID 节点数据，用户不可操作。
 
-| 名称<img width=100/> | 类型<img width=100/> | 示例值  | 描述                                           |
-| :------------------- | :------------------- | :------ | :--------------------------------------------- |
-| `master`             | `Pid_t*`             | /       | 指向所在的 PID 控制器                          |
-| `next`               | `PidNode_t*`         | /       | 指向下一个 PID 节点（内环），若没有则为空      |
-| `td`                 | `Td_t*`              | /       | 指向跟踪微分器，可选，若不使用输入量前馈则为空 |
-| `ref`                | `float`              | 1.0     | 给定值                                         |
-| `fdb`                | `float`              | 1.0     | 反馈值                                         |
-| `lst_ref`            | `float`              | 1.0     | 上一控制周期给定值                             |
-| `lst_fdb`            | `float`              | 1.0     | 上一控制周期反馈值                             |
-| `out`                | `float`              | 1.0     | 控制器输出                                     |
-| `params`             | `PidParams_t`        | /       | 控制器相关初始参数                             |
-| `data`               | `PidData_t`          | /       | 运行时中间项数据                               |
-| `last_tick`          | `uint32_t`           | 1919810 | 上一次调用该控制器的时刻，单位：$\rm ms$       |
-| `sample_interval`    | `uint32_t`           | 1       | 调用控制器的间隔，单位：$\rm ms$               |
+| 名称<img width=100/> | 类型<img width=100/> | 示例值  | 描述                                            |
+| :------------------- | :------------------- | :------ | :---------------------------------------------- |
+| `master`             | `Pid_t*`             | /       | 由最外环节点指向所在的 PID 控制器，其他节点为空 |
+| `next`               | `PidNode_t*`         | /       | 指向下一个 PID 节点（内环），若没有则为空       |
+| `td`                 | `Td_t*`              | /       | 指向跟踪微分器，可选，若不使用输入量前馈则为空  |
+| `ref`                | `float`              | 1.0     | 给定值                                          |
+| `fdb`                | `float`              | 1.0     | 反馈值                                          |
+| `out`                | `float`              | 1.0     | 控制器输出                                      |
+| `params`             | `PidParams_t`        | /       | 控制器相关初始参数                              |
+| `data`               | `PidData_t`          | /       | 运行时中间项数据                                |
+| `last_tick`          | `uint32_t`           | 1919810 | 上一次调用该控制器的时刻，单位：$\rm ms$        |
+| `sample_interval`    | `uint32_t`           | 1       | 调用控制器的间隔，单位：$\rm ms$                |
 
 #### `PidParams` 结构体
 
