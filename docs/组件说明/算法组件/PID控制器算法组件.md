@@ -13,6 +13,7 @@ Algorithms/pid.c
 Algorithms/pid.h
 Algorithms/filter.c
 Algorithms/filter.h
+Utils/tools.c
 Utils/tools.h
 system.h
 ```
@@ -259,7 +260,7 @@ f[e(k)]=
 \end{cases}
 $$
 
-其中阈值 $A,B\in(0,+\infin)$ 根据实际情况人为指定。
+其中阈值 $A,B\in(0,+\infty)$ 根据实际情况人为指定。
 
 ### 微分项优化
 
