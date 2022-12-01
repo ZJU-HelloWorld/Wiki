@@ -66,7 +66,7 @@ PidParams_t pid_node_param =
   .kSpThresUpper = 30,
   .kSpThresLower = -30,
   .kSpWeight = 0.5f,
-  .kf = 10.0f,
+  .kf = 1.0f,
 };
 /* pid_node_param[n] = {{...}，{...}, ...} for n-loop */
 ```
@@ -78,13 +78,13 @@ InitPidController(&pid, 1, PID_TYPE_MOTOR_RAD, &pid_node, &pid_node_param);
 /* InitPidController(&pid, n, PID_TYPE_MOTOR_RAD, &pid_node, &pid_node_param) for n-loop */
 ```
 
-若希望引入按输入前馈补偿，则需开启 `SETPOINT_FEED_FORWARD` 优化选项，并使用跟踪微分器，该组件位于 `Utils/filter.c` 中。实例化一个跟踪微分器并传入参数进行初始化，然后向已实例化的 PID 控制器指明节点编号（编号顺序为外回路 -> 内回路，从 0 开始），向该节点注册跟踪微分器：
-
-```c
-Td_t td;
-InitTd(&td, r, h, h0);
-pid.tdRegister(&pid, 0, &td);
-```
+> 若希望引入按输入前馈补偿，则需开启 `SETPOINT_FEED_FORWARD` 优化选项，并使用跟踪微分器，该组件位于 `Utils/filter.c` 中。实例化一个跟踪微分器并传入参数进行初始化，然后向已实例化的 PID 控制器指明节点编号（编号顺序为外回路 -> 内回路，从 0 开始），向该节点注册（线性）跟踪微分器：
+>```c
+>Td_t td;
+>InitTd(&td, r, h, h0);
+>pid.tdRegister(&pid, 0, &td);
+>```
+>关于其原理和参数调节规律详询沈组长:heart_eyes:
 
 计算控制量：
 
@@ -154,7 +154,7 @@ PID 控制器。
 | `kDeadBandThresUpper `<br>`kDeadBandThresLower ` | `float`              | 1.0/ -1.0        | 误差死区上下限                               |
 | `kSpThresUpper `<br>`kSpThresLower `             | `float`              | 30 / -30         | 使能给定值平滑的临界误差                     |
 | `kSpWeight `                                     | `float`              | 0.5              | 给定值平滑一阶滤波系数                       |
-| `kf`                                             | `float`              | 10.0             | 前馈补偿强度系数                             |
+| `kf`                                             | `float`              | 1.0              | 前馈补偿强度系数                             |
 
 
 
