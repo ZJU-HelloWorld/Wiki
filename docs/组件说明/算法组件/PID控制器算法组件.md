@@ -13,6 +13,7 @@ Algorithms/pid.c
 Algorithms/pid.h
 Algorithms/filter.c
 Algorithms/filter.h
+Utils/tools.c
 Utils/tools.h
 system.h
 ```
@@ -259,7 +260,7 @@ f[e(k)]=
 \end{cases}
 $$
 
-其中阈值 $A,B\in(0,+\infin)$ 根据实际情况人为指定。
+其中阈值 $A,B\in(0,+\infty)$ 根据实际情况人为指定。
 
 ### 微分项优化
 
@@ -323,7 +324,7 @@ $$
 
 前馈依可量测扰动或给定量来产生，构成按扰动补偿和按输入补偿两种复合控制形式。
 
-![image-20221125075755503](.\PID控制器算法组件.assets\image-20221125075755503.png)
+![image-20221125075755503](PID控制器算法组件.assets/image-20221125075755503.png)
 
 我们重点关注按输入补偿的复合控制系统设计。由上图 (b) ，系统输出为
 $$
