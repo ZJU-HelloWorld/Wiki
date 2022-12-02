@@ -89,7 +89,9 @@ InitPidController(&pid_n_loop, n, PID_TYPE_MOTOR_RAD, &pid_node[0], &pid_n_loop_
 > InitTd(&td, r, h0, h); // h = 1.0f / CTRL_FREQ
 > pid.tdRegister(&pid, 0, &td);
 > ```
-> 其中 $h_0$ 为滤波因子， $h_0$ 越大滤波效果越好； $h$为步长， $h$ 越小，滤波效果越好；一般来说， $h_0$ 略大于步长 $h$；$r$ 为快速因子，$r$ 越大，跟踪越快。更多原理和参数调节规律详询沈组长 :heart_eyes:
+> 其中 $h_0$ 为滤波因子， $h_0$ 越大滤波效果越好； $h$ 为步长， $h$ 越小滤波效果越好；一般来说， $h_0$ 略大于步长 $h$；$r$ 为快速因子，$r$ 越大，跟踪越快。
+>
+> 更多原理和参数调节规律详询沈组长www
 
 传入 计算 PID 控制量：
 
