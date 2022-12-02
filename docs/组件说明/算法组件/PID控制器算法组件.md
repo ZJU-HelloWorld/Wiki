@@ -98,6 +98,13 @@ InitPidController(&pid_n_loop, N, &pid_n_loop_param[0]); // cascade controller w
 pid.calcPid(&pid, ref, &fdb, &out);	
 ```
 
+若 PID 控制器是动态创建的，在其生存周期终止前还需要手动释放内存：
+ 
+ ```c
+ pid.delPid(&pid);
+ ```
+ 
+ 
 ### 组件说明
 
 #### `Pid` 类
@@ -118,6 +125,7 @@ PID 控制器。
 | `InitPidController` | 传入参数 ` loops` 标识本 PID 控制器级数；`params_list  ` 为存储各回路 PID 参数结构体数组的首地址，请设定所有 `loops `个节点参数，将按外回路 -> 内回路顺序读取数据 | 用传入的参数初始化一个 PID 控制器。   |
 | `calcPid`           | 传入参数 `ref` 为最外回路给定值；`fdb` 为各回路反馈值（存储顺序由外回路到内回路）数组首地址；传入地址 `out`，存储最内回路（末级） PID 输出结果 | 根据输入的数据，计算 PID 控制器输出。 |
 | `tdRegister`        | 传入参数 ` loop_no ` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；传入指定回路 ref 的跟踪微分器指针 `p_td` 以实现前馈 | 为对应 PID 节点注册跟踪微分器。       |
+| `delPid             | / | 释放为 PID 节点动态申请的内存。  |
 | `resetData`         | /                                                            | 重置所有回路 PID 中间项。             |
 | `resetNodeParams`   | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；传入 PID 节点参数数值 | 重置对应节点 PID 参数。               |
 | `getNode`           | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；返回类型 `PidNode_t*` | 返回对应 PID 节点指针。               |
