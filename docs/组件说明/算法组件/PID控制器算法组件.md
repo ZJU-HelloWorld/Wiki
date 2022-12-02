@@ -29,7 +29,7 @@ system.h
 
 在项目中引用头文件：
 
-```
+```c
 #include "pid.h"
 ```
 
@@ -37,16 +37,18 @@ system.h
 
 ```c
 Pid_t pid;
-PidNode_t pid_node; // standard PID
-/* pid_node[n] for n-loop cascade PID */
+PidNode_t pid_node;
+
+Pid_t pid_n_loop;
+PidNode_t pid_node[n]; // cascade controller with n loop
 ```
 
-创建参数结构体数组，按节点顺序（外回路 -> 内回路）设置控制器节点参数，如：
+创建参数结构体数组，按节点顺序（外回路 -> 内回路）设置控制器节点参数，如标准 PID 控制器：
 
 ```c
 PidParams_t pid_node_param = 
 {
-  .kImpOption = INTE_SEPARATION | INTE_CHANGING_RATE | DEAD_BAND | SETPOINT_RAMPING | SETPOINT_FEED_FORWARD, // 优化选项
+  .kImprvOption = INTE_SEPARATION | INTE_CHANGING_RATE | DEAD_BAND | SETPOINT_RAMPING | SETPOINT_FEED_FORWARD, // 优化选项
     
   .kp = 500.0f,
   .ki = 5.0f,
@@ -68,25 +70,28 @@ PidParams_t pid_node_param =
   .kSpWeight = 0.5f,
   .kf = 1.0f,
 };
-/* pid_node_param[n] = {{...}，{...}, ...} for n-loop */
+
+PidParams_t pid_n_loop_param[n] = {{...}, {...}, ...}; // cascade controller with n loop
 ```
 
-初始化 PID 控制器，如针对电机设备角度（单位为 $\rm rad$ ）的 PID 控制器（带过零处理）：
+初始化 PID 控制器，如针对电机设备角度（单位为 $\rm rad$ ）的标准 PID 控制器（带过零处理）：
 
 ```c
 InitPidController(&pid, 1, PID_TYPE_MOTOR_RAD, &pid_node, &pid_node_param);
-/* InitPidController(&pid, n, PID_TYPE_MOTOR_RAD, &pid_node[0], &pid_node_param[0]) for n-loop */
+
+InitPidController(&pid_n_loop, n, PID_TYPE_MOTOR_RAD, &pid_node[0], &pid_n_loop_param[0]); // cascade controller with n loop
 ```
 
 > 若希望引入按输入前馈补偿，则需开启 `SETPOINT_FEED_FORWARD` 优化选项，并使用跟踪微分器，该组件位于 `Utils/filter.c` 中。实例化一个跟踪微分器并传入参数进行初始化，然后向已实例化的 PID 控制器指明节点编号（编号顺序为外回路 -> 内回路，从 0 开始），向该节点注册（线性）跟踪微分器：
->```c
->Td_t td;
->InitTd(&td, r, h0, 1.0f / CTRL_FREQ); // r 和 h0 参数可调
->pid.tdRegister(&pid, 0, &td);
->```
->关于其原理和参数调节规律详询沈组长 :heart_eyes:
+>
+> ```c
+> Td_t td;
+> InitTd(&td, r, h0, h); // h = 1.0f / CTRL_FREQ
+> pid.tdRegister(&pid, 0, &td);
+> ```
+> 其中 $h_0$ 为滤波因子， $h_0$ 越大滤波效果越好； $h$为步长， $h$ 越小，滤波效果越好；一般来说， $h_0$ 略大于步长 $h$；$r$ 为快速因子，$r$ 越大，跟踪越快。更多原理和参数调节规律详询沈组长 :heart_eyes:
 
-计算控制量：
+传入 计算 PID 控制量：
 
 ```c
 pid.calcPid(&pid, ref, &fdb, &out);	
@@ -143,7 +148,7 @@ PID 控制器。
 
 | 名称<img width=100/>                             | 类型<img width=100/> | 示例值           | 描述                                         |
 | :----------------------------------------------- | :------------------- | :--------------- | :------------------------------------------- |
-| `kImpOption`                                     | `uint16_t`           | /                | 优化选项集合                                 |
+| `kImprvOption`                                   | `uint16_t`           | /                | 优化选项集合                                 |
 | `kp / ki / kd`                                   | `float`              | 500.0 / 5.0 /1.0 | PID 增益                                     |
 | `kOutMax`                                        | `float`              | 30000            | 最大输出，$\pm$kOutMax                       |
 | `kWindUpOutMax`                                  | `float`              | 5000             | 使能抗积分饱和的临界输出，$\pm$kWindUpOutMax |
