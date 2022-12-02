@@ -21,7 +21,7 @@ theme:
     - navigation.indexes
     - navigation.tracking
     - toc.follow
-    - toc.integrate
+#     - toc.integrate
     - navigation.top
     - header.autohide
 

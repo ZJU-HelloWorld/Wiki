@@ -1,6 +1,6 @@
 # PID 控制器算法组件
 
-<img src = "https://img.shields.io/badge/version-1.0.0.120122-green"><sp>  <img src = "https://img.shields.io/badge/author-dungloi-lightgrey"> 
+ <img src = "https://img.shields.io/badge/version-1.0.1-green"> <sp> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey"> 
 
 ## 快速开始
 
@@ -87,7 +87,9 @@ InitPidController(&pid_n_loop, N, PID_TYPE_MOTOR_RAD, &pid_n_loop_param[0]); // 
 > InitTd(&td, r, h0, h); // h = 1.0f / CTRL_FREQ
 > pid.tdRegister(&pid, N, &td); // loop no.N, numbered from 0
 > ```
-> 其中 $h_0$ 为滤波因子， $h_0$ 越大滤波效果越好； $h$为步长， $h$ 越小，滤波效果越好；一般来说， $h_0$ 略大于步长 $h$；$r$ 为快速因子，$r$ 越大，跟踪越快。更多原理和参数调节规律详询沈组长www
+> 其中 $h_0$ 为滤波因子， $h_0$ 越大滤波效果越好； $h$ 为步长， $h$ 越小滤波效果越好；一般来说， $h_0$ 略大于步长 $h$；$r$ 为快速因子，$r$ 越大，跟踪越快。
+>
+> 更多原理和参数调节规律详询沈组长www
 
 传入 PID 控制器句柄、最外回路给定值、各回路反馈值（存储顺序由外回路到内回路）数组首地址、存储输出量的内存地址，计算 PID 控制器输出：
 

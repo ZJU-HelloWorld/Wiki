@@ -1,6 +1,6 @@
 # CubeMX + VS Code + Ozone 配置 STM32 开发环境
 
-<img src = "https://img.shields.io/badge/version-1.0.112922-green"><sp> <img src = "https://img.shields.io/badge/author-dungloi | kunzhen-lightgrey"><sp> <img src = "https://img.shields.io/badge/system-windows-blue">
+<img src = "https://img.shields.io/badge/version-1.1.1-green"> <sp> <img src = "https://img.shields.io/badge/author-dungloi | kunzhen-lightgrey"><sp> <img src = "https://img.shields.io/badge/system-windows-blue">
 
 
 
