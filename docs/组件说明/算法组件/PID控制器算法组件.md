@@ -1,5 +1,7 @@
 # PID 控制器算法组件
 
+ <img src = "https://img.shields.io/badge/version-1.0.1-green" > <br> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey" > 
+
 ## 快速开始
 
 组件源码仓库地址：<https://github.com/ZJU-HelloWorld/HW-Components>
