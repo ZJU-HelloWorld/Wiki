@@ -392,8 +392,8 @@ include_directories(
 )
 
 # !! Keep only sub folders required to build and use CMSIS-DSP Library.
-# !! If DSP version >= 1.10, for all the paths including DSP source files,
-# ! please add [^a] to filter DSP files.
+# !! If DSP version >= 1.10, for all the paths including DSP folders,
+# !！ please add [^a] to filter DSP files.
 # !! e.g. your_dsp_path = Drivers/CMSIS/DSP, use "Drivers/[^a]*.*"
 file(GLOB_RECURSE SOURCES
   "Core/*.*"
