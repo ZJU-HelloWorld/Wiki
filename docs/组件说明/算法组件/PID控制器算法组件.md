@@ -44,7 +44,7 @@ Pid_t pid_n_loop;// cascade controller with N loop
 创建参数结构体数组，按节点顺序（外回路 -> 内回路）设置控制器节点参数，参数含义见组件说明。如带给定值过零处理（单位 $\rm rad$）的控制器：
 
 ```c
-PidParams_t pid_param = 
+const PidParams_t pid_param = 
 {
   .kType = PID_ACROSS0_RAD,
   .kImprvOption = INTE_SEPARATION | INTE_CHANGING_RATE | DEAD_BAND | SETPOINT_RAMPING | SETPOINT_FEED_FORWARD, 
@@ -70,7 +70,7 @@ PidParams_t pid_param =
   .kf = 1.0f,
 };
 
-PidParams_t pid_n_loop_param[N] = {{...}, {...}, ...}; // cascade controller with N loop
+const PidParams_t pid_n_loop_param[N] = {{...}, {...}, ...}; // cascade controller with N loop
 ```
 
 初始化 PID 控制器，如：
@@ -78,14 +78,14 @@ PidParams_t pid_n_loop_param[N] = {{...}, {...}, ...}; // cascade controller wit
 ```c
 InitPidController(&pid, 1, &pid_param);
 
-InitPidController(&pid_n_loop, N, &pid_n_loop_param[0]); // cascade controller with N loop
+InitPidController(&pid_n_loop, N, pid_n_loop_param); // cascade controller with N loop
 ```
 
 > 若希望引入按输入前馈补偿，则需开启 `SETPOINT_FEED_FORWARD` 优化选项，并使用跟踪微分器，该组件位于 `Utils/filter.c` 中。实例化一个跟踪微分器并传入参数进行初始化，然后向已实例化的 PID 控制器指明节点编号（编号顺序为外回路 -> 内回路，从 0 开始），向该节点注册（线性）跟踪微分器：
 >
 > ```c
 > Td_t td;
-> InitTd(&td, r, h0, h); // h = 1.0f / CTRL_FREQ
+> InitTd(&td, r, h0, h);        // h = 1.0f / CTRL_FREQ
 > pid.tdRegister(&pid, N, &td); // loop no.N, numbered from 0
 > ```
 > 其中 $h_0$ 为滤波因子， $h_0$ 越大滤波效果越好； $h$ 为步长， $h$ 越小滤波效果越好；一般来说， $h_0$ 略大于步长 $h$；$r$ 为快速因子，$r$ 越大，跟踪越快。
@@ -113,16 +113,16 @@ PID 控制器。
 
 方法
 
-| 名称                | 参数说明                                                     | 描述                                  |
-| :------------------ | :----------------------------------------------------------- | ------------------------------------- |
-| `InitPidController` | 传入参数 ` loops` 标识本 PID 控制器级数；`params_list  ` 为存储各回路 PID 参数结构体数组的首地址，请设定所有 `loops `个节点参数，将按外回路 -> 内回路顺序读取数据 | 用传入的参数初始化一个 PID 控制器。   |
-| `calcPid`           | 传入参数 `ref` 为最外回路给定值；`fdb` 为各回路反馈值（存储顺序由外回路到内回路）数组首地址；传入地址 `out`，存储最内回路（末级） PID 输出结果 | 根据输入的数据，计算 PID 控制器输出。 |
-| `tdRegister`        | 传入参数 ` loop_no ` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；传入指定回路 ref 的跟踪微分器指针 `p_td` 以实现前馈 | 为对应 PID 节点注册跟踪微分器。       |
-| `resetData`         | /                                                            | 重置所有回路 PID 中间项。             |
-| `resetNodeParams`   | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；传入 PID 节点参数数值 | 重置对应节点 PID 参数。               |
-| `getNode`           | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；返回类型 `PidNode_t*` | 返回对应 PID 节点指针。               |
-| `getNodeData`       | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；返回类型 `PidData_t*` | 返回对应 PID 节点中间项结构体指针。   |
-| `getNodeParams`     | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；返回类型 `PidParams_t*` | 返回对应 PID 节点参数结构体指针。     |
+| 名称<img width=200/> | 参数说明                                                     | 描述                                  |
+| :------------------- | :----------------------------------------------------------- | ------------------------------------- |
+| `InitPidController`  | 传入参数 ` loops` 标识本 PID 控制器级数；`params_list  ` 为存储各回路 PID 参数结构体数组的首地址，请设定所有 `loops `个节点参数，将按外回路 -> 内回路顺序读取数据 | 用传入的参数初始化一个 PID 控制器。   |
+| `calcPid`            | 传入参数 `ref` 为最外回路给定值；`fdb` 为各回路反馈值（存储顺序由外回路到内回路）数组首地址；传入地址 `out`，存储最内回路（末级） PID 输出结果 | 根据输入的数据，计算 PID 控制器输出。 |
+| `tdRegister`         | 传入参数 ` loop_no ` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；传入指定回路 ref 的跟踪微分器指针 `p_td` 以实现前馈 | 为对应 PID 节点注册跟踪微分器。       |
+| `resetData`          | /                                                            | 重置所有回路 PID 中间项。             |
+| `resetNodeParams`    | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；传入 PID 节点参数数值 | 重置对应节点 PID 参数。               |
+| `getNode`            | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；返回类型 `PidNode_t*` | 返回对应 PID 节点指针。               |
+| `getNodeData`        | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；返回类型 `PidData_t*` | 返回对应 PID 节点中间项结构体指针。   |
+| `getNodeParams`      | 传入参数 `loop_no` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；返回类型 `PidParams_t*` | 返回对应 PID 节点参数结构体指针。     |
 
 #### `PidNode` 结构体
 
@@ -143,7 +143,7 @@ PID 控制器。
 
 存储 PID 参数。
 
-| 名称<img width=100/>                             | 类型<img width=100/> | 示例值                                               | 描述                                                         |
+| 名称<img width=200/>                             | 类型<img width=100/> | 示例值                                               | 描述                                                         |
 | :----------------------------------------------- | :------------------- | :--------------------------------------------------- | :----------------------------------------------------------- |
 | `kType`                                          | `PidType_e`          | PID_ACROSS0_RAD<br>PID_ACROSS0_DEGREE<br>PID_DEFAULT | PID 处理类型                                                 |
 | `kImprvOption`                                   | `uint16_t`           | /                                                    | 优化选项集合,由所有需启用的优化枚举类型 `PidImprvType_t` 的优化选项 “按位与” 合成 `uint16_t` |
