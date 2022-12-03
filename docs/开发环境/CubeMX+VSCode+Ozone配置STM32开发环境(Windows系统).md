@@ -368,24 +368,37 @@ project(your_proj_name C CXX ASM) # TODO
 option(ENABLE_HARD_FP "enable hard floating point" OFF) # TODO
 option(ENABLE_SOFT_FP "enable soft floating point" OFF) # TODO
 option(USE_NEW_VERSION_DSP "DSP version >= 1.10.0" ON) # TODO
-	
-# if use DSP, plz place DSP folder into Drivers/CMSIS/, and keep 
-# only sub folders required to build and use CMSIS-DSP Library
 
 # add src and inc here	
+set(CMSISDSP your_dsp_path) # TODO
+	
 include_directories(
   Core/Inc 
   Drivers/STM32F4xx_HAL_Driver/Inc
   Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
   Drivers/CMSIS/Device/ST/STM32F4xx/Include 
   Drivers/CMSIS/Include 
+  
+  if(ENABLE_HARD_FP)
+  if(USE_NEW_VERSION_DSP)
+  ${CMSISDSP}/Include/dsp
+  ${CMSISDSP}/Include
+  ${CMSISDSP}/PrivateInclude
+  else()
+  ${CMSISDSP}/Include
+  endif()
+  endif()
 
   # TODO
 )
 
+# !! Keep only sub folders required to build and use CMSIS-DSP Library.
+# !! If DSP version >= 1.10, for all the paths including DSP source files,
+# ! please add [^a] to filter DSP files.
+# !! e.g. your_dsp_path = Drivers/CMSIS/DSP, use "Drivers/[^a]*.*"
 file(GLOB_RECURSE SOURCES
   "Core/*.*"
-  "Drivers/[^a]*.*" # change to "Drivers/*.*" when the DSP version < 1.10
+  "Drivers/*.*"
 
   # TODO
 )
