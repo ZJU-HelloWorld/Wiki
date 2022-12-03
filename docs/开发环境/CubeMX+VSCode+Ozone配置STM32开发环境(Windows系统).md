@@ -370,8 +370,7 @@ option(ENABLE_SOFT_FP "enable soft floating point" OFF) # TODO
 option(USE_NEW_VERSION_DSP "DSP version >= 1.10.0" ON) # TODO
 
 # add src and inc here	
-set(CMSISDSP your_dsp_path) # TODO
-	
+set(CMSISDSP your_dsp_path) # if use DSP, modify your_dsp_path here
 include_directories(
   Core/Inc 
   Drivers/STM32F4xx_HAL_Driver/Inc
@@ -399,8 +398,9 @@ include_directories(
 file(GLOB_RECURSE SOURCES
   "Core/*.*"
   "Drivers/*.*"
-
+	
   # TODO
+  # your_dsp_path
 )
 
 # #############################################################################
