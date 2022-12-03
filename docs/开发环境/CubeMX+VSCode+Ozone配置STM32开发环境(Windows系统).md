@@ -284,7 +284,7 @@ openocd -v
 * 添加 `STM32F407.svd` 文件（CMSIS SVD，系统视图描述文件）至工程根目录下以支持查看外设信息和其他设备参数 [下载](https://g6ursaxeei.feishu.cn/wiki/wikcno8IDCTKHQWGDTOOzQFLyMg) ； 
 
 * 进入 Ozone，选择 `File-->New-->New Project Wizard` ：
-    * 选择目标开发板对应的 Device, Register Set；Peripherals (optional) 选择对应的`.svd` 文件 ，按 Next；
+    * 选择目标开发板对应的 Device（如 STM32F407IG）, Register Set（如 Cortex-M4 (with FPU)）；Peripherals (optional) 选择对应的`.svd` 文件 ，按 Next；
     * 选择 Target Interface = SWD, Target Interface Speed  = 4MHz （默认）或合适的速率,  Host Interface = USB，若连接了多个调试器，选择需要使用的那个，按 Next；
     * 选择要调试的可执行文件（如 `.elf`），按 Next；
     * 如无特殊要求，其他选项保持默认即可。
