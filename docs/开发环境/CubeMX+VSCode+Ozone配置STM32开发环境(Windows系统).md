@@ -66,7 +66,7 @@ id16-->id15
 
 ### MinGW
 
-* 建议安装 [MinGW]()，我们只需要使用工具包内含的 make 工具。
+* 建议安装 [MinGW](https://sourceforge.net/projects/mingw/)，我们只需要使用工具包内含的 make 工具。
 * 自行选择路径进行安装。
 
 ### GNU Arm Embedded Toolchain
