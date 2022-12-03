@@ -151,20 +151,20 @@ PID 控制器。
 
 存储 PID 参数。
 
-| 名称<img width=250/>                             | 类型<img width=100/> | 示例值                                               | 描述                                                         |
-| :----------------------------------------------- | :------------------- | :--------------------------------------------------- | :----------------------------------------------------------- |
-| `kType`                                          | `PidType_e`          | PID_ACROSS0_RAD<br>PID_ACROSS0_DEGREE<br>PID_DEFAULT | PID 处理类型                                                 |
-| `kImprvOption`                                   | `uint16_t`           | /                                                    | 优化选项集合,由所有需启用的优化枚举类型 `PidImprvType_t` 的优化选项 “按位与” 合成 `uint16_t` |
-| `kp / ki / kd`                                   | `float`              | 500.0 / 5.0 /1.0                                     | PID 增益                                                     |
-| `kOutMax`                                        | `float`              | 30000                                                | 最大输出，$\pm$kOutMax                                       |
-| `kWindUpOutMax`                                  | `float`              | 5000                                                 | 使能抗积分饱和的临界输出，$\pm$kWindUpOutMax                 |
-| `kDWeight `                                      | `float`              | 0.9                                                  | 微分一阶滤波系数，默认值 1.0                                 |
-| `kISeparThresUpper `<br>`kISeparThresLower `     | `float`              | 1.0 / -1.0                                           | 使能积分分离的临界误差                                       |
-| `kUpperB`<br>`kLowerA`                           | `float`              | 2.0 / 0.1                                            | 线性变速积分误差区间，$\pm$kUpperB / kLowerA                 |
-| `kDeadBandThresUpper `<br>`kDeadBandThresLower ` | `float`              | 1.0/ -1.0                                            | 误差死区上下限                                               |
-| `kSpThresUpper `<br>`kSpThresLower `             | `float`              | 30 / -30                                             | 使能给定值平滑的临界误差                                     |
-| `kSpWeight `                                     | `float`              | 0.5                                                  | 给定值平滑一阶滤波系数                                       |
-| `kf`                                             | `float`              | 1.0                                                  | 前馈补偿强度系数                                             |
+| 名称<img width=280/>                             | 类型        | 示例值                                               | 描述                                                         |
+| :----------------------------------------------- | :---------- | :--------------------------------------------------- | :----------------------------------------------------------- |
+| `kType`                                          | `PidType_e` | PID_ACROSS0_RAD<br>PID_ACROSS0_DEGREE<br>PID_DEFAULT | PID 处理类型                                                 |
+| `kImprvOption`                                   | `uint16_t`  | /                                                    | 优化选项集合,由所有需启用的优化枚举类型 `PidImprvType_t` 的优化选项 “按位与” 合成 `uint16_t` |
+| `kp / ki / kd`                                   | `float`     | 500.0 / 5.0 /1.0                                     | PID 增益                                                     |
+| `kOutMax`                                        | `float`     | 30000                                                | 最大输出，$\pm$kOutMax                                       |
+| `kWindUpOutMax`                                  | `float`     | 5000                                                 | 使能抗积分饱和的临界输出，$\pm$kWindUpOutMax                 |
+| `kDWeight `                                      | `float`     | 0.9                                                  | 微分一阶滤波系数，默认值 1.0                                 |
+| `kISeparThresUpper `<br>`kISeparThresLower `     | `float`     | 1.0 / -1.0                                           | 使能积分分离的临界误差                                       |
+| `kUpperB`<br>`kLowerA`                           | `float`     | 2.0 / 0.1                                            | 线性变速积分误差区间，$\pm$kUpperB / kLowerA                 |
+| `kDeadBandThresUpper `<br>`kDeadBandThresLower ` | `float`     | 1.0/ -1.0                                            | 误差死区上下限                                               |
+| `kSpThresUpper `<br>`kSpThresLower `             | `float`     | 30 / -30                                             | 使能给定值平滑的临界误差                                     |
+| `kSpWeight `                                     | `float`     | 0.5                                                  | 给定值平滑一阶滤波系数                                       |
+| `kf`                                             | `float`     | 1.0                                                  | 前馈补偿强度系数                                             |
 
 
 
