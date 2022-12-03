@@ -76,16 +76,16 @@ const PidParams_t pid_n_loop_param[N] = {{...}, {...}, ...}; // cascade controll
 初始化 PID 控制器，如：
 
 ```c
-InitPidController(&pid, 1, &pid_param);
+PidInit(&pid, 1, &pid_param);
 
-InitPidController(&pid_n_loop, N, pid_n_loop_param); // cascade controller with N loop
+PidInit(&pid_n_loop, N, pid_n_loop_param); // cascade controller with N loop
 ```
 
 > 若希望引入按输入前馈补偿，则需开启 `SETPOINT_FEED_FORWARD` 优化选项，并使用跟踪微分器，该组件位于 `Utils/filter.c` 中。实例化一个跟踪微分器并传入参数进行初始化，然后向已实例化的 PID 控制器指明节点编号（编号顺序为外回路 -> 内回路，从 0 开始），向该节点注册（线性）跟踪微分器：
 >
 > ```c
 > Td_t td;
-> InitTd(&td, r, h0, h);        // h = 1.0f / CTRL_FREQ
+> TdInit(&td, r, h0, h);        // h = 1.0f / CTRL_FREQ
 > pid.tdRegister(&pid, N, &td); // loop no.N, numbered from 0
 > ```
 > 其中 $h_0$ 为滤波因子， $h_0$ 越大滤波效果越好； $h$ 为步长， $h$ 越小滤波效果越好；一般来说， $h_0$ 略大于步长 $h$； $r$ 为快速因子， $r$ 越大，跟踪越快。
@@ -122,7 +122,7 @@ PID 控制器。
 
 | 名称<img width=250/> | 参数说明                                                     | 描述                                  |
 | :------------------ | :----------------------------------------------------------- | ------------------------------------- |
-| `InitPidController` | 传入参数 ` loops` 标识本 PID 控制器级数；`params_list  ` 为存储各节点 PID 参数结构体数组的首地址，请设定所有 `loops `个节点参数，将按外回路 -> 内回路顺序读取数据 | 用传入的参数初始化一个 PID 控制器。   |
+| `PidInit` | 传入参数 ` loops` 标识本 PID 控制器级数；`params_list  ` 为存储各节点 PID 参数结构体数组的首地址，请设定所有 `loops `个节点参数，将按外回路 -> 内回路顺序读取数据 | 用传入的参数初始化一个 PID 控制器。   |
 | `calcPid`           | 传入参数 `ref` 为最外回路给定值；`fdb` 为各回路反馈值（存储顺序由外回路到内回路）数组首地址；传入地址 `out`，存储最内回路（末级） PID 输出结果 | 根据输入的数据，计算 PID 控制器输出。 |
 | `tdRegister`        | 传入参数 ` loop_no ` 为指定回路按外回路 -> 内回路顺序从 0 开始得到的编号；传入指定回路 ref 的跟踪微分器指针 `p_td` 以实现前馈 | 为对应 PID 节点注册跟踪微分器。       |
 | `delPid`            | / | 释放为 PID 控制器所有节点动态申请的内存。  |
