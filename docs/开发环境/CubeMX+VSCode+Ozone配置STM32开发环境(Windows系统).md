@@ -3,7 +3,6 @@
 <img src = "https://img.shields.io/badge/version-1.1.1-green"> <sp> <img src = "https://img.shields.io/badge/author-dungloi | kunzhen-lightgrey"><sp> <img src = "https://img.shields.io/badge/system-windows-blue">
 
 
-
 ```mermaid
 graph TD
 id3[(STM32CubeMX<br>STM32图形化配置工具)]-->id2([工程文件])-->id5 & id7 & id1
@@ -177,11 +176,11 @@ openocd -v
 * 添加 `CMakeLists.txt` [模板](#CMakeLists 模板)至工程根目录，修改模板中的 `TODO` 内容，主要包括：
 
     * 工程名；
-    * 文件路径；
     * FPU 的使用开关；
-    * DSP 库版本的选择；
+    * DSP 库路径设置和版本选择；
     * 编译优化等级，相关说明可参考[官方文档](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#Optimize-Options)；
-    * 其他配置。
+    * 头文件路径和源文件；
+    * 未列出的其他配置。
 
 
   > 注意：若更改 `CMakeLists.txt` 中的 `option`，运行配置并不会更新选项，需要删除 `build` 目录重新配置，或使用 `-D` 编译选项进行配置。如开启 `ENABLE_HARD_FP` 选项：
@@ -212,10 +211,11 @@ openocd -v
     * 可以通过更改构建类型来运行配置；
     * 或者修改 CMakeLists 并保存，将自动配置；
     * 或者通过从命令面板运行 *CMake: Configure* 命令；
-    * 或者在尚未进行配置时直接运行构建，其中包含了配置步骤；
-    * 或使用命令行：
+    * 或者在尚未进行配置时直接运行 *build* ，其中包含了配置步骤；
+    * 或在项目根目录下使用命令行：
 
   ```shell
+  mkdir build
   cd build
   cmake ..
   ```
@@ -236,12 +236,12 @@ openocd -v
 * 从命令面板运行 *CMake: Build* 命令（快捷键 `F7`），该命令具有跨平台的特性；
 
   ![_images/build_command.png](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/build_command.png)
-
-* 或者点击状态栏中的 *Build*:
+  
+  或者点击状态栏中的 *Build*:
 
   ![_images/build_button.png](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/build_button.png)
 
-* 或使用命令行，加入 `-jn` 以使用 `n` 线程编译，如 `-j10`：
+* 或使用命令行，加入 `-jn` 以指定使用 `n` 线程编译，如 `-j10`：
 
   ```shell
   cd build
@@ -252,7 +252,7 @@ openocd -v
 
   ![cmake03](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/cmake03.png)
 
-* 默认情况下，CMake 工具将构建输出写入 `build/` 的子目录。该目录下可找到调试所需的 `.elf` 文件。
+* 默认情况下，CMake 工具将构建输出写入 `build/` 子目录。该目录下可找到调试所需的 `.elf` 文件。
 
 ## 调试
 
@@ -264,7 +264,7 @@ openocd -v
 
 * 安装 Ozone 后，将目录下的 `JLink_x64.dll` 文件替换为破解版本 [下载](https://g6ursaxeei.feishu.cn/wiki/wikcno8IDCTKHQWGDTOOzQFLyMg)。
 
-* 使用 CMSIS-DAP 调试时，Ozone 会弹窗提示设备没有 License，此问题可通过在 J-Link License Manager 注册解决。若还不清楚如何用 Ozone 创建项目，可之后再进行此步骤。注册流程为：
+* **使用 CMSIS-DAP 调试时**，Ozone 会弹窗提示设备没有 License，此问题可通过在 J-Link License Manager 注册解决。若还不清楚如何用 Ozone 创建项目，可之后再进行此步骤。注册流程为：
 
     * 下载 J-Link / J-Flash 注册机 [下载](https://g6ursaxeei.feishu.cn/wiki/wikcno8IDCTKHQWGDTOOzQFLyMg) ； 
     
@@ -285,7 +285,7 @@ openocd -v
 
 * 进入 Ozone，选择 `File-->New-->New Project Wizard` ：
     * 选择目标开发板对应的 Device（如 STM32F407IG）, Register Set（如 Cortex-M4 (with FPU)）；Peripherals (optional) 选择对应的`.svd` 文件 ，按 Next；
-    * 选择 Target Interface = SWD, Target Interface Speed  = 4MHz （默认）或合适的速率,  Host Interface = USB，若连接了多个调试器，选择需要使用的那个，按 Next；
+    * 选择 Target Interface = SWD, Target Interface Speed  = 4MHz （默认）或合适的速率，Host Interface = USB；若连接了多个调试器，选择需要使用的那个，按 Next；
     * 选择要调试的可执行文件（如 `.elf`），按 Next；
     * 如无特殊要求，其他选项保持默认即可。
 
@@ -297,14 +297,15 @@ openocd -v
 
   ![ozone00](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/ozone00.png)
 
-> 注意：使用 CMSIS-DAP 时，若要退出调试，请不要点击![icon00](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon00.png)，否则会导致闪退，目前我们尚未解决这个问题；但这个问题并不影响调试，一般点击 ![icon01](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon01.png) 按钮组合即可执行运行、停止、复位操作，非运行状态下可进行增删窗口、变量、波形等操作。使用 J-Link 则一切功能正常。
+> 注意：**使用 CMSIS-DAP 时**，若要退出调试，请不要点击![icon00](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon00.png)，否则会导致闪退，目前我们尚未解决这个问题；但这个问题并不影响调试，一般点击 ![icon01](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon01.png) 按钮组合即可执行运行、停止、复位操作，非运行状态下可进行增删窗口、变量、波形等操作。
+> **使用 J-Link 则一切功能正常**。
 
 * 操作和一般的调试器类似，运行、复位、单步运行、打断点...
 * 开启 `View` 标签下的各种窗口以观察调试信息：
     * `Call Stack` 查看调用栈；
     * `Global Data` 及 `Local Data` 在程序暂停时更新变量；
     * `Register` 查看外设信息；
-    * `Watched Data` 能够实时显示变量；
+    * `Watched Data` 能够实时更新变量，在该窗口中右键设定刷新频率；
     * `Data Sampling` 能够实时采集数据，配合 `Timeline` 实现波形可视化，并可导出为 `.csv` 格式；`Timeline` 还可展示功耗和程序执行信息；
     * `Source Files` 展示工程源文件，可搜索希望打开的文件，以方便断点调试。
 * 右键开启快捷菜单可将变量添加到窗口，或执行其他快捷操作。关于键盘快捷键的使用可自行探索~
@@ -362,6 +363,8 @@ set(CMAKE_C_STANDARD 11)
 # ########################## USER CONFIG SECTION ##############################
 # set up proj
 project(your_proj_name C CXX ASM) # TODO
+set(CMSISDSP your_dsp_path) # if using DSP, modify your_dsp_path here
+			    # e.g. set(CMSISDSP Drivers/CMSIS/DSP)
 
 # ! rebuild or use command line `cmake .. -D` to switch option
 # floating point settings
@@ -369,8 +372,7 @@ option(ENABLE_HARD_FP "enable hard floating point" OFF) # TODO
 option(ENABLE_SOFT_FP "enable soft floating point" OFF) # TODO
 option(USE_NEW_VERSION_DSP "DSP version >= 1.10.0" ON) # TODO
 
-# add src and inc here	
-set(CMSISDSP your_dsp_path) # if use DSP, modify your_dsp_path here
+# add inc and src here	
 include_directories(
   Core/Inc 
   Drivers/STM32F4xx_HAL_Driver/Inc
@@ -393,14 +395,14 @@ include_directories(
 
 # !! Keep only sub folders required to build and use CMSIS-DSP Library.
 # !! If DSP version >= 1.10, for all the paths including DSP folders,
-# !！ please add [^a] to filter DSP files.
+# !! please add [^a] to filter DSP files.
 # !! e.g. your_dsp_path = Drivers/CMSIS/DSP, use "Drivers/[^a]*.*"
 file(GLOB_RECURSE SOURCES
   "Core/*.*"
   "Drivers/*.*"
 	
+  # "${CMSISDSP}/[^a]*.*" # uncomment this line when using DSP
   # TODO
-  # your_dsp_path
 )
 
 # #############################################################################
