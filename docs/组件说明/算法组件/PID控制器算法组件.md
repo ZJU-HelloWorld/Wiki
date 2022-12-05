@@ -208,11 +208,11 @@ PID 模块依赖于滤波器和跟踪微分器（可选）。要在项目中使�
 ```
 Algorithms/pid.c
 Algorithms/pid.h
-Algorithms/filter.c
 Algorithms/filter.h
-Utils/tools.c
 Utils/tools.h
 system.h
+ 
+Algorithms/filter.c  # 可选，若使用跟踪微分器，请添加
 ```
 
 ### 使用前准备
