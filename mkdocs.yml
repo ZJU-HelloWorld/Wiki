@@ -25,7 +25,8 @@ theme:
         #     - toc.integrate
         - navigation.top
         - header.autohide
-        
+        - navigation.expand
+
     palette:
         # Palette toggle for light mode
         - scheme: default
