@@ -208,11 +208,10 @@ PID 模块依赖于滤波器和跟踪微分器（可选）。要在项目中使�
 ```
 Algorithms/pid.c
 Algorithms/pid.h
+Algorithms/filter.c  # 可选，若使用跟踪微分器，请添加
 Algorithms/filter.h
 Utils/tools.h
 system.h
- 
-Algorithms/filter.c  # 可选，若使用跟踪微分器，请添加
 ```
 
 ### 使用前准备
@@ -270,7 +269,8 @@ const PidParams_t pid_param =
 
 const PidParams_t pid_n_loop_param[N] = {{...}, {...}, ...}; // cascade controller with N loop
 ```
-
+其中 `kType, kImprvOption, kp, ki, kd, kOutMax, kWindUpOutMax, kDWeight` 为必要的参数，请手动指定；其他参数为搭配优化选项的可选参数，具有缺省值。
+ 
 初始化 PID 控制器，如：
 
 ```c
