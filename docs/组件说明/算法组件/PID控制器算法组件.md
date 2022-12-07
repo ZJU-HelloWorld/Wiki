@@ -220,6 +220,7 @@ Algorithms/filter.c  # 可选，若使用跟踪微分器，请添加
 使用前需要做以下准备：
 
 * 在使用 STM32CubeMX 生成项目时，请在 `Code Generator` 界面 `Enable Full Assert`，来帮助断言算法中的错误
+* 在 `main.c` 中修改 `assert_failed` 函数以指示断言结果
 * 在 `system.h` 中 `system options: user config` 处进行系统设置
 
 ### 示例
