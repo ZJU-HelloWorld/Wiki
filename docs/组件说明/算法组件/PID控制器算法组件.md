@@ -269,7 +269,9 @@ const PidParams_t pid_param =
 
 const PidParams_t pid_n_loop_param[N] = {{...}, {...}, ...}; // cascade controller with N loop
 ```
-其中 `kType, kImprvOption, kp, ki, kd, kOutMax, kWindUpOutMax, kDWeight` 为必要的参数，请手动指定；其他参数为搭配优化选项的可选参数，具有缺省值。
+其中 `kType, kImprvOption, kp, ki, kd, kOutMax, kWindUpOutMax, kDWeight` 为基础参数，请在初始化时按需求指定；其他参数为搭配优化选项的可选参数。
+ 
+> 说明：所有参数均具有缺省值，部分参数的缺省值已在理论部分给出，未给出的默认为 0。
  
 初始化 PID 控制器，如：
 
@@ -288,7 +290,7 @@ PidInit(&pid_n_loop, N, pid_n_loop_param); // cascade controller with N loop
 > ```
 > 其中 $h_0$ 为滤波因子， $h_0$ 越大滤波效果越好； $h$ 为步长， $h$ 越小滤波效果越好；一般来说， $h_0$ 略大于步长 $h$； $r$ 为快速因子， $r$ 越大，跟踪越快。
 >
-> 更多原理和参数调节规律详询沈组长www
+> 更多原理和参数调节规律详见滤波器算法组件说明，或咨询沈组长www
 
 传入 PID 控制器句柄、最外回路给定值、各回路反馈值（存储顺序由外回路到内回路）数组首地址、存储输出量的内存地址，计算 PID 控制器输出：
 
