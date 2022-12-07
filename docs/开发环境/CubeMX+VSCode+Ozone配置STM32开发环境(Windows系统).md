@@ -364,7 +364,7 @@ set(CMAKE_C_STANDARD 11)
 # set up proj
 project(your_proj_name C CXX ASM) # TODO
 set(CMSISDSP your_dsp_path) # if using DSP, modify your_dsp_path here
-			    # e.g. set(CMSISDSP Drivers/CMSIS/DSP)
+			                      # e.g. set(CMSISDSP Drivers/CMSIS/DSP)
 
 # ! rebuild or use command line `cmake .. -D` to switch option
 # floating point settings
@@ -394,14 +394,13 @@ include_directories(
 )
 
 # !! Keep only sub folders required to build and use CMSIS-DSP Library.
-# !! If DSP version >= 1.10, for all the paths including DSP folders,
-# !! please add [^a] to filter DSP files.
-# !! e.g. your_dsp_path = Drivers/CMSIS/DSP, use "Drivers/[^a]*.*"
+# !! If DSP version >= 1.10, for all paths including DSP folders, plz add [^a] to filter DSP files.
+# !! e.g. your_dsp_path = Drivers/CMSIS/DSP, use "Drivers/[^a]*.*" "${CMSISDSP}/[^a]*.*" 
 file(GLOB_RECURSE SOURCES
   "Core/*.*"
   "Drivers/*.*"
 	
-  # "${CMSISDSP}/[^a]*.*" # uncomment this line when using DSP
+  # "${CMSISDSP}/*.*" # uncomment this line when using DSP
   # TODO
 )
 
