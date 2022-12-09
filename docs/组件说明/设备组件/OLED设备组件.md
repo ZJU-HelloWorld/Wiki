@@ -222,7 +222,7 @@ oled.refresh(&oled);
 >
 > `kRmLogo` - RoboMaster 徽标（64 * 64）
 >
-> `kAscii1206` ASCII 字符（12 * 6）
+> `kAscii1206` ASCII 字符（6 * 12）
 
 ## 附录
 
