@@ -201,7 +201,7 @@ oled.refresh(&oled);
 
 | 名称<img width=100/> | 类型<img width=100/> | 示例值                               | 描述                               |
 | :------------------- | :------------------- | :----------------------------------- | :--------------------------------- |
-| `gram_cmd`           | `OledCtrlType_e*`    | OLED_CMD<br>OLED_ONE_CMD<br>OLED_DTA | 控制字节类型。                     |
+| `gram_cmd`           | `OledCtrlType_e`    | OLED_CMD<br>OLED_ONE_CMD<br>OLED_DTA | 控制字节类型。                     |
 | `gram_data`          | `uint8_t[8][128]`    | /                                    | GDDRAM 在 STM32 内存中映射的画板。 |
 
 #### `OledIcon` 结构体
@@ -210,7 +210,7 @@ oled.refresh(&oled);
 | :------------------- | :------------------- | :----- | :------------------ |
 | `width`              | `uint16_t`           | 64     | 图标宽度（1 ~ 128） |
 | `height`             | `uint16_t`           | 32     | 图标高度（1 ~ 64）  |
-| `data`               | `unit8_t`            | /      | 图标数据数组指针    |
+| `data`               | `unit8_t*`            | /      | 图标数据数组指针    |
 
 > **内置图标和字模：**
 >
