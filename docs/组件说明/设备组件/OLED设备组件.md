@@ -178,12 +178,12 @@ oled.refresh(&oled);
 | 名称<img width=250/> | 参数说明                                                     | 描述                                  |
 | :------------------  | :-----------------------------------------------------------| ------------------------------------- |
 | `OledInit`      | 传入 I2C 句柄指针、GRAM 结构体指针              | 用传入的参数初始化一个 OLED 设备。 |
-| `displayOn`          | 根据 DMA 传输状态，返回设备状态类型 `DevStatus_e`            | 开启 OLED 屏显。                                             |
-| `displayOff`         | 根据 DMA 传输状态，返回设备状态类型 `DevStatus_e`            | 关闭 OLED 屏显。                                             |
-| `refresh`            | 根据 DMA 传输状态，返回设备状态类型 `DevStatus_e`            | 将数据写入 GDDRAM，刷新显示。                                |
+| `displayOn`          | 根据 DMA 传输状态，返回设备状态类型 `DevStatus_t`            | 开启 OLED 屏显。                                             |
+| `displayOff`         | 根据 DMA 传输状态，返回设备状态类型 `DevStatus_t`            | 关闭 OLED 屏显。                                             |
+| `refresh`            | 根据 DMA 传输状态，返回设备状态类型 `DevStatus_t`            | 将数据写入 GDDRAM，刷新显示。                                |
 | `clear`              | /                                                            | 清空内存中映射的画板。                                       |
 | `inverse`            | /                                                            | 将内存中映射的画板反色。                                     |
-| `genPoint`           | 指定画笔类型 `Pen_e pen`，然后传入点坐标 (x, y)，x 代表第 x 列，y 代表第 y 行 | 用指定的笔刷改变画板上的一点。                               |
+| `genPoint`           | 指定画笔类型 `Pen_t pen`，然后传入点坐标 (x, y)，x 代表第 x 列，y 代表第 y 行 | 用指定的笔刷改变画板上的一点。                               |
 | `genLine`            | 传入点坐标 (x1, y1) (x2, y2)，标识线段的起点和终点           | 在画板上绘制一条线段。                                       |
 | `genIcon`            | 传入点坐标 (x, y)，标识图标左上角起点；传入图标结构体常量的指针 | 在画板上绘制一个图标。                                       |
 | `putChar`            | 传入点坐标 (x, y)，标识字符左上角起点；传入一个字符         | 在画板上输出一个字符。                                       |
@@ -196,14 +196,14 @@ oled.refresh(&oled);
 
 | 名称<img width=100/> | 类型<img width=100/> | 示例值                              | 描述                     |
 | :------------------- | :------------------- | :---------------------------------- | :----------------------- |
-| `pen`                | `OledPen_e`          | PEN_CLEAR<br>PEN_WRITE<br>PEN_INVER | 对一个点，选择笔刷类型。 |
-| `dir`                | `OledDirection_e`    | OLED_NORMAL<br>OLED_REMAP           | OELD 显示方向。          |
+| `pen`                | `OledPen_t`          | PEN_CLEAR<br>PEN_WRITE<br>PEN_INVER | 对一个点，选择笔刷类型。 |
+| `dir`                | `OledDirection_t`    | OLED_NORMAL<br>OLED_REMAP           | OELD 显示方向。          |
 
 #### `OledGram` 结构体
 
 | 名称<img width=100/> | 类型<img width=100/> | 示例值                               | 描述                               |
 | :------------------- | :------------------- | :----------------------------------- | :--------------------------------- |
-| `gram_cmd`           | `OledCtrlType_e`    | OLED_CMD<br>OLED_ONE_CMD<br>OLED_DTA | 控制字节类型。                     |
+| `gram_cmd`           | `OledCtrlType_t`    | OLED_CMD<br>OLED_ONE_CMD<br>OLED_DTA | 控制字节类型。                     |
 | `gram_data`          | `uint8_t[8][128]`    | /                                    | GDDRAM 在 STM32 内存中映射的画板。 |
 
 #### `OledIcon` 结构体

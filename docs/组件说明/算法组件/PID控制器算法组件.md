@@ -353,7 +353,7 @@ PID 控制器。
 
 | 名称                                             | 类型        | 示例值                                               | 描述                                                         |
 | :----------------------------------------------- | :---------- | :--------------------------------------------------- | :----------------------------------------------------------- |
-| `kType`                                          | `PidType_e` | PID_ACROSS0_RAD<br>PID_ACROSS0_DEGREE<br>PID_DEFAULT | PID 处理类型                                                 |
+| `kType`                                          | `PidType_t` | PID_ACROSS0_RAD<br>PID_ACROSS0_DEGREE<br>PID_DEFAULT | PID 处理类型                                                 |
 | `kImprvOption`                                   | `uint16_t`  | /                                                    | 优化选项集合,由所有需启用的优化枚举类型 `PidImprvType_t` 的优化选项 “按位与” 合成 `uint16_t` |
 | `kp / ki / kd`                                   | `float`     | 500.0 / 5.0 /1.0                                     | PID 增益                                                     |
 | `kOutMax`                                        | `float`     | 30000                                                | 最大输出，$\pm$kOutMax                                       |
