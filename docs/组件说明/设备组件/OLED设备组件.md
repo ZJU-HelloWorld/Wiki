@@ -113,7 +113,7 @@ system.h
 在项目中引用头文件：
 
 ```c
-#include "dev_oled.h"
+#include "dev_config.h"
 ```
 
 实例化一个 OLED 设备，指定显示方向选项并初始化，默认开启显示，如：
