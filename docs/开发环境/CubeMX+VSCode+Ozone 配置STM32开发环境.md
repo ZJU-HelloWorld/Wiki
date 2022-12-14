@@ -110,7 +110,7 @@ openocd -v
 
 - 在VS Code中安装相关扩展：
 
-    ![Image title](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/vscode00.png)
+    ![Image title](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/vscode00.png)
 
     * C/C++
 
@@ -134,9 +134,9 @@ openocd -v
 * 生成工程时，在 `Project Manager-->Project-->Toolchain/IDE` 选项选择 `STM32CubeIDE`，勾选 `Generate Under Root`；其它一些选项建议按下图选择。
 * 点击右上角的 GENERATE CODE 生成代码。
 
-![](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/cubemx01.png)
+![](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/cubemx01.png)
 
-![](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/cubemx00.png)
+![](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/cubemx00.png)
 
 ### 使用 VS Code 编辑
 
@@ -145,7 +145,7 @@ openocd -v
     * `.ld` 为链接脚本文件，在链接时使用，本目录下的 `.ld` 规定了设备内存相关信息；
     * `Core/` `Drivers/` 为 CubeMX 按照模板生成的文件，除 `Core/Src/main.c` 外一般不做改动。
 
-![vscode01](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/vscode01.png)
+![vscode01](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/vscode01.png)
 
 * 在工程根目录添加子目录和文件，在 VS Code 中编辑。
 
@@ -192,19 +192,19 @@ openocd -v
 
 * 基于 CMake Tools 配置 CMake 工程。首先选择构建工具链套件，若未选择，状态栏将显示 **No Kit Selected**：
 
-  ![_images/no_kits.png](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/no_kits.png)
+  ![_images/no_kits.png](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/no_kits.png)
 
   单击此状态栏按钮，或从命令面板运行 *CMake: Select a Kit* 命令。将出现一个快速选择栏，选择 `arm-none-eabi`：
   
-  ![cmake00](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/cmake00.png)
+  ![cmake00](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/cmake00.png)
 
 * 选择构建类型。若未选择，状态栏将显示 **Unknown**：
 
-  ![_images/no_variant.png](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/no_variant.png)
+  ![_images/no_variant.png](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/no_variant.png)
 
   单击此状态栏按钮，或从命令面板运行 *CMake: Select variant* 命令。将出现一个快速选择栏，按需选择：
 
-  ![cmake00](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/cmake01.png)
+  ![cmake00](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/cmake01.png)
 
 * 运行配置：
 
@@ -222,7 +222,7 @@ openocd -v
 
 * 至此，已完成了 CMake 工程的所有配置。若配置成功，应当输出类似的信息：
 
-  ![cmake02](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/cmake02.png)
+  ![cmake02](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/cmake02.png)
 
 ### 修改工程
 
@@ -235,11 +235,11 @@ openocd -v
 
 * 从命令面板运行 *CMake: Build* 命令（快捷键 `F7`），该命令具有跨平台的特性；
 
-  ![_images/build_command.png](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/build_command.png)
+  ![_images/build_command.png](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/build_command.png)
   
   或者点击状态栏中的 *Build*:
 
-  ![_images/build_button.png](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/build_button.png)
+  ![_images/build_button.png](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/build_button.png)
 
 * 或使用命令行，加入 `-jn` 以指定使用 `n` 线程编译，如 `-j10`：
 
@@ -250,7 +250,7 @@ openocd -v
 
 * 若构建成功，应当输出类似的信息：
 
-  ![cmake03](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/cmake03.png)
+  ![cmake03](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/cmake03.png)
 
 * 默认情况下，CMake 工具将构建输出写入 `build/` 子目录。该目录下可找到调试所需的 `.elf` 文件。
 
@@ -270,14 +270,14 @@ openocd -v
     
     * 连接好 CMSIS-DAP 调试器，使用 `New Project Wizard` 新建工程，进行到下图所示步骤，读取调试器序列号：
     
-      ![image-20221125211505428](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/image-20221125211505428.png)
+      ![image-20221125211505428](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/image-20221125211505428.png)
 
-	> 或先用 Ozone 开启调试，然后点击 Windows 任务栏托盘区的 ![](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon-jl.png) 图标开启 J-Link 控制面板，也能够读取序列号：![jl](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/panel-jl.png)
+	> 或先用 Ozone 开启调试，然后点击 Windows 任务栏托盘区的 ![](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/icon-jl.png) 图标开启 J-Link 控制面板，也能够读取序列号：![jl](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/panel-jl.png)
 
 	* 将序列号输入注册机生成 License，然后开启 J-Link License Manager（已与 J-Link 捆绑安装），添加 License：
 	  
 	
-	![lic](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/license-jl.png)
+	![lic](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/license-jl.png)
 
 #### 创建项目
 
@@ -295,9 +295,9 @@ openocd -v
 
 * 点击左上角绿色图标，下载并复位程序，点击工具栏按钮进行调试；
 
-  ![ozone00](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/ozone00.png)
+  ![ozone00](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ozone00.png)
 
-> 注意：**使用 CMSIS-DAP 时**，若要退出调试，请不要点击![icon00](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon00.png)，否则会导致闪退，目前我们尚未解决这个问题；但这个问题并不影响调试，一般点击 ![icon01](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/icon01.png) 按钮组合即可执行运行、停止、复位操作，非运行状态下可进行增删窗口、变量、波形等操作。
+> 注意：**使用 CMSIS-DAP 时**，若要退出调试，请不要点击![icon00](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/icon00.png)，否则会导致闪退，目前我们尚未解决这个问题；但这个问题并不影响调试，一般点击 ![icon01](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/icon01.png) 按钮组合即可执行运行、停止、复位操作，非运行状态下可进行增删窗口、变量、波形等操作。
 > **使用 J-Link 则一切功能正常**。
 
 * 操作和一般的调试器类似，运行、复位、单步运行、打断点...
@@ -320,7 +320,7 @@ openocd -v
 
 #### 更多功能介绍
 
-![ozone01](CubeMX+VSCode+Ozone配置STM32开发环境(Windows系统).assets/ozone01.png)
+![ozone01](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ozone01.png)
 
 * `View` 标签下的窗口包含了 Ozone 的大部分功能。静态下可观察可执行文件的静态信息；开始调试后，能够观察更多动态信息；
 * 实现C/C++源代码级调试和汇编指令调试；调试信息包括：反汇编、内存、全局变量和局部变量、（实时）监视、CPU和外设寄存器等；可展示RTOS内核相关信息；

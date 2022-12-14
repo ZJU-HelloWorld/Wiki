@@ -74,9 +74,9 @@ graph TD
 - 搜索"环境变量"-->"编辑系统环境变量"-->"环境变量"-->"Path"-->"编辑"-->"新建"，添加解压路径中的三个`bin`目录。
 - 如果 MinGW 事先已安装且有 conda 环境，安装 conda 时会自动修改MinGW路径，二者等价。
   
-  ![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89db14fcf897299cba77d734bb20aa05.png)
+  ![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89db14fcf897299cba77d734bb20aa05.png)
 
-  ![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ff51b7652b58f21d847994010489947b.png)
+  ![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ff51b7652b58f21d847994010489947b.png)
 
 - 在终端测试是否安装成功
   ```powershell
@@ -94,20 +94,20 @@ graph TD
 - Toolchains
   - **Toolset**：配置 MinGW 路径，用 CLion 默认捆绑的即可，也可以用自己下载的版本
   
-  ![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ce1df062eda3f12f0ab0af9da6201d62.png)
+  ![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ce1df062eda3f12f0ab0af9da6201d62.png)
 
 - CMake
   
   - **Build directory**：cmake-build-debug 为编译生成的 .elf 文件所在目录（无需修改）
   
-  ![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5111298bbb51cb73b27606aa9a85d3fc.png)
+  ![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5111298bbb51cb73b27606aa9a85d3fc.png)
 
 - Embedded Deveploment
   - **OpenOCD Location**：OpenOCD 路径，不可有空格
   - **Stm32CubeMX Location**：CubeMX 路径
   - 点击 Test 可进行测试
   
-  ![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/1916cdf1a517dad11109332cedfbd5cb.png)
+  ![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/1916cdf1a517dad11109332cedfbd5cb.png)
 
 
 ## 创建工程
@@ -118,11 +118,11 @@ graph TD
 
 - **Location**：工程==文件夹==的位置
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/c235c072908674d326df57dfe16ddf83.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/c235c072908674d326df57dfe16ddf83.png)
 
 ​		创建后会自动成 Location 中所给文件夹，以及同名的 .ioc 文件，默认是 STM32030F4Px 芯片，点击 Open with STM32CubeMX，在 CubeMX 中重新配置。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/3d9d56b9a9bc4f8817032b864108e64d.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/3d9d56b9a9bc4f8817032b864108e64d.png)
 
 **CubeMX --> Project Manager**
 
@@ -134,23 +134,23 @@ graph TD
 - 配置完成后 GENERATE CODE，第一次生成是会出现 overrun 选项，选==是==（CubeMX配置时先进行以上步骤是为了避免在完成了前面的外设配置后因路径问题导致重配）
 - 若路径有误（第一次生成时没有出现overrun选项）或 Toolchain选择有误（生成的文件目录非后图所示），需删除新生成的文件夹，返回 Clion 中 Open with STM32CubeMX 重新配置
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/25556576d4714960fc92995e5a5742dc.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/25556576d4714960fc92995e5a5742dc.png)
 
 **返回 Clion**
 
 ​		Clion 中会跳出配置文件的选项，可以选择最相近的 stm32f4discovery.cfg，然后点击 Copy to Project & Use，工程目录下就会出现该配置文件，方便之后修改。（也可先取消，之后再配置）
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/66773f95328894f4403cd4d95fa666c5.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/66773f95328894f4403cd4d95fa666c5.png)
 
 ​		至此，工程文件基本配置完成，文件结构如下图所示，可返回 CubeMX 继续配置外设。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/a8be8a499df583af9c75c548506cf5e8.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/a8be8a499df583af9c75c548506cf5e8.png)
 
 ### CMakeLists.txt
 
 ​		整个编译流程是利用 cmake 工具生成了 CMakeList.txt，再根据 CMakeLists.txt 生成了 Makefile 用于编译，所以所有的编译规则都可以在 CMakeLists.txt 中规定，并且会覆盖编辑器中的相关配置。本项目中编译链的设置就在 CMakeLists.txt 自动配置完成，会覆盖之前 Toolchains 中的配置。
 ​		
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skkfdnr23s80xnv.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skkfdnr23s80xnv.png)
 
 ### 添加文件
 
@@ -159,11 +159,11 @@ graph TD
 - **include_directories**：头文件
 - **file**：源文件
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d433ecca118adec95af29669b381e49f.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d433ecca118adec95af29669b381e49f.png)
 
 ​		==文件在添加、重命名或删除后需要在下方工具栏 CMake 中 Reload CMake Project，否则会找不到原本编译链中的文件。==
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/20220812193310.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/20220812193310.png)
 
 ### 修改工程名
 
@@ -173,16 +173,16 @@ graph TD
 
 - CMakeLists.txt 中修改 project 处修改对应的文件名，然后右上角 Reload changes（与上图 Reload CMake Project 作用相同）
 
-  ![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slqna983nreci9aq324f.png)
+  ![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slqna983nreci9aq324f.png)
 
 
 ## 编译
 
 ​		点击右上角的锤子即可编译，终端显示 Linking .elf 文件 和 Build finished 即编译成功。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/b8219d2f6142e7b81e1db4e0d1a15783.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/b8219d2f6142e7b81e1db4e0d1a15783.png)
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/6ae5a1fcbf4ab9da8612213c74ba45cc.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/6ae5a1fcbf4ab9da8612213c74ba45cc.png)
 
 
 
@@ -192,9 +192,9 @@ graph TD
 
 ​		CLion 新建的工程默认使用 OpenOCD，点击 Debug --> Edit Configuration --> 左上角"+" --> Embedded GDB Server，完成相关配置。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png)
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/allzngw98r2873ncxxoa.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/allzngw98r2873ncxxoa.png)
 
 - **Name**： 自行选择
 - **Target / Executable**：对应的.elf文件
@@ -205,18 +205,18 @@ graph TD
 
 ​		JLinkGDBServer 没有单独的烧录选项，是在进入调试模式时进行代码的烧录（Downloaded executable 选项），点击右上角虫子进行调试&烧录，CLion 会自动打开底部 Debug 工具栏。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjebc74i3msnsu320957tmgkdjenwb.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjebc74i3msnsu320957tmgkdjenwb.png)
 
 ​		JLinkGDBServer 会首先检查是否连接 J-Link 和主控板，第2、3行亮绿灯表示通过。
 
 - 如果二三行都为红灯，检查 J-Link 是否连接以及 J-Link 驱动是否安装。   
 - 如果第三行为红灯，检查 J-Link 与主控板是否连接。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skxn2k2059c7smazkxx72jrvhsk.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skxn2k2059c7smazkxx72jrvhsk.png)
 
 ​		然后进行 tcp 连接，第一行亮绿灯后自动烧录代码。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png)
 
 ​		烧录完成后若关闭 JLinkGDBServer 界面或断开 J-Link 连接，则退出调试模式，否则仍处于调试模式。
 
@@ -226,17 +226,17 @@ graph TD
 
 ​		点击左侧绿色箭头，程序会运行至下一个断点处（while循环中即重新回到此处），可以看到此时全局变量和局部变量都发生了改变，且变量值会显示在变量定义处（95行）。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slkdjwenflzj.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slkdjwenflzj.png)
 
 ​		如果变量后出现了`<optimized out>`的字样，说明编译器自动对其进行了优化，导致其值不可见，一般是由于该变量未被使用（第二段程序有所修改）。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/I%7D838Z~9L5ITZ25N5LDN.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/I%7D838Z~9L5ITZ25N5LDN.png)
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/NGAEEXLRV04OGTI48VMF6.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/NGAEEXLRV04OGTI48VMF6.png)
 
 ​		如果需要取消此优化，在 CMakeList.txt 中修改编译器的优化指令，加在50行之后以覆盖之前的指令，`add_compile_options(-O0)`，-O0 代表不优化。调试结束后改回，否则影响编译效率。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5%5BGJ3XG4$B%7B1P7%7DBDG0Y7J3.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5%5BGJ3XG4$B%7B1P7%7DBDG0Y7J3.png)
 
 #### 查看寄存器
 
@@ -244,28 +244,28 @@ graph TD
 
 - 如果有安装过 KEIL，可以在安装子目录中中找到：`C:\Users\HTY\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\CMSIS\SVD\STM32F40x.svd`。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/69GILEZS%7BWI7C722FXR.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/69GILEZS%7BWI7C722FXR.png)
 
 - 也可在 [github链接](https://github.com/posborne/cmsis-svd/tree/master/data/STMicro) 上下载对应的文件，放在根目录后选择该文件即可。 
 
 ​		选择 .svd 文件后即可查看相应寄存器的值，这里点亮了C板上的蓝灯，即拉高 `GPIOH` 下的 `GPIO_PIN_10`的引脚，可以看到 GPIOH 寄存器 IDR 中的第10位发生改变被置位。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/QEP5$HPRZP%5B3D8%5BDW5ZGP%7D2.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/QEP5$HPRZP%5B3D8%5BDW5ZGP%7D2.png)
 
 
 ### OpenOCD
 
 ​		点击 Debug --> Edit Configuration，可以看到 Board config file 已自动配置了之前选择的 .cfg 文件，点击 Assist 可选则 OpenOCD 提供的其他模板配置文件（也可选择自己定义的文件）。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png)
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d6a31d32f2a57eb3c0399cff41e00dbb.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d6a31d32f2a57eb3c0399cff41e00dbb.png)
 
 #### ST-Link
 
 ​		打开 .cfg 配置文件，默认是 ST-Link 烧录器，==需要将最后一行的 `reset_config srst_only` 改为 `reset_config none`，或者直接删除==。其中的 interface 和 target 文件夹即 OpenOCD 路径 `C:\openocd\share\openocd\scripts\ ` 下的两个目录。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ed4871a9373f8024b13ca120b72c4d29.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ed4871a9373f8024b13ca120b72c4d29.png)
 
 
 #### J-Link
@@ -287,7 +287,7 @@ reset_config none
 
 ​		同时，由于 OpenOCD 使用 J-Link 的方式很低级，所以我们需要把 J-Link 原来的驱动更换为 WinUSB 驱动才可以被 OpenOCD 识别。[USBDriverTool官网](https://visualgdb.com/UsbDriverTool/)下载安装包，打开后右击 J-Link driver --> Install WinUSB。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/7e5e4df640242b6c3418d53644ff55ea.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/7e5e4df640242b6c3418d53644ff55ea.png)
 
 
 #### CMSIS-DAP
@@ -309,19 +309,19 @@ reset_config none
 
 ​		修改完配置后点击右上角箭头完成烧录。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/772367ce4a2db9d00073adb97072e597.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/772367ce4a2db9d00073adb97072e597.png)
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0a895eae36360d8c3bef55db69e88ce3.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0a895eae36360d8c3bef55db69e88ce3.png)
 
 
 ​		点击右上角的虫子进行调试。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/07ebebbf0116427773e357c920d55b24.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/07ebebbf0116427773e357c920d55b24.png)
 
 
 ​		在初始化锁相环的时候会出现卡死的情况，原因是 HAL 库与 OpenOCD 对时钟的配置所导致，具体原因见[OpenOCD在debug时PLL卡死问题](https://blog.t123yh.xyz:2/index.php/archives/922)。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0f93f38b4b3db416631bcb4fe94aa024.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0f93f38b4b3db416631bcb4fe94aa024.png)
 
 
 解决方案：
@@ -406,19 +406,19 @@ void SystemClock_Config(void)
 
 ​		找到 J-Link 安装目录下的 RRT 文件夹，下图中的压缩包不用解压缩，直接点进去将所需文件复制到工程目录即可。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png)
 
 ​		所需文件为 Config 文件夹下的 `SEGGER_RTT_Conf.h` 和 RTT 文件夹下的 `SEGGER_RTT.c`、`SEGGER_RTT.h`、`SEGGER_RTT_printf.c`。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwnew827r8oiv092.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwnew827r8oiv092.png)
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/djwn328ds8danq09r98u.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/djwn328ds8danq09r98u.png)
 
 ​		将以上四个文件复制到工程目录下，修改 CMakeLists.txt 与之匹配。同时将 `SEGGER_RTT.h` 中 `#include "../Config/SEGGER_RTT_Conf.h"` 改为 CMakeLists.txt 中所包含的路径 `#include "SEGGER_RTT_Conf.h"`（Config文件夹不存在）。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjenclxjs.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjenclxjs.png)
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/9MD15JOTMTZK97KO2BMN.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/9MD15JOTMTZK97KO2BMN.png)
 
 ​		编写如下测试代码，需要包含头文件 `#include "SEGGER_RTT.h"`。程序向两个终端发送不同变量的值，分别为红色的绿色，在 JLinkRTTViewer 中输入‘空格’或‘q’可以改变变量的值。
 
@@ -452,9 +452,9 @@ void SystemClock_Config(void)
 
 ​		打开 JLinkRTTViewer，下拉箭头选择对应芯片。可以同时打开两个以方便观察不同终端的输出。更多功能详见[官网](https://www.segger.com/products/debug-probes/j-link/tools/rtt-viewer/)。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sinwcxo.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sinwcxo.png)
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sj2d8ccxqkjbs.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sj2d8ccxqkjbs.png)
 
 ### J-Scope
 
@@ -462,11 +462,11 @@ void SystemClock_Config(void)
 - **Sampling Rate**：采样间隔需大于20000us，因为采样频率从最大50Hz
 - **Elf File**：选择工程目录下 cmake-build-debug 中的 .elf 文件
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89fd00824ab96b4c40a5f195360ca79b.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89fd00824ab96b4c40a5f195360ca79b.png)
 
 ​		如果之前更改了 USB 驱动，需要用 USBDriverTool 恢复。
 
-![](CLion+CubeMX%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/62654cbd7286ee7689dcca91546c7328.png)
+![](CubeMX+CLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/62654cbd7286ee7689dcca91546c7328.png)
 
 
 ### Vofa
