@@ -85,7 +85,7 @@ SSD1306中有三种不同的存储器寻址模式：页寻址模式（`0x02`）�
 ```
 Devices/dev_oled.c
 Devices/dev_oled.h
-Devices/dev_typedef.h
+Devices/dev_config.h
 system.h
 ```
 
@@ -104,9 +104,9 @@ system.h
 
 使用前需要做以下准备：
 
-* 在使用 STM32CubeMX 生成项目时，请在 `Code Generator` 界面 `Enable Full Assert`，来帮助断言设备驱动中的错误
-* 在 `main.c` 中修改 `assert_failed` 函数以指示断言结果
+* 在使用 STM32CubeMX 生成项目时，请在 `Code Generator` 界面 `Enable Full Assert`，来帮助断言设备驱动中的错误；在 `main.c` 中修改 `assert_failed` 函数以指示断言结果，如添加 `while(1);`
 * 在 `system.h` 中 `system options: user config` 处进行系统设置
+* 在 `dev_config.h` 中设置 `Conditional Compiling` 选项，将使用到的设备对应的条件编译宏开关定义为 1.
 
 ### 示例
 
