@@ -1,4 +1,6 @@
-# CLion+CubeMX 配置 STM32 开发环境（Windows系统）
+# CubeMX + CLion 配置 STM32 开发环境
+
+<img src = "https://img.shields.io/badge/version-1.4.0-green"> <sp> <img src = "https://img.shields.io/badge/author-hty-lightgrey"><sp> <img src = "https://img.shields.io/badge/system-windows-blue">
 
 ```mermaid
 graph TD
@@ -500,26 +502,8 @@ void SystemClock_Config(void)
 ​		CubeMX 生成的代码默认的缩进为 2 spaces，可使用 vscode 进行修改，这种方法只能单个文件修改，且CubeMX 重新 generate code 后仍会变成默认缩进，[修改缩进（vscode）](https://blog.csdn.net/spiremoon/article/details/111519064)。
 
 
-
-## 版本
-
-| 版本 | 时间     | 内容         |
-| ---- | -------- | ------------ |
-| v1.0 | 2022.9.1 | 基本配置 |
-| v1.1 | 2022.9.3 | 添加debug流程 |
-| v1.2 | 2022.9.3 | 添加其他clion功能 |
-| v1.3 | 2022.9.4 | 添加RTT流程 |
-| v1.4 | 2022.9.4 | 删除mingw |
-
-
-
-## 作者
-
-胡天扬
-
-
-
-## 参考
+## 附录
+### 参考资料
 
 [CLion官网](https://www.jetbrains.com/help/clion/embedded-overview.html)
 
@@ -549,3 +533,12 @@ void SystemClock_Config(void)
 
 [修改缩进（vscode）](https://blog.csdn.net/spiremoon/article/details/111519064)
 
+### 版本说明
+  
+| 版本号                                                | 发布日期   | 说明                           | 贡献者 |
+| ----------------------------------------------------- | ---------- | ------------------------------ | ------ |
+| ![hh](https://img.shields.io/badge/version-1.0.0-green) | 2022.09.01 | 基本配置                         | 胡天扬 |
+| ![hh](https://img.shields.io/badge/version-1.1.0-green) | 2022.09.03| 添加debug流程                       | 胡天扬 |
+| ![hh](https://img.shields.io/badge/version-1.2.0-green) | 2022.09.03 | 添加其他clion功能 | 胡天扬 |
+| ![hh](https://img.shields.io/badge/version-1.3.0-green) | 2022.09.04 | 添加RTT流程 | 胡天扬 |
+| ![hh](https://img.shields.io/badge/version-1.4.0-green) | 2022.09.04 | 删除mingw | 胡天扬 |
