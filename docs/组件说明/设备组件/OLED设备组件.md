@@ -1,6 +1,6 @@
 # OLED 设备组件
 
- <img src = "https://img.shields.io/badge/version-1.0.0-green"> <sp> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey"> 
+ <img src = "https://img.shields.io/badge/version-1.1.0-green"> <sp> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey"> 
 
 ## 理论
 
@@ -234,7 +234,8 @@ oled.refresh(&oled);
 | 版本号                                                       | 发布日期   | 说明           | 贡献者 |
 | ------------------------------------------------------------ | ---------- | -------------- | ------ |
 | <img src = "https://img.shields.io/badge/version-1.0.0-green" > | 2022.12.09 | 发布 OLED 组件 | 薛东来 |
-
+| <img src = "https://img.shields.io/badge/version-1.1.0-green" > | 2022.12.16 | 更新 CubeMX 配置说明 | 薛东来 |
+ 
 ### 参考资料
 
 [1] RoboMaster 开发板 C 型嵌入式软件教程文档. [Github 仓库](https://github.com/RoboMaster/Development-Board-C-Examples)
