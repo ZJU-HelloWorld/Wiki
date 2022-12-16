@@ -116,7 +116,7 @@ file(GLOB_RECURSE SOURCES
 
 最后需要注意的是源文件的选取。我们建议将软件包裁剪后加入工程，可使用上文提供的已裁剪版本，裁剪规则参考源码仓库的 `README.md`：
 
-![image-20221214012731420](CMSIS-DSP%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.assets/image-20221214012731420.png)
+![image-20221214012731420](CMSIS-DSP 使用指南.assets/image-20221214012731420.png)
 
 需要注意，对于这样裁剪得到的软件包，直接编译会有大量 `WARNING`，具体原因可参考 [这条经验](https://g6ursaxeei.feishu.cn/wiki/wikcnvTNsHomNrfLE0PVHN5VWhc?field=fldrk77lHy&record=recDLg4nf3&table=tbl5nghP4qHQIiZ5&view=vewlyW2exr)。因此，当添加  CMSIS-DSP 文件夹内的所有文件，及包含有 CMSIS-DSP 文件夹的父目录下的所有文件时，可以加上正则表达式 `[^a]` 来解决 `WARNING`. 
 
