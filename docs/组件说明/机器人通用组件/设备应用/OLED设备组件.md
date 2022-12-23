@@ -83,9 +83,9 @@ SSD1306中有三种不同的存储器寻址模式：页寻址模式（`0x02`）�
 要在项目中使用该组件，需添加仓库内的以下文件：
 
 ```
-Devices/dev_oled.c
-Devices/dev_oled.h
-Devices/dev_config.h
+devices/dev_oled.c
+devices/dev_oled.h
+devices/dev_config.h
 system.h
 ```
 
