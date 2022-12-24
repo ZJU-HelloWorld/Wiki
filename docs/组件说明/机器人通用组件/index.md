@@ -2,9 +2,9 @@
 
 > 机器人通用组件源码仓库：<https://github.com/ZJU-HelloWorld/HW-Components>
 
-##　算法（algorithms）
+## 算法（algorithms）
 
-涵盖了机器人开发相关的各类数学计算、信号处理及控制算法实现。
+涵盖了机器人开发相关的各类数学计算、信号处理及控制算法实现。包括实用功能聚合（tools）。
 
 ## 设备应用（devices）
 
