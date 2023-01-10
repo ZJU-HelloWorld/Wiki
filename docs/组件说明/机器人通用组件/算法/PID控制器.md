@@ -1,4 +1,4 @@
-# PID 控制器算法组件
+# PID 控制器
 
  <img src = "https://img.shields.io/badge/version-1.0.1-green"> <sp> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey"> 
  
