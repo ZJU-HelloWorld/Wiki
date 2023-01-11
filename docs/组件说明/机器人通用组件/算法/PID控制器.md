@@ -249,6 +249,7 @@ const PidParams_t pid_param =
   .kp = 500.0f,
   .ki = 5.0f,
   .kd = 1.0f,
+  .kOutMin = -30000,
   .kOutMax = 30000,
   
   .kWindUpOutMax = 5000,
@@ -269,7 +270,7 @@ const PidParams_t pid_param =
 
 const PidParams_t pid_n_loop_param[N] = {{...}, {...}, ...}; // cascade controller with N loop
 ```
-其中 `kType, kImprvOption, kp, ki, kd, kOutMax, kWindUpOutMax, kDWeight` 为基础参数，请在初始化时按需求指定；其他参数为搭配优化选项的可选参数。
+其中 `kType, kImprvOption, kp, ki, kd, kOutMax, kWindUpOutMax, kDWeight` 为基础参数，请在初始化时按需求指定；其他参数为搭配优化选项的可选参数。若无需优化，使用 `.kImprvOption = IMPRV_NONE` 语句。
  
 > 说明：所有参数均具有缺省值，部分参数的缺省值已在理论部分给出，未给出的默认为 0。
  
@@ -355,8 +356,9 @@ PID 控制器。
 | :----------------------------------------------- | :---------- | :--------------------------------------------------- | :----------------------------------------------------------- |
 | `kType`                                          | `PidType_t` | PID_ACROSS0_RAD<br>PID_ACROSS0_DEGREE<br>PID_DEFAULT | PID 处理类型                                                 |
 | `kImprvOption`                                   | `uint16_t`  | /                                                    | 优化选项集合,由所有需启用的优化枚举类型 `PidImprvType_t` 的优化选项 “按位与” 合成 `uint16_t` |
-| `kp / ki / kd`                                   | `float`     | 500.0 / 5.0 /1.0                                     | PID 增益                                                     |
-| `kOutMax`                                        | `float`     | 30000                                                | 最大输出，$\pm$kOutMax                                       |
+| `kp / ki / kd`                                   | `float`     | 500.0 / 5.0 /1.0                                     | PID 增益                                                      |
+| `kOutMin                                         | `float`     | -30000                                               | 最小输出                                                     | 
+| `kOutMax`                                        | `float`     | 30000                                                | 最大输出                                                      |
 | `kWindUpOutMax`                                  | `float`     | 5000                                                 | 使能抗积分饱和的临界输出，$\pm$kWindUpOutMax                 |
 | `kDWeight `                                      | `float`     | 0.9                                                  | 微分一阶滤波系数，默认值 1.0                                 |
 | `kISeparThresUpper `<br>`kISeparThresLower `     | `float`     | 1.0 / -1.0                                           | 使能积分分离的临界误差                                       |
