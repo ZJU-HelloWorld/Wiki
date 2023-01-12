@@ -54,7 +54,7 @@ CMSIS-DSP 软件库是一套用于基于 Cortex-M 和 Cortex-A 处理器的设�
 
 ### 引入源码并配置 CMake  
 
-在我们提供的 [CMakeLists模板](https://zju-helloworld.github.io/Wiki/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BVSCode%2BOzone%E9%85%8D%E7%BD%AESTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%28Windows%E7%B3%BB%E7%BB%9F%29/#cmakelists) 中有以下内容：
+在我们提供的 [CMakeLists模板](https://zju-helloworld.github.io/Wiki/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BVSCode%2BOzone%20%E9%85%8D%E7%BD%AESTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/#cmakelists) 中有以下内容：
 
 ```cmake
 # ########################## USER CONFIG SECTION ##############################
@@ -118,7 +118,7 @@ file(GLOB_RECURSE SOURCES
 
 ![image-20221214012731420](CMSIS-DSP 使用指南.assets/image-20221214012731420.png)
 
-需要注意，对于这样裁剪得到的软件包，直接编译会有大量 `WARNING`，具体原因可参考 [这条经验](https://g6ursaxeei.feishu.cn/wiki/wikcnvTNsHomNrfLE0PVHN5VWhc?field=fldrk77lHy&record=recDLg4nf3&table=tbl5nghP4qHQIiZ5&view=vewlyW2exr)。因此，当添加  CMSIS-DSP 文件夹内的所有文件，及包含有 CMSIS-DSP 文件夹的父目录下的所有文件时，可以加上正则表达式 `[^a]` 来解决 `WARNING`. 
+需要注意，对于这样裁剪得到的软件包，直接编译会有大量 `WARNING`，具体原因可参考 [这条经验](https://g6ursaxeei.feishu.cn/wiki/wikcnvTNsHomNrfLE0PVHN5VWhc?field=fldrk77lHy&record=recDLg4nf3&table=tbl5nghP4qHQIiZ5&view=vewlyW2exr)。因此，当添加  **CMSIS-DSP 目录**以及**包含有 CMSIS-DSP 文件夹的父目录**时，可以加上正则表达式 `[^a]` 来解决 `WARNING`. 
 
 > 例如你之前将 `your_dsp_path` 改为 `Drivers/CMSIS/CMSIS-DSP-1.14.2`，意味着 `Drivers/` 是CMSIS-DSP 文件夹的父目录，那么你可以这样筛选源文件：
 >

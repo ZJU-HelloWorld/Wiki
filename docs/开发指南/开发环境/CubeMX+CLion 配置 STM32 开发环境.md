@@ -24,7 +24,7 @@ graph TD
 
 ​		交叉编译链 gcc-arm-none-eabi 的作用，是将文件编译成 arm 架构下的文件格式，如 `elf, axf, bin`，从而供主控板使用。
 
-​		编译工具包 MinGW 提供了 gcc、cmake 等工具，其安装是==可选项==，因为 CLion 捆绑了 MinGW-w64 9.0 版本。
+​		编译工具包 MinGW 提供了 gcc、cmake 等工具，其安装是 ==可选项== ，因为 CLion 捆绑了 MinGW-w64 9.0 版本。
 
 ​		远程调试指的是在本地主机上对开发板上运行的应用程序进行调试，其需要两个 GDB 程序，运行在远程设备上的程序称之为 GDB Server，运行在本地主机上的 GDB 程序为交叉编译器。
 
@@ -328,19 +328,19 @@ reset_config none
 
 - 在单片机进入 main 函数时，把系统时钟来源设为 HSI。​(推荐)
   
-```c_cpp
+```c
 int main(void)
 {
-  __HAL_RCC_HSI_ENABLE();
-  __HAL_RCC_SYSCLK_CONFIG(RCC_SYSCLKSOURCE_HSI);
-  HAL_Init();
-  SystemClock_Config();
+    __HAL_RCC_HSI_ENABLE();
+    __HAL_RCC_SYSCLK_CONFIG(RCC_SYSCLKSOURCE_HSI);
+    HAL_Init();
+    SystemClock_Config();
 }  
 ```
 
 - 或者将 main 文件中的 SystemClock_Config 函数作如下修改。
 
-```c_cpp
+```c
 void SystemClock_Config(void)
 {
     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -422,7 +422,7 @@ void SystemClock_Config(void)
 
 ​		编写如下测试代码，需要包含头文件 `#include "SEGGER_RTT.h"`。程序向两个终端发送不同变量的值，分别为红色的绿色，在 JLinkRTTViewer 中输入‘空格’或‘q’可以改变变量的值。
 
-```c_cpp
+```c
   while (1)
   {
       HAL_GPIO_TogglePin(GPIOH, GPIO_PIN_10);
