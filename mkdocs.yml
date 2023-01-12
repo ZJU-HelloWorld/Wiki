@@ -3,7 +3,7 @@ site_name: Hello World 电控知识库
 copyright: Copyright &copy; 2022-2023 Hello World Team, Zhejiang University
 
 repo_url: https://github.com/ZJU-HelloWorld/Wiki
-repo_name: Wiki
+# repo_name: Wiki
 edit_uri: edit/main/docs/
 
 theme:
