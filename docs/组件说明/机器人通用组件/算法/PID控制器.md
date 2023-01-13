@@ -232,55 +232,65 @@ system.h
 
 实例化一个 PID 控制器：
 
-```c
-Pid_t pid;
-
-Pid_t pid_n_loop;// cascade controller with N loop
-```
+=== "Standard Controller"
+    ```c
+    Pid_t pid;
+    ```
+=== "N-loop Cascade Controller"
+    ```c
+    Pid_t pid_n_loop;
+    ```
 
 创建参数结构体数组，按节点顺序（外回路 -> 内回路）设置控制器节点参数，参数含义见组件说明。如带给定值过零处理（单位 $\rm rad$）的控制器：
 
-```c
-const PidParams_t pid_param = 
-{
-  .kType = PID_ACROSS0_RAD,
-  .kImprvOption = INTE_SEPARATION | INTE_CHANGING_RATE | DEAD_BAND | SETPOINT_RAMPING | SETPOINT_FEED_FORWARD, 
+=== "Standard Controller"
+    ```c
+    const PidParams_t pid_param = 
+    {
+      .kType = PID_ACROSS0_RAD,
+      .kImprvOption = INTE_SEPARATION | INTE_CHANGING_RATE | DEAD_BAND | SETPOINT_RAMPING | SETPOINT_FEED_FORWARD, 
     
-  .kp = 500.0f,
-  .ki = 5.0f,
-  .kd = 1.0f,
-  .kOutMin = -30000,
-  .kOutMax = 30000,
+      .kp = 500.0f,
+      .ki = 5.0f,
+      .kd = 1.0f,
+      .kOutMin = -30000,
+      .kOutMax = 30000,
   
-  .kWindUpOutMax = 5000,
-  .kDWeight = 0.9f,
+      .kWindUpOutMax = 5000,
+      .kDWeight = 0.9f,
   
-  .kISeparThresUpper = 1.0f,
-  .kISeparThresLower = -1.0f,
-  .kUpperB = 2.0f,
-  .kLowerA = 0.1f,
+      .kISeparThresUpper = 1.0f,
+      .kISeparThresLower = -1.0f,
+      .kUpperB = 2.0f,
+      .kLowerA = 0.1f,
 
-  .kDeadBandThresUpper = 1.0f,
-  .kDeadBandThresLower = -1.0f,
-  .kSpThresUpper = 30,
-  .kSpThresLower = -30,
-  .kSpWeight = 0.5f,
-  .kf = 1.0f,
-};
+      .kDeadBandThresUpper = 1.0f,
+      .kDeadBandThresLower = -1.0f,
+      .kSpThresUpper = 30,
+      .kSpThresLower = -30,
+      .kSpWeight = 0.5f,
+      .kf = 1.0f,
+    };
+    ```
+=== "N-loop Cascade Controller"
+    ```c
+    const PidParams_t pid_n_loop_param[N] = {{...}, {...}, ...};
+    ```
 
-const PidParams_t pid_n_loop_param[N] = {{...}, {...}, ...}; // cascade controller with N loop
-```
 其中 `kType, kImprvOption, kp, ki, kd, kOutMax, kWindUpOutMax, kDWeight` 为基础参数，请在初始化时按需求指定；其他参数为搭配优化选项的可选参数。若无需优化，使用 `.kImprvOption = IMPRV_NONE` 语句。
  
 > 说明：所有参数均具有缺省值，部分参数的缺省值已在理论部分给出，未给出的默认为 0。
  
 初始化 PID 控制器，如：
 
-```c
-PidInit(&pid, 1, &pid_param);
-
-PidInit(&pid_n_loop, N, pid_n_loop_param); // cascade controller with N loop
-```
+=== "Standard Controller"
+    ```c
+    PidInit(&pid, 1, &pid_param);
+    ```
+=== "N-loop Cascade Controller"
+    ```c
+   PidInit(&pid_n_loop, N, pid_n_loop_param);
+   ```
 
 > 若希望引入按输入前馈补偿，则需开启 `SETPOINT_FEED_FORWARD` 优化选项，并使用跟踪微分器，该组件位于 `Utils/filter.c` 中。实例化一个跟踪微分器并传入参数进行初始化，然后向已实例化的 PID 控制器指明节点编号（编号顺序为外回路 -> 内回路，从 0 开始），向该节点注册（线性）跟踪微分器：
 >
@@ -357,10 +367,10 @@ PID 控制器。
 | `kType`                                          | `PidType_t` | PID_ACROSS0_RAD<br>PID_ACROSS0_DEGREE<br>PID_DEFAULT | PID 处理类型                                                 |
 | `kImprvOption`                                   | `uint16_t`  | /                                                    | 优化选项集合,由所有需启用的优化枚举类型 `PidImprvType_t` 的优化选项 “按位与” 合成 `uint16_t` |
 | `kp / ki / kd`                                   | `float`     | 500.0 / 5.0 /1.0                                     | PID 增益                                                      |
-| `kOutMin                                         | `float`     | -30000                                               | 最小输出                                                     | 
+| `kOutMin`                                        | `float`     | -30000                                               | 最小输出                                                     | 
 | `kOutMax`                                        | `float`     | 30000                                                | 最大输出                                                      |
 | `kWindUpOutMax`                                  | `float`     | 5000                                                 | 使能抗积分饱和的临界输出，$\pm$kWindUpOutMax                 |
-| `kDWeight `                                      | `float`     | 0.9                                                  | 微分一阶滤波系数，默认值 1.0                                 |
+| `kDWeight`                                      | `float`     | 0.9                                                  | 微分一阶滤波系数，默认值 1.0                                 |
 | `kISeparThresUpper `<br>`kISeparThresLower `     | `float`     | 1.0 / -1.0                                           | 使能积分分离的临界误差                                       |
 | `kUpperB`<br>`kLowerA`                           | `float`     | 2.0 / 0.1                                            | 线性变速积分误差区间，$\pm$kUpperB / kLowerA                 |
 | `kDeadBandThresUpper `<br>`kDeadBandThresLower ` | `float`     | 1.0/ -1.0                                            | 误差死区上下限                                               |
