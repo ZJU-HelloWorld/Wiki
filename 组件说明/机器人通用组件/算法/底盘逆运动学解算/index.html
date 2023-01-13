@@ -1,0 +1,2607 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6/">
+      
+      
+        <link rel="next" href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
+      
+      <link rel="icon" href="../../../../img/rm.svg">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
+    
+    
+      
+        <title>底盘逆运动学解算（舵轮/麦轮） - Hello World 电控知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.9c788c91.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="Hello World 电控知识库" class="md-header__button md-logo" aria-label="Hello World 电控知识库" data-md-component="logo">
+      
+  <img src="../../../../img/rm.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hello World 电控知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              底盘逆运动学解算（舵轮/麦轮）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ZJU-HelloWorld/Wiki" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ZJU-HelloWorld/Wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../.." class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../%E5%85%A5%E9%97%A8/%E4%BA%86%E8%A7%A3%20Hello%20World%20%E7%94%B5%E6%8E%A7%E7%BB%84/" class="md-tabs__link">
+        入门
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+        开发指南
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+        测试指南
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+        组件说明
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E6%BA%90%E7%A0%81%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+        贡献指南
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Hello World 电控知识库" class="md-nav__button md-logo" aria-label="Hello World 电控知识库" data-md-component="logo">
+      
+  <img src="../../../../img/rm.svg" alt="logo">
+
+    </a>
+    Hello World 电控知识库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ZJU-HelloWorld/Wiki" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ZJU-HelloWorld/Wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="false">
+          入门
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="入门" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          入门
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%85%A5%E9%97%A8/%E4%BA%86%E8%A7%A3%20Hello%20World%20%E7%94%B5%E6%8E%A7%E7%BB%84/" class="md-nav__link">
+        了解 Hello World 电控组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%85%A5%E9%97%A8/%E5%9C%A8%20Hello%20World%EF%BC%8C%E4%BD%A0%E5%8F%AF%E4%BB%A5/" class="md-nav__link">
+        你可以...
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%85%A5%E9%97%A8/%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+        机器人系统概述
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">开发指南</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="开发指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          开发指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" tabindex="0" aria-expanded="false">
+          开发环境
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="开发环境" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          开发环境
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        CubeMX + CLion 配置 STM32 开发环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BVSCode%2BOzone%20%E9%85%8D%E7%BD%AESTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        CubeMX + VS Code + Ozone 配置 STM32 开发环境
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" tabindex="0" aria-expanded="false">
+          第三方库
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第三方库" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          第三方库
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/CMSIS-DSP%20%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        CMSIS-DSP 软件库使用指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_4" tabindex="0" aria-expanded="false">
+          维护指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="维护指南" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          维护指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E7%BB%B4%E6%8A%A4%E6%8C%87%E5%8D%97/%E6%9B%B4%E6%8D%A2%E5%BC%80%E5%8F%91%E6%9D%BF./" class="md-nav__link">
+        更换开发板
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_5" type="checkbox" id="__nav_3_5" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_5" tabindex="0" aria-expanded="false">
+          设计指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="设计指南" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          设计指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        嵌入式编程风格指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        机器人软件系统架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/">测试指南</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="测试指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          测试指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E5%AE%9E%E6%88%98%E6%B5%8B%E8%AF%95/" class="md-nav__link">
+        实战测试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E6%95%B4%E6%9C%BA%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95/" class="md-nav__link">
+        整机功能测试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E8%81%94%E5%90%88%E6%B5%8B%E8%AF%95/" class="md-nav__link">
+        联合测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../">组件说明</a>
+          
+            <label for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="组件说明" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          组件说明
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/">嵌入式系统支持</a>
+          
+            <label for="__nav_5_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="嵌入式系统支持" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          嵌入式系统支持
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5_2_2" type="checkbox" id="__nav_5_2_2" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_2_2" tabindex="0" aria-expanded="false">
+          中间件
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="中间件" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          中间件
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/%E4%B8%AD%E9%97%B4%E4%BB%B6/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/" class="md-nav__link">
+        设备管理框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5_2_3" type="checkbox" id="__nav_5_2_3" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_2_3" tabindex="0" aria-expanded="false">
+          板级支持包
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="板级支持包" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          板级支持包
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/%E6%9D%BF%E7%BA%A7%E6%94%AF%E6%8C%81%E5%8C%85/CAN%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/" class="md-nav__link">
+        CAN总线驱动
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../">机器人通用组件</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="机器人通用组件" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          机器人通用组件
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5_3_2" type="checkbox" id="__nav_5_3_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_3_2" tabindex="0" aria-expanded="true">
+          算法
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="算法" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          算法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PID%E6%8E%A7%E5%88%B6%E5%99%A8/" class="md-nav__link">
+        PID 控制器
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6/" class="md-nav__link">
+        底盘功率限制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          底盘逆运动学解算（舵轮/麦轮）
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        底盘逆运动学解算（舵轮/麦轮）
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    理论
+  </a>
+  
+    <nav class="md-nav" aria-label="理论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    基本概念介绍
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    坐标系定义和旋转矩阵
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    运动状态表示
+  </a>
+  
+    <nav class="md-nav" aria-label="运动状态表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    舵轮轮组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    麦轮
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    逆运动学解算算法
+  </a>
+  
+    <nav class="md-nav" aria-label="逆运动学解算算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    通用部分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    舵轮应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    麦轮应用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    运动优化
+  </a>
+  
+    <nav class="md-nav" aria-label="运动优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    标准化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    舵轮平动和旋转的权衡
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    舵轮轮组运动优化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    舵轮驻车和刹车
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    快速开始
+  </a>
+  
+    <nav class="md-nav" aria-label="快速开始">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    使用前准备
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    示例
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    组件说明
+  </a>
+  
+    <nav class="md-nav" aria-label="组件说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chasiksolver" class="md-nav__link">
+    ChasIKSolver 类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    运行时参数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    附录
+  </a>
+  
+    <nav class="md-nav" aria-label="附录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    版本说明
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5_3_3" type="checkbox" id="__nav_5_3_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_3_3" tabindex="0" aria-expanded="false">
+          设备应用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="设备应用" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          设备应用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        OLED 设备组件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        红点激光器（Laser）设备组件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        舵机（Servo）设备组件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%9C%82%E9%B8%A3%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        蜂鸣器（Buzzer）设备组件
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          贡献指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          贡献指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E6%BA%90%E7%A0%81%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        源码贡献指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E7%9F%A5%E8%AF%86%E5%BA%93%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        知识库贡献指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    理论
+  </a>
+  
+    <nav class="md-nav" aria-label="理论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    基本概念介绍
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    坐标系定义和旋转矩阵
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    运动状态表示
+  </a>
+  
+    <nav class="md-nav" aria-label="运动状态表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    舵轮轮组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    麦轮
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    逆运动学解算算法
+  </a>
+  
+    <nav class="md-nav" aria-label="逆运动学解算算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    通用部分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    舵轮应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    麦轮应用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    运动优化
+  </a>
+  
+    <nav class="md-nav" aria-label="运动优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    标准化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    舵轮平动和旋转的权衡
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    舵轮轮组运动优化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    舵轮驻车和刹车
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    快速开始
+  </a>
+  
+    <nav class="md-nav" aria-label="快速开始">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    使用前准备
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    示例
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    组件说明
+  </a>
+  
+    <nav class="md-nav" aria-label="组件说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chasiksolver" class="md-nav__link">
+    ChasIKSolver 类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    运行时参数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    附录
+  </a>
+  
+    <nav class="md-nav" aria-label="附录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    版本说明
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/ZJU-HelloWorld/Wiki/edit/main/docs/组件说明/机器人通用组件/算法/底盘逆运动学解算.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/ZJU-HelloWorld/Wiki/raw/main/docs/组件说明/机器人通用组件/算法/底盘逆运动学解算.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+
+<h1 id="_1">底盘逆运动学解算（舵轮/麦轮）<a class="headerlink" href="#_1" title="Anchor link to this      section for reference">&para;</a></h1>
+<p><img src = "https://img.shields.io/badge/version-1.1.1-green" >  <sp> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey" ></p>
+<h2 id="_2">理论<a class="headerlink" href="#_2" title="Anchor link to this      section for reference">&para;</a></h2>
+<p>根据给定的底盘 <span class="arithmatex">\(x,y\)</span> 方向上的目标平动速度分量和绕 <span class="arithmatex">\(z\)</span> 轴的目标旋转角速度分量，经逆运动学解算，能够得出：</p>
+<ul>
+<li>四组航向电机的目标角度和对应的目标驱动轮速（舵轮）；</li>
+<li>四个目标驱动轮速（麦克纳姆轮）。</li>
+</ul>
+<p>完成逆运动学解算后，我们也可以对矩阵求（伪）逆以进行正运动学解算。</p>
+<h3 id="_3">基本概念介绍<a class="headerlink" href="#_3" title="Anchor link to this      section for reference">&para;</a></h3>
+<ul>
+<li><strong>驱动电机（driving motor）</strong> 驱动底盘移动。目前（2022赛季）型号为 M3508，反馈转子转速单位为 <span class="arithmatex">\(\rm rpm\)</span>；</li>
+<li>
+<p><strong>航向电机（steering motor）</strong> 是舵轮轮组中负责改变驱动轮朝向的电机。目前（2022赛季）型号为 GM6020，编码器反馈机械转子刻度 0 ~ 8191，程序中线性映射到 <span class="arithmatex">\(-\pi\)</span> ~ <span class="arithmatex">\(0\)</span> ~ <span class="arithmatex">\(\pi\)</span>；</p>
+</li>
+<li>
+<p>记<strong>驱动电机减速比</strong>为 <span class="arithmatex">\(k\)</span>（原装 M3508 电机为3591 / 187）；</p>
+</li>
+<li>记<strong>驱动轮直径</strong>为 <span class="arithmatex">\(d\)</span>，单位：<span class="arithmatex">\(\rm m\)</span>；</li>
+<li><strong>轴距（wheelbase）</strong> 即前后轮轴间距离，记为 <span class="arithmatex">\(l\)</span>，单位：<span class="arithmatex">\(\rm m\)</span>；</li>
+<li><strong>轮距（track）</strong> 即左右驱动轮中心距离，记为 <span class="arithmatex">\(w\)</span>，单位：<span class="arithmatex">\(\rm m\)</span>；</li>
+<li><strong>麦轮及其动力学特性</strong><ul>
+<li>为实现全向移动，麦轮一般4个一组使用，其中左旋轮和右旋轮各2个，呈手性对称；麦轮的安装方式呈 X 或 O 型，一般（2022赛季）采取 O 型安装。</li>
+<li>麦轮上的辊子轴线与轮毂轴线夹角为 45°。在轮毂旋转时，与地面接触的辊子和地面相互作用，为底盘运动提供力矩。</li>
+<li>麦轮的运动可以分解为辊子的滚动和滑移，两者合成麦轮的合速度。<a href="https://mmbiz.qpic.cn/mmbiz_gif/emUnIU9NLria5HtnE2ujTguj4OUKfuf9iboeMu6Qpohx9MNcww2U7ibXBcXLlmdajMwN63Bl6JdibnicoHicYvU8bwhw/640?wx_fmt=gif&amp;wxfrom=5&amp;wx_lazy=1">戳这里看运动效果</a></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>说明1：</strong> X 和 O 表示四轮与地面接触的辊子所形成的图形，如<a href="#_7">图4</a>所示，该图为俯视图，可推知其辊子与地面接触的情况，为 O 型。</p>
+<p><strong>说明2：</strong>辊子受地面的反作用，在垂直于其轴线方向上产生滚动，滚动速度由轮毂速度和底盘上其他麦轮的运动共同影响；该运动是被动的，无法为底盘移动提供力矩。在轮毂的驱动作用下，辊子在平行于其轴线方向上产生滑移，滑移速度仅与轮毂速度相关；该运动是主动的，辊子受地面反作用力进而驱动底盘。</p>
+</blockquote>
+<h3 id="_4">坐标系定义和旋转矩阵<a class="headerlink" href="#_4" title="Anchor link to this      section for reference">&para;</a></h3>
+<p>对本文中所有坐标系，绕坐标轴逆时针旋转（CCW）为正（右手定则）。</p>
+<p>由 GM6020 电机的特性和我们之前的定义，可知其角度零位对应码盘值 4096，此时定义电机（定子）坐标系，转子朝向向量指向 <span class="arithmatex">\(x^+\)</span>。图1所示情况电机角度约为 <span class="arithmatex">\({2\over3}\pi\ \rm rad\)</span>。</p>
+<blockquote>
+<p><strong>说明：</strong>转子朝向向量在电机实体上可描述为：由电机中轴指向销孔中心的方向向量。</p>
+</blockquote>
+<figure>
+<p><img alt="Image title" src="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/gm6020_coordinate.png" width="200" />
+  </p>
+<figcaption>图1 GM6020 电机坐标系</figcaption>
+</figure>
+<p>记底盘坐标系为<span class="arithmatex">\(\{O\}\)</span>，如图2. </p>
+<figure>
+<p><img alt="Image title" src="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/chassis_coordinate.png" width="500" />
+  </p>
+<figcaption>图2 舵轮和麦轮坐标系及舵轮轮组坐标系</figcaption>
+</figure>
+<p>对于舵轮底盘，记轮组坐标系为 <span class="arithmatex">\(\{M_i\}\)</span> ，其中<span class="arithmatex">\(i=1,2,3,4\)</span>，分别对应 front left (FL), back left (BL),  back right (BR), front right (FR) 四组模块。以 FL 模块为例，其坐标系如图2左所示。实际解算过程中，还需要得到由 <span class="arithmatex">\(\{O\}\)</span> 到 <span class="arithmatex">\(\{M_i\}\)</span> 的旋转矩阵，记为 <span class="arithmatex">\({^{M_i}_O}R\)</span> . 将该矩阵左乘于一向量 <span class="arithmatex">\(^OP\)</span>，可得到该向量在 <span class="arithmatex">\(\{M_i\}\)</span> 中的描述：</p>
+<div class="arithmatex">\[
+\begin{align}
+^{M_i} P = {^{M_i}_O}R\  ^{O}P
+\end{align}
+\]</div>
+<h3 id="_5">运动状态表示<a class="headerlink" href="#_5" title="Anchor link to this      section for reference">&para;</a></h3>
+<h4 id="_6">舵轮轮组<a class="headerlink" href="#_6" title="Anchor link to this      section for reference">&para;</a></h4>
+<figure>
+<p><img alt="Image title" src="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/swerve_diagram.png" width="500" />
+  </p>
+<figcaption>图3 舵轮底盘俯视图</figcaption>
+</figure>
+<p>对每个轮组，用一个向量 <span class="arithmatex">\(\boldsymbol V_i\)</span> 表征其运动状态（如图3左）：</p>
+<ul>
+<li>
+<p>该向量指向航向电机的朝向，驱动轮转动方向与该朝向共线（可以正反转）。<u>在不考虑优化的前提下，默认驱动轮转动方向与 <span class="arithmatex">\(\boldsymbol V_i\)</span> 同向</u>；</p>
+</li>
+<li>
+<p>向量的模长对应驱动轮线速率。</p>
+</li>
+</ul>
+<p>则轮组运动状态可表示为：</p>
+<div class="arithmatex">\[
+\begin{align}
+^O\boldsymbol V_i=
+\begin{bmatrix}
+v_{xi}\\ 
+v_{yi}\\
+0
+\end{bmatrix}
+\end{align}
+\]</div>
+<blockquote>
+<p><strong>说明1：</strong>驱动轮转动方向与 <span class="arithmatex">\(\boldsymbol V_i\)</span> 同向时，将驱动电机的转速定义为正，这里涉及到实际电机方向的标定。</p>
+<p><strong>说明2：</strong>航向电机和驱动电机均能够正反360°旋转，这意味着每一种轮组运动状态均至少有两个解，对应航向电机角度和驱动轮转动方向的不同组合（如图3右，其中 <span class="arithmatex">\(\boldsymbol d_i\)</span> 指向航向电机的朝向）。现实世界中我们需要按一定策略选择更优的的那个，来保证底盘运动更为鲁棒和流畅。对优化的具体说明见<a href="#_15">优化部分</a>。</p>
+</blockquote>
+<h4 id="_7">麦轮<a class="headerlink" href="#_7" title="Anchor link to this      section for reference">&para;</a></h4>
+<figure>
+<p><img alt="Image title" src="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/mecanum_diagram.png" width="300" />
+  </p>
+<figcaption>图4 麦轮底盘俯视图</figcaption>
+</figure>
+<p>对每个驱动轮，用一个向量 <span class="arithmatex">\(\boldsymbol V_i\)</span> 表征其运动速度（如图4）：</p>
+<ul>
+<li>该向量指向驱动轮<u>运动</u>方向（辊子滚动速度和滑移速度的合速度，并非驱动轮的<u>转动</u>方向）；</li>
+<li>向量的模长对应在<u>运动</u>方向上的线速率。</li>
+</ul>
+<p>则轮组运动速度可表示为：</p>
+<div class="arithmatex">\[
+\begin{align}
+^O\boldsymbol V_i=
+\begin{bmatrix}
+v_{xi}\\ 
+v_{yi}\\
+0
+\end{bmatrix}
+\end{align}
+\]</div>
+<p>该速度可分解为辊子的滚动速度和滑移速度，滑移速度分量用 <span class="arithmatex">\(v_{si}\)</span> 表示，其符号指示滑移方向。由麦轮的结构和动力学特性可得</p>
+<div class="arithmatex">\[
+v_{si}=
+\ 
+^O\boldsymbol V_{i}
+\cdot
+\boldsymbol {\hat e_i}
+\]</div>
+<p>其中 <span class="arithmatex">\(\boldsymbol {\hat e_i}\)</span> 为指向滑移正方向的单位方向向量。</p>
+<p>由麦轮的结构和动力学特性可知，滑移速度和驱动轮转速有清晰的一一对应关系。由滑移速度可解出驱动轮转速，反之亦然。</p>
+<blockquote>
+<p><strong>说明：</strong>驱动轮转动方向指向 <span class="arithmatex">\(x^+\)</span> 时，将驱动电机的转速定义为正，这里涉及到实际电机方向的标定；此时将对应的滑移速度分量指向的方向定义为滑移正方向。</p>
+</blockquote>
+<h3 id="_8">逆运动学解算算法<a class="headerlink" href="#_8" title="Anchor link to this      section for reference">&para;</a></h3>
+<h4 id="_9">通用部分<a class="headerlink" href="#_9" title="Anchor link to this      section for reference">&para;</a></h4>
+<p>给定 <span class="arithmatex">\(\{O\}\)</span> 下底盘的目标平动速度 <span class="arithmatex">\(\boldsymbol v\)</span> 和绕 <span class="arithmatex">\(z\)</span> 轴的旋转角速度 <span class="arithmatex">\(\boldsymbol \omega\)</span>，记为 <span class="arithmatex">\(^O\boldsymbol V=[v_x\ v_y\ \omega]^{\mathrm T}\)</span>. 将底盘旋转中心指向轮（组） <span class="arithmatex">\(i\)</span> 中心的位矢记为 <span class="arithmatex">\(^O\boldsymbol R_i=[r_{xi}\ r_{yi}\ 0]^{\mathrm T}\)</span>. </p>
+<blockquote>
+<p><strong>注意：</strong>底盘旋转中心不一定是底盘的几何中心。目前（2022赛季），我们将底盘旋转中心定义在几何中心上。</p>
+<p><strong>说明：</strong>由模型可以读出 <span class="arithmatex">\(l\)</span> 和 <span class="arithmatex">\(w\)</span>. 各轮（组）相对旋转中心的位矢如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>FL</th>
+<th>BL</th>
+<th>BR</th>
+<th>FR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(r_x\)</span></td>
+<td><span class="arithmatex">\(l/2\)</span></td>
+<td><span class="arithmatex">\(-l/2\)</span></td>
+<td><span class="arithmatex">\(-l/2\)</span></td>
+<td><span class="arithmatex">\(l/2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(r_y\)</span></td>
+<td><span class="arithmatex">\(w/2\)</span></td>
+<td><span class="arithmatex">\(w/2\)</span></td>
+<td><span class="arithmatex">\(-w/2\)</span></td>
+<td><span class="arithmatex">\(-w/2\)</span></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>对于每个轮（组），平动分量仍为 <span class="arithmatex">\(\boldsymbol v\)</span> . 可得</p>
+<div class="arithmatex">\[
+\begin{align}
+^O\boldsymbol V_i=
+{\boldsymbol v}+{\boldsymbol \omega} \times  {^O{\boldsymbol R_i}}
+\end{align}
+\]</div>
+<p>将 <span class="arithmatex">\(\boldsymbol \omega\)</span> 定义为 <span class="arithmatex">\([0\ 0\ \omega]^{\mathrm T}\)</span>，对应的叉乘变换矩阵</p>
+<div class="arithmatex">\[
+\boldsymbol S=
+\begin{bmatrix}
+0 &amp; -\omega &amp; 0\\
+\omega &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0\\
+\end{bmatrix}
+\\
+{\boldsymbol \omega} \times  {^O{\boldsymbol R_i}} 
+= \boldsymbol S \ {^O{\boldsymbol R_i}}
+\]</div>
+<p>故得</p>
+<div class="arithmatex">\[
+^O\boldsymbol V_i=
+\begin{bmatrix}
+v_x \\ 
+v_y \\
+0
+\end{bmatrix}
++
+\begin{bmatrix}
+0 &amp; -\omega &amp; 0\\
+\omega &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0\\
+\end{bmatrix}
+\begin{bmatrix}
+r_{xi} \\
+r_{yi} \\ 
+r_{zi} 
+\end{bmatrix}=
+\begin{bmatrix}
+v_x - r_{yi}\omega \\ 
+v_y + r_{xi}\omega\\
+0 
+\end{bmatrix} =
+\begin{bmatrix}
+1 &amp; 0&amp; -r_{yi}\\ 
+0 &amp; 1&amp; r_{xi}\\ 
+0 &amp; 0 &amp; 0 \\ 
+\end{bmatrix}
+\begin{bmatrix}
+v_x \\ 
+v_y \\
+\omega 
+\end{bmatrix}
+\]</div>
+<p>至此，我们得出了指定底盘运动状态下各轮（组）的目标运动状态描述。</p>
+<h4 id="_10">舵轮应用<a class="headerlink" href="#_10" title="Anchor link to this      section for reference">&para;</a></h4>
+<p>应用上述通用算法，<u>暂不考虑优化</u>，我们尝试计算舵轮执行机构的相关参数。给出以下信息：</p>
+<ul>
+<li>目前（2022赛季）航向电机安装方式为转子朝下；</li>
+<li>认为 <span class="arithmatex">\(oxy\)</span> 平面平行于  <span class="arithmatex">\(m_ix_iy_i\)</span> 平面，则 <span class="arithmatex">\(m_ix_i\)</span> 相对 <span class="arithmatex">\(ox\)</span> 在平面上的夹角可在模型中读出，记为 <span class="arithmatex">\(\psi_i\)</span>，单位：<span class="arithmatex">\(\rm rad.\)</span> </li>
+</ul>
+<p>可确定旋转矩阵：</p>
+<div class="arithmatex">\[
+\begin{align}
+^{M_i}_OR = 
+\begin{bmatrix}
+c\psi_i\   &amp;-s\psi_i\   &amp;0\\
+s\psi_i\   &amp;c\psi_i\    &amp;0\\
+0\       &amp;0\        &amp;1\\
+\end{bmatrix}
+\begin{bmatrix}
+1\   &amp;0\   &amp;0\\
+0\   &amp;-1\  &amp;0\\
+0\   &amp;0\   &amp;-1\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+c\psi_i\   &amp;s\psi_i\   &amp;0\\
+s\psi_i\   &amp;-c\psi_i\    &amp;0\\
+0\       &amp;0\        &amp;-1\\
+\end{bmatrix}
+\end{align}
+\]</div>
+<p>则有</p>
+<div class="arithmatex">\[
+\begin{align}
+^{M_i} \boldsymbol V_i =
+{^{M_i}_O}R \ ^O\boldsymbol V_i
+\triangleq
+\begin{bmatrix}
+^{M_i}v_{xi}\\ 
+^{M_i}v_{yi}\\
+0
+\end{bmatrix}
+\end{align}
+\]</div>
+<p>可以进一步计算：</p>
+<ul>
+<li><strong>航向电机角度</strong> <span class="arithmatex">\(^{M_i}\theta_i\)</span>，单位：<span class="arithmatex">\(\rm rad\)</span>.</li>
+</ul>
+<div class="arithmatex">\[
+^{M_i}\theta_i={\mathrm{atan2}\ }(^{M_i}v_{yi},\ ^{M_i}v_{xi})
+\]</div>
+<blockquote>
+<p><strong>注意：</strong>请注意 <code>atan2</code> 函数的正确含义。当速度指令全为 0 时，需要为其补充定义。目前（2022赛季），我们将此时的 <span class="arithmatex">\(^{M_i}\theta_i\)</span> 定义为与仅有旋转分量 <span class="arithmatex">\(\omega\)</span> 时解算出的角度一致。</p>
+</blockquote>
+<ul>
+<li><strong>轮线速度</strong> <span class="arithmatex">\(\boldsymbol v_i\)</span>，单位：<span class="arithmatex">\(\rm m/s\)</span>（不考虑优化则方向与航向电机朝向一致，关于其方向的确定见<a href="#_15">优化部分</a>）</li>
+</ul>
+<div class="arithmatex">\[
+||\boldsymbol v_i||=\sqrt{^{M_i}v_{xi}^2\ +\ ^{M_i}v_{yi}^2}
+\]</div>
+<ul>
+<li><strong>驱动电机转速</strong> <span class="arithmatex">\(\boldsymbol n_i\)</span>，单位：<span class="arithmatex">\(\rm rpm\)</span>（解释同上）</li>
+</ul>
+<div class="arithmatex">\[
+||\boldsymbol n_i||=
+\frac 1k \cdot
+\frac{60}{2\pi}
+\cdot {\frac 2{d}}
+\cdot ||\boldsymbol v_i||
+\]</div>
+<h4 id="_11">麦轮应用<a class="headerlink" href="#_11" title="Anchor link to this      section for reference">&para;</a></h4>
+<p>应用上述通用算法，我们尝试计算麦轮执行机构的相关参数。滑移速度</p>
+<div class="arithmatex">\[
+v_{si}=
+\ 
+^O\boldsymbol V_{i}
+\cdot
+\boldsymbol {\hat e_i}
+=
+\begin{bmatrix}
+v_x - r_{yi}\omega \\ 
+v_y + r_{xi}\omega\\
+0 
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\hat e_{xi}\\ 
+\hat e_{yi}\\ 
+0 
+\end{bmatrix}
+=
+\hat e_{xi} v_x +
+\hat e_{yi} v_y +
+(\hat e_{yi}r_{xi} - \hat e_{xi}  r_{yi})\omega
+\]</div>
+<blockquote>
+<p><strong>说明：</strong>参考<a href="#_7">图4</a>，可得</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>FL</th>
+<th>BL</th>
+<th>BR</th>
+<th>FR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\hat e_x\)</span></td>
+<td><span class="arithmatex">\(\sqrt2/ 2\)</span></td>
+<td><span class="arithmatex">\(\sqrt2/ 2\)</span></td>
+<td><span class="arithmatex">\(\sqrt2/ 2\)</span></td>
+<td><span class="arithmatex">\(\sqrt2/ 2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\hat e_y\)</span></td>
+<td><span class="arithmatex">\(-\sqrt2/ 2\)</span></td>
+<td><span class="arithmatex">\(\sqrt2/ 2\)</span></td>
+<td><span class="arithmatex">\(-\sqrt2/ 2\)</span></td>
+<td><span class="arithmatex">\(\sqrt2/ 2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>以上 <span class="arithmatex">\(\hat e_z=0\)</span>.</p>
+</blockquote>
+<p>可以进一步计算：</p>
+<ul>
+<li><strong>轮线速度</strong> <span class="arithmatex">\(\boldsymbol v_i\)</span>，单位：<span class="arithmatex">\(\rm m/s\)</span>；滑移速度由轮线速度正交分解得到，而两向量夹角为 <span class="arithmatex">\(\phi =\pi / 4\)</span>，故有</li>
+</ul>
+<div class="arithmatex">\[
+v_i={ v_{si} \over \cos \phi}=
+\sqrt 2\ 
+[
+\hat e_{xi} v_x +
+\hat e_{yi} v_y +
+(\hat e_{yi}r_{xi} - \hat e_{xi}  r_{yi})\omega
+]
+\]</div>
+<p>经计算，列出四轮线速度：</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+v_1\\ 
+v_2\\ 
+v_3\\
+v_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; −1 &amp; −r_{x1} - r_{y1}\\
+1 &amp; 1  &amp; r_{x2} - r_{y2}\\
+1 &amp; −1 &amp; −r_{x3} - r_{y3}\\
+1 &amp; 1  &amp; r_{x4} - r_{y4} \\
+\end{bmatrix}
+\begin{bmatrix}
+v_x \\ 
+v_y \\
+\omega 
+\end{bmatrix}
+\]</div>
+<blockquote>
+<p><strong>说明：</strong>麦轮代码实现中我们可以直接套用线速度公式，不必再进行完整的解算。</p>
+</blockquote>
+<ul>
+<li><strong>驱动电机转速</strong> <span class="arithmatex">\(n_i\)</span>，单位：<span class="arithmatex">\(\rm rpm\)</span>.</li>
+</ul>
+<div class="arithmatex">\[
+n_i=
+\frac 1k
+\cdot
+\frac{60}{2\pi}
+\cdot
+{\frac 2{d}}\cdot\ 
+v_i
+\]</div>
+<h3 id="_12">运动优化<a class="headerlink" href="#_12" title="Anchor link to this      section for reference">&para;</a></h3>
+<h4 id="_13">标准化<a class="headerlink" href="#_13" title="Anchor link to this      section for reference">&para;</a></h4>
+<p>当解算出某个轮组所需的驱动电机转速大于其额定转速（或在当前负载下所能达到的最高转速），则需要对底盘上的所有电机进行转速限制，即共同乘以一限制系数，以避免底盘失控。设转速上限为 <span class="arithmatex">\(n_{\max}\)</span>，系数</p>
+<div class="arithmatex">\[
+p=\frac {n_\max}{\max_{i}\{n_i\}}
+\]</div>
+<blockquote>
+<p><strong>说明：</strong>底盘功率限制机制也涉及转速限制，但情况与上述有所不同，具体请参考功率限制方案文档。</p>
+</blockquote>
+<h4 id="_14">舵轮平动和旋转的权衡<a class="headerlink" href="#_14" title="Anchor link to this      section for reference">&para;</a></h4>
+<p>需要注意平动和旋转分量的比例关系：</p>
+<ul>
+<li>确定策略，陀螺躲避攻击优先 or 机动性优先，设置合理的运动指令；</li>
+<li>随动模式下，底盘对云台的跟随存在余差，因此旋转分量指令必然始终存在；当平动分量较小时，解算出的航向电机角度可能剧烈变化。因此，对于此情况需要适当设定死区，使航向电机的角度仅由平动指令解算得到，以避免不期望的抖动。</li>
+</ul>
+<h4 id="_15">舵轮轮组运动优化<a class="headerlink" href="#_15" title="Anchor link to this      section for reference">&para;</a></h4>
+<p><a href="#_5">"舵轮轮组"</a>一节对逆运动学解的优化做出了简单的说明。事实上，对轮组运动的优化出于以下几点考量：</p>
+<ul>
+<li>航向电机旋转时，将给车身一个扭矩；若航向电机相对旋转角度较大，可能导致车身不期望的偏转或偏移；</li>
+<li>对于航向电机未收敛到目标位置的轮组，若其驱动轮若具有一定的速度，则可能使底盘运动不受控（若所需旋转角度较大，则意味着更慢收敛到期望的位置上）。</li>
+</ul>
+<p>因此，优化的目标如下：</p>
+<ul>
+<li>将航向电机的相对旋转角度限定在一定范围内；</li>
+<li>对于未收敛到正确角度的轮组，削减其驱动电机转速。</li>
+</ul>
+<p>思路如下：</p>
+<ol>
+<li>完成基础解算后，得到驱动电机转速 <span class="arithmatex">\(n_i\)</span> ；计算航向电机目标角度与当前角度 <span class="arithmatex">\(\theta_i\)</span> 的差 <span class="arithmatex">\({\delta_i}\)</span>；</li>
+<li>若<span class="arithmatex">\(|{\delta}_i|&gt;\pi/2\)</span> ，将目标角度 <span class="arithmatex">\(+\pi\ \rm rad\)</span> 后限制在 <span class="arithmatex">\([\theta_i-\frac{\pi}2,\theta_i+\frac{\pi}2)\)</span>，否则目标角度不变；记处理后的目标角度与当前角度的差为 <span class="arithmatex">\({\delta'_i}\)</span>；</li>
+<li>若<span class="arithmatex">\(|{\delta}_i|&gt;\pi/2\)</span> ，<u>驱动电机转速取反</u>，否则不变；记处理后的转速为 <span class="arithmatex">\(n_i'\)</span>；</li>
+<li>确定驱动电机转速限制函数 <span class="arithmatex">\(f(\delta'_i)\)</span> ，限制后的最终转速为 <span class="arithmatex">\(f(\delta'_i)\cdot n_i'\)</span>。</li>
+</ol>
+<blockquote>
+<p><strong>说明：</strong>驱动电机转速限制函数 <span class="arithmatex">\(f(\delta'_i)\)</span> 需满足以下条件：</p>
+<ul>
+<li><span class="arithmatex">\(\forall {\delta'_i}\in[-\frac{\pi}2,\frac{\pi}2),0 \leq f(\delta'_i)\leq1\)</span>.</li>
+<li><span class="arithmatex">\(f(0) = 1\)</span>.</li>
+<li>在 <span class="arithmatex">\([-\frac{\pi}2,0)\)</span> 和 <span class="arithmatex">\([0,\frac{\pi}2)\)</span> 上对称.</li>
+</ul>
+</blockquote>
+<p>有一个函数很好地符合以上条件，即 <span class="arithmatex">\(\cos \alpha\)</span>。我们发现当<span class="arithmatex">\(|\alpha|&gt;\pi/2\)</span>，<span class="arithmatex">\(\cos \alpha\)</span> 同样能给出一个对应的限制系数，只是符号为负，这恰好对应了思路第3点“驱动电机反转”。因此，我们可以将思路第3、4点合并为：<strong>计算 <span class="arithmatex">\(\cos \delta_i\)</span>，确定经削减和调整方向后的最终驱动电机转速为 <span class="arithmatex">\(n_i' = \cos \delta_i\cdot n_i\)</span>.</strong></p>
+<p>除此之外，我们还可以选取 <span class="arithmatex">\(\cos^3 \alpha\)</span> 等函数来实现更严格的限制。 </p>
+<blockquote>
+<p><strong>例：</strong><a href="https://dominik.win/blog/res/swerve/stray_module_cos.mp4">一个例子</a>，其中黑色箭头指示航向电机方向，蓝色箭头为 <span class="arithmatex">\(\cos\)</span> 方案，绿色箭头为 <span class="arithmatex">\(\cos^3\)</span> 方案<span class="arithmatex">\(^{[2]}\)</span>.</p>
+</blockquote>
+<h4 id="_16">舵轮驻车和刹车<a class="headerlink" href="#_16" title="Anchor link to this      section for reference">&para;</a></h4>
+<p>驻车时，航向电机角度与小陀螺旋转时一致，以保证底盘位置的稳固。</p>
+<p>刹车阶段（操作手无指令），当驱动轮速降至较低时，再切入驻车模式；这种策略能够减小对机械结构的冲击，并保证底盘运动的平稳。</p>
+<h2 id="_17">快速开始<a class="headerlink" href="#_17" title="Anchor link to this      section for reference">&para;</a></h2>
+<p>组件源码仓库地址：<a href="https://github.com/ZJU-HelloWorld/HW-Components">https://github.com/ZJU-HelloWorld/HW-Components</a></p>
+<p>要在项目中使用该组件，需添加仓库内的以下文件：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>algorithms/chas_ik_solver.c
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>algorithms/chas_ik_solver.h
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>tools.h
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>system.h
+</code></pre></div>
+<h3 id="_18">使用前准备<a class="headerlink" href="#_18" title="Anchor link to this      section for reference">&para;</a></h3>
+<p>逆运动学解算模块涉及 <code>CMSIS-DSP</code> 矩阵运算、三角函数等操作，使用前需要做以下准备：</p>
+<ul>
+<li>添加源文件，包含头文件路径；注意 DSP 版本须在 1.10.0 及以上</li>
+<li>添加预处理宏以开启浮点运算单元（FPU）</li>
+<li>在使用 STM32CubeMX 生成项目时，请在 <code>Code Generator</code> 界面 <code>Enable Full Assert</code>，来帮助断言算法中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果</li>
+<li>在 <code>system.h</code> 中 <code>system options: user config</code> 处进行系统设置</li>
+</ul>
+<h3 id="_19">示例<a class="headerlink" href="#_19" title="Anchor link to this      section for reference">&para;</a></h3>
+<p>首先在求解器头文件 <code>chas_ik_solver.h</code> 中输入相关参数，例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cm">/* reduction ratio of driving motor */</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="cp">#define DRV_MOTOR_REDUCTION_RATIO (1.0f / 14.0f)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="cm">/* chassis parameters */</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="cp">#define WHEEL_DIAM_M 0.1f</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="cp">#define WHEEL_BASE_M 0.4f</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="cp">#define TRACK_M 0.3f</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="cm">/* angle bias: wheel module to chassis */</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="cp">#define PSI_FL 0.0f</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="cp">#define PSI_BL 0.0f</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="cp">#define PSI_BR 0.0f</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="cp">#define PSI_FR 0.0f</span>
+</code></pre></div>
+<p>在项目中引用头文件：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;chas_ik_solver.h&quot;</span>
+</code></pre></div>
+<p>选择底盘类型和是否开启优化（针对舵轮底盘，麦轮底盘该选项无效），实例化一个求解器并初始化：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">ChasIkSolver_t</span><span class="w"> </span><span class="n">solver</span><span class="p">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cm">/* swerve drive */</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">ChasIkSolverInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">SWERVE</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="cm">/* mecanum */</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">ChasIkSolverInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">MECANUM</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+</code></pre></div>
+<p>输入底盘的运动参数，调用方法求解：</p>
+<blockquote>
+<p>对于舵轮，按 <code>目标轮组转速，当前航向电机角度，目标航向电机角度</code> 顺序传入存放轮组数据的数组地址；</p>
+<p>对于麦轮，传入用于存放 <code>目标轮组转速</code> 的数组地址。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cm">/* swerve drive */</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_spd</span><span class="p">,</span><span class="w"> </span><span class="n">cur_str_angle</span><span class="p">,</span><span class="w"> </span><span class="n">tar_str_angle</span><span class="p">);</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="cm">/* mecanum */</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_spd</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_20">组件说明<a class="headerlink" href="#_20" title="Anchor link to this      section for reference">&para;</a></h3>
+<h4 id="chasiksolver"><code>ChasIKSolver</code> 类<a class="headerlink" href="#chasiksolver" title="Anchor link to this      section for reference">&para;</a></h4>
+<p>属性</p>
+<table>
+<thead>
+<tr>
+<th align="left">名称<img width=100/></th>
+<th align="left">类型<img width=100/></th>
+<th align="left">示例值<img width=100/></th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>type</code></td>
+<td align="left"><code>ChassisType_t</code></td>
+<td align="left"><code>SWERVE</code><br><code>MECANUM</code></td>
+<td align="left">底盘类型</td>
+</tr>
+<tr>
+<td align="left"><code>is_optimize</code></td>
+<td align="left"><code>bool</code></td>
+<td align="left"><code>true</code><br><code>false</code></td>
+<td align="left">舵轮优化开启标识</td>
+</tr>
+<tr>
+<td align="left"><code>cmd.vx</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">1.0</td>
+<td align="left"><span class="arithmatex">\(x\)</span> 方向（前后）目标速度，单位：m/s</td>
+</tr>
+<tr>
+<td align="left"><code>cmd.vy</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">1.0</td>
+<td align="left"><span class="arithmatex">\(y\)</span> 方向（左右）目标速度，单位：m/s</td>
+</tr>
+<tr>
+<td align="left"><code>cmd.vw</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">1.0</td>
+<td align="left">绕 <span class="arithmatex">\(z\)</span> 轴目标转速，单位：rad/s</td>
+</tr>
+</tbody>
+</table>
+<p>方法</p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th>入参类型<img width=250/></th>
+<th>出参类型</th>
+<th align="left">返回值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>ChasIkSolverInit</code></td>
+<td><code>ChasIKSolver_t*</code><br><code>ChassisType_e</code><br><code>bool</code></td>
+<td>/</td>
+<td align="left"><code>void</code></td>
+<td>用传入的参数初始化一个求解器。</td>
+</tr>
+<tr>
+<td align="left"><code>ikSolve</code></td>
+<td><code>ChasIKSolver_t*</code><br><code>float vx_mps</code><br><code>float vy_mps</code><br><code>float vw_radps</code><br><code>float* tar_drv_rpm</code><br><code>float* ...</code></td>
+<td><code>float* ...</code></td>
+<td align="left"><code>void</code></td>
+<td>调用算法进行逆运动学求解。传入初始化后的求解器指针和运行时参数；解算结果将覆盖原地址内容。<br>采用了可变参数，首先传入目标轮组转速数组地址；对于舵轮，还需要按顺序额外传入两个数组地址： <code>当前航向电机角度，目标航向电机角度</code>。具体参见源码。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_21">运行时参数<a class="headerlink" href="#_21" title="Anchor link to this      section for reference">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">名称<img width=100/></th>
+<th align="left">类型<img width=100/></th>
+<th align="left">示例值<img width=100/></th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>tar_drv_rpm</code></td>
+<td align="left"><code>float[4]</code></td>
+<td align="left">/</td>
+<td align="left">解算结果：驱动电机目标转速</td>
+</tr>
+<tr>
+<td align="left"><code>cur_str_rad</code></td>
+<td align="left"><code>float[4]</code></td>
+<td align="left">/</td>
+<td align="left">当前航向电机角度（舵轮）</td>
+</tr>
+<tr>
+<td align="left"><code>tar_str_rad</code></td>
+<td align="left"><code>float[4]</code></td>
+<td align="left">/</td>
+<td align="left">解算结果：航向电机目标角度（舵轮）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_22">附录<a class="headerlink" href="#_22" title="Anchor link to this      section for reference">&para;</a></h2>
+<h3 id="_23">版本说明<a class="headerlink" href="#_23" title="Anchor link to this      section for reference">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>版本号</th>
+<th>发布日期</th>
+<th>说明</th>
+<th>贡献者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-0.1.0-green" ></td>
+<td>2022.01.20</td>
+<td>舵轮webots仿真实现</td>
+<td>薛东来</td>
+</tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-1.0.0-green" ></td>
+<td>2022.05.23</td>
+<td>实车测试并加入航向电机冗余转向限制，整理形成文档</td>
+<td>薛东来</td>
+</tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-1.1.0-green" ></td>
+<td>2022.10.18</td>
+<td>进一步优化舵轮运动，加入麦轮，重构模块并重写文档</td>
+<td>薛东来</td>
+</tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-1.1.1-green" ></td>
+<td>2022.12.16</td>
+<td>优化了用户接口</td>
+<td>薛东来</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_24">参考资料<a class="headerlink" href="#_24" title="Anchor link to this      section for reference">&para;</a></h2>
+<p>[1] <a href="https://file.tavsys.net/control/controls-engineering-in-frc.pdf">https://file.tavsys.net/control/controls-engineering-in-frc.pdf</a> （一位 FRC Mentor 编写的技术手册，包含详细的运动学解算和其他技术介绍）</p>
+<p>[2] <a href="https://dominik.win/blog/programming-swerve-drive">https://dominik.win/blog/programming-swerve-drive</a> （个人开发者的优化思路提示）</p>
+<p>[3] <a href="https://g6ursaxeei.feishu.cn/wiki/wikcnfVj5iRhjhn4QNNpaFGMeDh?table=tblDBoGzi8ASFqbx&amp;view=vewx5ZOj1f&amp;record=reczWN9rT5&amp;field=fldSN7AY4l">克雷格.  机器人学导论.  北京 : 机械工业出版社, 2018.</a></p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-13T13:42:51+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-13</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 - 2023 Hello World Team, Zhejiang University
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/ZJU-HelloWorld" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:<ZJU_HelloWorld@163.com>" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.tracking", "toc.follow", "navigation.top", "header.autohide", "navigation.expand"], "search": "../../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.ba449ae6.min.js"></script>
+      
+        <script src="../../../../js/timeago.min.js"></script>
+      
+        <script src="../../../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
