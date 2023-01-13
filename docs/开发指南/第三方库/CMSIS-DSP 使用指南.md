@@ -54,7 +54,7 @@ CMSIS-DSP 软件库是一套用于基于 Cortex-M 和 Cortex-A 处理器的设�
 
 ### 引入源码并配置 CMake  
 
-在我们提供的 [CMakeLists模板](https://zju-helloworld.github.io/Wiki/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BVSCode%2BOzone%20%E9%85%8D%E7%BD%AESTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/#cmakelists) 中有以下内容：
+在我们提供的 [CMakeLists模板](https://zju-helloworld.github.io/Wiki/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BVSCode%2BOzone%20%E9%85%8D%E7%BD%AESTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/#cmakelists-%E6%A8%A1%E6%9D%BF) 中有以下内容：
 
 ```cmake
 # ########################## USER CONFIG SECTION ##############################
