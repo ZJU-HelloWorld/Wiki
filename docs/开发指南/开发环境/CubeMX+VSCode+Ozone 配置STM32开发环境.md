@@ -103,7 +103,7 @@ id16-->id15
 * 在终端测试是否安装成功
 
 ```shell
-make -v                 # 我们只需用到MinGW中的make工具
+make -v                 # 我们只需用到MinGW中的make工具，如果你发现测试不成功，不妨问问项管gg;-)
 arm-none-eabi-gcc -v
 openocd -v
 ```
