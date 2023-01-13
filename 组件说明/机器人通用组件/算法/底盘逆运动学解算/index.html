@@ -1387,31 +1387,39 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"chas_ik_solver.h"</span>
 </code></pre></div></td></tr></table></div>
 <p>选择底盘类型和是否开启优化（针对舵轮底盘，麦轮底盘该选项无效），实例化一个求解器并初始化：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Swerve Srive</label><label for="__tabbed_1_2">Mecanum</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#__codelineno-3-3">3</a></span>
-<span class="normal"><a href="#__codelineno-3-4">4</a></span>
-<span class="normal"><a href="#__codelineno-3-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">ChasIkSolver_t</span><span class="w"> </span><span class="n">solver</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="cm">/* swerve drive */</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">ChasIkSolverInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">SWERVE</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="cm">/* mecanum */</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="n">ChasIkSolverInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">MECANUM</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">ChasIkSolver_t</span><span class="w"> </span><span class="n">solver</span><span class="p">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">ChasIkSolverInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">SWERVE</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">ChasIkSolver_t</span><span class="w"> </span><span class="n">solver</span><span class="p">;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">ChasIkSolverInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">MECANUM</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</input></input></div>
 <p>输入底盘的运动参数，调用方法求解：</p>
 <blockquote>
 <p>对于舵轮，按 <code>目标轮组转速，当前航向电机角度，目标航向电机角度</code> 顺序传入存放轮组数据的数组地址；</p>
 <p>对于麦轮，传入用于存放 <code>目标轮组转速</code> 的数组地址。</p>
 </blockquote>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#__codelineno-4-2">2</a></span>
-<span class="normal"><a href="#__codelineno-4-3">3</a></span>
-<span class="normal"><a href="#__codelineno-4-4">4</a></span>
-<span class="normal"><a href="#__codelineno-4-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cm">/* swerve drive */</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_spd</span><span class="p">,</span><span class="w"> </span><span class="n">cur_str_angle</span><span class="p">,</span><span class="w"> </span><span class="n">tar_str_angle</span><span class="p">);</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="cm">/* mecanum */</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_spd</span><span class="p">);</span>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Swerve Srive</label><label for="__tabbed_2_2">Mecanum</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_spd</span><span class="p">,</span><span class="w"> </span><span class="n">cur_str_angle</span><span class="p">,</span><span class="w"> </span><span class="n">tar_str_angle</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_spd</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</input></input></div>
 <h3 id="组件说明">组件说明<a class="headerlink" href="#组件说明" title="链接到此节">¶</a></h3>
 <h4 id="chasiksolver-类"><code>ChasIKSolver</code> 类<a class="headerlink" href="#chasiksolver-类" title="链接到此节">¶</a></h4>
 <p>属性</p>
