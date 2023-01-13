@@ -31,6 +31,8 @@ bilibili：[浙江大学HelloWorld战队](https://space.bilibili.com/1882602720)
 
 微博：浙江大学HelloWorld战队
 
+----------------------------
+
 # 关于知识库开发
 
 使用 [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) 进行开发。
