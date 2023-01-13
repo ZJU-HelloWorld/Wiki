@@ -289,8 +289,8 @@ system.h
     ```
 === "N-loop Cascade Controller"
     ```c
-   PidInit(&pid_n_loop, N, pid_n_loop_param);
-   ```
+    PidInit(&pid_n_loop, N, pid_n_loop_param);
+    ```
 
 > 若希望引入按输入前馈补偿，则需开启 `SETPOINT_FEED_FORWARD` 优化选项，并使用跟踪微分器，该组件位于 `Utils/filter.c` 中。实例化一个跟踪微分器并传入参数进行初始化，然后向已实例化的 PID 控制器指明节点编号（编号顺序为外回路 -> 内回路，从 0 开始），向该节点注册（线性）跟踪微分器：
 >
