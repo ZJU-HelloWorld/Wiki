@@ -1,0 +1,52 @@
+---
+hide:
+  - feedback
+---
+
+# 关于我们
+
+## 战队介绍
+
+浙江大学 Hello World 战队成立于 2015 年，是依托于浙江大学信息与电子工程学院的一支机器人战队，以“求是，团结，兢业，至臻”作为队训，是 RoboMaster 机甲大师赛浙江大学参赛代表队。战队成员分别来自信电学院、机械学院、能源学院、控制学院等十数个学院，覆盖本硕博各个年级，分为机械、电控、视觉、硬件以及运营宣传五个小组。
+
+
+## 历史战绩
+
+> 第十七届全国大学生机器人大赛 ROBOMASTER 2018 机甲大师总决赛三等奖
+
+> 第十八届全国大学生机器人大赛 ROBOMASTER 2019 机甲大师总决赛三等奖
+
+> 第十九届全国大学生机器人大赛 ROBOMASTER 2020 机甲大师对抗赛（线上）三等奖
+
+> 第二十届全国大学生机器人大赛 ROBOMASTER 2021 机甲大师超级对抗赛全国赛一等奖
+
+> 第二十一届全国大学生机器人大赛 ROBOMASTER 2022 机甲大师超级对抗赛全国赛一等奖
+
+
+## 联系我们
+
+bilibili：[浙江大学HelloWorld战队](https://space.bilibili.com/1882602720)
+
+公众号：Hello World战队
+
+微博：浙江大学HelloWorld战队
+
+# 关于知识库开发
+
+使用 [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) 进行开发。
+
+使用插件：
+
+* 目录导航整理：[awesome-pages](https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin)
+* 图片点击放大：glightbox
+* 创建和修改日期显示：git-revision-date-localized
+
+高级功能：
+
+* Google Analytics
+
+没有必要但可以尝试的功能：
+
+* comment system
+* 一些没有用到的 python markdown 扩展
+* social cards

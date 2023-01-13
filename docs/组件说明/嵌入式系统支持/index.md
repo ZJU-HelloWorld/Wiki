@@ -1,3 +1,8 @@
+---
+hide:
+  - feedback
+---
+
 # 嵌入式系统支持
 
 > 嵌入式系统支持源码仓库：<https://github.com/ZJU-HelloWorld/HW-OS>

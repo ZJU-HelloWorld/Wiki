@@ -21,5 +21,7 @@ jobs:
         with:
           key: ${{ github.ref }}
           path: .cache
-      - run: pip install mkdocs-material pip install mkdocs-git-revision-date-localized-plugin
+      # - run: apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
+      - run: pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-glightbox mkdocs-awesome-pages-plugin
+      #  pillow cairosvg
       - run: mkdocs gh-deploy --force

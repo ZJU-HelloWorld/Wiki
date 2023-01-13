@@ -1,3 +1,8 @@
+---
+hide:
+  - feedback
+---
+
 # 机器人通用组件
 
 > 机器人通用组件源码仓库：<https://github.com/ZJU-HelloWorld/HW-Components>
