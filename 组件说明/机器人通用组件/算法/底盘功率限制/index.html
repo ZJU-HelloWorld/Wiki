@@ -1018,7 +1018,7 @@ P_p=\hat k_{M}\sum_j \Omega_j\cdot  i_{ref_j}+\sum_j(a\cdot i_{ref_j}^2+b\cdot i
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/power_limiter.drawio.png"><img alt="power_limiter.drawio" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/power_limiter.drawio.png"/></a></p>
 <p>此外，当出现异常情况导致缓冲能量过低时，触发保护机制，给出极低的目标功率。若出现裁判系统或超电主控断联，需做对应处理。</p>
 <h4 id="计算动态功率上限">计算动态功率上限<a class="headerlink" href="#计算动态功率上限" title="链接到此节">¶</a></h4>
-<p>算法中额外计算动态底盘功率上限 <span class="arithmatex">\(P_{ref}\)</span> （而不直接使用 <span class="arithmatex">\(P_m\)</span> 作为上限），是为了应对电机启动阶段瞬时功率较大的情况，此时功率限制应适当放宽，若以 <span class="arithmatex">\(P_m\)</span> 将难以启动。计算过程如下：</p>
+<p>算法中额外计算动态底盘功率上限 <span class="arithmatex">\(P_{ref}\)</span> （而不直接使用 <span class="arithmatex">\(P_m\)</span> 作为上限），一是为了应对电机启动阶段瞬时功率较大的情况，此时功率限制应适当放宽，若以 <span class="arithmatex">\(P_m\)</span> 将难以启动；二是为了充分利用缓冲能量。计算过程如下：</p>
 <ul>
 <li>求取缓冲能量调节控制量 <span class="arithmatex">\(u(Z)\)</span>，采用 PD 控制以增加稳定性：</li>
 </ul>
@@ -1096,7 +1096,7 @@ k_l=\frac{-\beta+\sqrt{\beta^2-4\alpha\gamma}}{2\alpha}
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cp">#define SUPER_CAP_EXISTING 1</span>
 </code></pre></div></td></tr></table></div>
 <p>在项目中引用头文件：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>#include "power_limiter.h"
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"power_limiter.h"</span>
 </code></pre></div></td></tr></table></div>
 <p>实例化一个底盘功率限制器，并初始化一个静态参数结构体数组，参数含义见组件说明。如：</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
@@ -1132,24 +1132,24 @@ k_l=\frac{-\beta+\sqrt{\beta^2-4\alpha\gamma}}{2\alpha}
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="p">.</span><span class="n">z_ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20u</span><span class="p">,</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="p">.</span><span class="n">z_danger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10u</span><span class="p">,</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="p">.</span><span class="n">p_bias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">8.0f</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="p">.</span><span class="n">a_loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="p">.</span><span class="n">b_loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="p">.</span><span class="n">c_loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="p">.</span><span class="n">a_loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="p">.</span><span class="n">b_loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="p">.</span><span class="n">c_loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="p">.</span><span class="n">PwrKfParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">        </span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">        </span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">        </span><span class="p">.</span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">        </span><span class="p">.</span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">        </span><span class="p">.</span><span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">        </span><span class="p">.</span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">        </span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">        </span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">        </span><span class="p">.</span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">        </span><span class="p">.</span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">        </span><span class="p">.</span><span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">        </span><span class="p">.</span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
 <a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">    </span><span class="p">},</span>
 <a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">    </span><span class="p">.</span><span class="n">FusionKfParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">        </span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">        </span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">        </span><span class="p">.</span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">        </span><span class="p">.</span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w">        </span><span class="p">.</span><span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="w">        </span><span class="p">.</span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER</span><span class="w"> </span><span class="n">CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">        </span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">        </span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">        </span><span class="p">.</span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">        </span><span class="p">.</span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w">        </span><span class="p">.</span><span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="w">        </span><span class="p">.</span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
 <a id="__codelineno-3-26" name="__codelineno-3-26"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-27" name="__codelineno-3-27"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
@@ -1208,8 +1208,8 @@ k_l=\frac{-\beta+\sqrt{\beta^2-4\alpha\gamma}}{2\alpha}
 <a id="__codelineno-5-24" name="__codelineno-5-24"></a>
 <a id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="n">limiter</span><span class="p">.</span><span class="n">updateRuntimeParams</span><span class="p">(</span><span class="o">&amp;</span><span class="n">limiter</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">runtime_par</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<p>其中若底盘上连接了超电模块，则启用 <code>is_super_cap_online</code> 等参数（<code>SUPER_CAP_EXISTING</code> 宏语句范围内）。</p>
-<p>然后调用方法解算限制后的各电机转速，存储于提供的数组中。</p>
+<p>其中若底盘上安装了超电模块，则启用 <code>is_super_cap_online</code> 等参数（已由 <code>SUPER_CAP_EXISTING</code> 宏开关确定）。</p>
+<p>然后解算限制后的各电机转速，存储于用户提供的数组中。</p>
 <blockquote>
 <p>注意：最终得到的是与动态参数设置顺序对应的所有电机的目标转速，还需要自行使用控制器算法得到目标转矩电流，再发送给电调。</p>
 </blockquote>
@@ -1226,7 +1226,6 @@ k_l=\frac{-\beta+\sqrt{\beta^2-4\alpha\gamma}}{2\alpha}
 <tr>
 <th>名称</th>
 <th>类型</th>
-<th>示例值</th>
 <th>描述</th>
 </tr>
 </thead>
@@ -1234,37 +1233,31 @@ k_l=\frac{-\beta+\sqrt{\beta^2-4\alpha\gamma}}{2\alpha}
 <tr>
 <td><code>static_params</code></td>
 <td><code>PwrLimitStaticParams_t</code></td>
-<td>/</td>
 <td>功率限制静态参数，包括电机数量和用户设定的参数</td>
 </tr>
 <tr>
 <td><code>runtime_params</code></td>
 <td><code>PwrLimitRuntimeParams_t</code></td>
-<td>/</td>
 <td>功率限制动态参数，包括连接状态、裁判系统数据、转速及电流量测和目标值、电机 Kp 等</td>
 </tr>
 <tr>
 <td><code>data</code></td>
 <td><code>PwrLimitData_t</code></td>
-<td>/</td>
 <td>运行时中间项数据</td>
 </tr>
 <tr>
 <td><code>p_ref_pid</code></td>
 <td><code>Pid_t</code></td>
-<td>/</td>
 <td>控制缓冲能量的 PD 控制器</td>
 </tr>
 <tr>
 <td><code>pwr_kf</code></td>
 <td><code>Kf_t</code></td>
-<td>/</td>
 <td>融合功率模型计算值和观测值的卡尔曼滤波器</td>
 </tr>
 <tr>
 <td><code>fusion_kf</code></td>
 <td><code>Kf_t</code></td>
-<td>/</td>
 <td>（仅当安装超电模块时启用）融合超级电容主控、裁判系统功率观测值的卡尔曼滤波器</td>
 </tr>
 </tbody>
