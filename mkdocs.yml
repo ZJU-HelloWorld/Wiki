@@ -105,4 +105,4 @@ extra:
 plugins:
     - search
     - git-revision-date-localized:
-          enable_creation_date: false
+          type: timeago
