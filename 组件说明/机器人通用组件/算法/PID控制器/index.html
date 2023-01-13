@@ -1087,96 +1087,115 @@ $$
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"pid.h"</span>
 </code></pre></div></td></tr></table></div>
 <p>实例化一个 PID 控制器：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
-<span class="normal"><a href="#__codelineno-2-2">2</a></span>
-<span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">Pid_t</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">Pid_t</span><span class="w"> </span><span class="n">pid_n_loop</span><span class="p">;</span><span class="c1">// cascade controller with N loop</span>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Standard Controller</label><label for="__tabbed_1_2">N-loop Cascade Controller</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">Pid_t</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">Pid_t</span><span class="w"> </span><span class="n">pid_n_loop</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</input></input></div>
 <p>创建参数结构体数组，按节点顺序（外回路 -&gt; 内回路）设置控制器节点参数，参数含义见组件说明。如带给定值过零处理（单位 <span class="arithmatex">\(\rm rad\)</span>）的控制器：</p>
-<p><div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-3-10">10</a></span>
-<span class="normal"><a href="#__codelineno-3-11">11</a></span>
-<span class="normal"><a href="#__codelineno-3-12">12</a></span>
-<span class="normal"><a href="#__codelineno-3-13">13</a></span>
-<span class="normal"><a href="#__codelineno-3-14">14</a></span>
-<span class="normal"><a href="#__codelineno-3-15">15</a></span>
-<span class="normal"><a href="#__codelineno-3-16">16</a></span>
-<span class="normal"><a href="#__codelineno-3-17">17</a></span>
-<span class="normal"><a href="#__codelineno-3-18">18</a></span>
-<span class="normal"><a href="#__codelineno-3-19">19</a></span>
-<span class="normal"><a href="#__codelineno-3-20">20</a></span>
-<span class="normal"><a href="#__codelineno-3-21">21</a></span>
-<span class="normal"><a href="#__codelineno-3-22">22</a></span>
-<span class="normal"><a href="#__codelineno-3-23">23</a></span>
-<span class="normal"><a href="#__codelineno-3-24">24</a></span>
-<span class="normal"><a href="#__codelineno-3-25">25</a></span>
-<span class="normal"><a href="#__codelineno-3-26">26</a></span>
-<span class="normal"><a href="#__codelineno-3-27">27</a></span>
-<span class="normal"><a href="#__codelineno-3-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">const</span><span class="w"> </span><span class="n">PidParams_t</span><span class="w"> </span><span class="n">pid_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="p">.</span><span class="n">kType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PID_ACROSS0_RAD</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="p">.</span><span class="n">kImprvOption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INTE_SEPARATION</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">INTE_CHANGING_RATE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">DEAD_BAND</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SETPOINT_RAMPING</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SETPOINT_FEED_FORWARD</span><span class="p">,</span><span class="w"> </span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="p">.</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">500.0f</span><span class="p">,</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">  </span><span class="p">.</span><span class="n">ki</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0f</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">  </span><span class="p">.</span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">  </span><span class="p">.</span><span class="n">kOutMin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-30000</span><span class="p">,</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">  </span><span class="p">.</span><span class="n">kOutMax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11"></a>
-<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">  </span><span class="p">.</span><span class="n">kWindUpOutMax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">  </span><span class="p">.</span><span class="n">kDWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.9f</span><span class="p">,</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">  </span><span class="p">.</span><span class="n">kISeparThresUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">  </span><span class="p">.</span><span class="n">kISeparThresLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-1.0f</span><span class="p">,</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">  </span><span class="p">.</span><span class="n">kUpperB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">  </span><span class="p">.</span><span class="n">kLowerA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">,</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19"></a>
-<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">  </span><span class="p">.</span><span class="n">kDeadBandThresUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">  </span><span class="p">.</span><span class="n">kDeadBandThresLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-1.0f</span><span class="p">,</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">  </span><span class="p">.</span><span class="n">kSpThresUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">  </span><span class="p">.</span><span class="n">kSpThresLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-30</span><span class="p">,</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w">  </span><span class="p">.</span><span class="n">kSpWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">,</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="w">  </span><span class="p">.</span><span class="n">kf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26"></a><span class="p">};</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27"></a>
-<a id="__codelineno-3-28" name="__codelineno-3-28"></a><span class="k">const</span><span class="w"> </span><span class="n">PidParams_t</span><span class="w"> </span><span class="n">pid_n_loop_param</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{...},</span><span class="w"> </span><span class="p">{...},</span><span class="w"> </span><span class="p">...};</span><span class="w"> </span><span class="c1">// cascade controller with N loop</span>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Standard Controller</label><label for="__tabbed_2_2">N-loop Cascade Controller</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">const</span><span class="w"> </span><span class="n">PidParams_t</span><span class="w"> </span><span class="n">pid_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">  </span><span class="p">.</span><span class="n">kType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PID_ACROSS0_RAD</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">  </span><span class="p">.</span><span class="n">kImprvOption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INTE_SEPARATION</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">INTE_CHANGING_RATE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">DEAD_BAND</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SETPOINT_RAMPING</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SETPOINT_FEED_FORWARD</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">  </span><span class="p">.</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">500.0f</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">  </span><span class="p">.</span><span class="n">ki</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0f</span><span class="p">,</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">  </span><span class="p">.</span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">  </span><span class="p">.</span><span class="n">kOutMin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-30000</span><span class="p">,</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">  </span><span class="p">.</span><span class="n">kOutMax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">  </span><span class="p">.</span><span class="n">kWindUpOutMax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">  </span><span class="p">.</span><span class="n">kDWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.9f</span><span class="p">,</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">  </span><span class="p">.</span><span class="n">kISeparThresUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">  </span><span class="p">.</span><span class="n">kISeparThresLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">  </span><span class="p">.</span><span class="n">kUpperB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">  </span><span class="p">.</span><span class="n">kLowerA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">,</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="w">  </span><span class="p">.</span><span class="n">kDeadBandThresUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="w">  </span><span class="p">.</span><span class="n">kDeadBandThresLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="w">  </span><span class="p">.</span><span class="n">kSpThresUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="w">  </span><span class="p">.</span><span class="n">kSpThresLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-30</span><span class="p">,</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="w">  </span><span class="p">.</span><span class="n">kSpWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">,</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="w">  </span><span class="p">.</span><span class="n">kf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-其中 <code>kType, kImprvOption, kp, ki, kd, kOutMax, kWindUpOutMax, kDWeight</code> 为基础参数，请在初始化时按需求指定；其他参数为搭配优化选项的可选参数。若无需优化，使用 <code>.kImprvOption = IMPRV_NONE</code> 语句。</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">const</span><span class="w"> </span><span class="n">PidParams_t</span><span class="w"> </span><span class="n">pid_n_loop_param</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{...},</span><span class="w"> </span><span class="p">{...},</span><span class="w"> </span><span class="p">...};</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</input></input></div>
+<p>其中 <code>kType, kImprvOption, kp, ki, kd, kOutMax, kWindUpOutMax, kDWeight</code> 为基础参数，请在初始化时按需求指定；其他参数为搭配优化选项的可选参数。若无需优化，使用 <code>.kImprvOption = IMPRV_NONE</code> 语句。</p>
 <blockquote>
 <p>说明：所有参数均具有缺省值，部分参数的缺省值已在理论部分给出，未给出的默认为 0。</p>
 </blockquote>
 <p>初始化 PID 控制器，如：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#__codelineno-4-2">2</a></span>
-<span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">PidInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pid_param</span><span class="p">);</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">PidInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid_n_loop</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">pid_n_loop_param</span><span class="p">);</span><span class="w"> </span><span class="c1">// cascade controller with N loop</span>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Standard Controller</label><label for="__tabbed_3_2">N-loop Cascade Controller</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">PidInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pid_param</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<p>```c</p>
+</div>
+</div>
+</input></input></div>
+<p>PidInit(&amp;pid_n_loop, N, pid_n_loop_param);
+   ```</p>
 <blockquote>
 <p>若希望引入按输入前馈补偿，则需开启 <code>SETPOINT_FEED_FORWARD</code> 优化选项，并使用跟踪微分器，该组件位于 <code>Utils/filter.c</code> 中。实例化一个跟踪微分器并传入参数进行初始化，然后向已实例化的 PID 控制器指明节点编号（编号顺序为外回路 -&gt; 内回路，从 0 开始），向该节点注册（线性）跟踪微分器：</p>
-<p><div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
-<span class="normal"><a href="#__codelineno-5-2">2</a></span>
-<span class="normal"><a href="#__codelineno-5-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">Td_t</span><span class="w"> </span><span class="n">td</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">TdInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">td</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">h0</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">);</span><span class="w">        </span><span class="c1">// h = 1.0f / CTRL_FREQ</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">pid</span><span class="p">.</span><span class="n">tdRegister</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">td</span><span class="p">);</span><span class="w"> </span><span class="c1">// loop no.N, numbered from 0</span>
+<p><div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">Td_t</span><span class="w"> </span><span class="n">td</span><span class="p">;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">TdInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">td</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">h0</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">);</span><span class="w">        </span><span class="c1">// h = 1.0f / CTRL_FREQ</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">pid</span><span class="p">.</span><span class="n">tdRegister</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">td</span><span class="p">);</span><span class="w"> </span><span class="c1">// loop no.N, numbered from 0</span>
 </code></pre></div></td></tr></table></div>
 其中 <span class="arithmatex">\(h_0\)</span> 为滤波因子， <span class="arithmatex">\(h_0\)</span> 越大滤波效果越好； <span class="arithmatex">\(h\)</span> 为步长， <span class="arithmatex">\(h\)</span> 越小滤波效果越好；一般来说， <span class="arithmatex">\(h_0\)</span> 略大于步长 <span class="arithmatex">\(h\)</span>； <span class="arithmatex">\(r\)</span> 为快速因子， <span class="arithmatex">\(r\)</span> 越大，跟踪越快。</p>
 <p>更多原理和参数调节规律详见滤波器算法组件说明，或咨询沈组长 <img alt="😍" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f60d.svg" title=":heart_eyes:"/></p>
 </blockquote>
 <p>传入 PID 控制器句柄、最外回路给定值、各回路反馈值（存储顺序由外回路到内回路）数组首地址、存储输出量的内存地址，计算 PID 控制器输出：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">pid</span><span class="p">.</span><span class="n">calcPid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span><span class="w"> </span>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">pid</span><span class="p">.</span><span class="n">calcPid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span><span class="w"> </span>
 </code></pre></div></td></tr></table></div>
 <p>若 PID 控制器是动态创建的，在其生存周期终止前还需要手动释放内存：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">pid</span><span class="p">.</span><span class="n">delPid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">pid</span><span class="p">.</span><span class="n">delPid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="组件说明">组件说明<a class="headerlink" href="#组件说明" title="链接到此节">¶</a></h3>
 <h4 id="pid-类"><code>Pid</code> 类<a class="headerlink" href="#pid-类" title="链接到此节">¶</a></h4>
@@ -1356,10 +1375,10 @@ $$
 <td align="left">PID 增益</td>
 </tr>
 <tr>
-<td align="left"><code>kOutMin                                         |</code>float`</td>
+<td align="left"><code>kOutMin</code></td>
+<td align="left"><code>float</code></td>
 <td align="left">-30000</td>
 <td align="left">最小输出</td>
-<td align="left"></td>
 </tr>
 <tr>
 <td align="left"><code>kOutMax</code></td>
