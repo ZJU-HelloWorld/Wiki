@@ -1076,10 +1076,12 @@ $$
 <a id="__codelineno-0-6" name="__codelineno-0-6"></a>system.h
 </code></pre></div></td></tr></table></div>
 <h3 id="使用前准备">使用前准备<a class="headerlink" href="#使用前准备" title="链接到此节">¶</a></h3>
-<p>使用前需要做以下准备：</p>
+<p>本组件依赖的 filter.c/h 涉及 CMSIS-DSP 矩阵运算等操作。</p>
+<p>使用本组件前需要做以下准备：</p>
 <ul>
-<li>在使用 STM32CubeMX 生成项目时，请在 <code>Code Generator</code> 界面 <code>Enable Full Assert</code>，来帮助断言算法中的错误</li>
-<li>在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果</li>
+<li>添加源文件, 包含头文件路径；注意 DSP 版本须在 1.10.0 及以上</li>
+<li>添加预处理宏以开启浮点运算单元（FPU）</li>
+<li>在使用 STM32CubeMX 生成项目时，请在 Code Generator 界面 Enable Full Assert，来帮助断言设备驱动中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果，如添加 <code>while(1);</code></li>
 <li>在 <code>system.h</code> 中 <code>system options: user config</code> 处进行系统设置</li>
 </ul>
 <h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">¶</a></h3>
@@ -1477,7 +1479,7 @@ $$
 <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-17</span>
 <br/>
         创建日期:
         <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-01</span>
