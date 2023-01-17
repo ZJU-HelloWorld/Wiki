@@ -215,11 +215,14 @@ system.h
 ```
 
 ### 使用前准备
+ 
+本组件依赖的 filter.c/h 涉及 CMSIS-DSP 矩阵运算等操作。
+ 
+使用本组件前需要做以下准备：
 
-使用前需要做以下准备：
-
-* 在使用 STM32CubeMX 生成项目时，请在 `Code Generator` 界面 `Enable Full Assert`，来帮助断言算法中的错误
-* 在 `main.c` 中修改 `assert_failed` 函数以指示断言结果
+* 添加源文件, 包含头文件路径；注意 DSP 版本须在 1.10.0 及以上
+* 添加预处理宏以开启浮点运算单元（FPU）
+* 在使用 STM32CubeMX 生成项目时，请在 Code Generator 界面 Enable Full Assert，来帮助断言设备驱动中的错误；在 `main.c` 中修改 `assert_failed` 函数以指示断言结果，如添加 `while(1);`
 * 在 `system.h` 中 `system options: user config` 处进行系统设置
 
 ### 示例
