@@ -280,7 +280,7 @@ system.h
     const PidParams_t pid_n_loop_param[N] = {{...}, {...}, ...};
     ```
 
-其中 `kType, kImprvOption, kp, ki, kd, kOutMax, kWindUpOutMax, kDWeight` 为基础参数，请在初始化时按需求指定；其他参数为搭配优化选项的可选参数。若无需优化，使用 `.kImprvOption = IMPRV_NONE` 语句。
+其中 `kType, kImprvOption, kp, ki, kd, kOutMin, kOutMax, kWindUpOutMax, kDWeight` 为基础参数，请在初始化时按需求指定；其他参数为搭配优化选项的可选参数。若无需优化，使用 `.kImprvOption = IMPRV_NONE` 语句。
  
 > 说明：所有参数均具有缺省值，部分参数的缺省值已在理论部分给出，未给出的默认为 0。
  
