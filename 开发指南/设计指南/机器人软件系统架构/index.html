@@ -8,9 +8,9 @@
 <link href="../%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" rel="prev"/>
 <link href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/" rel="next"/>
 <link href="../../../img/rm.svg" rel="icon"/>
-<meta content="mkdocs-1.4.2, mkdocs-material-9.0.13" name="generator"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.1.1" name="generator"/>
 <title>机器人软件系统架构 - Hello World 电控知识库</title>
-<link href="../../../assets/stylesheets/main.ffa9267a.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/main.402914a4.min.css" rel="stylesheet"/>
 <link href="../../../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -54,7 +54,7 @@
 <script>var content,el=document.querySelector("[data-md-component=announce]");el&&(content=el.querySelector(".md-typeset"),__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0))</script>
 </aside>
 </div>
-<header class="md-header md-header--lifted" data-md-component="header">
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
 <nav aria-label="页眉" class="md-header__inner md-grid">
 <a aria-label="Hello World 电控知识库" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Hello World 电控知识库">
 <img alt="logo" src="../../../img/rm.svg"/>
@@ -366,15 +366,6 @@
 <a class="md-nav__link" href="#板级支持包board-support-package">
     板级支持包（Board Support Package）
   </a>
-<nav aria-label="板级支持包（Board Support Package）" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#设备驱动device-driver">
-    设备驱动（Device Driver）
-  </a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#操作系统operating-system">
@@ -723,15 +714,6 @@
 <a class="md-nav__link" href="#板级支持包board-support-package">
     板级支持包（Board Support Package）
   </a>
-<nav aria-label="板级支持包（Board Support Package）" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#设备驱动device-driver">
-    设备驱动（Device Driver）
-  </a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#操作系统operating-system">
@@ -809,7 +791,7 @@
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/img_1_9_1.png"><img alt="" src="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/img_1_9_1.png"/></a></p>
 <p>在概念上，这些模型适用于任何嵌入式系统；但对应于实际开发过程，应结合应用需求，对其进行适当的补充和调整，使各概念的含义更清晰、各模块功能更明确，以适用于机器人系统的开发。</p>
 <p>大到一个机器人开发团队的软件工作、小到每一位成员的代码产出，写出能用的程序固然重要，但也要考虑到设计上的逻辑性、合理性和可移植、可拓展性。唯有如此，才能够提升开发和维护的效率，维持软件的活力，帮助团队持续稳定地发展。没有架构设计或不合理的架构设计，其弊端已经在过往的赛季中逐渐显现，是时候推广一个更为完善、更有发展潜力的架构，来<strong>理清对象逻辑层次关系，合理设计系统流程架构，引导自研应用生态发展</strong>。</p>
-<p>因此，我们参考大量资料，包括 <em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/STM32Cube%20Package%20Content.png">STM32Cube Package 架构</a></em>，<em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/DJI%20Autonomous%20Driving%20Domain%20Controller.png">DJI 自动驾驶域控制器架构</a></em>，<em><a href="rtt_io.png">RT-Thread I/O 设备模型</a></em> 等，结合开发过程和应用的实际需求，形成战队机器人软件系统架构；该架构尚不成熟，需要更多的队员秉承科学的设计理念，不断优化和完善。</p>
+<p>因此，我们参考大量资料，包括 <em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/stm32cube.png">STM32Cube Package 架构</a></em>，<em><a href="机器人软件系统架构.assets/DJI.png">DJI 自动驾驶域控制器架构</a></em>（<a href="https://auto.dji.com/components">link</a>），<em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/rtt_io.png">RT-Thread I/O 设备模型</a></em> （<a href="https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/programming-manual/device/device">link</a>）等，结合开发过程和应用的实际需求，形成战队机器人软件系统架构；该架构尚不成熟，需要更多的队员秉承科学的设计理念，不断优化和完善。</p>
 <h2 id="软件架构概述">软件架构概述<a class="headerlink" href="#软件架构概述" title="链接到此节">¶</a></h2>
 <p>嵌入式软件大体上可以分为两大类：<strong>系统软件</strong>和<strong>应用软件</strong>。系统软件是支持应用程序的任何软件，例如设备驱动程序、操作系统和中间件。应用软件是上层软件，它定义了嵌入式设备的功能和用途，并处理与用户的大部分交互。</p>
 <p>以步兵机器人的软件架构为例，下图中彩色色块覆盖的部分代表应用软件，其他部分代表系统软件及硬件。</p>
@@ -819,71 +801,86 @@
 <h3 id="硬件抽象层hardware-abstraction-layer-hal">硬件抽象层（Hardware Abstraction Layer, HAL）<a class="headerlink" href="#硬件抽象层hardware-abstraction-layer-hal" title="链接到此节">¶</a></h3>
 <p>大多数嵌入式硬件需要某种类型的软件初始化和管理。HAL 是对硬件的抽象和封装，为软件提供了统一的硬件设备访问接口。HAL 涉及的各层级 STM32 外设包括 GPIO、TIM、IWDG、USART、SPI、CAN、I2C...</p>
 <blockquote>
-<p>STM32Cube HAL 为此提供了支持。</p>
+<p>STM32Cube HAL 为此提供了支持</p>
 </blockquote>
 <h3 id="板级支持包board-support-package">板级支持包（Board Support Package）<a class="headerlink" href="#板级支持包board-support-package" title="链接到此节">¶</a></h3>
 <p>BSP 是进一步调用 HAL 的各种方法实现硬件配置、外设初始化、功能聚合等，从而为 STM32 片上硬件实现的可直接调用的功能支持包。上层模块调用板级支持包提供的接口，而无需关注 HAL 库及其他底层细节。在应用时，BSP 仅与对应外设自身功能相关，该层对数据的描述不具有特定含义。</p>
 <blockquote>
-<p>使用 STM32CubeMX 生成项目时，外设配置相关的 BSP 将自动生成。</p>
+<p>使用 STM32CubeMX 生成项目时，外设配置相关的 BSP 将自动生成</p>
 </blockquote>
-<h4 id="设备驱动device-driver">设备驱动（Device Driver）<a class="headerlink" href="#设备驱动device-driver" title="链接到此节">¶</a></h4>
+<p><strong>设备驱动（Device Driver）</strong></p>
 <p>设备驱动程序是 BSP 的主要组成部分，是对 HAL 提供方法的再一次封装，提供统一易用的驱动接口以及驱动注册、软件 FIFO、回调函数注册等功能。按照外设的类型，编写对应的驱动（如 drv_can, drv_i2c...），以驱动对应类型的设备。</p>
 <blockquote>
-<p>设备驱动是战队自研系统软件支持的一部分。对于新增加的外设，请编写独立、可移植复用的应用程序，并加入驱动库中。</p>
+<p>设备驱动是战队自研系统软件支持的一部分。对于新增加的外设，请编写独立、可移植复用的应用程序，并加入驱动库中</p>
 </blockquote>
 <h3 id="操作系统operating-system">操作系统（Operating System）<a class="headerlink" href="#操作系统operating-system" title="链接到此节">¶</a></h3>
 <p>嵌入式系统对实时性要求较高，采用实时操作系统（Real Time Operating System）。RTOS 的核心功能如下：</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/FreeRTOS%20Core-16760303509641.png"><img alt="FreeRTOS Core" src="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/FreeRTOS%20Core-16760303509641.png"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/freertos_core.png"><img alt="FreeRTOS Core" src="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/freertos_core.png"/></a></p>
 <blockquote>
-<p>我们选用 FreeRTOS 进行开发。STM32Cube Packge 将 RTOS 内核组件定义在 Middleware 层级，在此不做改动。</p>
+<p>我们选用 FreeRTOS 进行开发。STM32Cube Packge 将 RTOS 内核组件定义在 Middleware 层级，在此不做改动</p>
 </blockquote>
 <h3 id="中间件middleware">中间件（Middleware）<a class="headerlink" href="#中间件middleware" title="链接到此节">¶</a></h3>
-<p>一般而言，中间件软件是任何不是操作系统内核、设备驱动程序或应用程序的系统软件。为便于区分系统软件和与机器人开发相关的软件，机器人抽象组件（如实用工具、设备应用、算法组件等）和模组将被定义到应用软件层，但它们严格意义上也属于中间件，允许任务重用。</p>
+<p>一般而言，中间件软件是任何不是操作系统内核、设备驱动程序或应用程序的系统软件。为便于区分<em>系统软件</em>和<em>与机器人开发相关的软件</em>，机器人抽象组件（如设备应用、算法等）和模组将被定义到应用软件层，但它们严格意义上也属于中间件，允许任务重用。</p>
 <p>在本架构中，中间件包括：</p>
 <ul>
-<li>RTOS 内核</li>
-<li>已经包含在现成支持包中的应用软件，如 USB 应用支持</li>
-<li>第三方供应商提供的现成软件（ *.lib 等）</li>
-<li>自研设备统一管理框架</li>
+<li>已经包含在现成系统支持包中的应用软件，如 USB 应用支持</li>
+<li>第三方供应商提供的现成软件（如 DSP 库）</li>
 <li>自研通信服务组件、内存管理、Shell、日志、自定义通信协议等操作系统扩展组件</li>
+<li>自研设备管理框架</li>
 </ul>
 <blockquote>
-<p>自研中间件是战队自研系统软件支持的一部分。按照操作系统的扩展需求，基于 FreeRTOS 进行研发。</p>
+<p>自研中间件是战队自研系统软件支持的一部分。按照操作系统的扩展需求，基于 FreeRTOS 进行研发</p>
 </blockquote>
 <h2 id="应用软件层application-software-layer">应用软件层（Application Software Layer）<a class="headerlink" href="#应用软件层application-software-layer" title="链接到此节">¶</a></h2>
-<h4 id="组件component">组件（Component）<a class="headerlink" href="#组件component" title="链接到此节">¶</a></h4>
-<p>组件是一些独立模块，在嵌入式系统中发挥功能但不与其他模块耦合。</p>
-<ul>
-<li><strong>设备应用（Device）</strong></li>
-</ul>
-<p>设备是组成机器人的最小单元，包括电机、遥控系统、裁判系统等等单一独立模块。设备应用对实体设备进行抽象，管理更高层软件对设备的访问；同时，设计设备与设备驱动匹配的程序接口，控制设备对象所需的底层数据交互。设备驱动内容主要包括：</p>
-<ul>
-<li>构造和初始化方法；</li>
-<li>数据处理、解析方法；</li>
-<li>特定封装的驱动方法。</li>
-</ul>
+<h3 id="组件component">组件（Component）<a class="headerlink" href="#组件component" title="链接到此节">¶</a></h3>
+<p>组件是一些独立模块，在系统中发挥功能但不与其他模块耦合。</p>
+<p><strong>简单功能聚合（Tool）</strong></p>
+<p>包括通用常量及简单功能（使用宏、内联函数等形式实现）。</p>
 <blockquote>
-<p>设备应用基于 Device Driver 提供的通用外设操作方法进行开发，是战队电控的通用组件之一。对于新增加的设备，建议编写独立、可移植复用的应用程序，并加入组件库中</p>
+<p>各应用中所需的通用常量和简单功能均应从此处调用 </p>
 </blockquote>
+<p><strong>设备应用（Device）</strong></p>
+<p><strong>设备</strong>是组成机器人的最小单元，包括各类传感器（IMU、激光测距等）、执行器（电机、舵机等）、遥控系统、裁判系统等模块。<strong>设备应用</strong>对各类实体设备进行抽象，管理更高层软件对设备的访问；同时，抽象设备与驱动匹配的程序接口，以控制设备对象所需的底层数据交互。</p>
+<p>设备应用对象的设计内容主要涉及：</p>
 <ul>
-<li><strong>算法（Algorithm）</strong></li>
+<li>设备对象的构造和初始化方法</li>
+<li>设备可解释数据的处理和解析方法</li>
+<li>设备应用方法</li>
+<li>设备驱动方法注册接口</li>
 </ul>
-<p>算法区别于实体，作为抽象的功能模块存在于架构中。</p>
+<p>其中，对于设备应用的使用者而言，对象的驱动方法是抽象且通用的；而对于设备应用本身而言，可以通过预留驱动的注册接口，为同一种应用注册不同的底层驱动。</p>
 <blockquote>
-<p>算法是战队电控的通用组件之一。对于新增加的算法，建议编写独立、可移植复用的应用程序，并加入组件库中</p>
+<p>设备应用基于设备驱动 (Device Driver) 提供的通用外设操作方法进行开发，战队通用。对于新增加的设备，建议编写独立、可移植复用的应用，并加入组件库中</p>
 </blockquote>
+<p><strong>算法（Algorithm）</strong></p>
+<p>算法作为抽象的功能模块，形成独立应用组件，供更高层软件调用。</p>
+<blockquote>
+<p>算法组件战队通用。对于新增加的算法，建议编写独立、可移植复用的应用，并加入组件库中</p>
+</blockquote>
+<h3 id="模组module">模组（Module）<a class="headerlink" href="#模组module" title="链接到此节">¶</a></h3>
+<p>模组是组成机器人的具有一定聚合关系的实体组件集合，或抽象的复杂功能模块（如云台、底盘、错误检测器等）。各模组独立实现，互相解耦。</p>
+<p>模组对象的设计内容主要涉及：</p>
 <ul>
-<li><strong>简单功能聚合（Tool）</strong></li>
+<li>模组对象的构造和初始化方法</li>
+<li>设备和算法的实例化</li>
+<li>数据 in/out 接口</li>
+<li>模组功能实现所需的处理逻辑</li>
+<li>模组应用方法</li>
 </ul>
-<h4 id="模组module">模组（Module）<a class="headerlink" href="#模组module" title="链接到此节">¶</a></h4>
-<p>模组是组成机器人的具有一定聚合关系的实体组件集合或抽象模块，如云台、底盘、错误检测器等，彼此独立、耦合度低。模组驱动对为任务提供应用接口。</p>
 <blockquote>
-<p>模组驱动由各兵种实现，可复用的模组应尽量协作完成</p>
+<p>模组仍具有一定的可复用性，对一些共有的模组各兵种应尽量协作完成</p>
 </blockquote>
-<h4 id="任务--线程task--thread">任务 / 线程（Task / Thread）<a class="headerlink" href="#任务--线程task--thread" title="链接到此节">¶</a></h4>
-<p>任务依赖于系统软件，由系统软件管理和调度。任务描述该嵌入式系统最高级的目的，简介清晰地展示运行过程，并与用户进行了大部分交互；除此之外还有一些通用系统必要的任务，如消息处理任务、错误诊断任务等。</p>
+<h3 id="任务--线程task--thread">任务 / 线程（Task / Thread）<a class="headerlink" href="#任务--线程task--thread" title="链接到此节">¶</a></h3>
+<p>任务依赖于系统软件，由操作系统管理和调度；任务描述该嵌入式系统最高级的目的，简介清晰地展示运行过程，并与用户进行了大部分交互；除此之外还有一些通用的系统必要的任务。</p>
+<p>任务的设计按照机器人实际任务需求实现，大体上可分为 <strong>感知</strong>、<strong>决策</strong>、<strong>规划</strong>、<strong>控制</strong> 四大方向，以及 <strong>设备校准</strong>、<strong>模式管理</strong>、<strong>消息处理</strong>、<strong>错误诊断</strong>、<strong>用户接口</strong> 等杂项任务。具体而言，设计内容主要涉及：</p>
+<ul>
+<li>按一定顺序初始化模组，以及完成其他的杂项初始化</li>
+<li>处理数据交互</li>
+<li>按任务逻辑执行计算，调用相关的方法</li>
+</ul>
+<p>任务的执行与操作系统紧密联系，因此，需要对任务调度逻辑、优先级、中断、数据流向等有清晰明确的认识。</p>
 <blockquote>
-<p>任务 / 线程按实际任务需求进行实现</p>
+<p>由于各兵种任务不尽相同，基本不存在可复用的情况，因此任务由各兵种电控各自实现，但请遵循设计指南</p>
 </blockquote>
 <h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">¶</a></h2>
 <h3 id="版本说明">版本说明<a class="headerlink" href="#版本说明" title="链接到此节">¶</a></h3>
@@ -905,7 +902,7 @@
 </tr>
 <tr>
 <td><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://img.shields.io/badge/version-0.9.2-green"><img alt="hh" src="https://img.shields.io/badge/version-0.9.2-green"/></a></td>
-<td>2023.02</td>
+<td>2023.03</td>
 <td>适用于 RTOS</td>
 <td>薛东来</td>
 </tr>
@@ -920,7 +917,7 @@
 <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-02-22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-03-09</span>
 <br/>
         创建日期:
         <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-23</span>
@@ -1027,7 +1024,7 @@
 <div class="md-dialog__inner md-typeset"></div>
 </div>
 <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.tracking", "toc.follow", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
-<script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+<script src="../../../assets/javascripts/bundle.b78d2936.min.js"></script>
 <script src="../../../javascripts/mathjax.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
