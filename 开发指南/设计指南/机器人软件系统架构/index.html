@@ -8,9 +8,9 @@
 <link href="../%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" rel="prev"/>
 <link href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/" rel="next"/>
 <link href="../../../img/rm.svg" rel="icon"/>
-<meta content="mkdocs-1.4.2, mkdocs-material-9.1.1" name="generator"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.1.2" name="generator"/>
 <title>机器人软件系统架构 - Hello World 电控知识库</title>
-<link href="../../../assets/stylesheets/main.402914a4.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/main.7bf56d0a.min.css" rel="stylesheet"/>
 <link href="../../../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -791,7 +791,7 @@
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/img_1_9_1.png"><img alt="" src="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/img_1_9_1.png"/></a></p>
 <p>在概念上，这些模型适用于任何嵌入式系统；但对应于实际开发过程，应结合应用需求，对其进行适当的补充和调整，使各概念的含义更清晰、各模块功能更明确，以适用于机器人系统的开发。</p>
 <p>大到一个机器人开发团队的软件工作、小到每一位成员的代码产出，写出能用的程序固然重要，但也要考虑到设计上的逻辑性、合理性和可移植、可拓展性。唯有如此，才能够提升开发和维护的效率，维持软件的活力，帮助团队持续稳定地发展。没有架构设计或不合理的架构设计，其弊端已经在过往的赛季中逐渐显现，是时候推广一个更为完善、更有发展潜力的架构，来<strong>理清对象逻辑层次关系，合理设计系统流程架构，引导自研应用生态发展</strong>。</p>
-<p>因此，我们参考大量资料，包括 <em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/stm32cube.png">STM32Cube Package 架构</a></em>，<em><a href="机器人软件系统架构.assets/DJI.png">DJI 自动驾驶域控制器架构</a></em>（<a href="https://auto.dji.com/components">link</a>），<em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/rtt_io.png">RT-Thread I/O 设备模型</a></em> （<a href="https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/programming-manual/device/device">link</a>）等，结合开发过程和应用的实际需求，形成战队机器人软件系统架构；该架构尚不成熟，需要更多的队员秉承科学的设计理念，不断优化和完善。</p>
+<p>因此，我们参考大量资料，包括 <em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/stm32cube.png">STM32Cube Package 架构</a></em>，<em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/dji.png">DJI 自动驾驶域控制器架构</a></em>（<a href="https://auto.dji.com/components">link</a>），<em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/rtt_io.png">RT-Thread I/O 设备模型</a></em> （<a href="https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/programming-manual/device/device">link</a>）等，结合开发过程和应用的实际需求，形成战队机器人软件系统架构；该架构尚不成熟，需要更多的队员秉承科学的设计理念，不断优化和完善。</p>
 <h2 id="软件架构概述">软件架构概述<a class="headerlink" href="#软件架构概述" title="链接到此节">¶</a></h2>
 <p>嵌入式软件大体上可以分为两大类：<strong>系统软件</strong>和<strong>应用软件</strong>。系统软件是支持应用程序的任何软件，例如设备驱动程序、操作系统和中间件。应用软件是上层软件，它定义了嵌入式设备的功能和用途，并处理与用户的大部分交互。</p>
 <p>以步兵机器人的软件架构为例，下图中彩色色块覆盖的部分代表应用软件，其他部分代表系统软件及硬件。</p>
@@ -1024,7 +1024,7 @@
 <div class="md-dialog__inner md-typeset"></div>
 </div>
 <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.tracking", "toc.follow", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
-<script src="../../../assets/javascripts/bundle.b78d2936.min.js"></script>
+<script src="../../../assets/javascripts/bundle.fc8c2696.min.js"></script>
 <script src="../../../javascripts/mathjax.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
