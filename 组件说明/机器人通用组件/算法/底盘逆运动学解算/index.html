@@ -928,19 +928,14 @@
 <h3 id="基本概念介绍">基本概念介绍<a class="headerlink" href="#基本概念介绍" title="链接到此节">¶</a></h3>
 <ul>
 <li><strong>驱动电机（driving motor）</strong> 驱动底盘移动。目前（2022赛季）型号为 M3508，反馈转子转速单位为 <span class="arithmatex">\(\rm rpm\)</span>；</li>
-<li>
-<p><strong>航向电机（steering motor）</strong> 是舵轮轮组中负责改变驱动轮朝向的电机。目前（2022赛季）型号为 GM6020，编码器反馈机械转子刻度 0 ~ 8191，程序中线性映射到 <span class="arithmatex">\(-\pi\)</span> ~ <span class="arithmatex">\(0\)</span> ~ <span class="arithmatex">\(\pi\)</span>；</p>
-</li>
-<li>
-<p>记<strong>驱动电机减速比</strong>为 <span class="arithmatex">\(k\)</span>（原装 M3508 电机为3591 / 187）；</p>
-</li>
+<li><strong>航向电机（steering motor）</strong> 是舵轮轮组中负责改变驱动轮朝向的电机。目前（2022赛季）型号为 GM6020，编码器反馈机械转子刻度 0 ~ 8191，程序中线性映射到 <span class="arithmatex">\(-\pi\)</span> ~ <span class="arithmatex">\(0\)</span> ~ <span class="arithmatex">\(\pi\)</span>；</li>
 <li>记<strong>驱动轮直径</strong>为 <span class="arithmatex">\(d\)</span>，单位：<span class="arithmatex">\(\rm m\)</span>；</li>
 <li><strong>轴距（wheelbase）</strong> 即前后轮轴间距离，记为 <span class="arithmatex">\(l\)</span>，单位：<span class="arithmatex">\(\rm m\)</span>；</li>
 <li><strong>轮距（track）</strong> 即左右驱动轮中心距离，记为 <span class="arithmatex">\(w\)</span>，单位：<span class="arithmatex">\(\rm m\)</span>；</li>
 <li><strong>麦轮及其动力学特性</strong><ul>
 <li>为实现全向移动，麦轮一般4个一组使用，其中左旋轮和右旋轮各2个，呈手性对称；麦轮的安装方式呈 X 或 O 型，一般（2022赛季）采取 O 型安装。</li>
 <li>麦轮上的辊子轴线与轮毂轴线夹角为 45°。在轮毂旋转时，与地面接触的辊子和地面相互作用，为底盘运动提供力矩。</li>
-<li>麦轮的运动可以分解为辊子的滚动和滑移，两者合成麦轮的合速度。<a href="底盘逆运动学解算.assets\mecanum_gif.gif">戳这里看运动效果</a></li>
+<li>麦轮的运动可以分解为辊子的滚动和滑移，两者合成麦轮的合速度。<a href="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/mecanum_gif.gif">戳这里看运动效果</a></li>
 </ul>
 </li>
 </ul>
@@ -1178,17 +1173,16 @@ s\psi_i\   &amp;-c\psi_i\    &amp;0\\
 <p><strong>注意：</strong>请注意 <code>atan2</code> 函数的正确含义。当速度指令全为 0 时，需要为其补充定义。目前（2022赛季），我们将此时的 <span class="arithmatex">\(^{M_i}\theta_i\)</span> 定义为与仅有旋转分量 <span class="arithmatex">\(\omega\)</span> 时解算出的角度一致。</p>
 </blockquote>
 <ul>
-<li><strong>轮线速度</strong> <span class="arithmatex">\(\boldsymbol v_i\)</span>，单位：<span class="arithmatex">\(\rm m/s\)</span>（不考虑优化则方向与航向电机朝向一致，关于其方向的确定见<a href="#运动优化">优化部分</a>）</li>
+<li><strong>驱动轮线速度</strong> <span class="arithmatex">\(\boldsymbol v_i\)</span>，单位：<span class="arithmatex">\(\rm m/s\)</span>（不考虑优化则方向与航向电机朝向一致，关于其方向的确定见<a href="#运动优化">优化部分</a>）</li>
 </ul>
 <div class="arithmatex">\[
 ||\boldsymbol v_i||=\sqrt{^{M_i}v_{xi}^2\ +\ ^{M_i}v_{yi}^2}
 \]</div>
 <ul>
-<li><strong>驱动电机转速</strong> <span class="arithmatex">\(\boldsymbol n_i\)</span>，单位：<span class="arithmatex">\(\rm rpm\)</span>（解释同上）</li>
+<li><strong>驱动轮转速</strong> <span class="arithmatex">\(\boldsymbol n_i\)</span>，单位：<span class="arithmatex">\(\rm rad/s\)</span>（解释同上）</li>
 </ul>
 <div class="arithmatex">\[
 ||\boldsymbol n_i||=
-\frac 1k \cdot
 \frac{60}{2\pi}
 \cdot {\frac 2{d}}
 \cdot ||\boldsymbol v_i||
@@ -1251,7 +1245,7 @@ v_y + r_{xi}\omega\\
 </blockquote>
 <p>可以进一步计算：</p>
 <ul>
-<li><strong>轮线速度</strong> <span class="arithmatex">\(\boldsymbol v_i\)</span>，单位：<span class="arithmatex">\(\rm m/s\)</span>；滑移速度由轮线速度正交分解得到，而两向量夹角为 <span class="arithmatex">\(\phi =\pi / 4\)</span>，故有</li>
+<li><strong>驱动轮线速度</strong> <span class="arithmatex">\(\boldsymbol v_i\)</span>，单位：<span class="arithmatex">\(\rm m/s\)</span>；滑移速度由轮线速度正交分解得到，而两向量夹角为 <span class="arithmatex">\(\phi =\pi / 4\)</span>，故有</li>
 </ul>
 <div class="arithmatex">\[
 v_i={ v_{si} \over \cos \phi}=
@@ -1287,12 +1281,10 @@ v_y \\
 <p><strong>说明：</strong>麦轮代码实现中我们可以直接套用线速度公式，不必再进行完整的解算。</p>
 </blockquote>
 <ul>
-<li><strong>驱动电机转速</strong> <span class="arithmatex">\(n_i\)</span>，单位：<span class="arithmatex">\(\rm rpm\)</span>.</li>
+<li><strong>驱动轮转速</strong> <span class="arithmatex">\(n_i\)</span>，单位：<span class="arithmatex">\(\rm rad/s\)</span>.</li>
 </ul>
 <div class="arithmatex">\[
 n_i=
-\frac 1k
-\cdot
 \frac{60}{2\pi}
 \cdot
 {\frac 2{d}}\cdot\ 
@@ -1368,27 +1360,23 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 </ul>
 <h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">¶</a></h3>
 <p>首先在求解器头文件 <code>chas_ik_solver.h</code> 中输入相关参数，例如：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-1-10">10</a></span>
-<span class="normal"><a href="#__codelineno-1-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cm">/* reduction ratio of driving motor */</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cp">#define DRV_MOTOR_REDUCTION_RATIO (1.0f / 14.0f)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="cm">/* chassis parameters */</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="cp">#define WHEEL_DIAM_M 0.1f</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="cp">#define WHEEL_BASE_M 0.4f</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="cp">#define TRACK_M 0.3f</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="cm">/* angle bias: wheel module to chassis */</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="cp">#define PSI_FL 0.0f</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="cp">#define PSI_BL 0.0f</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="cp">#define PSI_BR 0.0f</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="cp">#define PSI_FR 0.0f</span>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span>
+<span class="normal"><a href="#__codelineno-1-8">8</a></span>
+<span class="normal"><a href="#__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cm">/* chassis parameters */</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cp">#define WHEEL_DIAM_M 0.1f</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="cp">#define WHEEL_BASE_M 0.4f</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="cp">#define TRACK_M 0.3f</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="cm">/* angle bias: wheel module to chassis */</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="cp">#define PSI_FL 0.0f</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="cp">#define PSI_BL 0.0f</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="cp">#define PSI_BR 0.0f</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="cp">#define PSI_FR 0.0f</span>
 </code></pre></div></td></tr></table></div>
 <p>在项目中引用头文件：</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"chas_ik_solver.h"</span>
@@ -1418,11 +1406,11 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Swerve Drive</label><label for="__tabbed_2_2">Mecanum</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_spd</span><span class="p">,</span><span class="w"> </span><span class="n">cur_str_angle</span><span class="p">,</span><span class="w"> </span><span class="n">tar_str_angle</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_radps</span><span class="p">,</span><span class="w"> </span><span class="n">cur_str_angle</span><span class="p">,</span><span class="w"> </span><span class="n">tar_str_angle</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_spd</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_radps</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -1493,7 +1481,7 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 </tr>
 <tr>
 <td align="left"><code>ikSolve</code></td>
-<td><code>ChasIKSolver_t*</code><br/><code>float vx_mps</code><br/><code>float vy_mps</code><br/><code>float vw_radps</code><br/><code>float* tar_drv_rpm</code><br/><code>float* ...</code></td>
+<td><code>ChasIKSolver_t*</code><br/><code>float vx_mps</code><br/><code>float vy_mps</code><br/><code>float vw_radps</code><br/><code>float* tar_drv_radps</code><br/><code>float* ...</code></td>
 <td><code>float* ...</code></td>
 <td align="left"><code>void</code></td>
 <td>调用算法进行逆运动学求解。传入初始化后的求解器指针和运行时参数；解算结果将覆盖原地址内容。<br/>采用了可变参数，首先传入目标轮组转速数组地址；对于舵轮，还需要按顺序额外传入两个数组地址： <code>当前航向电机角度，目标航向电机角度</code>。具体参见源码。</td>
@@ -1512,10 +1500,10 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>tar_drv_rpm</code></td>
+<td align="left"><code>tar_drv_radps</code></td>
 <td align="left"><code>float[4]</code></td>
 <td align="left">/</td>
-<td align="left">解算结果：驱动电机目标转速</td>
+<td align="left">解算结果：驱动轮目标转速</td>
 </tr>
 <tr>
 <td align="left"><code>cur_str_rad</code></td>
@@ -1567,6 +1555,12 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 <td>优化了用户接口</td>
 <td>薛东来</td>
 </tr>
+<tr>
+<td><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://img.shields.io/badge/version-1.1.2-green"><img src="https://img.shields.io/badge/version-1.1.2-green"/></a></td>
+<td>2023.03.10</td>
+<td>删除减速比，移至电机应用组件；更改输出转速单位为 rad/s</td>
+<td>薛东来</td>
+</tr>
 </tbody>
 </table>
 <h2 id="参考资料">参考资料<a class="headerlink" href="#参考资料" title="链接到此节">¶</a></h2>
@@ -1578,7 +1572,7 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-03-09</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-03-10</span>
 <br/>
         创建日期:
         <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-11-13</span>
