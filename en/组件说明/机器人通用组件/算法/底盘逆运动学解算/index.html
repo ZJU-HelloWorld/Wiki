@@ -1059,8 +1059,8 @@ v_{si}=
 <h4 id="通用部分">通用部分<a class="headerlink" href="#通用部分" title="链接到此节">¶</a></h4>
 <p>给定 <span class="arithmatex">\(\{O\}\)</span> 下底盘的目标平动速度 <span class="arithmatex">\(\boldsymbol v\)</span> 和绕 <span class="arithmatex">\(z\)</span> 轴的旋转角速度 <span class="arithmatex">\(\boldsymbol \omega\)</span>，记为 <span class="arithmatex">\(^O\boldsymbol V=[v_x\ v_y\ \omega]^{\mathrm T}\)</span>. 将底盘旋转中心指向轮（组） <span class="arithmatex">\(i\)</span> 中心的位矢记为 <span class="arithmatex">\(^O\boldsymbol R_i=[r_{xi}\ r_{yi}\ 0]^{\mathrm T}\)</span>. </p>
 <blockquote>
-<p><strong>注意：</strong>底盘旋转中心不一定是底盘的几何中心。目前（2022赛季），我们将底盘旋转中心定义在几何中心上。</p>
-<p><strong>说明：</strong>由模型可以读出 <span class="arithmatex">\(l\)</span> 和 <span class="arithmatex">\(w\)</span>. 各轮（组）相对旋转中心的位矢如下：</p>
+<p><strong>注意：</strong>底盘旋转中心不一定是底盘的几何中心。一般而言我们将底盘旋转中心定义在几何中心上，当然也可以定义在空间中的任何位置。</p>
+<p><strong>说明：</strong>由模型可以读出 <span class="arithmatex">\(l\)</span> 和 <span class="arithmatex">\(w\)</span>. 底盘旋转中心定义在几何中心上时，各轮（组）相对旋转中心的位矢如下：</p>
 <table>
 <thead>
 <tr>
@@ -1179,7 +1179,7 @@ s\psi_i\   &amp;-c\psi_i\    &amp;0\\
 <div class="arithmatex">\[
 \begin{align}
 ^{M_i} \boldsymbol V_i =
-^{M_i}_O R \ ^O\boldsymbol V_i
+{^{M_i}_OR} \ ^O\boldsymbol V_i
 \triangleq
 \begin{bmatrix}
 ^{M_i}v_{xi}\\ 
@@ -1317,7 +1317,7 @@ v_i
 <h4 id="标准化">标准化<a class="headerlink" href="#标准化" title="链接到此节">¶</a></h4>
 <p>当解算出某个轮组所需的驱动电机转速大于其额定转速（或在当前负载下所能达到的最高转速），则需要对底盘上的所有电机进行转速限制，即共同乘以一限制系数，以避免底盘失控。设转速上限为 <span class="arithmatex">\(n_{\max}\)</span>，系数</p>
 <div class="arithmatex">\[
-p=\frac {n_\max}{\max_{i}\{n_i\}}
+p=\frac {n_{\max}}{{\max}_{i}\{n_i\}}
 \]</div>
 <blockquote>
 <p><strong>说明：</strong>底盘功率限制机制也涉及转速限制，但情况与上述有所不同，具体请参考功率限制方案文档。</p>
@@ -1382,24 +1382,31 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 <li>在 <code>system.h</code> 中 <code>system options: user config</code> 处进行系统设置</li>
 </ul>
 <h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">¶</a></h3>
-<p>首先在求解器头文件 <code>chas_ik_solver.h</code> 中输入相关参数，例如：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
-<span class="normal"><a href="#__codelineno-1-2">2</a></span>
-<span class="normal"><a href="#__codelineno-1-3">3</a></span>
-<span class="normal"><a href="#__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span>
-<span class="normal"><a href="#__codelineno-1-7">7</a></span>
-<span class="normal"><a href="#__codelineno-1-8">8</a></span>
-<span class="normal"><a href="#__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cm">/* chassis parameters */</span>
+<p>首先在求解器头文件 <code>chas_ik_solver.h</code> 中输入相关静态参数，包括：</p>
+<ul>
+<li>底盘轮轴距参数（m）</li>
+<li>(仅舵轮需要) 底盘<span class="arithmatex">\(x^+\)</span>方向与轮组<span class="arithmatex">\(x^+\)</span>方向的夹角（°）</li>
+</ul>
+<p>例如：</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cm">/* chassis parameters */</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cp">#define WHEEL_DIAM_M 0.1f</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="cp">#define WHEEL_BASE_M 0.4f</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="cp">#define TRACK_M 0.3f</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="cm">/* angle bias: wheel module to chassis */</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="cp">#define PSI_FL 0.0f</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="cp">#define PSI_BL 0.0f</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="cp">#define PSI_BR 0.0f</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="cp">#define PSI_FR 0.0f</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="cm">/* (swerve drive only) angle bias (degree): chassis(O) to wheel module(Mi) */</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="cp">#define PSI_FL_DEG 0.0f</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="cp">#define PSI_BL_DEG 0.0f</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="cp">#define PSI_BR_DEG 0.0f</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="cp">#define PSI_FR_DEG 0.0f</span>
 </code></pre></div></td></tr></table></div>
 <p>在项目中引用头文件：</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"chas_ik_solver.h"</span>
@@ -1421,7 +1428,10 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 </div>
 </div>
 </input></input></div>
-<p>输入底盘的运动参数，调用方法求解：</p>
+<p>设置底盘陀螺旋转中心坐标（m），坐标系定义见上文。若从未设置，默认旋转中心为 <span class="arithmatex">\((0, 0)\)</span>. 如设置旋转中心为 <span class="arithmatex">\((0.1, 0)\)</span>：</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>solver.setSpinCenter(&amp;solver, 0.1, 0);
+</code></pre></div></td></tr></table></div>
+<p>运行时输入底盘的运动参数，调用方法求解：</p>
 <blockquote>
 <p>对于舵轮，按 <code>目标轮组转速，当前航向电机角度，目标航向电机角度</code> 顺序传入存放轮组数据的数组地址；</p>
 <p>对于麦轮，传入用于存放 <code>目标轮组转速</code> 的数组地址。</p>
@@ -1429,11 +1439,11 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Swerve Drive</label><label for="__tabbed_2_2">Mecanum</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_radps</span><span class="p">,</span><span class="w"> </span><span class="n">cur_str_angle</span><span class="p">,</span><span class="w"> </span><span class="n">tar_str_angle</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_radps</span><span class="p">,</span><span class="w"> </span><span class="n">cur_str_angle</span><span class="p">,</span><span class="w"> </span><span class="n">tar_str_angle</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_radps</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_radps</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -1462,6 +1472,18 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 <td align="left"><code>bool</code></td>
 <td align="left"><code>true</code><br/><code>false</code></td>
 <td align="left">舵轮优化开启标识</td>
+</tr>
+<tr>
+<td align="left"><code>spin_center_x_m</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">0.1</td>
+<td align="left">底盘旋转中心坐标 <span class="arithmatex">\(x\)</span> 分量，单位：m</td>
+</tr>
+<tr>
+<td align="left"><code>spin_center_y_m</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">0.1</td>
+<td align="left">底盘旋转中心坐标 <span class="arithmatex">\(y\)</span> 分量，单位：m</td>
 </tr>
 <tr>
 <td align="left"><code>cmd.vx</code></td>
@@ -1501,6 +1523,13 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 <td>/</td>
 <td align="left"><code>void</code></td>
 <td>用传入的参数初始化一个求解器。</td>
+</tr>
+<tr>
+<td align="left"><code>setSpinCenter</code></td>
+<td><code>ChasIKSolver_t*</code><br/><code>x_m</code><br/><code>y_m</code></td>
+<td>/</td>
+<td align="left"><code>void</code></td>
+<td>设定底盘旋转中心。</td>
 </tr>
 <tr>
 <td align="left"><code>ikSolve</code></td>
@@ -1582,6 +1611,12 @@ p=\frac {n_\max}{\max_{i}\{n_i\}}
 <td><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/version-1.1.2-green"><img src="https://img.shields.io/badge/version-1.1.2-green"/></a></td>
 <td>2023.03.10</td>
 <td>删除减速比，移至电机应用组件；更改输出转速单位为 rad/s</td>
+<td>薛东来</td>
+</tr>
+<tr>
+<td><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/version-1.1.3-green"><img src="https://img.shields.io/badge/version-1.1.3-green"/></a></td>
+<td>2023.03.27</td>
+<td>添加底盘陀螺旋转中心设置接口</td>
 <td>薛东来</td>
 </tr>
 </tbody>
