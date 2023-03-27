@@ -1104,7 +1104,7 @@ v_{si}=
 \omega &amp; 0 &amp; 0\
 0 &amp; 0 &amp; 0\
 \end{bmatrix}</p>
-<p>\</p>
+<p>\\</p>
 <p>{\boldsymbol \omega} \times  {^O{\boldsymbol R_i}} 
 = \boldsymbol S  {^O{\boldsymbol R_i}}
 $$</p>
@@ -1148,12 +1148,12 @@ v_y \\
 <p>应用上述通用算法，<u>暂不考虑优化</u>，我们尝试计算舵轮执行机构的相关参数。给出以下信息：</p>
 <ul>
 <li>目前（2022赛季）航向电机安装方式为转子朝下；</li>
-<li>认为 <span class="arithmatex">\(oxy\)</span> 平面平行于  <span class="arithmatex">\(m_ix_iy_i\)</span> 平面，则 <span class="arithmatex">\(m_ix_i\)</span> 相对 <span class="arithmatex">\(ox\)</span> 在平面上的夹角可在模型中读出，记为 <span class="arithmatex">\(\psi_i\)</span>，单位：<span class="arithmatex">\(\rm rad.\)</span> </li>
+<li>认为 <span class="arithmatex">\(oxy\)</span> 平面平行于  <span class="arithmatex">\(m_ix_iy_i\)</span> 平面，则 <span class="arithmatex">\(ox\)</span> 相对 <span class="arithmatex">\(m_ix_i\)</span> 在平面上的夹角可在模型中读出，记为 <span class="arithmatex">\(\psi_i\)</span>，单位：<span class="arithmatex">\(\rm rad.\)</span> </li>
 </ul>
 <p>可确定旋转矩阵：</p>
 <div class="arithmatex">\[
 \begin{align}
-^{M_i}_OR = 
+^{M_i}_O R = 
 \begin{bmatrix}
 c\psi_i\   &amp;-s\psi_i\   &amp;0\\
 s\psi_i\   &amp;c\psi_i\    &amp;0\\
@@ -1176,7 +1176,7 @@ s\psi_i\   &amp;-c\psi_i\    &amp;0\\
 <div class="arithmatex">\[
 \begin{align}
 ^{M_i} \boldsymbol V_i =
-{^{M_i}_O}R \ ^O\boldsymbol V_i
+^{M_i}_O R \ ^O\boldsymbol V_i
 \triangleq
 \begin{bmatrix}
 ^{M_i}v_{xi}\\ 
