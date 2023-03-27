@@ -1,4 +1,4 @@
-site_name: Hello World 电控知识库
+site_name: Hello World 技术知识库
 
 copyright: Copyright &copy; 2022 - 2023 Hello World Team, Zhejiang University
 
@@ -7,8 +7,8 @@ repo_name: ZJU-HelloWorld/Wiki
 edit_uri: edit/main/docs/
 
 theme:
-    logo: img/rm.svg
-    favicon: img/rm.svg
+    logo: assets/rm.svg
+    favicon: assets/rm.svg
 
     icon:
         edit: material/pencil 
@@ -19,13 +19,13 @@ theme:
         - content.code.annotate 
         - content.action.edit
         - content.action.view
-        - navigation.instant
+      #   - navigation.instant
         # - navigation.sections
         - navigation.tabs
         - navigation.tabs.sticky
-        - navigation.indexes
         - navigation.tracking
         - toc.follow
+        - navigation.indexes
         #     - toc.integrate
         - navigation.top
         - header.autohide
@@ -108,6 +108,17 @@ extra_css:
   - stylesheets/extra.css
 
 extra: 
+#     version:
+#         provider: mike
+#     consent:
+#       title: Cookie consent
+#       description: >-
+#           We use cookies to recognize your repeated visits and preferences, as well
+#           as to measure the effectiveness of our documentation and whether users
+#           find what they're searching for. With your consent, you're helping us to
+#           make our documentation better.
+#       cookies:
+#         analytics: Google Analytics 
     analytics:
         provider: google
         property: G-12BWRJ4SWG
@@ -151,7 +162,29 @@ plugins:
       # - social
       - search
       - awesome-pages
+      - i18n:
+          material_alternate: true
+          default_language: zh
+          docs_structure: suffix #folder
+          languages:
+            zh: 
+              name: 中文
+              build: true
+              site_name: Hello World 技术知识库
+            en: 
+              name: English
+              build: true 
+              site_name: Hello Wiki
+          nav_translations: 
+            en:
+              测试指南: Testing
+              贡献指南: Contribution
+              关于: About
+              开发指南: Development
+              入门: Getting Started
+              组件说明: Components Manual
+
       - glightbox
       - git-revision-date-localized:
-          enable_creation_date: true
-          type: iso_date
+            enable_creation_date: true
+            type: iso_date

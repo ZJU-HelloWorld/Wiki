@@ -1,2 +1,2 @@
 # Wiki
-Wiki of Electronic Control Group 
+Tech Wiki of Hello World Team 
