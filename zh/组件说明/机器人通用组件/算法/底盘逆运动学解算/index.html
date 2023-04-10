@@ -1029,22 +1029,22 @@
 </figure>
 <p>对每个舵轮轮组，用一个向量 <span class="arithmatex">\(\boldsymbol V_i\)</span> 表征其运动状态（如图3左）。该向量指向航向电机的朝向，驱动轮转动方向与该朝向共线（可以正反转）。<u>在不考虑优化的前提下，默认驱动轮转动方向与 <span class="arithmatex">\(\boldsymbol V_i\)</span> 同向</u>；向量的模长对应驱动轮线速率。</p>
 <figure>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/mecanum_omni_diagram.png"><img alt="Image title" src="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/mecanum_omni_diagram.png" width="300"/></a>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/mecanum_omni_diagram.png"><img alt="Image title" src="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/mecanum_omni_diagram.png" width="600"/></a>
 </p>
 <figcaption>图4 麦轮 / 全向轮底盘俯视图</figcaption>
 </figure>
 <p>对每个麦克纳姆轮 / 全向轮，用一个向量 <span class="arithmatex">\(\boldsymbol V_i\)</span> 表征其运动速度（如图4）。</p>
-<p>则所有轮（组）的运动状态均可表示为：
-$$
+<p>则所有轮（组）的运动状态均可表示为：</p>
+<div class="arithmatex">\[
 \begin{align}
 ^O\boldsymbol V_i=
 \begin{bmatrix}
-v_{xi}\ 
-v_{yi}\
+v_{xi}\\ 
+v_{yi}\\
 0
 \end{bmatrix}
 \end{align}
-$$</p>
+\]</div>
 <blockquote>
 <p><strong>说明1：</strong>驱动轮转动方向与 <span class="arithmatex">\(\boldsymbol V_i\)</span> 的夹角小于 <span class="arithmatex">\(\pm\pi/2\)</span> 时，将驱动电机的转速定义为正，这里涉及到实际电机方向的标定，需要自行预处理。</p>
 <p><strong>说明2：</strong> 对于舵轮，航向电机和驱动电机均能够正反360°旋转，这意味着每一种轮组运动状态均至少有两个解，对应航向电机角度和驱动轮转动方向的不同组合（如图3右，其中 <span class="arithmatex">\(\boldsymbol d_i\)</span> 指向航向电机的朝向）。现实世界中我们需要按一定策略选择更优的的那个，来保证底盘运动更为鲁棒和流畅。对优化的具体说明见<a href="#运动优化">优化部分</a>。</p>
@@ -1114,44 +1114,44 @@ $$</p>
 0 &amp; 0 &amp; 0\\
 \end{bmatrix}
 \]</div>
-<p>得
-$$
-\begin{align}</p>
-<p>^O\boldsymbol V_i=
+<p>得</p>
+<div class="arithmatex">\[
+\begin{align}
+^O\boldsymbol V_i=
 &amp;
 {\boldsymbol v}+{\boldsymbol \omega} \times  {^O{\boldsymbol R_i}}
 =
-{\boldsymbol v}+\boldsymbol S  {^O{\boldsymbol R_i}}
-\=</p>
-<p>&amp;
+{\boldsymbol v}+\boldsymbol S \ {^O{\boldsymbol R_i}}
+\\
+=&amp;
 \begin{bmatrix}
-v_x \ 
-v_y \
+v_x \\ 
+v_y \\
 0
 \end{bmatrix}
 +
 \begin{bmatrix}
-0 &amp; -\omega &amp; 0\
-\omega &amp; 0 &amp; 0\
-0 &amp; 0 &amp; 0\
+0 &amp; -\omega &amp; 0\\
+\omega &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0\\
 \end{bmatrix}
 \begin{bmatrix}
-r_{xi} \
-r_{yi} \ 
+r_{xi} \\
+r_{yi} \\ 
 r_{zi} 
 \end{bmatrix} =
 \begin{bmatrix}
-1 &amp; 0&amp; -r_{yi}\ 
-0 &amp; 1&amp; r_{xi}\ 
-0 &amp; 0 &amp; 0 \ 
+1 &amp; 0&amp; -r_{yi}\\ 
+0 &amp; 1&amp; r_{xi}\\ 
+0 &amp; 0 &amp; 0 \\ 
 \end{bmatrix}
 \begin{bmatrix}
-v_x \ 
-v_y \
+v_x \\ 
+v_y \\
 \omega 
-\end{bmatrix}</p>
-<p>\end{align}
-$$</p>
+\end{bmatrix}
+\end{align}
+\]</div>
 <p>至此，我们得出了指定底盘运动状态下各轮（组）的目标运动状态描述。</p>
 <h4 id="舵轮解算">舵轮解算<a class="headerlink" href="#舵轮解算" title="链接到此节">¶</a></h4>
 <p>应用上述通用算法，<u>暂不考虑优化</u>，给出以下信息：</p>
@@ -1219,30 +1219,30 @@ s\psi_i\   &amp;-c\psi_i\    &amp;0\\
 \cdot ||\boldsymbol v_i||
 \]</div>
 <h4 id="麦克纳姆轮解算">麦克纳姆轮解算<a class="headerlink" href="#麦克纳姆轮解算" title="链接到此节">¶</a></h4>
-<p>应用上述通用算法，辊子受静摩擦产生的移动速度（平行于辊子轴线方向）由移动合速度分解得到，应为
-$$
+<p>应用上述通用算法，辊子受静摩擦产生的移动速度（平行于辊子轴线方向）由移动合速度分解得到，应为</p>
+<div class="arithmatex">\[
 v_{si}=
- 
+\ 
 ^O\boldsymbol V_{i}
 \cdot
 \boldsymbol {\hat e_i}
 =
 \begin{bmatrix}
-v_x - r_{yi}\omega \ 
-v_y + r_{xi}\omega\
+v_x - r_{yi}\omega \\ 
+v_y + r_{xi}\omega\\
 0 
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\hat e_{xi}\ 
-\hat e_{yi}\ 
+\hat e_{xi}\\ 
+\hat e_{yi}\\ 
 0 
 \end{bmatrix}
 =
 \hat e_{xi} v_x +
 \hat e_{yi} v_y +
 (\hat e_{yi}r_{xi} - \hat e_{xi}  r_{yi})\omega
-$$</p>
+\]</div>
 <p>其中 <span class="arithmatex">\(\boldsymbol {\hat e_i}\)</span> 为平行于辊子轴线的单位方向向量。参考<a href="#麦轮">图4</a>，可得</p>
 <table>
 <thead>
@@ -1318,12 +1318,12 @@ v_i
 <ul>
 <li><strong>驱动轮线速度</strong> <span class="arithmatex">\(\boldsymbol v_i\)</span>，单位：<span class="arithmatex">\(\rm m/s\)</span>。有</li>
 </ul>
-<p>$$
-v_i=v_{si}=</p>
-<p>\hat e_{xi} v_x +
+<div class="arithmatex">\[
+v_i=v_{si}=
+\hat e_{xi} v_x +
 \hat e_{yi} v_y +
 (\hat e_{yi}r_{xi} - \hat e_{xi}  r_{yi})\omega
-$$</p>
+\]</div>
 <p>经计算，列出四轮线速度：</p>
 <div class="arithmatex">\[
 \begin{bmatrix}
@@ -1504,7 +1504,7 @@ p=\frac {n_{\max}}{{\max}_{i}\{n_i\}}
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"chas_ik_solver.h"</span>
 </code></pre></div></td></tr></table></div>
 <p>选择底盘类型和是否开启优化（针对舵轮底盘，其他底盘该选项无效），实例化一个求解器并初始化：</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Swerve Drive</label><label for="__tabbed_1_2">Mecanum</label><label for="__tabbed_1_3">Omni_3</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Swerve Drive</label><label for="__tabbed_1_2">Mecanum</label><label for="__tabbed_1_3">Omni_3</label><label for="__tabbed_1_4">Omni_4</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
@@ -1518,22 +1518,20 @@ p=\frac {n_{\max}}{{\max}_{i}\{n_i\}}
 <a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">ChasIkSolverInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">MECANUM</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
-<div class="tabbed-block"></div>
-</div>
-</input></input></input></div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">ChasIkSolver_t</span><span class="w"> </span><span class="n">solver</span><span class="p">;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">ChasIkSolverInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">OMNI_3</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Omni_4</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block"></div>
 </div>
-</input></div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">ChasIkSolver_t</span><span class="w"> </span><span class="n">solver</span><span class="p">;</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="n">ChasIkSolverInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">OMNI_4</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
+</div>
+</div>
+</input></input></input></input></div>
 <p>设置底盘陀螺旋转中心坐标（m），坐标系定义见上文。若未设置，默认旋转中心为 <span class="arithmatex">\((0, 0)\)</span>. 如设置旋转中心为 <span class="arithmatex">\((0.1, 0)\)</span>：</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">setSpinCenter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
@@ -1542,7 +1540,7 @@ p=\frac {n_{\max}}{{\max}_{i}\{n_i\}}
 <p>对于舵轮，按 <code>目标轮组转速，当前航向电机角度，目标航向电机角度</code> 顺序传入存放轮组数据的数组地址；</p>
 <p>对于其他类型，传入用于存放 <code>目标轮组转速</code> 的数组地址。</p>
 </blockquote>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><input id="__tabbed_3_3" name="__tabbed_3" type="radio"><input id="__tabbed_3_4" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Swerve Drive</label><label for="__tabbed_3_2">Mecanum</label><label for="__tabbed_3_3">Omni_3</label><label for="__tabbed_3_4">Omni_4</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><input id="__tabbed_2_4" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Swerve Drive</label><label for="__tabbed_2_2">Mecanum</label><label for="__tabbed_2_3">Omni_3</label><label for="__tabbed_2_4">Omni_4</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">solver</span><span class="p">.</span><span class="n">ikSolve</span><span class="p">(</span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vw</span><span class="p">,</span><span class="w"> </span><span class="n">tar_drv_radps</span><span class="p">,</span><span class="w"> </span><span class="n">cur_str_angle</span><span class="p">,</span><span class="w"> </span><span class="n">tar_str_angle</span><span class="p">);</span>
