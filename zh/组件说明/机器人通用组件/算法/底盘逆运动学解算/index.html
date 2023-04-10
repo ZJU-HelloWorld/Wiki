@@ -983,7 +983,7 @@
 <h4 id="麦克纳姆轮">麦克纳姆轮<a class="headerlink" href="#麦克纳姆轮" title="链接到此节">¶</a></h4>
 <p>为实现平台全向移动，麦轮底盘一般由4个麦轮组成，其中左旋轮和右旋轮各2个，呈手性对称；麦轮的安装方式呈 X 或 O 型，一般采取 O 型安装。麦轮上的辊子轴线与轮毂轴线夹角为 45°。</p>
 <blockquote>
-<p><strong>说明：</strong> X 和 O 表示四轮与地面接触的辊子所形成的图形，如<a href="#坐标系和运动状态表示">图4</a>所示，该图为俯视图，可推知其辊子与地面接触的情况，为 O 型。</p>
+<p><strong>说明：</strong> X 和 O 表示四轮与地面接触的辊子所形成的图形，如图4所示，该图为俯视图，可推知其辊子与地面接触的情况，为 O 型。</p>
 </blockquote>
 <p>动力学：</p>
 <ul>
@@ -997,7 +997,7 @@
 <li>辊子的滚动速度由轮毂转速和底盘上其他麦轮的运动共同影响，该运动是被动的。辊子的移动速度仅与轮毂转速相关。</li>
 </ul>
 <h4 id="全向轮">全向轮<a class="headerlink" href="#全向轮" title="链接到此节">¶</a></h4>
-<p>全向轮平台通过 3 或 4 个全向轮协同转动而实现全向移动，安装方式如<a href="#坐标系和运动状态表示">图4</a>所示。</p>
+<p>全向轮平台通过 3 或 4 个全向轮协同转动而实现全向移动，安装方式如图4所示。</p>
 <p>其动力学与运动学原理与麦轮类似，只是其辊子轴线与轮毂轴线的夹角为 90°，且在轮组布局上有所差异，速度分解时相关系数发生改变。</p>
 <h3 id="坐标系和运动状态表示">坐标系和运动状态表示<a class="headerlink" href="#坐标系和运动状态表示" title="链接到此节">¶</a></h3>
 <p>对本文中所有坐标系，绕坐标轴逆时针旋转（CCW）为正（右手定则）。</p>
@@ -1243,7 +1243,7 @@ v_y + r_{xi}\omega\\
 \hat e_{yi} v_y +
 (\hat e_{yi}r_{xi} - \hat e_{xi}  r_{yi})\omega
 \]</div>
-<p>其中 <span class="arithmatex">\(\boldsymbol {\hat e_i}\)</span> 为平行于辊子轴线的单位方向向量。参考<a href="#麦轮">图4</a>，可得</p>
+<p>其中 <span class="arithmatex">\(\boldsymbol {\hat e_i}\)</span> 为平行于辊子轴线的单位方向向量。参考图4，可得</p>
 <table>
 <thead>
 <tr>
@@ -1347,7 +1347,7 @@ v_y \\
 \end{bmatrix}
 \]</div>
 <hr/>
-<p>对于三轮模型，参考<a href="#麦轮">图4</a>，可得：</p>
+<p>对于三轮模型，参考图4，可得：</p>
 <table>
 <thead>
 <tr>
@@ -1469,7 +1469,7 @@ p=\frac {n_{\max}}{{\max}_{i}\{n_i\}}
 <li>在使用 STM32CubeMX 生成项目时，请在 <code>Code Generator</code> 界面 <code>Enable Full Assert</code>，来帮助断言算法中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果</li>
 <li>在 <code>system.h</code> 中 <code>system options: user config</code> 处进行系统设置</li>
 </ul>
-<p>此外，还需要预先自行标定轮毂电机转速的正负，使其正方向与 <a href="#坐标系和运动状态表示">图3及图4</a> 一致。</p>
+<p>此外，还需要预先自行标定轮毂电机转速的正负，使其正方向与图3及图4 一致。</p>
 <h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">¶</a></h3>
 <p>首先在求解器头文件 <code>chas_ik_solver.h</code> 中输入相关静态参数，包括：</p>
 <ul>
