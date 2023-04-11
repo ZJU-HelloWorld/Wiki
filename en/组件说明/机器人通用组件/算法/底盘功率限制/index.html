@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="../PID%E6%8E%A7%E5%88%B6%E5%99%A8/" rel="prev"/>
+<link href="../%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%99%A8/" rel="prev"/>
 <link href="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97/" rel="next"/>
 <link href="../../../../../assets/rm.svg" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.1.6" name="generator"/>
@@ -465,6 +465,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../PID%E6%8E%A7%E5%88%B6%E5%99%A8/">
         PID 控制器
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%99%A8/">
+        卡尔曼滤波器
       </a>
 </li>
 <li class="md-nav__item md-nav__item--active">
@@ -1008,15 +1013,13 @@ P_{loss} =a\cdot i^2_q+b\cdot i_q+c
 <p>超电<strong>启用</strong>时，裁判系统不再直接监测底盘输出功率，此时以 <span class="arithmatex">\(\rm \mathbb P_c\)</span> 量测与 <span class="arithmatex">\(\rm \mathbb P_{model}\)</span> 融合进行功率估计。</p>
 <div class="arithmatex">\[
 \begin{split}
-Predict: 
-&amp;\hat x_{k|k-1}=\rm \mathbb P_{model}\\
-&amp;P_{k|k-1}=FP_{k-1}F^T+Q\\
-Update: 
-&amp;S=HP_{k|k-1}H^T+R\\
-&amp;K_k=P_{k|k-1}H^TS^{-1}\\
-&amp;y = {\rm \mathbb P_{measure}}-H\hat x_{k|k-1} \\
-&amp;\hat x_{k}=\hat x_{k|k-1}+K_k y\\
-&amp;P_k=(I-K_kH)P_{k|k-1}
+预测：
+&amp;\hat x_{k}^-=\rm \mathbb P_{model}\\
+&amp;P_k^-=P_{k-1}+Q\\
+更新：
+&amp;K_k=P_{k|k-1}(P_{k|k-1}+R)^{-1}\\
+&amp;\hat x_{k}=\hat x_{k|k-1}+K_k ({\rm \mathbb P_{measure}}-\hat x_k^-)\\
+&amp;P_k=(I-K_k)P_{k}^-
 \end{split}
 \]</div>
 <p><strong>若底盘上未装有超级电容模块：</strong>以 <span class="arithmatex">\(\rm \mathbb P_r\)</span> 量测（10Hz）与 <span class="arithmatex">\(\rm \mathbb P_{model}\)</span>（1KHz）融合进行功率估计。</p>
@@ -1149,11 +1152,7 @@ k_l=\frac{-\beta+\sqrt{\beta^2-4\alpha\gamma}}{2\alpha}
 <span class="normal"><a href="#__codelineno-3-20">20</a></span>
 <span class="normal"><a href="#__codelineno-3-21">21</a></span>
 <span class="normal"><a href="#__codelineno-3-22">22</a></span>
-<span class="normal"><a href="#__codelineno-3-23">23</a></span>
-<span class="normal"><a href="#__codelineno-3-24">24</a></span>
-<span class="normal"><a href="#__codelineno-3-25">25</a></span>
-<span class="normal"><a href="#__codelineno-3-26">26</a></span>
-<span class="normal"><a href="#__codelineno-3-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">PwrLimiter_t</span><span class="w"> </span><span class="n">limiter</span><span class="p">;</span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">PwrLimiter_t</span><span class="w"> </span><span class="n">limiter</span><span class="p">;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">PwrLimitStaticParams_t</span><span class="w"> </span><span class="n">static_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="p">.</span><span class="n">motor_nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4u</span><span class="p">,</span>
@@ -1166,20 +1165,16 @@ k_l=\frac{-\beta+\sqrt{\beta^2-4\alpha\gamma}}{2\alpha}
 <a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="p">.</span><span class="n">PwrKfParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">        </span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">        </span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">        </span><span class="p">.</span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">        </span><span class="p">.</span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">        </span><span class="p">.</span><span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">        </span><span class="p">.</span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">    </span><span class="p">.</span><span class="n">FusionKfParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">        </span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">        </span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">        </span><span class="p">.</span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">        </span><span class="p">.</span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w">        </span><span class="p">.</span><span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="w">        </span><span class="p">.</span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27"></a><span class="p">};</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">        </span><span class="p">.</span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">        </span><span class="p">.</span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">    </span><span class="p">.</span><span class="n">FusionKfParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">        </span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">        </span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">        </span><span class="p">.</span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">        </span><span class="p">.</span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">USER_CONFIG</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 <p>其中 <code>a_loss, b_loss, c_loss, PwrKfParams, FusionKfParams</code> 参数与算法原理相关，需要事先计算或整定。</p>
 <p>初始化底盘功率限制器，如：</p>
@@ -1503,7 +1498,7 @@ k_l=\frac{-\beta+\sqrt{\beta^2-4\alpha\gamma}}{2\alpha}
 <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
 <br/>
         Created:
         <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-09</span>

@@ -5,11 +5,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" rel="prev"/>
-<link href="../%E8%9C%82%E9%B8%A3%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" rel="next"/>
+<link href="../PID%E6%8E%A7%E5%88%B6%E5%99%A8/" rel="prev"/>
+<link href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6/" rel="next"/>
 <link href="../../../../../assets/rm.svg" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.1.6" name="generator"/>
-<title>舵机（Servo）设备组件 - Hello World 技术知识库</title>
+<title>卡尔曼滤波器 - Hello World 技术知识库</title>
 <link href="../../../../../assets/stylesheets/main.ded33207.min.css" rel="stylesheet"/>
 <link href="../../../../../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -37,7 +37,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#舵机servo设备组件">
+<a class="md-skip" href="#卡尔曼滤波器">
           跳转至
         </a>
 </div>
@@ -74,7 +74,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              舵机（Servo）设备组件
+              卡尔曼滤波器
             
           </span>
 </div>
@@ -98,12 +98,12 @@
 <div class="md-select__inner">
 <ul class="md-select__list">
 <li class="md-select__item">
-<a class="md-select__link" href="../../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" hreflang="zh">
+<a class="md-select__link" href="../../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%99%A8/" hreflang="zh">
                     中文
                   </a>
 </li>
 <li class="md-select__item">
-<a class="md-select__link" href="../../../../../en/%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" hreflang="en">
+<a class="md-select__link" href="../../../../../en/%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%99%A8/" hreflang="en">
                     English
                   </a>
 </li>
@@ -450,71 +450,31 @@
           机器人通用组件
         </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6_2_2" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_6_2_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_6_2_2" id="__nav_6_2_2_label" tabindex="0">
           算法
           <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_6_2_2_label" class="md-nav" data-md-level="3">
+<nav aria-expanded="true" aria-labelledby="__nav_6_2_2_label" class="md-nav" data-md-level="3">
 <label class="md-nav__title" for="__nav_6_2_2">
 <span class="md-nav__icon md-icon"></span>
           算法
         </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../%E7%AE%97%E6%B3%95/PID%E6%8E%A7%E5%88%B6%E5%99%A8/">
+<a class="md-nav__link" href="../PID%E6%8E%A7%E5%88%B6%E5%99%A8/">
         PID 控制器
-      </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../%E7%AE%97%E6%B3%95/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%99%A8/">
-        卡尔曼滤波器
-      </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../%E7%AE%97%E6%B3%95/%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6/">
-        底盘功率限制
-      </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../%E7%AE%97%E6%B3%95/%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97/">
-        底盘逆运动学解算
-      </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_6_2_3" type="checkbox"/>
-<label class="md-nav__link" for="__nav_6_2_3" id="__nav_6_2_3_label" tabindex="0">
-          设备应用
-          <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="true" aria-labelledby="__nav_6_2_3_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_6_2_3">
-<span class="md-nav__icon md-icon"></span>
-          设备应用
-        </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
-        OLED 设备组件
-      </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
-        红点激光器（Laser）设备组件
       </a>
 </li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
-          舵机（Servo）设备组件
+          卡尔曼滤波器
           <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
-        舵机（Servo）设备组件
+        卡尔曼滤波器
       </a>
 <nav aria-label="目录" class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">
@@ -526,6 +486,35 @@
 <a class="md-nav__link" href="#理论">
     理论
   </a>
+<nav aria-label="理论" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#概述">
+    概述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#卡尔曼增益">
+    卡尔曼增益
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#卡尔曼滤波">
+    卡尔曼滤波
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#观测数据融合">
+    观测数据融合
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#参数调整">
+    参数调整
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#快速开始">
@@ -533,11 +522,6 @@
   </a>
 <nav aria-label="快速开始" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#外设驱动配置">
-    外设驱动配置
-  </a>
-</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#使用前准备">
     使用前准备
@@ -555,13 +539,8 @@
 <nav aria-label="组件说明" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#servo-类">
-    Servo 类
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#servoinfo-结构体">
-    ServoInfo 结构体
+<a class="md-nav__link" href="#kf-类">
+    Kf 类
   </a>
 </li>
 </ul>
@@ -593,7 +572,47 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../%E8%9C%82%E9%B8%A3%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
+<a class="md-nav__link" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6/">
+        底盘功率限制
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97/">
+        底盘逆运动学解算
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6_2_3" id="__nav_6_2_3_label" tabindex="0">
+          设备应用
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_2_3_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_6_2_3">
+<span class="md-nav__icon md-icon"></span>
+          设备应用
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
+        OLED 设备组件
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
+        红点激光器（Laser）设备组件
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
+        舵机（Servo）设备组件
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%9C%82%E9%B8%A3%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
         蜂鸣器（Buzzer）设备组件
       </a>
 </li>
@@ -706,6 +725,35 @@
 <a class="md-nav__link" href="#理论">
     理论
   </a>
+<nav aria-label="理论" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#概述">
+    概述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#卡尔曼增益">
+    卡尔曼增益
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#卡尔曼滤波">
+    卡尔曼滤波
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#观测数据融合">
+    观测数据融合
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#参数调整">
+    参数调整
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#快速开始">
@@ -713,11 +761,6 @@
   </a>
 <nav aria-label="快速开始" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#外设驱动配置">
-    外设驱动配置
-  </a>
-</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#使用前准备">
     使用前准备
@@ -735,13 +778,8 @@
 <nav aria-label="组件说明" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#servo-类">
-    Servo 类
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#servoinfo-结构体">
-    ServoInfo 结构体
+<a class="md-nav__link" href="#kf-类">
+    Kf 类
   </a>
 </li>
 </ul>
@@ -776,82 +814,253 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/ZJU-HelloWorld/Wiki/edit/main/docs/组件说明/机器人通用组件/设备应用/舵机设备组件.md" title="编辑此页">
+<a class="md-content__button md-icon" href="https://github.com/ZJU-HelloWorld/Wiki/edit/main/docs/组件说明/机器人通用组件/算法/卡尔曼滤波器.md" title="编辑此页">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
-<a class="md-content__button md-icon" href="https://github.com/ZJU-HelloWorld/Wiki/raw/main/docs/组件说明/机器人通用组件/设备应用/舵机设备组件.md" title="查看本页的源代码">
+<a class="md-content__button md-icon" href="https://github.com/ZJU-HelloWorld/Wiki/raw/main/docs/组件说明/机器人通用组件/算法/卡尔曼滤波器.md" title="查看本页的源代码">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"></path></svg>
 </a>
-<h1 id="舵机servo设备组件">舵机（Servo）设备组件<a class="headerlink" href="#舵机servo设备组件" title="链接到此节">¶</a></h1>
+<h1 id="卡尔曼滤波器">卡尔曼滤波器<a class="headerlink" href="#卡尔曼滤波器" title="链接到此节">¶</a></h1>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/version-1.0.0-green"><img src="https://img.shields.io/badge/version-1.0.0-green"/></a> <sp> <a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/author-dungloi-lightgrey"><img src="https://img.shields.io/badge/author-dungloi-lightgrey"/></a> </sp></p>
 <h2 id="理论">理论<a class="headerlink" href="#理论" title="链接到此节">¶</a></h2>
-<p>舵机是机器人中的常见执行部件，适用于简单的动作控制，通常使用特定频率的 PWM 进行驱动。实车上舵机可应用于控制弹仓盖开合等场景。</p>
-<p>通常使用三根线一组来驱动舵机，按照颜色分别对应： <code>黑色 / 棕色 - GND</code>，<code>红色 - VCC</code>，<code>黄色 / 白色 - PWM 信号</code>。使用舵机时，将与其连接的杜邦线接入对应的 PWM 接口。下图为市面上常见的舵机：</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180127349.png"><img alt="image-20221207180127349" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180127349.png"/></a></p>
-<p>舵机使用的 PWM 信号一般频率为 50Hz，高电平时间为 0.5ms - 2.5ms。不同占空比的 PWM 信号线性对应舵机转动的目标角度，以 180 度舵机为例，对应角度图如下图所示：</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180140026.png"><img alt="image-20221207180140026" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180140026.png"/></a></p>
-<blockquote>
-<p>以 RoboMaster 开发板 C 型为例，板上有 7 个 PWM 接口，原理图和实物图如下图所示：</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180458452.png"><img alt="image-20221207180458452" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180458452.png"/></a></p>
-<p>从右至左对应 <code>TIM1 CHANNEL 1-4, TIM8 CHANNEL 1-3</code></p>
-</blockquote>
+<p>卡尔曼滤波基于线性、高斯系统的假设，能够利用前一时刻的状态（和可能的测量值）来得到当前时刻下的状态的最优估计。算法由预测、更新（校正）两步骤组成，既能够基于状态空间模型进行状态预测，本质上又是一个数据融合算法。</p>
+<h3 id="概述">概述<a class="headerlink" href="#概述" title="链接到此节">¶</a></h3>
+<p>以状态空间的形式描述一个线性高斯系统，下标表示时刻：
+$$
+\begin{align}
+x_k&amp;=Ax_{k-1}+Bu_{k}+w_{k-1} \tag{1}
+\
+z_k&amp;= Hx_k + v_k \tag{2}
+\end{align}
+$$
+其中 <span class="arithmatex">\(A, B\)</span> 分别表示状态转移矩阵和控制量输入矩阵，<span class="arithmatex">\(H\)</span> 表示状态观测矩阵； <span class="arithmatex">\(x_k\)</span> 为系统状态量矩阵，<span class="arithmatex">\(z_k\)</span> 为实测得到的状态量矩阵 ；引入高斯分布，<span class="arithmatex">\(w_{k-1}\)</span> 表示过程噪声（理论模型与现实模型的误差），<span class="arithmatex">\(v_k\)</span> 表示观测噪声（量测与现实数据的误差），分别满足 <span class="arithmatex">\(P(w) \sim N(0,Q),P(v)\sim N(0, R)\)</span>，其中 <span class="arithmatex">\(Q\)</span> 表示过程噪声协方差， <span class="arithmatex">\(R\)</span> 表示观测噪声协方差。</p>
+<p>为区分状态的多种表示，定义以下符号：
+$$
+\begin{align}
+x_k:&amp; 状态观测值\
+\hat x_{k measure}:&amp; 由观测初步得到的状态估计值\
+\hat x_k:&amp; 最优状态估计值，或称后验状态估计值\
+\hat x_k^-:&amp; 状态预测值，或称先验状态估计值
+\end{align}
+$$</p>
+<hr/>
+<p>现实中我们并不知道噪声的实际值，但我们可以通过迭代优化，逼近最优的状态估计。由 <span class="arithmatex">\((1)\)</span> 式，将状态预测方程表示为：
+$$
+\hat x_k^- = A\hat x_{k-1}+Bu_k \tag{a}
+$$
+由 <span class="arithmatex">\((2)\)</span> 式，由当下的状态量观测初步得到一个状态估计：
+$$
+\hat x_{k measure}=H^{-1}z_k
+$$
+由于噪声的存在，<span class="arithmatex">\(\hat x_k^-\)</span> 和 <span class="arithmatex">\(\hat x_{k\ measure}\)</span> 都不能准确表示当下的状态，我们采用一个朴素的思想，即对这两者进行加权平均。状态最优估计方程：
+$$
+\hat x_k = \hat x_{k}^-+G(\hat x_{k measure}-\hat x_{k}^-)
+$$
+其中系数 <span class="arithmatex">\(G = 0\)</span> 时，完全相信状态预测；系数 <span class="arithmatex">\(G = 1\)</span> 时，完全相信状态观测。记 <span class="arithmatex">\(G = KH\)</span>，上式化为：
+$$
+\hat x_k = \hat x_{k}^-+K(z_k-H\hat x_{k}^-) \tag {b}
+$$
+此处 <span class="arithmatex">\(K\in [0, H^-]\)</span> 即为卡尔曼增益，求取状态最优估计的问题转化为求取最优 <span class="arithmatex">\(K\)</span> 的问题。</p>
+<h3 id="卡尔曼增益">卡尔曼增益<a class="headerlink" href="#卡尔曼增益" title="链接到此节">¶</a></h3>
+<p>我们希望最优估计与实际值误差最小，即后验估计误差 <span class="arithmatex">\(e_k = x_k-\hat x_k\)</span> 绝对值最小。引入后验估计误差的协方差矩阵 <span class="arithmatex">\(P_k = E[e_ke_k^T]\)</span>，对 <span class="arithmatex">\(n\)</span> 个状态变量相互独立，有：
+$$
+P=
+\begin{bmatrix}
+{\rm cov}(e_1,e_1)&amp; ... &amp;{\rm cov}(e_1,e_n)\
+... &amp; ... &amp; ...\
+{\rm cov}(e_n,e_1)&amp; ... &amp;{\rm cov}(e_n,e_n)\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sigma_1e_1^2&amp; 0&amp;... &amp;0\
+0 &amp; \sigma_2e_2^2 &amp; ... &amp;0\
+...&amp;...&amp;...&amp;...&amp;\
+0&amp; 0 &amp;... &amp;\sigma_ne_n^2\
+\end{bmatrix}
+$$
+卡尔曼增益最优问题可转化为求 <span class="arithmatex">\(K_k\)</span> 使得 <span class="arithmatex">\(\tr (P_k)\)</span> 最小，思路为对 <span class="arithmatex">\(\tr(P_k)\)</span> 求导并令结果为 <span class="arithmatex">\(0\)</span> ，进而用其他量表示 <span class="arithmatex">\(K_k\)</span>。以下进行求解。</p>
+<p>由 <span class="arithmatex">\((2)(b)\)</span> 式，有：
+$$
+\begin{align}
+\hat x_k &amp;= \hat x_{k}^-+K(Hx_k + v_k-H\hat x_{k}^-)\
+\Rightarrow -\hat x_k &amp;= -\hat x_k^{-}-KH(x_k - \hat x_k^{-})-Kv_k\
+\Rightarrow x_k - \hat x_k &amp;= x_k-\hat x_k^{-}-KH(x_k - \hat x_k^{-})-Kv_k\
+\Rightarrow e_k &amp;= (I-KH)e_k^--Kv_k
+\end{align}
+$$
+经计算得到：
+$$
+P_k=E[e_ke_k<sup>T]=P_k</sup>--K_kHP_k<sup>--P_k</sup>-H<sup>TK_k</sup>T+K_k(HP_k<sup>-H</sup>T+R)K_k^T \tag 3
+$$
+<span class="arithmatex">\(\tr(P_k)\)</span> 对 <span class="arithmatex">\(K_k\)</span> 求导，经计算得到：
+$$
+{\partial \tr (P_k) \over  \partial K_k}=-2P_k<sup>{-T}H</sup>T+2KHP_k<sup>-H</sup>T+2KR = 0
+$$
+则卡尔曼增益为：
+$$
+K_k={{P_k<sup>-H</sup>T}\over {HP_k<sup>-H</sup>T+R}} \tag{c}
+$$
+观察上式可知，观测噪声协方差 <span class="arithmatex">\(R\)</span> 越小，增益越大，越相信状态观测值；<span class="arithmatex">\(R\)</span> 越大，越相信状态预测值。</p>
+<h3 id="卡尔曼滤波">卡尔曼滤波<a class="headerlink" href="#卡尔曼滤波" title="链接到此节">¶</a></h3>
+<p>先验估计误差 <span class="arithmatex">\(e_k^-=x_k-\hat x_k^-\)</span> ，其协方差矩阵 <span class="arithmatex">\(P^−_k=E[{e^−_k}{e^{−T}_k}]\)</span>。由 <span class="arithmatex">\((1)(a)\)</span> 式,，有：
+$$
+\begin{align}
+e_k^-&amp;=Ax_{k-1}+Bu_{k}+w_{k-1} -A\hat x_{k-1}-Bu_k
+\
+&amp;=Ae_{k-1}+w_{k-1}
+\end{align}
+$$
+由 <span class="arithmatex">\((c)\)</span> 式，为得到 <span class="arithmatex">\(K_k\)</span>，计算先验估计协方差 <span class="arithmatex">\(P_k^-\)</span> ，并化简得到：
+$$
+\begin{align}
+P_k<sup>-&amp;=E[(Ae_{k-1}+w_{k-1})(Ae_{k-1}+w_{k-1})</sup>T]\
+&amp;=AE[e_{k-1}e_{k-1}<sup>T]A</sup>T+E[w_{k-1}w_{k-1}^T]\
+&amp;=AP_{k-1}A^T+Q \tag d
+\end{align}
+$$</p>
+<p>需要上一时刻的后验协方差 <span class="arithmatex">\(P_{k-1}\)</span>. 进一步联立 <span class="arithmatex">\((3)(c)\)</span> 式，计算 <span class="arithmatex">\(P_{k}\)</span>：
+$$
+\begin{align}
+P_k=&amp;P_k<sup>--K_kHP_k</sup>--P_k<sup>-H</sup>TK_k<sup>T+{{P_k</sup>-H^T}\over {HP_k<sup>-H</sup>T+R}}(HP_k<sup>-H</sup>T+R)K_k^T \
+&amp;=(I-K_kH)P_k^- \tag e
+\end{align}
+$$
+此时 <span class="arithmatex">\((a)\sim(e)\)</span> 五式形成了迭代预测、更新的关系。此五式即为完整的卡尔曼滤波算法：
+$$
+\begin{split}
+预测：
+&amp; \hat x_k^- = A\hat x_{k-1}+Bu_k \
+&amp; P_k<sup>-=AP_{k-1}A</sup>T+Q\
+更新：
+&amp;K_k={{P_k<sup>-H</sup>T}\over {HP_k<sup>-H</sup>T+R}}\
+&amp;\hat x_k = \hat x_{k}^-+K_k(z_k-H\hat x_{k}^-)\
+&amp;P_k=(I-K_kH)P_k^-
+\end{split}
+$$
+其中，预测部分将后验状态估计和后验协方差从 <span class="arithmatex">\(k-1\)</span> 时刻推向 <span class="arithmatex">\(k\)</span> 时刻，形成预测；更新部分首先计算卡尔曼增益，根据该增益，参考状态预测值和观测值，得到状态后验估计，然后更新后验协方差。该过程不断循环；初始状态下，需要给出 <span class="arithmatex">\(\hat x_0\)</span> 和 <span class="arithmatex">\(P_0\)</span>。</p>
+<h3 id="观测数据融合">观测数据融合<a class="headerlink" href="#观测数据融合" title="链接到此节">¶</a></h3>
+<p>由于卡尔曼滤波的本质是数据融合，在没有状态空间模型的情况下，若有两个观测器对同一个状态进行观测，产生两组数据，则它们也可以通过卡尔曼滤波的思想进行融合。此时，<span class="arithmatex">\(A = I, B = 0, H = I\)</span>，算法简化为：
+$$
+\begin{split}
+预测：
+&amp;\hat x_{k}^-={\rm Data1}\
+&amp;P_k^-=P_{k-1}+Q\
+更新：
+&amp;K_k=P_{k|k-1}(P_{k|k-1}+R)^{-1}\
+&amp;\hat x_{k}=\hat x_{k|k-1}+K_k ({\rm Data2}-\hat x_k^-)\
+&amp;P_k=(I-K_k)P_{k}^-
+\end{split}
+$$</p>
+<h3 id="参数调整">参数调整<a class="headerlink" href="#参数调整" title="链接到此节">¶</a></h3>
+<p><span class="arithmatex">\(A,B\)</span> 及 <span class="arithmatex">\(H\)</span> 基于状态空间模型设置。</p>
+<p>实际实现时，观测噪声协方差 <span class="arithmatex">\(R\)</span> 一般可以观测到；但过程噪声协方差 <span class="arithmatex">\(Q\)</span> 较难确定。根据上文，调参的一个基本原则是 <span class="arithmatex">\(R\)</span> 越小，越相信状态观测值；<span class="arithmatex">\(Q\)</span> 越小，越相信状态预测值。一般给 <span class="arithmatex">\(Q\)</span> 一个较小的值有助于更方便地调整 <span class="arithmatex">\(R\)</span>。</p>
+<p>调整后验估计误差协方差初值 <span class="arithmatex">\(P_0\)</span> 时，一般给一个较小的初值有利于更快收敛。运行时，若参数逐步收敛并保持为常量，则滤波器系数可以参考此结果进行调整，以期在后续在线运行时获得更好的收敛效率。</p>
+<p>此外，可以在运行时根据模型的实际情况改变 <span class="arithmatex">\(Q,R\)</span> 的值。</p>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">¶</a></h2>
 <p>组件源码仓库地址：<a href="https://github.com/ZJU-HelloWorld/HW-Components">https://github.com/ZJU-HelloWorld/HW-Components</a></p>
 <p>要在项目中使用该组件，需添加仓库内的以下文件：</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span>
-<span class="normal"><a href="#__codelineno-0-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>devices/dev_servo.c
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>devices/dev_servo.h
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a>devices/dev_config.h
+<span class="normal"><a href="#__codelineno-0-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>algorithms/filter.c
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>algorithms/filter.h
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>tools.h
 <a id="__codelineno-0-4" name="__codelineno-0-4"></a>system.h
 </code></pre></div></td></tr></table></div>
-<h3 id="外设驱动配置">外设驱动配置<a class="headerlink" href="#外设驱动配置" title="链接到此节">¶</a></h3>
-<p>在使用 PWM 波控制舵机时，需要注意查阅舵机参数，并在使用 CubeMX 配置时将对应定时器预分频至 1MHz，以方便控制。例如对一个工作频率 50Hz - 300Hz 的舵机，工作脉宽 500us - 2500us，工作角度 0° -180°，连接至 RoboMaster 开发板 C 型 <code>TIM1 CH1</code>，驱动流程如下：</p>
-<ul>
-<li>对于 TIM1，查看数据手册可知其挂载在 APB2 总线上，时钟频率 168MHz，为达到 1MHz 需要 168 分频 ，因此将预分频值（Prescaler）设置为 167；</li>
-<li>工作频率定为 50Hz，对应周期为 20ms (20000us)，因此重载值（Counter Period）设置为 19999。此“工作频率”选项仍可在组件初始化时指定更改，CubeMX 配置可随意；</li>
-<li>设置初始高电平时间即脉宽（Pulse），一般最小为 0.5ms，即 500us，占空比 2.5%，对应了最小角度 0°；最大为 2.5ms，即 2500us，占空比 12.5%，对应了最大角度 180°. 此“初始角度”选项可在组件初始化时更改，“角度”选项可在组件运行时更改，CubeMX 配置可随意。</li>
-</ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221208081137300.png"><img alt="image-20221208081137300" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221208081137300.png"/></a></p>
 <h3 id="使用前准备">使用前准备<a class="headerlink" href="#使用前准备" title="链接到此节">¶</a></h3>
-<p>使用前需要做以下准备：</p>
+<p>本组件涉及 CMSIS-DSP 矩阵运算等操作。</p>
+<p>使用本组件前需要做以下准备：</p>
 <ul>
-<li>在使用 STM32CubeMX 生成项目时，请在 <code>Code Generator</code> 界面 <code>Enable Full Assert</code>，来帮助断言设备驱动中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果，如添加 <code>while(1);</code></li>
+<li>添加源文件, 包含头文件路径；注意 DSP 版本须在 1.10.0 及以上</li>
+<li>添加预处理宏以开启浮点运算单元（FPU）</li>
+<li>在使用 STM32CubeMX 生成项目时，请在 Code Generator 界面 Enable Full Assert，来帮助断言设备驱动中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果，如添加 <code>while(1);</code></li>
 <li>在 <code>system.h</code> 中 <code>system options: user config</code> 处进行系统设置</li>
-<li>在 <code>dev_config.h</code> 中设置 <code>Conditional Compiling</code> 选项，将使用到的设备对应的条件编译宏开关定义为 1.</li>
 </ul>
 <h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">¶</a></h3>
 <p>在项目中引用头文件：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"dev_config.h"</span>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"filter.h"</span>
 </code></pre></div></td></tr></table></div>
-<p>实例化一个舵机设备：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">Servo_t</span><span class="w"> </span><span class="n">servo</span><span class="p">;</span>
+<p>实例化一个卡尔曼滤波器：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Kalman Filter</label><label for="__tabbed_1_2">Extend Kalman Filter (TODO)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">Kf_t</span><span class="w"> </span><span class="n">kf</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
-<p>创建参数结构体数组，初始化舵机设备，默认使能，如：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#__codelineno-3-3">3</a></span>
-<span class="normal"><a href="#__codelineno-3-4">4</a></span>
-<span class="normal"><a href="#__codelineno-3-5">5</a></span>
-<span class="normal"><a href="#__codelineno-3-6">6</a></span>
-<span class="normal"><a href="#__codelineno-3-7">7</a></span>
-<span class="normal"><a href="#__codelineno-3-8">8</a></span>
-<span class="normal"><a href="#__codelineno-3-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">ServoInfo_t</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="p">.</span><span class="n">operating_freq_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="p">.</span><span class="n">min_pulse_width_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">  </span><span class="p">.</span><span class="n">max_pulse_width_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="p">.</span><span class="n">angle_range_deg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">  </span><span class="p">.</span><span class="n">init_angle_deg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5f</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="p">};</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="n">ServoInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">servo</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">HTIM_PWM1</span><span class="p">,</span><span class="w"> </span><span class="n">HTIM_PWM_CH1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">info</span><span class="p">);</span>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">Ekf_t</span><span class="w"> </span><span class="n">ekf</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
-<p>设定舵机角度：</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">servo</span><span class="p">.</span><span class="n">setAngle</span><span class="p">(</span><span class="o">&amp;</span><span class="n">servo</span><span class="p">,</span><span class="w"> </span><span class="n">TAR_ANGLE_DEG</span><span class="p">);</span><span class="w"> </span><span class="c1">// target angle (float) measured in degree</span>
+</div>
+</div>
+</input></input></div>
+<p>指定状态维度、滤波器类型和各矩阵初值，初始化卡尔曼滤波器。</p>
+<p>注意以下几点：</p>
+<ul>
+<li>若有状态空间模型，需要 <span class="arithmatex">\(\hat x_0,P_0,Q,R,A,B,H\)</span> 七组矩阵数据；若为 2 传感器数据融合，需要  <span class="arithmatex">\(\hat x_0,P_0,Q,R\)</span>  四组矩阵数据。</li>
+<li>注意矩阵维度，注意协方差矩阵均为对角阵</li>
+<li>矩阵数据的排列顺序：从左至右，从上到下。</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">KF_MODEL_BASED</label><label for="__tabbed_2_2">KF_SENSOR_FUSION</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span>
+<span class="normal"><a href="#__codelineno-4-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="kt">float</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="kt">float</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">1.00</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.00</span><span class="p">};</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="kt">float</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">};</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="kt">float</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="kt">float</span><span class="w"> </span><span class="n">h</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="n">KfInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">KF_MODEL_BASED</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="kt">float</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="kt">float</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">1.00</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.00</span><span class="p">};</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="kt">float</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">};</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="n">KfInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">KF_SENSOR_FUSION</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</input></input></div>
+<p>调用控制量设定方法进行动态设置（仅 KF_MODEL_BASED 模式可用）；调用预测方法，可获得状态量预测值，如：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">KF_MODEL_BASED</label><label for="__tabbed_3_2">KF_SENSOR_FUSION</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">kf</span><span class="p">.</span><span class="n">setU</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">u_x1d</span><span class="p">);</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="n">kf</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">);</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="n">kf</span><span class="p">.</span><span class="n">getX</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">x_prediction</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">kf</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">);</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">kf</span><span class="p">.</span><span class="n">getX</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">x_prediction</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</input></input></div>
+<p>调用更新方法，可获得状态量后验估计，如：</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">kf</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">);</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">kf</span><span class="p">.</span><span class="n">getX</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">x_estimation</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="组件说明">组件说明<a class="headerlink" href="#组件说明" title="链接到此节">¶</a></h3>
-<h4 id="servo-类"><code>Servo</code> 类<a class="headerlink" href="#servo-类" title="链接到此节">¶</a></h4>
+<h4 id="kf-类"><code>Kf</code> 类<a class="headerlink" href="#kf-类" title="链接到此节">¶</a></h4>
+<p>线性卡尔曼滤波器。</p>
 <p>属性</p>
 <table>
 <thead>
@@ -864,22 +1073,22 @@
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>htim</code></td>
-<td align="left"><code>TIM_HandleTypeDef*</code></td>
-<td align="left">&amp;htim1</td>
-<td align="left">驱动舵机使用的时钟</td>
+<td align="left"><code>type</code></td>
+<td align="left"><code>KfType_t</code></td>
+<td align="left"><code>KF_MODEL_BASED</code><br><code>KF_SENSOR_FUSION</code></br></td>
+<td align="left">滤波器类型</td>
 </tr>
 <tr>
-<td align="left"><code>tim_ch</code></td>
-<td align="left"><code>uint16_t</code></td>
-<td align="left">TIM_CHANNEL_1</td>
-<td align="left">使用的时钟频道</td>
+<td align="left"><code>xd, zd</code></td>
+<td align="left"><code>uint8_t</code></td>
+<td align="left"><code>2, 2</code></td>
+<td align="left">状态量和观测量的维度</td>
 </tr>
 <tr>
-<td align="left"><code>info</code></td>
-<td align="left"><code>ServoInfo_t*</code></td>
+<td align="left"><code>x_x1d, P_xxd, Q_xxd, R_zzd, A_xxd, B_xxd, H_zxd</code></td>
+<td align="left"><code>arm_matrix_instance_f32</code></td>
 <td align="left">/</td>
-<td align="left">相关参数结构体指针</td>
+<td align="left">各种参数矩阵</td>
 </tr>
 </tbody>
 </table>
@@ -894,78 +1103,39 @@
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>ServoInit</code></td>
-<td align="left">传入时钟句柄指针、频道、相关参数结构体指针</td>
-<td>用传入的参数初始化一个舵机设备。</td>
+<td align="left"><code>KfInit</code></td>
+<td align="left">按声明要求传入状态维度、滤波器类型和各矩阵初值等参数</td>
+<td>按指定的类型和给定的数据，初始化一个卡尔曼滤波器</td>
 </tr>
 <tr>
-<td align="left"><code>enable</code></td>
-<td align="left">/</td>
-<td>使能舵机设备。</td>
+<td align="left"><code>predict</code></td>
+<td align="left">（仅 KF_SENSOR_FUSION 类型）传入另一组 <code>float*</code> 观测量数组地址</td>
+<td>运行卡尔曼滤波预测部分</td>
 </tr>
 <tr>
-<td align="left"><code>disable</code></td>
-<td align="left">/</td>
-<td>失能舵机设备。</td>
+<td align="left"><code>update</code></td>
+<td align="left">传入 <code>float*</code> 观测量数组地址</td>
+<td>根据传入的观测量，运行卡尔曼滤波更新部分</td>
 </tr>
 <tr>
-<td align="left"><code>setAngle</code></td>
-<td align="left">传入目标角度值(float degree)</td>
-<td>控制舵机输出至目标角度。</td>
+<td align="left"><code>getX</code></td>
+<td align="left">传入 <code>float*</code> 数组地址，用于存储状态量</td>
+<td>返回当前状态量</td>
 </tr>
 <tr>
-<td align="left"><code>setMaxAngle</code></td>
-<td align="left">/</td>
-<td>控制舵机输出至最大角度。</td>
+<td align="left"><code>setU</code></td>
+<td align="left">（仅 KF_MODEL_BASED 类型）传入 <code>float*</code> u 控制量数组地址</td>
+<td>设置状态控制量</td>
 </tr>
 <tr>
-<td align="left"><code>setMinAngle</code></td>
-<td align="left">/</td>
-<td>控制舵机输出至最小角度。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="servoinfo-结构体"><code>ServoInfo</code> 结构体<a class="headerlink" href="#servoinfo-结构体" title="链接到此节">¶</a></h4>
-<p>存储舵机相关参数。</p>
-<table>
-<thead>
-<tr>
-<th align="left">名称<a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href=""><img width="100/"/></a></th>
-<th align="left">类型<a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href=""><img width="100/"/></a></th>
-<th align="left">示例值</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>operating_freq_hz</code></td>
-<td align="left"><code>float</code></td>
-<td align="left">50</td>
-<td align="left">执行频率</td>
+<td align="left"><code>setQ</code></td>
+<td align="left">传入 <code>float*</code> Q 矩阵数组地址</td>
+<td>设置过程噪声协方差 Q 矩阵</td>
 </tr>
 <tr>
-<td align="left"><code>min_pulse_width_us</code></td>
-<td align="left"><code>uint16_t</code></td>
-<td align="left">500</td>
-<td align="left">最小角度对应脉宽</td>
-</tr>
-<tr>
-<td align="left"><code>max_pulse_width_us</code></td>
-<td align="left"><code>uint16_t</code></td>
-<td align="left">2500</td>
-<td align="left">最大角度对应脉宽</td>
-</tr>
-<tr>
-<td align="left"><code>angle_range_deg</code></td>
-<td align="left"><code>uint16_t</code></td>
-<td align="left">180</td>
-<td align="left">极限角度范围，默认从 0 开始</td>
-</tr>
-<tr>
-<td align="left"><code>init_angle_deg</code></td>
-<td align="left"><code>float</code></td>
-<td align="left">1.5</td>
-<td align="left">初始角度</td>
+<td align="left"><code>setR</code></td>
+<td align="left">传入 <code>float*</code> R 矩阵数组地址</td>
+<td>设置观测噪声协方差 R 矩阵</td>
 </tr>
 </tbody>
 </table>
@@ -983,23 +1153,25 @@
 <tbody>
 <tr>
 <td><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/version-1.0.0-green"><img src="https://img.shields.io/badge/version-1.0.0-green"/></a></td>
-<td>2022.12.07</td>
-<td>发布舵机组件</td>
+<td>2023.4.11</td>
+<td>完成卡尔曼滤波说明文档</td>
 <td>薛东来</td>
 </tr>
 </tbody>
 </table>
 <h3 id="参考资料">参考资料<a class="headerlink" href="#参考资料" title="链接到此节">¶</a></h3>
-<p>[1] RoboMaster 开发板 C 型嵌入式软件教程文档. <a href="https://github.com/RoboMaster/Development-Board-C-Examples">Github 仓库</a></p>
+<p>[1] <a href="https://www.cs.unc.edu/~welch/kalman/media/pdf/kalman_intro_chinese.pdf">卡尔曼滤波器介绍</a></p>
+<p>[2] DR_CAN <a href="https://space.bilibili.com/230105574/channel/collectiondetail?sid=6939">视频</a> <a href="https://zhuanlan.zhihu.com/p/585819291">文档</a></p>
+<p>[3] </p>
 <hr/>
 <div class="md-source-file">
 <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-23</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
 <br/>
         创建日期:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-07</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
 </small>
 </div>
 <form class="md-feedback" hidden="" name="feedback">
