@@ -825,132 +825,132 @@
 <h2 id="理论">理论<a class="headerlink" href="#理论" title="链接到此节">¶</a></h2>
 <p>卡尔曼滤波基于线性、高斯系统的假设，能够利用前一时刻的状态（和可能的测量值）来得到当前时刻下的状态的最优估计。算法由预测、更新（校正）两步骤组成，既能够基于状态空间模型进行状态预测，本质上又是一个数据融合算法。</p>
 <h3 id="概述">概述<a class="headerlink" href="#概述" title="链接到此节">¶</a></h3>
-<p>以状态空间的形式描述一个线性高斯系统，下标表示时刻：
-$$
+<p>以状态空间的形式描述一个线性高斯系统，下标表示时刻：</p>
+<div class="arithmatex">\[
 \begin{align}
 x_k&amp;=Ax_{k-1}+Bu_{k}+w_{k-1} \tag{1}
-\
+\\
 z_k&amp;= Hx_k + v_k \tag{2}
 \end{align}
-$$
-其中 <span class="arithmatex">\(A, B\)</span> 分别表示状态转移矩阵和控制量输入矩阵，<span class="arithmatex">\(H\)</span> 表示状态观测矩阵； <span class="arithmatex">\(x_k\)</span> 为系统状态量矩阵，<span class="arithmatex">\(z_k\)</span> 为实测得到的状态量矩阵 ；引入高斯分布，<span class="arithmatex">\(w_{k-1}\)</span> 表示过程噪声（理论模型与现实模型的误差），<span class="arithmatex">\(v_k\)</span> 表示观测噪声（量测与现实数据的误差），分别满足 <span class="arithmatex">\(P(w) \sim N(0,Q),P(v)\sim N(0, R)\)</span>，其中 <span class="arithmatex">\(Q\)</span> 表示过程噪声协方差， <span class="arithmatex">\(R\)</span> 表示观测噪声协方差。</p>
-<p>为区分状态的多种表示，定义以下符号：
-$$
+\]</div>
+<p>其中 <span class="arithmatex">\(A, B\)</span> 分别表示状态转移矩阵和控制量输入矩阵，<span class="arithmatex">\(H\)</span> 表示状态观测矩阵； <span class="arithmatex">\(x_k\)</span> 为系统状态量矩阵，<span class="arithmatex">\(z_k\)</span> 为实测得到的状态量矩阵 ；引入高斯分布，<span class="arithmatex">\(w_{k-1}\)</span> 表示过程噪声（理论模型与现实模型的误差），<span class="arithmatex">\(v_k\)</span> 表示观测噪声（量测与现实数据的误差），分别满足 <span class="arithmatex">\(P(w) \sim N(0,Q),P(v)\sim N(0, R)\)</span>，其中 <span class="arithmatex">\(Q\)</span> 表示过程噪声协方差， <span class="arithmatex">\(R\)</span> 表示观测噪声协方差。</p>
+<p>为区分状态的多种表示，定义以下符号：</p>
+<div class="arithmatex">\[
 \begin{align}
-x_k:&amp; 状态观测值\
-\hat x_{k measure}:&amp; 由观测初步得到的状态估计值\
-\hat x_k:&amp; 最优状态估计值，或称后验状态估计值\
+x_k:&amp; 状态观测值\\
+\hat x_{k\ measure}:&amp; 由观测初步得到的状态估计值\\
+\hat x_k:&amp; 最优状态估计值，或称后验状态估计值\\
 \hat x_k^-:&amp; 状态预测值，或称先验状态估计值
 \end{align}
-$$</p>
+\]</div>
 <hr/>
-<p>现实中我们并不知道噪声的实际值，但我们可以通过迭代优化，逼近最优的状态估计。由 <span class="arithmatex">\((1)\)</span> 式，将状态预测方程表示为：
-$$
+<p>现实中我们并不知道噪声的实际值，但我们可以通过迭代优化，逼近最优的状态估计。由 <span class="arithmatex">\((1)\)</span> 式，将状态预测方程表示为：</p>
+<div class="arithmatex">\[
 \hat x_k^- = A\hat x_{k-1}+Bu_k \tag{a}
-$$
-由 <span class="arithmatex">\((2)\)</span> 式，由当下的状态量观测初步得到一个状态估计：
-$$
-\hat x_{k measure}=H^{-1}z_k
-$$
-由于噪声的存在，<span class="arithmatex">\(\hat x_k^-\)</span> 和 <span class="arithmatex">\(\hat x_{k\ measure}\)</span> 都不能准确表示当下的状态，我们采用一个朴素的思想，即对这两者进行加权平均。状态最优估计方程：
-$$
-\hat x_k = \hat x_{k}^-+G(\hat x_{k measure}-\hat x_{k}^-)
-$$
-其中系数 <span class="arithmatex">\(G = 0\)</span> 时，完全相信状态预测；系数 <span class="arithmatex">\(G = 1\)</span> 时，完全相信状态观测。记 <span class="arithmatex">\(G = KH\)</span>，上式化为：
-$$
+\]</div>
+<p>由 <span class="arithmatex">\((2)\)</span> 式，由当下的状态量观测初步得到一个状态估计：</p>
+<div class="arithmatex">\[
+\hat x_{k\ measure}=H^{-1}z_k
+\]</div>
+<p>由于噪声的存在，<span class="arithmatex">\(\hat x_k^-\)</span> 和 <span class="arithmatex">\(\hat x_{k\ measure}\)</span> 都不能准确表示当下的状态，我们采用一个朴素的思想，即对这两者进行加权平均。状态最优估计方程：</p>
+<div class="arithmatex">\[
+\hat x_k = \hat x_{k}^-+G(\hat x_{k\ measure}-\hat x_{k}^-)
+\]</div>
+<p>其中系数 <span class="arithmatex">\(G = 0\)</span> 时，完全相信状态预测；系数 <span class="arithmatex">\(G = 1\)</span> 时，完全相信状态观测。记 <span class="arithmatex">\(G = KH\)</span>，上式化为：</p>
+<div class="arithmatex">\[
 \hat x_k = \hat x_{k}^-+K(z_k-H\hat x_{k}^-) \tag {b}
-$$
-此处 <span class="arithmatex">\(K\in [0, H^-]\)</span> 即为卡尔曼增益，求取状态最优估计的问题转化为求取最优 <span class="arithmatex">\(K\)</span> 的问题。</p>
+\]</div>
+<p>此处 <span class="arithmatex">\(K\in [0, H^-]\)</span> 即为卡尔曼增益，求取状态最优估计的问题转化为求取最优 <span class="arithmatex">\(K\)</span> 的问题。</p>
 <h3 id="卡尔曼增益">卡尔曼增益<a class="headerlink" href="#卡尔曼增益" title="链接到此节">¶</a></h3>
-<p>我们希望最优估计与实际值误差最小，即后验估计误差 <span class="arithmatex">\(e_k = x_k-\hat x_k\)</span> 绝对值最小。引入后验估计误差的协方差矩阵 <span class="arithmatex">\(P_k = E[e_ke_k^T]\)</span>，对 <span class="arithmatex">\(n\)</span> 个状态变量相互独立，有：
-$$
+<p>我们希望最优估计与实际值误差最小，即后验估计误差 <span class="arithmatex">\(e_k = x_k-\hat x_k\)</span> 绝对值最小。引入后验估计误差的协方差矩阵 <span class="arithmatex">\(P_k = E[e_ke_k^T]\)</span>，对 <span class="arithmatex">\(n\)</span> 个状态变量相互独立，有：</p>
+<div class="arithmatex">\[
 P=
 \begin{bmatrix}
-{\rm cov}(e_1,e_1)&amp; ... &amp;{\rm cov}(e_1,e_n)\
-... &amp; ... &amp; ...\
-{\rm cov}(e_n,e_1)&amp; ... &amp;{\rm cov}(e_n,e_n)\
+{\rm cov}(e_1,e_1)&amp; ... &amp;{\rm cov}(e_1,e_n)\\
+... &amp; ... &amp; ...\\
+{\rm cov}(e_n,e_1)&amp; ... &amp;{\rm cov}(e_n,e_n)\\
 \end{bmatrix}
 =
 \begin{bmatrix}
-\sigma_1e_1^2&amp; 0&amp;... &amp;0\
-0 &amp; \sigma_2e_2^2 &amp; ... &amp;0\
-...&amp;...&amp;...&amp;...&amp;\
-0&amp; 0 &amp;... &amp;\sigma_ne_n^2\
+\sigma_1e_1^2&amp; 0&amp;... &amp;0\\
+0 &amp; \sigma_2e_2^2 &amp; ... &amp;0\\
+...&amp;...&amp;...&amp;...&amp;\\
+0&amp; 0 &amp;... &amp;\sigma_ne_n^2\\
 \end{bmatrix}
-$$
-卡尔曼增益最优问题可转化为求 <span class="arithmatex">\(K_k\)</span> 使得 <span class="arithmatex">\(\tr (P_k)\)</span> 最小，思路为对 <span class="arithmatex">\(\tr(P_k)\)</span> 求导并令结果为 <span class="arithmatex">\(0\)</span> ，进而用其他量表示 <span class="arithmatex">\(K_k\)</span>。以下进行求解。</p>
-<p>由 <span class="arithmatex">\((2)(b)\)</span> 式，有：
-$$
+\]</div>
+<p>卡尔曼增益最优问题可转化为求 <span class="arithmatex">\(K_k\)</span> 使得 <span class="arithmatex">\(\tr (P_k)\)</span> 最小，思路为对 <span class="arithmatex">\(\tr(P_k)\)</span> 求导并令结果为 <span class="arithmatex">\(0\)</span> ，进而用其他量表示 <span class="arithmatex">\(K_k\)</span>。以下进行求解。</p>
+<p>由 <span class="arithmatex">\((2)(b)\)</span> 式，有：</p>
+<div class="arithmatex">\[
 \begin{align}
-\hat x_k &amp;= \hat x_{k}^-+K(Hx_k + v_k-H\hat x_{k}^-)\
-\Rightarrow -\hat x_k &amp;= -\hat x_k^{-}-KH(x_k - \hat x_k^{-})-Kv_k\
-\Rightarrow x_k - \hat x_k &amp;= x_k-\hat x_k^{-}-KH(x_k - \hat x_k^{-})-Kv_k\
+\hat x_k &amp;= \hat x_{k}^-+K(Hx_k + v_k-H\hat x_{k}^-)\\
+\Rightarrow -\hat x_k &amp;= -\hat x_k^{-}-KH(x_k - \hat x_k^{-})-Kv_k\\
+\Rightarrow x_k - \hat x_k &amp;= x_k-\hat x_k^{-}-KH(x_k - \hat x_k^{-})-Kv_k\\
 \Rightarrow e_k &amp;= (I-KH)e_k^--Kv_k
 \end{align}
-$$
-经计算得到：
-$$
-P_k=E[e_ke_k<sup>T]=P_k</sup>--K_kHP_k<sup>--P_k</sup>-H<sup>TK_k</sup>T+K_k(HP_k<sup>-H</sup>T+R)K_k^T \tag 3
-$$
-<span class="arithmatex">\(\tr(P_k)\)</span> 对 <span class="arithmatex">\(K_k\)</span> 求导，经计算得到：
-$$
-{\partial \tr (P_k) \over  \partial K_k}=-2P_k<sup>{-T}H</sup>T+2KHP_k<sup>-H</sup>T+2KR = 0
-$$
-则卡尔曼增益为：
-$$
-K_k={{P_k<sup>-H</sup>T}\over {HP_k<sup>-H</sup>T+R}} \tag{c}
-$$
-观察上式可知，观测噪声协方差 <span class="arithmatex">\(R\)</span> 越小，增益越大，越相信状态观测值；<span class="arithmatex">\(R\)</span> 越大，越相信状态预测值。</p>
+\]</div>
+<p>经计算得到：</p>
+<div class="arithmatex">\[
+P_k=E[e_ke_k^T]=P_k^--K_kHP_k^--P_k^-H^TK_k^T+K_k(HP_k^-H^T+R)K_k^T \tag 3
+\]</div>
+<p><span class="arithmatex">\(\tr(P_k)\)</span> 对 <span class="arithmatex">\(K_k\)</span> 求导，经计算得到：</p>
+<div class="arithmatex">\[
+{\partial \tr (P_k) \over  \partial K_k}=-2P_k^{-T}H^T+2KHP_k^-H^T+2KR = 0
+\]</div>
+<p>则卡尔曼增益为：</p>
+<div class="arithmatex">\[
+K_k={{P_k^-H^T}\over {HP_k^-H^T+R}} \tag{c}
+\]</div>
+<p>观察上式可知，观测噪声协方差 <span class="arithmatex">\(R\)</span> 越小，增益越大，越相信状态观测值；<span class="arithmatex">\(R\)</span> 越大，越相信状态预测值。</p>
 <h3 id="卡尔曼滤波">卡尔曼滤波<a class="headerlink" href="#卡尔曼滤波" title="链接到此节">¶</a></h3>
-<p>先验估计误差 <span class="arithmatex">\(e_k^-=x_k-\hat x_k^-\)</span> ，其协方差矩阵 <span class="arithmatex">\(P^−_k=E[{e^−_k}{e^{−T}_k}]\)</span>。由 <span class="arithmatex">\((1)(a)\)</span> 式,，有：
-$$
+<p>先验估计误差 <span class="arithmatex">\(e_k^-=x_k-\hat x_k^-\)</span> ，其协方差矩阵 <span class="arithmatex">\(P^−_k=E[{e^−_k}{e^{−T}_k}]\)</span>。由 <span class="arithmatex">\((1)(a)\)</span> 式,，有：</p>
+<div class="arithmatex">\[
 \begin{align}
 e_k^-&amp;=Ax_{k-1}+Bu_{k}+w_{k-1} -A\hat x_{k-1}-Bu_k
-\
+\\
 &amp;=Ae_{k-1}+w_{k-1}
 \end{align}
-$$
-由 <span class="arithmatex">\((c)\)</span> 式，为得到 <span class="arithmatex">\(K_k\)</span>，计算先验估计协方差 <span class="arithmatex">\(P_k^-\)</span> ，并化简得到：
-$$
+\]</div>
+<p>由 <span class="arithmatex">\((c)\)</span> 式，为得到 <span class="arithmatex">\(K_k\)</span>，计算先验估计协方差 <span class="arithmatex">\(P_k^-\)</span> ，并化简得到：</p>
+<div class="arithmatex">\[
 \begin{align}
-P_k<sup>-&amp;=E[(Ae_{k-1}+w_{k-1})(Ae_{k-1}+w_{k-1})</sup>T]\
-&amp;=AE[e_{k-1}e_{k-1}<sup>T]A</sup>T+E[w_{k-1}w_{k-1}^T]\
+P_k^-&amp;=E[(Ae_{k-1}+w_{k-1})(Ae_{k-1}+w_{k-1})^T]\\
+&amp;=AE[e_{k-1}e_{k-1}^T]A^T+E[w_{k-1}w_{k-1}^T]\\
 &amp;=AP_{k-1}A^T+Q \tag d
 \end{align}
-$$</p>
-<p>需要上一时刻的后验协方差 <span class="arithmatex">\(P_{k-1}\)</span>. 进一步联立 <span class="arithmatex">\((3)(c)\)</span> 式，计算 <span class="arithmatex">\(P_{k}\)</span>：
-$$
+\]</div>
+<p>需要上一时刻的后验协方差 <span class="arithmatex">\(P_{k-1}\)</span>. 进一步联立 <span class="arithmatex">\((3)(c)\)</span> 式，计算 <span class="arithmatex">\(P_{k}\)</span>：</p>
+<div class="arithmatex">\[
 \begin{align}
-P_k=&amp;P_k<sup>--K_kHP_k</sup>--P_k<sup>-H</sup>TK_k<sup>T+{{P_k</sup>-H^T}\over {HP_k<sup>-H</sup>T+R}}(HP_k<sup>-H</sup>T+R)K_k^T \
+P_k=&amp;P_k^--K_kHP_k^--P_k^-H^TK_k^T+{{P_k^-H^T}\over {HP_k^-H^T+R}}(HP_k^-H^T+R)K_k^T \\
 &amp;=(I-K_kH)P_k^- \tag e
 \end{align}
-$$
-此时 <span class="arithmatex">\((a)\sim(e)\)</span> 五式形成了迭代预测、更新的关系。此五式即为完整的卡尔曼滤波算法：
-$$
+\]</div>
+<p>此时 <span class="arithmatex">\((a)\sim(e)\)</span> 五式形成了迭代预测、更新的关系。此五式即为完整的卡尔曼滤波算法：</p>
+<div class="arithmatex">\[
 \begin{split}
 预测：
-&amp; \hat x_k^- = A\hat x_{k-1}+Bu_k \
-&amp; P_k<sup>-=AP_{k-1}A</sup>T+Q\
+&amp; \hat x_k^- = A\hat x_{k-1}+Bu_k \\
+&amp; P_k^-=AP_{k-1}A^T+Q\\
 更新：
-&amp;K_k={{P_k<sup>-H</sup>T}\over {HP_k<sup>-H</sup>T+R}}\
-&amp;\hat x_k = \hat x_{k}^-+K_k(z_k-H\hat x_{k}^-)\
+&amp;K_k={{P_k^-H^T}\over {HP_k^-H^T+R}}\\
+&amp;\hat x_k = \hat x_{k}^-+K_k(z_k-H\hat x_{k}^-)\\
 &amp;P_k=(I-K_kH)P_k^-
 \end{split}
-$$
-其中，预测部分将后验状态估计和后验协方差从 <span class="arithmatex">\(k-1\)</span> 时刻推向 <span class="arithmatex">\(k\)</span> 时刻，形成预测；更新部分首先计算卡尔曼增益，根据该增益，参考状态预测值和观测值，得到状态后验估计，然后更新后验协方差。该过程不断循环；初始状态下，需要给出 <span class="arithmatex">\(\hat x_0\)</span> 和 <span class="arithmatex">\(P_0\)</span>。</p>
+\]</div>
+<p>其中，预测部分将后验状态估计和后验协方差从 <span class="arithmatex">\(k-1\)</span> 时刻推向 <span class="arithmatex">\(k\)</span> 时刻，形成预测；更新部分首先计算卡尔曼增益，根据该增益，参考状态预测值和观测值，得到状态后验估计，然后更新后验协方差。该过程不断循环；初始状态下，需要给出 <span class="arithmatex">\(\hat x_0\)</span> 和 <span class="arithmatex">\(P_0\)</span>。</p>
 <h3 id="观测数据融合">观测数据融合<a class="headerlink" href="#观测数据融合" title="链接到此节">¶</a></h3>
-<p>由于卡尔曼滤波的本质是数据融合，在没有状态空间模型的情况下，若有两个观测器对同一个状态进行观测，产生两组数据，则它们也可以通过卡尔曼滤波的思想进行融合。此时，<span class="arithmatex">\(A = I, B = 0, H = I\)</span>，算法简化为：
-$$
+<p>由于卡尔曼滤波的本质是数据融合，在没有状态空间模型的情况下，若有两个观测器对同一个状态进行观测，产生两组数据，则它们也可以通过卡尔曼滤波的思想进行融合。此时，<span class="arithmatex">\(A = I, B = 0, H = I\)</span>，算法简化为：</p>
+<div class="arithmatex">\[
 \begin{split}
 预测：
-&amp;\hat x_{k}^-={\rm Data1}\
-&amp;P_k^-=P_{k-1}+Q\
+&amp;\hat x_{k}^-={\rm Data1}\\
+&amp;P_k^-=P_{k-1}+Q\\
 更新：
-&amp;K_k=P_{k|k-1}(P_{k|k-1}+R)^{-1}\
-&amp;\hat x_{k}=\hat x_{k|k-1}+K_k ({\rm Data2}-\hat x_k^-)\
+&amp;K_k=P_{k|k-1}(P_{k|k-1}+R)^{-1}\\
+&amp;\hat x_{k}=\hat x_{k|k-1}+K_k ({\rm Data2}-\hat x_k^-)\\
 &amp;P_k=(I-K_k)P_{k}^-
 \end{split}
-$$</p>
+\]</div>
 <h3 id="参数调整">参数调整<a class="headerlink" href="#参数调整" title="链接到此节">¶</a></h3>
 <p><span class="arithmatex">\(A,B\)</span> 及 <span class="arithmatex">\(H\)</span> 基于状态空间模型设置。</p>
 <p>实际实现时，观测噪声协方差 <span class="arithmatex">\(R\)</span> 一般可以观测到；但过程噪声协方差 <span class="arithmatex">\(Q\)</span> 较难确定。根据上文，调参的一个基本原则是 <span class="arithmatex">\(R\)</span> 越小，越相信状态观测值；<span class="arithmatex">\(Q\)</span> 越小，越相信状态预测值。一般给 <span class="arithmatex">\(Q\)</span> 一个较小的值有助于更方便地调整 <span class="arithmatex">\(R\)</span>。</p>
@@ -1079,13 +1079,13 @@ $$</p>
 <td align="left">滤波器类型</td>
 </tr>
 <tr>
-<td align="left"><code>xd, zd</code></td>
+<td align="left"><code>x_dim</code></td>
 <td align="left"><code>uint8_t</code></td>
-<td align="left"><code>2, 2</code></td>
-<td align="left">状态量和观测量的维度</td>
+<td align="left"><code>2</code></td>
+<td align="left">状态维度</td>
 </tr>
 <tr>
-<td align="left"><code>x_x1d, P_xxd, Q_xxd, R_zzd, A_xxd, B_xxd, H_zxd</code></td>
+<td align="left"><code>x_x1d, P_xxd, Q_xxd, R_zzd, A_xxd, B_xxd, u_x1d, H_zxd</code></td>
 <td align="left"><code>arm_matrix_instance_f32</code></td>
 <td align="left">/</td>
 <td align="left">各种参数矩阵</td>
@@ -1125,7 +1125,7 @@ $$</p>
 <tr>
 <td align="left"><code>setU</code></td>
 <td align="left">（仅 KF_MODEL_BASED 类型）传入 <code>float*</code> u 控制量数组地址</td>
-<td>设置状态控制量</td>
+<td>设置控制量</td>
 </tr>
 <tr>
 <td align="left"><code>setQ</code></td>
@@ -1162,7 +1162,6 @@ $$</p>
 <h3 id="参考资料">参考资料<a class="headerlink" href="#参考资料" title="链接到此节">¶</a></h3>
 <p>[1] <a href="https://www.cs.unc.edu/~welch/kalman/media/pdf/kalman_intro_chinese.pdf">卡尔曼滤波器介绍</a></p>
 <p>[2] DR_CAN <a href="https://space.bilibili.com/230105574/channel/collectiondetail?sid=6939">视频</a> <a href="https://zhuanlan.zhihu.com/p/585819291">文档</a></p>
-<p>[3] </p>
 <hr/>
 <div class="md-source-file">
 <small>
