@@ -878,7 +878,7 @@ P=
 0&amp; 0 &amp;... &amp;\sigma_ne_n^2\\
 \end{bmatrix}
 \]</div>
-<p>卡尔曼增益最优问题可转化为求 <span class="arithmatex">\(K_k\)</span> 使得 <span class="arithmatex">\(\tr (P_k)\)</span> 最小，思路为对 <span class="arithmatex">\(\tr(P_k)\)</span> 求导并令结果为 <span class="arithmatex">\(0\)</span> ，进而用其他量表示 <span class="arithmatex">\(K_k\)</span>。以下进行求解。</p>
+<p>卡尔曼增益最优问题可转化为求 <span class="arithmatex">\(K_k\)</span> 使得 <span class="arithmatex">\({\rm tr} (P_k)\)</span> 最小，思路为对 <span class="arithmatex">\({\rm tr}(P_k)\)</span> 求导并令结果为 <span class="arithmatex">\(0\)</span> ，进而用其他量表示 <span class="arithmatex">\(K_k\)</span>。以下进行求解。</p>
 <p>由 <span class="arithmatex">\((2)(b)\)</span> 式，有：</p>
 <div class="arithmatex">\[
 \begin{align}
@@ -892,9 +892,9 @@ P=
 <div class="arithmatex">\[
 P_k=E[e_ke_k^T]=P_k^--K_kHP_k^--P_k^-H^TK_k^T+K_k(HP_k^-H^T+R)K_k^T \tag 3
 \]</div>
-<p><span class="arithmatex">\(\tr(P_k)\)</span> 对 <span class="arithmatex">\(K_k\)</span> 求导，经计算得到：</p>
+<p><span class="arithmatex">\({\rm tr} (P_k)\)</span> 对 <span class="arithmatex">\(K_k\)</span> 求导，经计算得到：</p>
 <div class="arithmatex">\[
-{\partial \tr (P_k) \over  \partial K_k}=-2P_k^{-T}H^T+2KHP_k^-H^T+2KR = 0
+{\partial {\rm tr} (P_k) \over  \partial K_k}=-2P_k^{-T}H^T+2KHP_k^-H^T+2KR = 0
 \]</div>
 <p>则卡尔曼增益为：</p>
 <div class="arithmatex">\[
