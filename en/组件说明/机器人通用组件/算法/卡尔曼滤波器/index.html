@@ -1047,17 +1047,29 @@ P_k=&amp;P_k^--K_kHP_k^--P_k^-H^TK_k^T+{{P_k^-H^T}\over {HP_k^-H^T+R}}(HP_k^-H^T
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
-<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">kf</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">);</span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">kf</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">data1_x1d</span><span class="p">);</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">kf</span><span class="p">.</span><span class="n">getX</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">x_prediction</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </input></input></div>
 <p>调用更新方法，可获得状态量后验估计，如：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">KF_MODEL_BASED</label><label for="__tabbed_4_2">KF_SENSOR_FUSION</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
-<span class="normal"><a href="#__codelineno-8-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">kf</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">);</span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">kf</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">z_x1d</span><span class="p">);</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">kf</span><span class="p">.</span><span class="n">getX</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">x_estimation</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">kf</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">x2_x1d</span><span class="p">);</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">kf</span><span class="p">.</span><span class="n">getX</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">x_estimation</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</input></input></div>
 <h3 id="组件说明">组件说明<a class="headerlink" href="#组件说明" title="链接到此节">¶</a></h3>
 <h4 id="kf-类"><code>Kf</code> 类<a class="headerlink" href="#kf-类" title="链接到此节">¶</a></h4>
 <p>线性卡尔曼滤波器。</p>
@@ -1167,7 +1179,7 @@ P_k=&amp;P_k^--K_kHP_k^--P_k^-H^TK_k^T+{{P_k^-H^T}\over {HP_k^-H^T+R}}(HP_k^-H^T
 <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-14</span>
 <br/>
         Created:
         <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-11</span>
