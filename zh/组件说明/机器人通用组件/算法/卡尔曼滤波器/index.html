@@ -860,7 +860,7 @@ x_k:&amp; 状态观测值\\
 <div class="arithmatex">\[
 \hat x_k = \hat x_{k}^-+K(z_k-H\hat x_{k}^-) \tag {b}
 \]</div>
-<p>此处 <span class="arithmatex">\(K\in [0, H^-]\)</span> 即为卡尔曼增益，求取状态最优估计的问题转化为求取最优 <span class="arithmatex">\(K\)</span> 的问题。</p>
+<p>此处 <span class="arithmatex">\(K\in [0, H^{-1}]\)</span> 即为卡尔曼增益，求取状态最优估计的问题转化为求取最优 <span class="arithmatex">\(K\)</span> 的问题。</p>
 <h3 id="卡尔曼增益">卡尔曼增益<a class="headerlink" href="#卡尔曼增益" title="链接到此节">¶</a></h3>
 <p>我们希望最优估计与实际值误差最小，即后验估计误差 <span class="arithmatex">\(e_k = x_k-\hat x_k\)</span> 绝对值最小。引入后验估计误差的协方差矩阵 <span class="arithmatex">\(P_k = E[e_ke_k^T]\)</span>，对 <span class="arithmatex">\(n\)</span> 个状态变量相互独立，有：</p>
 <div class="arithmatex">\[
