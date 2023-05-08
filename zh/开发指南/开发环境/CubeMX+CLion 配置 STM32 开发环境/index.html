@@ -1,1084 +1,2279 @@
 
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../">
+      
+      
+        <link rel="next" href="../CubeMX%2BVSCode%2BOzone%20%E9%85%8D%E7%BD%AESTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+      
+      <link rel="icon" href="../../../../assets/rm.svg">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.9">
+    
+    
+      
+        <title>CubeMX + CLion 配置 STM32 开发环境 - Hello World 技术知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.85bb2934.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.a6bdf11c.min.css">
+      
+      
 
-<html class="no-js" lang="zh">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="../../" rel="prev"/>
-<link href="../CubeMX%2BVSCode%2BOzone%20%E9%85%8D%E7%BD%AESTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" rel="next"/>
-<link href="../../../../assets/rm.svg" rel="icon"/>
-<meta content="mkdocs-1.4.2, mkdocs-material-9.1.6" name="generator"/>
-<title>CubeMX + CLion 配置 STM32 开发环境 - Hello World 技术知识库</title>
-<link href="../../../../assets/stylesheets/main.ded33207.min.css" rel="stylesheet"/>
-<link href="../../../../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
-<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-<link href="../../../../stylesheets/extra.css" rel="stylesheet"/>
-<script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-12BWRJ4SWG"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-12BWRJ4SWG",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-12BWRJ4SWG",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
-<script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-<link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-            html.glightbox-open { overflow: initial; height: 100%; }
-            .gslide-title { margin-top: 0px; user-select: text; }
-            .gslide-desc { color: #666; user-select: text; }
-            .gslide-image img { background: white; }
-            
-                .gscrollbar-fixer { padding-right: 15px; }
-                .gdesc-inner { font-size: 0.75rem; }
-                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-                </style><script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
-<body data-md-color-accent="" data-md-color-primary="" data-md-color-scheme="default" dir="ltr">
-<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#cubemx--clion-配置-stm32-开发环境">
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-12BWRJ4SWG"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-12BWRJ4SWG",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-12BWRJ4SWG",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cubemx--clion-配置-stm32-开发环境" class="md-skip">
           跳转至
         </a>
-</div>
-<div data-md-component="announce">
-<aside class="md-banner">
-<div class="md-banner__inner md-grid md-typeset">
-<button aria-label="不再显示此消息" class="md-banner__button md-icon">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
-</button>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="不再显示此消息">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+              </button>
+            
+            
+
 <!-- Add announcement here, including arbitrary HTML -->
-<b>公        告</b>    暂无<br/>
-<b>重要更新</b>    暂无
+<b>公&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;告</b>&nbsp;&nbsp;&nbsp;&nbsp;暂无<br>
+<b>重要更新</b>&nbsp;&nbsp;&nbsp;&nbsp;暂无
 
 
           </div>
-<script>var content,el=document.querySelector("[data-md-component=announce]");el&&(content=el.querySelector(".md-typeset"),__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0))</script>
-</aside>
-</div>
+          
+            <script>var content,el=document.querySelector("[data-md-component=announce]");el&&(content=el.querySelector(".md-typeset"),__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0))</script>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-<nav aria-label="页眉" class="md-header__inner md-grid">
-<a aria-label="Hello World 技术知识库" class="md-header__button md-logo" data-md-component="logo" href="../../../" title="Hello World 技术知识库">
-<img alt="logo" src="../../../../assets/rm.svg"/>
-</a>
-<label class="md-header__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
-</label>
-<div class="md-header__title" data-md-component="header-title">
-<div class="md-header__ellipsis">
-<div class="md-header__topic">
-<span class="md-ellipsis">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../" title="Hello World 技术知识库" class="md-header__button md-logo" aria-label="Hello World 技术知识库" data-md-component="logo">
+      
+  <img src="../../../../assets/rm.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
             Hello World 技术知识库
           </span>
-</div>
-<div class="md-header__topic" data-md-component="header-topic">
-<span class="md-ellipsis">
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
             
               CubeMX + CLion 配置 STM32 开发环境
             
           </span>
-</div>
-</div>
-</div>
-<form class="md-header__option" data-md-component="palette">
-<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
-<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"></path></svg>
-</label>
-<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
-<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"></path></svg>
-</label>
-</form>
-<div class="md-header__option">
-<div class="md-select">
-<button aria-label="选择当前语言" class="md-header__button md-icon">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"></path></svg>
-</button>
-<div class="md-select__inner">
-<ul class="md-select__list">
-<li class="md-select__item">
-<a class="md-select__link" href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" hreflang="zh">
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="选择当前语言">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" hreflang="zh" class="md-select__link">
                     中文
                   </a>
-</li>
-<li class="md-select__item">
-<a class="md-select__link" href="../../../../en/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" hreflang="en">
+                </li>
+              
+                <li class="md-select__item">
+                  <a href="../../../../en/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" hreflang="en" class="md-select__link">
                     English
                   </a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<label class="md-header__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-</label>
-<div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
-</label>
-<nav aria-label="查找" class="md-search__options">
-<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
-</button>
-</nav>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+                </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             正在初始化搜索引擎
           </div>
-<ol class="md-search-result__list" role="presentation"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-header__source">
-<a class="md-source" data-md-component="source" href="https://github.com/ZJU-HelloWorld/Wiki" title="前往仓库">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ZJU-HelloWorld/Wiki" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     ZJU-HelloWorld/Wiki
   </div>
 </a>
-</div>
-</nav>
-<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
-<div class="md-grid">
-<ul class="md-tabs__list">
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../">
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../" class="md-tabs__link">
       首页
     </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../%E5%85%A5%E9%97%A8/%E4%BA%86%E8%A7%A3%20Hello%20World%20%E7%94%B5%E6%8E%A7%E7%BB%84/">
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../%E5%85%A5%E9%97%A8/%E4%BA%86%E8%A7%A3%20Hello%20World%20%E7%94%B5%E6%8E%A7%E7%BB%84/" class="md-tabs__link">
         入门
       </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link md-tabs__link--active" href="../../">
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         开发指南
       </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/">
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/" class="md-tabs__link">
         测试指南
       </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E6%BA%90%E7%A0%81%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/">
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E6%BA%90%E7%A0%81%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/" class="md-tabs__link">
         贡献指南
       </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/">
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/" class="md-tabs__link">
         组件说明
       </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../%E5%85%B3%E4%BA%8E/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC/">
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../%E5%85%B3%E4%BA%8E/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC/" class="md-tabs__link">
         关于
       </a>
-</li>
-</ul>
-</div>
+    </li>
+  
+
+      
+    </ul>
+  </div>
 </nav>
+    
+  
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="Hello World 技术知识库" class="md-nav__button md-logo" data-md-component="logo" href="../../../" title="Hello World 技术知识库">
-<img alt="logo" src="../../../../assets/rm.svg"/>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../" title="Hello World 技术知识库" class="md-nav__button md-logo" aria-label="Hello World 技术知识库" data-md-component="logo">
+      
+  <img src="../../../../assets/rm.svg" alt="logo">
+
+    </a>
     Hello World 技术知识库
   </label>
-<div class="md-nav__source">
-<a class="md-source" data-md-component="source" href="https://github.com/ZJU-HelloWorld/Wiki" title="前往仓库">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ZJU-HelloWorld/Wiki" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     ZJU-HelloWorld/Wiki
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../">
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
         首页
       </a>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
           入门
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_2">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
           入门
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E5%85%A5%E9%97%A8/%E4%BA%86%E8%A7%A3%20Hello%20World%20%E7%94%B5%E6%8E%A7%E7%BB%84/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E5%85%A5%E9%97%A8/%E4%BA%86%E8%A7%A3%20Hello%20World%20%E7%94%B5%E6%8E%A7%E7%BB%84/" class="md-nav__link">
         了解 Hello World 电控组
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E5%85%A5%E9%97%A8/%E5%9C%A8%20Hello%20World%EF%BC%8C%E4%BD%A0%E5%8F%AF%E4%BB%A5/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E5%85%A5%E9%97%A8/%E5%9C%A8%20Hello%20World%EF%BC%8C%E4%BD%A0%E5%8F%AF%E4%BB%A5/" class="md-nav__link">
         你可以...
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E5%85%A5%E9%97%A8/%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E5%85%A5%E9%97%A8/%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" class="md-nav__link">
         机器人系统概述
       </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
-<div class="md-nav__link md-nav__link--index">
-<a href="../../">开发指南</a>
-<label for="__nav_3">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_3">
-<span class="md-nav__icon md-icon"></span>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../">开发指南</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
           开发指南
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
           开发环境
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="true" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_2">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
           开发环境
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
           CubeMX + CLion 配置 STM32 开发环境
           <span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         CubeMX + CLion 配置 STM32 开发环境
       </a>
-<nav aria-label="目录" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       目录
     </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#写在前面">
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#写在前面" class="md-nav__link">
     写在前面
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#软件下载">
+      
+        <li class="md-nav__item">
+  <a href="#软件下载" class="md-nav__link">
     软件下载
   </a>
-<nav aria-label="软件下载" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#clion">
+  
+    <nav class="md-nav" aria-label="软件下载">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clion" class="md-nav__link">
     CLion
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#cubemx">
+        
+          <li class="md-nav__item">
+  <a href="#cubemx" class="md-nav__link">
     CubeMX
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#gcc-arm-none-eabi">
+        
+          <li class="md-nav__item">
+  <a href="#gcc-arm-none-eabi" class="md-nav__link">
     gcc-arm-none-eabi
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#j-link">
+        
+          <li class="md-nav__item">
+  <a href="#j-link" class="md-nav__link">
     J-Link
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#openocd">
+        
+          <li class="md-nav__item">
+  <a href="#openocd" class="md-nav__link">
     OpenOCD
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#mingw可选">
+        
+          <li class="md-nav__item">
+  <a href="#mingw可选" class="md-nav__link">
     MinGW（可选）
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#环境配置">
+      
+        <li class="md-nav__item">
+  <a href="#环境配置" class="md-nav__link">
     环境配置
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#clion配置">
+      
+        <li class="md-nav__item">
+  <a href="#clion配置" class="md-nav__link">
     Clion配置
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#创建工程">
+      
+        <li class="md-nav__item">
+  <a href="#创建工程" class="md-nav__link">
     创建工程
   </a>
-<nav aria-label="创建工程" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#基本配置">
+  
+    <nav class="md-nav" aria-label="创建工程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基本配置" class="md-nav__link">
     基本配置
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#cmakeliststxt">
+        
+          <li class="md-nav__item">
+  <a href="#cmakeliststxt" class="md-nav__link">
     CMakeLists.txt
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#添加文件">
+        
+          <li class="md-nav__item">
+  <a href="#添加文件" class="md-nav__link">
     添加文件
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#修改工程名">
+        
+          <li class="md-nav__item">
+  <a href="#修改工程名" class="md-nav__link">
     修改工程名
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#编译">
+      
+        <li class="md-nav__item">
+  <a href="#编译" class="md-nav__link">
     编译
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#烧录--内部调试">
+      
+        <li class="md-nav__item">
+  <a href="#烧录--内部调试" class="md-nav__link">
     烧录 &amp; 内部调试
   </a>
-<nav aria-label="烧录 &amp; 内部调试" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#j-link-gdb-server">
+  
+    <nav class="md-nav" aria-label="烧录 &amp; 内部调试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#j-link-gdb-server" class="md-nav__link">
     J-Link GDB Server
   </a>
-<nav aria-label="J-Link GDB Server" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#查看变量">
+  
+    <nav class="md-nav" aria-label="J-Link GDB Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#查看变量" class="md-nav__link">
     查看变量
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#查看寄存器">
+        
+          <li class="md-nav__item">
+  <a href="#查看寄存器" class="md-nav__link">
     查看寄存器
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#openocd_1">
+        
+          <li class="md-nav__item">
+  <a href="#openocd_1" class="md-nav__link">
     OpenOCD
   </a>
-<nav aria-label="OpenOCD" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#st-link">
+  
+    <nav class="md-nav" aria-label="OpenOCD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#st-link" class="md-nav__link">
     ST-Link
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#j-link_1">
+        
+          <li class="md-nav__item">
+  <a href="#j-link_1" class="md-nav__link">
     J-Link
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#cmsis-dap">
+        
+          <li class="md-nav__item">
+  <a href="#cmsis-dap" class="md-nav__link">
     CMSIS-DAP
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#外部调试">
+      
+        <li class="md-nav__item">
+  <a href="#外部调试" class="md-nav__link">
     外部调试
   </a>
-<nav aria-label="外部调试" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#j-link-rtt-viewer">
+  
+    <nav class="md-nav" aria-label="外部调试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#j-link-rtt-viewer" class="md-nav__link">
     J-Link RTT Viewer
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#j-scope">
+        
+          <li class="md-nav__item">
+  <a href="#j-scope" class="md-nav__link">
     J-Scope
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#vofa">
+        
+          <li class="md-nav__item">
+  <a href="#vofa" class="md-nav__link">
     Vofa
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#其他">
+      
+        <li class="md-nav__item">
+  <a href="#其他" class="md-nav__link">
     其他
   </a>
-<nav aria-label="其他" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#printf重定向">
+  
+    <nav class="md-nav" aria-label="其他">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#printf重定向" class="md-nav__link">
     printf重定向
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#clion添加文件头部注释">
+        
+          <li class="md-nav__item">
+  <a href="#clion添加文件头部注释" class="md-nav__link">
     CLion添加文件头部注释
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#clion常用快捷键">
+        
+          <li class="md-nav__item">
+  <a href="#clion常用快捷键" class="md-nav__link">
     CLion常用快捷键
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#修改缩进">
+        
+          <li class="md-nav__item">
+  <a href="#修改缩进" class="md-nav__link">
     修改缩进
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#附录">
+      
+        <li class="md-nav__item">
+  <a href="#附录" class="md-nav__link">
     附录
   </a>
-<nav aria-label="附录" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#参考资料">
+  
+    <nav class="md-nav" aria-label="附录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#参考资料" class="md-nav__link">
     参考资料
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#版本说明">
+        
+          <li class="md-nav__item">
+  <a href="#版本说明" class="md-nav__link">
     版本说明
   </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../CubeMX%2BVSCode%2BOzone%20%E9%85%8D%E7%BD%AESTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CubeMX%2BVSCode%2BOzone%20%E9%85%8D%E7%BD%AESTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
         CubeMX + VS Code + Ozone 配置 STM32 开发环境
       </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_3" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
           第三方库
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_3">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
           第三方库
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/CMSIS-DSP%20%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/CMSIS-DSP%20%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
         CMSIS-DSP 软件库使用指南
       </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
           维护指南
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_4">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
           维护指南
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../%E7%BB%B4%E6%8A%A4%E6%8C%87%E5%8D%97/%E6%9B%B4%E6%8D%A2%E5%BC%80%E5%8F%91%E6%9D%BF/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BB%B4%E6%8A%A4%E6%8C%87%E5%8D%97/%E6%9B%B4%E6%8D%A2%E5%BC%80%E5%8F%91%E6%9D%BF/" class="md-nav__link">
         更换开发板
       </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
           设计指南
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_3_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_5">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
           设计指南
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" class="md-nav__link">
         嵌入式编程风格指南
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" class="md-nav__link">
         机器人软件系统架构
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/" class="md-nav__link">
         机器人软件系统设计指南
       </a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
-<div class="md-nav__link md-nav__link--index">
-<a href="../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/">测试指南</a>
-<label for="__nav_4">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_4">
-<span class="md-nav__icon md-icon"></span>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/">测试指南</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
           测试指南
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E5%AE%9E%E6%88%98%E6%B5%8B%E8%AF%95/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E5%AE%9E%E6%88%98%E6%B5%8B%E8%AF%95/" class="md-nav__link">
         实战测试
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E6%95%B4%E6%9C%BA%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E6%95%B4%E6%9C%BA%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95/" class="md-nav__link">
         整机功能测试
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E8%81%94%E5%90%88%E6%B5%8B%E8%AF%95/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E8%81%94%E5%90%88%E6%B5%8B%E8%AF%95/" class="md-nav__link">
         联合测试
       </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
           贡献指南
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_5">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
           贡献指南
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E6%BA%90%E7%A0%81%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E6%BA%90%E7%A0%81%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
         源码贡献指南
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E7%9F%A5%E8%AF%86%E5%BA%93%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E7%9F%A5%E8%AF%86%E5%BA%93%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
         知识库贡献指南
       </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6" type="checkbox"/>
-<div class="md-nav__link md-nav__link--index">
-<a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/">组件说明</a>
-<label for="__nav_6">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_6">
-<span class="md-nav__icon md-icon"></span>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/">组件说明</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
           组件说明
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6_2" type="checkbox"/>
-<div class="md-nav__link md-nav__link--index">
-<a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/">机器人通用组件</a>
-<label for="__nav_6_2">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_6_2_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_6_2">
-<span class="md-nav__icon md-icon"></span>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/">机器人通用组件</a>
+          
+            <label for="__nav_6_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_2">
+          <span class="md-nav__icon md-icon"></span>
           机器人通用组件
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6_2_2" type="checkbox"/>
-<label class="md-nav__link" for="__nav_6_2_2" id="__nav_6_2_2_label" tabindex="0">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6_2_2" id="__nav_6_2_2_label" tabindex="0">
           算法
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_6_2_2_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_6_2_2">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_2_2">
+          <span class="md-nav__icon md-icon"></span>
           算法
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/PID%E6%8E%A7%E5%88%B6%E5%99%A8/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/PID%E6%8E%A7%E5%88%B6%E5%99%A8/" class="md-nav__link">
         PID 控制器
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%99%A8/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%99%A8/" class="md-nav__link">
         卡尔曼滤波器
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6/" class="md-nav__link">
         底盘功率限制
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97/" class="md-nav__link">
         底盘逆运动学解算
       </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6_2_3" type="checkbox"/>
-<label class="md-nav__link" for="__nav_6_2_3" id="__nav_6_2_3_label" tabindex="0">
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6_2_3" id="__nav_6_2_3_label" tabindex="0">
           设备应用
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_6_2_3_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_6_2_3">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_2_3">
+          <span class="md-nav__icon md-icon"></span>
           设备应用
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
         OLED 设备组件
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E7%94%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E7%94%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
         电机（Motor）设备组件
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
         红点激光器（Laser）设备组件
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
         舵机（Servo）设备组件
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%9C%82%E9%B8%A3%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%9C%82%E9%B8%A3%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
         蜂鸣器（Buzzer）设备组件
       </a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6_3" type="checkbox"/>
-<div class="md-nav__link md-nav__link--index">
-<a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/">嵌入式系统支持</a>
-<label for="__nav_6_3">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_6_3_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_6_3">
-<span class="md-nav__icon md-icon"></span>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/">嵌入式系统支持</a>
+          
+            <label for="__nav_6_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_3">
+          <span class="md-nav__icon md-icon"></span>
           嵌入式系统支持
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6_3_2" type="checkbox"/>
-<label class="md-nav__link" for="__nav_6_3_2" id="__nav_6_3_2_label" tabindex="0">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3_2" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6_3_2" id="__nav_6_3_2_label" tabindex="0">
           中间件
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_6_3_2_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_6_3_2">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_3_2">
+          <span class="md-nav__icon md-icon"></span>
           中间件
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/%E4%B8%AD%E9%97%B4%E4%BB%B6/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/%E4%B8%AD%E9%97%B4%E4%BB%B6/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/" class="md-nav__link">
         设备管理框架
       </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6_3_3" type="checkbox"/>
-<label class="md-nav__link" for="__nav_6_3_3" id="__nav_6_3_3_label" tabindex="0">
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3_3" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6_3_3" id="__nav_6_3_3_label" tabindex="0">
           板级支持包
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_6_3_3_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_6_3_3">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_3_3">
+          <span class="md-nav__icon md-icon"></span>
           板级支持包
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/%E6%9D%BF%E7%BA%A7%E6%94%AF%E6%8C%81%E5%8C%85/CAN%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/%E6%9D%BF%E7%BA%A7%E6%94%AF%E6%8C%81%E5%8C%85/CAN%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/" class="md-nav__link">
         CAN总线驱动
       </a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_7" type="checkbox"/>
-<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
           关于
           <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_7">
-<span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
           关于
         </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E5%85%B3%E4%BA%8E/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC/">
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E5%85%B3%E4%BA%8E/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC/" class="md-nav__link">
         关于我们
       </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../%E5%85%B3%E4%BA%8E/%E5%85%B3%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%BA%93/">
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E5%85%B3%E4%BA%8E/%E5%85%B3%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%BA%93/" class="md-nav__link">
         关于知识库
       </a>
-</li>
-</ul>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
 </nav>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="目录" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       目录
     </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#写在前面">
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#写在前面" class="md-nav__link">
     写在前面
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#软件下载">
+      
+        <li class="md-nav__item">
+  <a href="#软件下载" class="md-nav__link">
     软件下载
   </a>
-<nav aria-label="软件下载" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#clion">
+  
+    <nav class="md-nav" aria-label="软件下载">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clion" class="md-nav__link">
     CLion
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#cubemx">
+        
+          <li class="md-nav__item">
+  <a href="#cubemx" class="md-nav__link">
     CubeMX
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#gcc-arm-none-eabi">
+        
+          <li class="md-nav__item">
+  <a href="#gcc-arm-none-eabi" class="md-nav__link">
     gcc-arm-none-eabi
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#j-link">
+        
+          <li class="md-nav__item">
+  <a href="#j-link" class="md-nav__link">
     J-Link
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#openocd">
+        
+          <li class="md-nav__item">
+  <a href="#openocd" class="md-nav__link">
     OpenOCD
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#mingw可选">
+        
+          <li class="md-nav__item">
+  <a href="#mingw可选" class="md-nav__link">
     MinGW（可选）
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#环境配置">
+      
+        <li class="md-nav__item">
+  <a href="#环境配置" class="md-nav__link">
     环境配置
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#clion配置">
+      
+        <li class="md-nav__item">
+  <a href="#clion配置" class="md-nav__link">
     Clion配置
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#创建工程">
+      
+        <li class="md-nav__item">
+  <a href="#创建工程" class="md-nav__link">
     创建工程
   </a>
-<nav aria-label="创建工程" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#基本配置">
+  
+    <nav class="md-nav" aria-label="创建工程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基本配置" class="md-nav__link">
     基本配置
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#cmakeliststxt">
+        
+          <li class="md-nav__item">
+  <a href="#cmakeliststxt" class="md-nav__link">
     CMakeLists.txt
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#添加文件">
+        
+          <li class="md-nav__item">
+  <a href="#添加文件" class="md-nav__link">
     添加文件
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#修改工程名">
+        
+          <li class="md-nav__item">
+  <a href="#修改工程名" class="md-nav__link">
     修改工程名
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#编译">
+      
+        <li class="md-nav__item">
+  <a href="#编译" class="md-nav__link">
     编译
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#烧录--内部调试">
+      
+        <li class="md-nav__item">
+  <a href="#烧录--内部调试" class="md-nav__link">
     烧录 &amp; 内部调试
   </a>
-<nav aria-label="烧录 &amp; 内部调试" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#j-link-gdb-server">
+  
+    <nav class="md-nav" aria-label="烧录 &amp; 内部调试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#j-link-gdb-server" class="md-nav__link">
     J-Link GDB Server
   </a>
-<nav aria-label="J-Link GDB Server" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#查看变量">
+  
+    <nav class="md-nav" aria-label="J-Link GDB Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#查看变量" class="md-nav__link">
     查看变量
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#查看寄存器">
+        
+          <li class="md-nav__item">
+  <a href="#查看寄存器" class="md-nav__link">
     查看寄存器
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#openocd_1">
+        
+          <li class="md-nav__item">
+  <a href="#openocd_1" class="md-nav__link">
     OpenOCD
   </a>
-<nav aria-label="OpenOCD" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#st-link">
+  
+    <nav class="md-nav" aria-label="OpenOCD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#st-link" class="md-nav__link">
     ST-Link
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#j-link_1">
+        
+          <li class="md-nav__item">
+  <a href="#j-link_1" class="md-nav__link">
     J-Link
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#cmsis-dap">
+        
+          <li class="md-nav__item">
+  <a href="#cmsis-dap" class="md-nav__link">
     CMSIS-DAP
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#外部调试">
+      
+        <li class="md-nav__item">
+  <a href="#外部调试" class="md-nav__link">
     外部调试
   </a>
-<nav aria-label="外部调试" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#j-link-rtt-viewer">
+  
+    <nav class="md-nav" aria-label="外部调试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#j-link-rtt-viewer" class="md-nav__link">
     J-Link RTT Viewer
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#j-scope">
+        
+          <li class="md-nav__item">
+  <a href="#j-scope" class="md-nav__link">
     J-Scope
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#vofa">
+        
+          <li class="md-nav__item">
+  <a href="#vofa" class="md-nav__link">
     Vofa
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#其他">
+      
+        <li class="md-nav__item">
+  <a href="#其他" class="md-nav__link">
     其他
   </a>
-<nav aria-label="其他" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#printf重定向">
+  
+    <nav class="md-nav" aria-label="其他">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#printf重定向" class="md-nav__link">
     printf重定向
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#clion添加文件头部注释">
+        
+          <li class="md-nav__item">
+  <a href="#clion添加文件头部注释" class="md-nav__link">
     CLion添加文件头部注释
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#clion常用快捷键">
+        
+          <li class="md-nav__item">
+  <a href="#clion常用快捷键" class="md-nav__link">
     CLion常用快捷键
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#修改缩进">
+        
+          <li class="md-nav__item">
+  <a href="#修改缩进" class="md-nav__link">
     修改缩进
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#附录">
+      
+        <li class="md-nav__item">
+  <a href="#附录" class="md-nav__link">
     附录
   </a>
-<nav aria-label="附录" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#参考资料">
+  
+    <nav class="md-nav" aria-label="附录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#参考资料" class="md-nav__link">
     参考资料
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#版本说明">
+        
+          <li class="md-nav__item">
+  <a href="#版本说明" class="md-nav__link">
     版本说明
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content" data-md-component="content">
-<article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/ZJU-HelloWorld/Wiki/edit/main/docs/开发指南/开发环境/CubeMX+CLion 配置 STM32 开发环境.md" title="编辑此页">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
-</a>
-<a class="md-content__button md-icon" href="https://github.com/ZJU-HelloWorld/Wiki/raw/main/docs/开发指南/开发环境/CubeMX+CLion 配置 STM32 开发环境.md" title="查看本页的源代码">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"></path></svg>
-</a>
-<h1 id="cubemx--clion-配置-stm32-开发环境">CubeMX + CLion 配置 STM32 开发环境<a class="headerlink" href="#cubemx--clion-配置-stm32-开发环境" title="链接到此节">¶</a></h1>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/version-1.4.0-green"><img src="https://img.shields.io/badge/version-1.4.0-green"/></a> <sp> <a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/author-hty-lightgrey"><img src="https://img.shields.io/badge/author-hty-lightgrey"/></a><sp> <a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/system-windows-blue"><img src="https://img.shields.io/badge/system-windows-blue"/></a></sp></sp></p>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/ZJU-HelloWorld/Wiki/edit/main/docs/开发指南/开发环境/CubeMX+CLion 配置 STM32 开发环境.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/ZJU-HelloWorld/Wiki/raw/main/docs/开发指南/开发环境/CubeMX+CLion 配置 STM32 开发环境.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="cubemx--clion-配置-stm32-开发环境">CubeMX + CLion 配置 STM32 开发环境<a class="headerlink" href="#cubemx--clion-配置-stm32-开发环境" title="链接到此节">&para;</a></h1>
+<p><img src = "https://img.shields.io/badge/version-1.4.0-green"> <sp> <img src = "https://img.shields.io/badge/author-hty-lightgrey"><sp> <img src = "https://img.shields.io/badge/system-windows-blue"></p>
 <pre class="mermaid"><code>graph TD
 
 编译工具[[编译工具包]]--&gt;mingw[(MinGW)]--&gt;调试软件
@@ -1094,66 +2289,66 @@
 上位机1--&gt;scope[(J-Scope)]
 上位机1--&gt;rtt[(J-Link RTT Viewer)]
 上位机2--&gt;vofa[(Vofa)]</code></pre>
-<h2 id="写在前面">写在前面<a class="headerlink" href="#写在前面" title="链接到此节">¶</a></h2>
+<h2 id="写在前面">写在前面<a class="headerlink" href="#写在前面" title="链接到此节">&para;</a></h2>
 <p>​       交叉编译链 gcc-arm-none-eabi 的作用，是将文件编译成 arm 架构下的文件格式，如 <code>elf, axf, bin</code>，从而供主控板使用。</p>
 <p>​       编译工具包 MinGW 提供了 gcc、cmake 等工具，其安装是 <mark>可选项</mark> ，因为 CLion 捆绑了 MinGW-w64 9.0 版本。</p>
 <p>​       远程调试指的是在本地主机上对开发板上运行的应用程序进行调试，其需要两个 GDB 程序，运行在远程设备上的程序称之为 GDB Server，运行在本地主机上的 GDB 程序为交叉编译器。</p>
 <p>​       OpenOCD 和 JLinkGDBServer 都属于 GDB Server。OpenOCD 支持 J-Link、ST-Link、CMSIS-DAP（无线调试器） 等多种调试器，但是配置流程稍显复杂，且在使用 CMSIS-DAP 时只能用串口调试助手查看曲线，会占用主控板一个串口。JLinkGDBServer 只支持 J-Link，但是配置和烧录流程会简单一些。</p>
 <p>​       在配置前，可以根据是否需要 CMSIS-DAP 决定选用哪一个调试软件，如果无需 CMSIS-DAP，则建议选用 JLinkGDBServer。当然，如果不确定使用哪个调试软件，也可按照教程一起进行配置，二者并不冲突，可以在不同场合进行切换。</p>
-<h2 id="软件下载">软件下载<a class="headerlink" href="#软件下载" title="链接到此节">¶</a></h2>
-<h3 id="clion">CLion<a class="headerlink" href="#clion" title="链接到此节">¶</a></h3>
+<h2 id="软件下载">软件下载<a class="headerlink" href="#软件下载" title="链接到此节">&para;</a></h2>
+<h3 id="clion">CLion<a class="headerlink" href="#clion" title="链接到此节">&para;</a></h3>
 <ul>
 <li>注册 JetBrains 账号，进行学信网认证，获得浙江大学提供的免费使用权（未激活可有30天免费试用机会）</li>
 <li>如果浙大邮箱无法使用，在<a href="https://foxirj.com/jetbrains-crack-code">激活网站</a>中破解</li>
 <li><a href="https://www.jetbrains.com/clion/">CLion官网</a>下载安装包，使用 JetBrains 账号登录即可</li>
 <li>安装时可选的 Options 全都勾上</li>
 </ul>
-<h3 id="cubemx">CubeMX<a class="headerlink" href="#cubemx" title="链接到此节">¶</a></h3>
+<h3 id="cubemx">CubeMX<a class="headerlink" href="#cubemx" title="链接到此节">&para;</a></h3>
 <ul>
 <li><a href="https://www.st.com/en/development-tools/stm32cubemx.html">STM32CubeMX官网</a>下载安装包</li>
 </ul>
-<h3 id="gcc-arm-none-eabi">gcc-arm-none-eabi<a class="headerlink" href="#gcc-arm-none-eabi" title="链接到此节">¶</a></h3>
+<h3 id="gcc-arm-none-eabi">gcc-arm-none-eabi<a class="headerlink" href="#gcc-arm-none-eabi" title="链接到此节">&para;</a></h3>
 <ul>
 <li><a href="https://link.zhihu.com/?target=https%3A//developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads">gcc-arm-none-eabi官网</a>下载压缩包</li>
 <li>解压后自行修改安装路径</li>
 </ul>
-<h3 id="j-link">J-Link<a class="headerlink" href="#j-link" title="链接到此节">¶</a></h3>
+<h3 id="j-link">J-Link<a class="headerlink" href="#j-link" title="链接到此节">&para;</a></h3>
 <ul>
 <li><a href="https://www.segger.com/downloads/jlink/">J-Link官网</a>下载V7及以上版本，会附带 J-Scope、JLinkGDBServer等重要工具</li>
 </ul>
-<h3 id="openocd">OpenOCD<a class="headerlink" href="#openocd" title="链接到此节">¶</a></h3>
+<h3 id="openocd">OpenOCD<a class="headerlink" href="#openocd" title="链接到此节">&para;</a></h3>
 <ul>
 <li><a href="https://link.zhihu.com/?target=https%3A//gnutoolchains.com/arm-eabi/openocd/">OpenOCD官网</a>下载安装包</li>
 <li>文件夹==不可放置在有空格的路径下==（如<code>Program Files</code>），可直接放置在C盘根目录下</li>
 </ul>
-<h3 id="mingw可选">MinGW（可选）<a class="headerlink" href="#mingw可选" title="链接到此节">¶</a></h3>
+<h3 id="mingw可选">MinGW（可选）<a class="headerlink" href="#mingw可选" title="链接到此节">&para;</a></h3>
 <ul>
 <li><a href="https://bit.ly/mingw10">MinGW官网</a>下载安装包</li>
 <li>默认安装在C盘<code>Program Files</code>目录下，可自行修改路径</li>
 </ul>
-<h2 id="环境配置">环境配置<a class="headerlink" href="#环境配置" title="链接到此节">¶</a></h2>
+<h2 id="环境配置">环境配置<a class="headerlink" href="#环境配置" title="链接到此节">&para;</a></h2>
 <ul>
-<li>搜索"环境变量"→"编辑系统环境变量"→"环境变量"→"Path"→"编辑"→"新建"，添加解压路径中的三个<code>bin</code>目录。</li>
+<li>搜索"环境变量"&rarr;"编辑系统环境变量"&rarr;"环境变量"&rarr;"Path"&rarr;"编辑"&rarr;"新建"，添加解压路径中的三个<code>bin</code>目录。</li>
 <li>如果 MinGW 事先已安装且有 conda 环境，安装 conda 时会自动修改MinGW路径，二者等价。</li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89db14fcf897299cba77d734bb20aa05.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89db14fcf897299cba77d734bb20aa05.png"/></a></p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ff51b7652b58f21d847994010489947b.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ff51b7652b58f21d847994010489947b.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89db14fcf897299cba77d734bb20aa05.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89db14fcf897299cba77d734bb20aa05.png" /></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ff51b7652b58f21d847994010489947b.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ff51b7652b58f21d847994010489947b.png" /></a></p>
 <ul>
 <li>在终端测试是否安装成功
-  <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+  <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">gcc</span> <span class="n">-v</span>                <span class="c"># mingw</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">openocd</span> <span class="n">-v</span>            <span class="c"># openocd</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="n">arm-none-eabi-gcc</span> <span class="n">-v</span>  <span class="c"># eabi</span>
 </code></pre></div></td></tr></table></div></li>
 </ul>
-<h2 id="clion配置">Clion配置<a class="headerlink" href="#clion配置" title="链接到此节">¶</a></h2>
-<p><strong>Clion → File → Settings → Build, Execution, Deployment</strong></p>
+<h2 id="clion配置">Clion配置<a class="headerlink" href="#clion配置" title="链接到此节">&para;</a></h2>
+<p><strong>Clion &rarr; File &rarr; Settings &rarr; Build, Execution, Deployment</strong></p>
 <ul>
 <li>Toolchains</li>
 <li><strong>Toolset</strong>：配置 MinGW 路径，用 CLion 默认捆绑的即可，也可以用自己下载的版本</li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ce1df062eda3f12f0ab0af9da6201d62.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ce1df062eda3f12f0ab0af9da6201d62.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ce1df062eda3f12f0ab0af9da6201d62.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ce1df062eda3f12f0ab0af9da6201d62.png" /></a></p>
 <ul>
 <li>
 <p>CMake</p>
@@ -1162,24 +2357,24 @@
 <p><strong>Build directory</strong>：cmake-build-debug 为编译生成的 .elf 文件所在目录（无需修改）</p>
 </li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5111298bbb51cb73b27606aa9a85d3fc.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5111298bbb51cb73b27606aa9a85d3fc.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5111298bbb51cb73b27606aa9a85d3fc.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5111298bbb51cb73b27606aa9a85d3fc.png" /></a></p>
 <ul>
 <li>Embedded Deveploment</li>
 <li><strong>OpenOCD Location</strong>：OpenOCD 路径，不可有空格</li>
 <li><strong>Stm32CubeMX Location</strong>：CubeMX 路径</li>
 <li>点击 Test 可进行测试</li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/1916cdf1a517dad11109332cedfbd5cb.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/1916cdf1a517dad11109332cedfbd5cb.png"/></a></p>
-<h2 id="创建工程">创建工程<a class="headerlink" href="#创建工程" title="链接到此节">¶</a></h2>
-<h3 id="基本配置">基本配置<a class="headerlink" href="#基本配置" title="链接到此节">¶</a></h3>
-<p><strong>Clion → File → New → Project → STM32CubeMX</strong></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/1916cdf1a517dad11109332cedfbd5cb.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/1916cdf1a517dad11109332cedfbd5cb.png" /></a></p>
+<h2 id="创建工程">创建工程<a class="headerlink" href="#创建工程" title="链接到此节">&para;</a></h2>
+<h3 id="基本配置">基本配置<a class="headerlink" href="#基本配置" title="链接到此节">&para;</a></h3>
+<p><strong>Clion &rarr; File &rarr; New &rarr; Project &rarr; STM32CubeMX</strong></p>
 <ul>
 <li><strong>Location</strong>：工程==文件夹==的位置</li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/c235c072908674d326df57dfe16ddf83.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/c235c072908674d326df57dfe16ddf83.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/c235c072908674d326df57dfe16ddf83.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/c235c072908674d326df57dfe16ddf83.png" /></a></p>
 <p>​       创建后会自动成 Location 中所给文件夹，以及同名的 .ioc 文件，默认是 STM32030F4Px 芯片，点击 Open with STM32CubeMX，在 CubeMX 中重新配置。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/3d9d56b9a9bc4f8817032b864108e64d.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/3d9d56b9a9bc4f8817032b864108e64d.png"/></a></p>
-<p><strong>CubeMX → Project Manager</strong></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/3d9d56b9a9bc4f8817032b864108e64d.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/3d9d56b9a9bc4f8817032b864108e64d.png" /></a></p>
+<p><strong>CubeMX &rarr; Project Manager</strong></p>
 <ul>
 <li><strong>Project Name</strong>：对应 Clion 中 .ioc 文件的名字（demo.ioc）</li>
 <li><strong>Project Location</strong>：对应 Clion 工程目录的根目录而非文件夹名（demo文件夹的根目录为Desktop）</li>
@@ -1189,26 +2384,26 @@
 <li>配置完成后 GENERATE CODE，第一次生成是会出现 overrun 选项，选==是==（CubeMX配置时先进行以上步骤是为了避免在完成了前面的外设配置后因路径问题导致重配）</li>
 <li>若路径有误（第一次生成时没有出现overrun选项）或 Toolchain选择有误（生成的文件目录非后图所示），需删除新生成的文件夹，返回 Clion 中 Open with STM32CubeMX 重新配置</li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/25556576d4714960fc92995e5a5742dc.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/25556576d4714960fc92995e5a5742dc.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/25556576d4714960fc92995e5a5742dc.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/25556576d4714960fc92995e5a5742dc.png" /></a></p>
 <p><strong>返回 Clion</strong></p>
 <p>​       Clion 中会跳出配置文件的选项，可以选择最相近的 stm32f4discovery.cfg，然后点击 Copy to Project &amp; Use，工程目录下就会出现该配置文件，方便之后修改。（也可先取消，之后再配置）</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/66773f95328894f4403cd4d95fa666c5.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/66773f95328894f4403cd4d95fa666c5.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/66773f95328894f4403cd4d95fa666c5.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/66773f95328894f4403cd4d95fa666c5.png" /></a></p>
 <p>​       至此，工程文件基本配置完成，文件结构如下图所示，可返回 CubeMX 继续配置外设。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/a8be8a499df583af9c75c548506cf5e8.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/a8be8a499df583af9c75c548506cf5e8.png"/></a></p>
-<h3 id="cmakeliststxt">CMakeLists.txt<a class="headerlink" href="#cmakeliststxt" title="链接到此节">¶</a></h3>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/a8be8a499df583af9c75c548506cf5e8.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/a8be8a499df583af9c75c548506cf5e8.png" /></a></p>
+<h3 id="cmakeliststxt">CMakeLists.txt<a class="headerlink" href="#cmakeliststxt" title="链接到此节">&para;</a></h3>
 <p>​       整个编译流程是利用 cmake 工具生成了 CMakeList.txt，再根据 CMakeLists.txt 生成了 Makefile 用于编译，所以所有的编译规则都可以在 CMakeLists.txt 中规定，并且会覆盖编辑器中的相关配置。本项目中编译链的设置就在 CMakeLists.txt 自动配置完成，会覆盖之前 Toolchains 中的配置。
-​     <br>
-<a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skkfdnr23s80xnv.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skkfdnr23s80xnv.png"/></a></br></p>
-<h3 id="添加文件">添加文件<a class="headerlink" href="#添加文件" title="链接到此节">¶</a></h3>
+​     <br />
+<a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skkfdnr23s80xnv.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skkfdnr23s80xnv.png" /></a></p>
+<h3 id="添加文件">添加文件<a class="headerlink" href="#添加文件" title="链接到此节">&para;</a></h3>
 <p>​       直接在左侧工程目录下添加所需文件，然后在 CMakeLists.txt 中添加相应文件。</p>
 <ul>
 <li><strong>include_directories</strong>：头文件</li>
 <li><strong>file</strong>：源文件</li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d433ecca118adec95af29669b381e49f.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d433ecca118adec95af29669b381e49f.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d433ecca118adec95af29669b381e49f.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d433ecca118adec95af29669b381e49f.png" /></a></p>
 <p>​       <mark>文件在添加、重命名或删除后需要在下方工具栏 CMake 中 Reload CMake Project，否则会找不到原本编译链中的文件。</mark></p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/20220812193310.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/20220812193310.png"/></a></p>
-<h3 id="修改工程名">修改工程名<a class="headerlink" href="#修改工程名" title="链接到此节">¶</a></h3>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/20220812193310.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/20220812193310.png" /></a></p>
+<h3 id="修改工程名">修改工程名<a class="headerlink" href="#修改工程名" title="链接到此节">&para;</a></h3>
 <ul>
 <li>
 <p>删除 CLion 调试文件夹 <code>cmake-build-debug</code></p>
@@ -1220,16 +2415,16 @@
 <p>CMakeLists.txt 中修改 project 处修改对应的文件名，然后右上角 Reload changes（与上图 Reload CMake Project 作用相同）</p>
 </li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slqna983nreci9aq324f.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slqna983nreci9aq324f.png"/></a></p>
-<h2 id="编译">编译<a class="headerlink" href="#编译" title="链接到此节">¶</a></h2>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slqna983nreci9aq324f.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slqna983nreci9aq324f.png" /></a></p>
+<h2 id="编译">编译<a class="headerlink" href="#编译" title="链接到此节">&para;</a></h2>
 <p>​       点击右上角的锤子即可编译，终端显示 Linking .elf 文件 和 Build finished 即编译成功。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/b8219d2f6142e7b81e1db4e0d1a15783.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/b8219d2f6142e7b81e1db4e0d1a15783.png"/></a></p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/6ae5a1fcbf4ab9da8612213c74ba45cc.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/6ae5a1fcbf4ab9da8612213c74ba45cc.png"/></a></p>
-<h2 id="烧录--内部调试">烧录 &amp; 内部调试<a class="headerlink" href="#烧录--内部调试" title="链接到此节">¶</a></h2>
-<h3 id="j-link-gdb-server">J-Link GDB Server<a class="headerlink" href="#j-link-gdb-server" title="链接到此节">¶</a></h3>
-<p>​       CLion 新建的工程默认使用 OpenOCD，点击 Debug → Edit Configuration → 左上角"+" → Embedded GDB Server，完成相关配置。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png"/></a></p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/allzngw98r2873ncxxoa.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/allzngw98r2873ncxxoa.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/b8219d2f6142e7b81e1db4e0d1a15783.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/b8219d2f6142e7b81e1db4e0d1a15783.png" /></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/6ae5a1fcbf4ab9da8612213c74ba45cc.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/6ae5a1fcbf4ab9da8612213c74ba45cc.png" /></a></p>
+<h2 id="烧录--内部调试">烧录 &amp; 内部调试<a class="headerlink" href="#烧录--内部调试" title="链接到此节">&para;</a></h2>
+<h3 id="j-link-gdb-server">J-Link GDB Server<a class="headerlink" href="#j-link-gdb-server" title="链接到此节">&para;</a></h3>
+<p>​       CLion 新建的工程默认使用 OpenOCD，点击 Debug &rarr; Edit Configuration &rarr; 左上角"+" &rarr; Embedded GDB Server，完成相关配置。</p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png" /></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/allzngw98r2873ncxxoa.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/allzngw98r2873ncxxoa.png" /></a></p>
 <ul>
 <li><strong>Name</strong>： 自行选择</li>
 <li><strong>Target / Executable</strong>：对应的.elf文件</li>
@@ -1239,46 +2434,46 @@
 <li><strong>GDB Server args</strong>：烧录参数（设备、速率），<code>-device STM32F407IG -if SWD -speed 4000k</code></li>
 </ul>
 <p>​       JLinkGDBServer 没有单独的烧录选项，是在进入调试模式时进行代码的烧录（Downloaded executable 选项），点击右上角虫子进行调试&amp;烧录，CLion 会自动打开底部 Debug 工具栏。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjebc74i3msnsu320957tmgkdjenwb.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjebc74i3msnsu320957tmgkdjenwb.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjebc74i3msnsu320957tmgkdjenwb.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjebc74i3msnsu320957tmgkdjenwb.png" /></a></p>
 <p>​       JLinkGDBServer 会首先检查是否连接 J-Link 和主控板，第2、3行亮绿灯表示通过。</p>
 <ul>
 <li>如果二三行都为红灯，检查 J-Link 是否连接以及 J-Link 驱动是否安装。   </li>
 <li>如果第三行为红灯，检查 J-Link 与主控板是否连接。</li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skxn2k2059c7smazkxx72jrvhsk.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skxn2k2059c7smazkxx72jrvhsk.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skxn2k2059c7smazkxx72jrvhsk.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skxn2k2059c7smazkxx72jrvhsk.png" /></a></p>
 <p>​       然后进行 tcp 连接，第一行亮绿灯后自动烧录代码。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png" /></a></p>
 <p>​       烧录完成后若关闭 JLinkGDBServer 界面或断开 J-Link 连接，则退出调试模式，否则仍处于调试模式。</p>
-<h4 id="查看变量">查看变量<a class="headerlink" href="#查看变量" title="链接到此节">¶</a></h4>
+<h4 id="查看变量">查看变量<a class="headerlink" href="#查看变量" title="链接到此节">&para;</a></h4>
 <p>​       Variables 中可以添加变量，CLion 不能在程序运行时查看实时变量，只能通过打断点的方式查看此刻变量值，但是可以查看局部变量。</p>
 <p>​       点击左侧绿色箭头，程序会运行至下一个断点处（while循环中即重新回到此处），可以看到此时全局变量和局部变量都发生了改变，且变量值会显示在变量定义处（95行）。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slkdjwenflzj.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slkdjwenflzj.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slkdjwenflzj.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/slkdjwenflzj.png" /></a></p>
 <p>​       如果变量后出现了<code>&lt;optimized out&gt;</code>的字样，说明编译器自动对其进行了优化，导致其值不可见，一般是由于该变量未被使用（第二段程序有所修改）。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/I%7D838Z~9L5ITZ25N5LDN.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/I%7D838Z~9L5ITZ25N5LDN.png"/></a></p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/NGAEEXLRV04OGTI48VMF6.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/NGAEEXLRV04OGTI48VMF6.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/I%7D838Z~9L5ITZ25N5LDN.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/I%7D838Z~9L5ITZ25N5LDN.png" /></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/NGAEEXLRV04OGTI48VMF6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/NGAEEXLRV04OGTI48VMF6.png" /></a></p>
 <p>​       如果需要取消此优化，在 CMakeList.txt 中修改编译器的优化指令，加在50行之后以覆盖之前的指令，<code>add_compile_options(-O0)</code>，-O0 代表不优化。调试结束后改回，否则影响编译效率。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5%5BGJ3XG4%24B%7B1P7%7DBDG0Y7J3.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5%5BGJ3XG4%24B%7B1P7%7DBDG0Y7J3.png"/></a></p>
-<h4 id="查看寄存器">查看寄存器<a class="headerlink" href="#查看寄存器" title="链接到此节">¶</a></h4>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5%5BGJ3XG4%24B%7B1P7%7DBDG0Y7J3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/5%5BGJ3XG4%24B%7B1P7%7DBDG0Y7J3.png" /></a></p>
+<h4 id="查看寄存器">查看寄存器<a class="headerlink" href="#查看寄存器" title="链接到此节">&para;</a></h4>
 <p>​       Peripherals 中加载对应芯片的 .svd 文件。</p>
 <ul>
 <li>如果有安装过 KEIL，可以在安装子目录中中找到：<code>C:\Users\HTY\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\CMSIS\SVD\STM32F40x.svd</code>。</li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/69GILEZS%7BWI7C722FXR.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/69GILEZS%7BWI7C722FXR.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/69GILEZS%7BWI7C722FXR.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/69GILEZS%7BWI7C722FXR.png" /></a></p>
 <ul>
 <li>也可在 <a href="https://github.com/posborne/cmsis-svd/tree/master/data/STMicro">github链接</a> 上下载对应的文件，放在根目录后选择该文件即可。 </li>
 </ul>
 <p>​       选择 .svd 文件后即可查看相应寄存器的值，这里点亮了C板上的蓝灯，即拉高 <code>GPIOH</code> 下的 <code>GPIO_PIN_10</code>的引脚，可以看到 GPIOH 寄存器 IDR 中的第10位发生改变被置位。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/QEP5%24HPRZP%5B3D8%5BDW5ZGP%7D2.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/QEP5%24HPRZP%5B3D8%5BDW5ZGP%7D2.png"/></a></p>
-<h3 id="openocd_1">OpenOCD<a class="headerlink" href="#openocd_1" title="链接到此节">¶</a></h3>
-<p>​       点击 Debug → Edit Configuration，可以看到 Board config file 已自动配置了之前选择的 .cfg 文件，点击 Assist 可选则 OpenOCD 提供的其他模板配置文件（也可选择自己定义的文件）。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png"/></a></p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d6a31d32f2a57eb3c0399cff41e00dbb.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d6a31d32f2a57eb3c0399cff41e00dbb.png"/></a></p>
-<h4 id="st-link">ST-Link<a class="headerlink" href="#st-link" title="链接到此节">¶</a></h4>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/QEP5%24HPRZP%5B3D8%5BDW5ZGP%7D2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/QEP5%24HPRZP%5B3D8%5BDW5ZGP%7D2.png" /></a></p>
+<h3 id="openocd_1">OpenOCD<a class="headerlink" href="#openocd_1" title="链接到此节">&para;</a></h3>
+<p>​       点击 Debug &rarr; Edit Configuration，可以看到 Board config file 已自动配置了之前选择的 .cfg 文件，点击 Assist 可选则 OpenOCD 提供的其他模板配置文件（也可选择自己定义的文件）。</p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/197c6599834905b74b85ecab268eb9e6.png" /></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d6a31d32f2a57eb3c0399cff41e00dbb.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/d6a31d32f2a57eb3c0399cff41e00dbb.png" /></a></p>
+<h4 id="st-link">ST-Link<a class="headerlink" href="#st-link" title="链接到此节">&para;</a></h4>
 <p>​       打开 .cfg 配置文件，默认是 ST-Link 烧录器，<mark>需要将最后一行的 <code>reset_config srst_only</code> 改为 <code>reset_config none</code>，或者直接删除</mark>。其中的 interface 和 target 文件夹即 OpenOCD 路径 <code>C:\openocd\share\openocd\scripts\</code> 下的两个目录。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ed4871a9373f8024b13ca120b72c4d29.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ed4871a9373f8024b13ca120b72c4d29.png"/></a></p>
-<h4 id="j-link_1">J-Link<a class="headerlink" href="#j-link_1" title="链接到此节">¶</a></h4>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ed4871a9373f8024b13ca120b72c4d29.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/ed4871a9373f8024b13ca120b72c4d29.png" /></a></p>
+<h4 id="j-link_1">J-Link<a class="headerlink" href="#j-link_1" title="链接到此节">&para;</a></h4>
 <p>​       若使用 J-Link 烧录器，则修改为如下代码。</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
@@ -1298,11 +2493,11 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9"></a>
 <a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="n">reset_config</span> <span class="n">none</span>
 </code></pre></div></td></tr></table></div>
-<p>​       同时，由于 OpenOCD 使用 J-Link 的方式很低级，所以我们需要把 J-Link 原来的驱动更换为 WinUSB 驱动才可以被 OpenOCD 识别。<a href="https://visualgdb.com/UsbDriverTool/">USBDriverTool官网</a>下载安装包，打开后右击 J-Link driver → Install WinUSB。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/7e5e4df640242b6c3418d53644ff55ea.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/7e5e4df640242b6c3418d53644ff55ea.png"/></a></p>
-<h4 id="cmsis-dap">CMSIS-DAP<a class="headerlink" href="#cmsis-dap" title="链接到此节">¶</a></h4>
+<p>​       同时，由于 OpenOCD 使用 J-Link 的方式很低级，所以我们需要把 J-Link 原来的驱动更换为 WinUSB 驱动才可以被 OpenOCD 识别。<a href="https://visualgdb.com/UsbDriverTool/">USBDriverTool官网</a>下载安装包，打开后右击 J-Link driver &rarr; Install WinUSB。</p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/7e5e4df640242b6c3418d53644ff55ea.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/7e5e4df640242b6c3418d53644ff55ea.png" /></a></p>
+<h4 id="cmsis-dap">CMSIS-DAP<a class="headerlink" href="#cmsis-dap" title="链接到此节">&para;</a></h4>
 <p>​       若使用 CMSIS-DAP 无线烧录器，则修改为如下代码。</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
@@ -1323,17 +2518,17 @@
 <a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="n">reset_config</span> <span class="n">none</span>
 </code></pre></div></td></tr></table></div>
 <p>​       修改完配置后点击右上角箭头完成烧录。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/772367ce4a2db9d00073adb97072e597.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/772367ce4a2db9d00073adb97072e597.png"/></a></p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0a895eae36360d8c3bef55db69e88ce3.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0a895eae36360d8c3bef55db69e88ce3.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/772367ce4a2db9d00073adb97072e597.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/772367ce4a2db9d00073adb97072e597.png" /></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0a895eae36360d8c3bef55db69e88ce3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0a895eae36360d8c3bef55db69e88ce3.png" /></a></p>
 <p>​       点击右上角的虫子进行调试。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/07ebebbf0116427773e357c920d55b24.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/07ebebbf0116427773e357c920d55b24.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/07ebebbf0116427773e357c920d55b24.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/07ebebbf0116427773e357c920d55b24.png" /></a></p>
 <p>​       在初始化锁相环的时候会出现卡死的情况，原因是 HAL 库与 OpenOCD 对时钟的配置所导致，具体原因见<a href="https://blog.t123yh.xyz:2/index.php/archives/922">OpenOCD在debug时PLL卡死问题</a>。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0f93f38b4b3db416631bcb4fe94aa024.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0f93f38b4b3db416631bcb4fe94aa024.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0f93f38b4b3db416631bcb4fe94aa024.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/0f93f38b4b3db416631bcb4fe94aa024.png" /></a></p>
 <p>解决方案：</p>
 <ul>
 <li>在单片机进入 main 函数时，把系统时钟来源设为 HSI。​(推荐)</li>
 </ul>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
 <span class="normal"><a href="#__codelineno-3-4">4</a></span>
@@ -1350,7 +2545,7 @@
 <ul>
 <li>或者将 main 文件中的 SystemClock_Config 函数作如下修改。</li>
 </ul>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
@@ -1457,18 +2652,18 @@
 <a id="__codelineno-4-53" name="__codelineno-4-53"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>​       具体调试方法与 JLinkGDBServer 中所介绍的相同。</p>
-<h2 id="外部调试">外部调试<a class="headerlink" href="#外部调试" title="链接到此节">¶</a></h2>
-<h3 id="j-link-rtt-viewer">J-Link RTT Viewer<a class="headerlink" href="#j-link-rtt-viewer" title="链接到此节">¶</a></h3>
+<h2 id="外部调试">外部调试<a class="headerlink" href="#外部调试" title="链接到此节">&para;</a></h2>
+<h3 id="j-link-rtt-viewer">J-Link RTT Viewer<a class="headerlink" href="#j-link-rtt-viewer" title="链接到此节">&para;</a></h3>
 <p>​       找到 J-Link 安装目录下的 RRT 文件夹，下图中的压缩包不用解压缩，直接点进去将所需文件复制到工程目录即可。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwn328fddshaekdsovzgnrrdl0vc989q873qf.png" /></a></p>
 <p>​       所需文件为 Config 文件夹下的 <code>SEGGER_RTT_Conf.h</code> 和 RTT 文件夹下的 <code>SEGGER_RTT.c</code>、<code>SEGGER_RTT.h</code>、<code>SEGGER_RTT_printf.c</code>。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwnew827r8oiv092.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwnew827r8oiv092.png"/></a></p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/djwn328ds8danq09r98u.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/djwn328ds8danq09r98u.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwnew827r8oiv092.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/skwnew827r8oiv092.png" /></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/djwn328ds8danq09r98u.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/djwn328ds8danq09r98u.png" /></a></p>
 <p>​       将以上四个文件复制到工程目录下，修改 CMakeLists.txt 与之匹配。同时将 <code>SEGGER_RTT.h</code> 中 <code>#include "../Config/SEGGER_RTT_Conf.h"</code> 改为 CMakeLists.txt 中所包含的路径 <code>#include "SEGGER_RTT_Conf.h"</code>（Config文件夹不存在）。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjenclxjs.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjenclxjs.png"/></a></p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/9MD15JOTMTZK97KO2BMN.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/9MD15JOTMTZK97KO2BMN.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjenclxjs.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sjenclxjs.png" /></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/9MD15JOTMTZK97KO2BMN.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/9MD15JOTMTZK97KO2BMN.png" /></a></p>
 <p>​       编写如下测试代码，需要包含头文件 <code>#include "SEGGER_RTT.h"</code>。程序向两个终端发送不同变量的值，分别为红色的绿色，在 JLinkRTTViewer 中输入‘空格’或‘q’可以改变变量的值。</p>
-<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
@@ -1496,21 +2691,21 @@
 <a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">      </span><span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOH</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PIN_10</span><span class="p">);</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SEGGER_RTT_GetKey</span><span class="p">();</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ch</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">' '</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ch</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">)</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">      </span><span class="p">{</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">          </span><span class="n">global_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">          </span><span class="n">local_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">      </span><span class="p">}</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ch</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">'q'</span><span class="p">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ch</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="p">)</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">      </span><span class="p">{</span>
 <a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">          </span><span class="n">global_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">          </span><span class="n">local_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">      </span><span class="p">}</span>
 <a id="__codelineno-5-15" name="__codelineno-5-15"></a>
 <a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">      </span><span class="n">SEGGER_RTT_SetTerminal</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">      </span><span class="n">SEGGER_RTT_printf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">RTT_CTRL_TEXT_RED</span><span class="s">"global: %d</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">global_flag</span><span class="p">);</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">      </span><span class="n">SEGGER_RTT_printf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">RTT_CTRL_TEXT_RED</span><span class="s">&quot;global: %d</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">global_flag</span><span class="p">);</span>
 <a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">      </span><span class="n">SEGGER_RTT_SetTerminal</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">      </span><span class="n">SEGGER_RTT_printf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">RTT_CTRL_TEXT_GREEN</span><span class="s">"local: %d</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">local_flag</span><span class="p">);</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">      </span><span class="n">SEGGER_RTT_printf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">RTT_CTRL_TEXT_GREEN</span><span class="s">&quot;local: %d</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">local_flag</span><span class="p">);</span>
 <a id="__codelineno-5-20" name="__codelineno-5-20"></a>
 <a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">      </span><span class="n">HAL_Delay</span><span class="p">(</span><span class="mi">800</span><span class="p">);</span>
 <a id="__codelineno-5-22" name="__codelineno-5-22"></a>
@@ -1519,25 +2714,25 @@
 <a id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="w">  </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>​       打开 JLinkRTTViewer，下拉箭头选择对应芯片。可以同时打开两个以方便观察不同终端的输出。更多功能详见<a href="https://www.segger.com/products/debug-probes/j-link/tools/rtt-viewer/">官网</a>。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sinwcxo.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sinwcxo.png"/></a></p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sj2d8ccxqkjbs.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sj2d8ccxqkjbs.png"/></a></p>
-<h3 id="j-scope">J-Scope<a class="headerlink" href="#j-scope" title="链接到此节">¶</a></h3>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sinwcxo.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sinwcxo.png" /></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sj2d8ccxqkjbs.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/sj2d8ccxqkjbs.png" /></a></p>
+<h3 id="j-scope">J-Scope<a class="headerlink" href="#j-scope" title="链接到此节">&para;</a></h3>
 <ul>
 <li><strong>Specify Target Device</strong>：​输入对应芯片（IG要大写）</li>
 <li><strong>Sampling Rate</strong>：采样间隔需大于20000us，因为采样频率从最大50Hz</li>
 <li><strong>Elf File</strong>：选择工程目录下 cmake-build-debug 中的 .elf 文件</li>
 </ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89fd00824ab96b4c40a5f195360ca79b.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89fd00824ab96b4c40a5f195360ca79b.png"/></a></p>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89fd00824ab96b4c40a5f195360ca79b.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/89fd00824ab96b4c40a5f195360ca79b.png" /></a></p>
 <p>​       如果之前更改了 USB 驱动，需要用 USBDriverTool 恢复。</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/62654cbd7286ee7689dcca91546c7328.png"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/62654cbd7286ee7689dcca91546c7328.png"/></a></p>
-<h3 id="vofa">Vofa<a class="headerlink" href="#vofa" title="链接到此节">¶</a></h3>
+<p><a class="glightbox" href="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/62654cbd7286ee7689dcca91546c7328.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/62654cbd7286ee7689dcca91546c7328.png" /></a></p>
+<h3 id="vofa">Vofa<a class="headerlink" href="#vofa" title="链接到此节">&para;</a></h3>
 <p>​       使用无线烧录器时需用 Vofa 或其他串口调试助手查看数据。</p>
-<h2 id="其他">其他<a class="headerlink" href="#其他" title="链接到此节">¶</a></h2>
-<h3 id="printf重定向">printf重定向<a class="headerlink" href="#printf重定向" title="链接到此节">¶</a></h3>
+<h2 id="其他">其他<a class="headerlink" href="#其他" title="链接到此节">&para;</a></h2>
+<h3 id="printf重定向">printf重定向<a class="headerlink" href="#printf重定向" title="链接到此节">&para;</a></h3>
 <p>详见<a href="https://zhuanlan.zhihu.com/p/145801160">稚晖君教程</a></p>
-<h3 id="clion添加文件头部注释">CLion添加文件头部注释<a class="headerlink" href="#clion添加文件头部注释" title="链接到此节">¶</a></h3>
+<h3 id="clion添加文件头部注释">CLion添加文件头部注释<a class="headerlink" href="#clion添加文件头部注释" title="链接到此节">&para;</a></h3>
 <p><a href="https://blog.csdn.net/qq_39161804/article/details/83865853">CLion自动添加文件头部注释</a></p>
-<h3 id="clion常用快捷键">CLion常用快捷键<a class="headerlink" href="#clion常用快捷键" title="链接到此节">¶</a></h3>
+<h3 id="clion常用快捷键">CLion常用快捷键<a class="headerlink" href="#clion常用快捷键" title="链接到此节">&para;</a></h3>
 <ul>
 <li><code>ctrl</code> + <code>左键</code>：转到定义</li>
 <li><code>ctrl</code> + <code>F</code>：当前文件搜索</li>
@@ -1549,10 +2744,10 @@
 <li><code>ctrl</code> + <code>/</code>：添加注释</li>
 <li><code>alt</code> + <code>→</code>：切换文件</li>
 </ul>
-<h3 id="修改缩进">修改缩进<a class="headerlink" href="#修改缩进" title="链接到此节">¶</a></h3>
+<h3 id="修改缩进">修改缩进<a class="headerlink" href="#修改缩进" title="链接到此节">&para;</a></h3>
 <p>​       CubeMX 生成的代码默认的缩进为 2 spaces，可使用 vscode 进行修改，这种方法只能单个文件修改，且CubeMX 重新 generate code 后仍会变成默认缩进，<a href="https://blog.csdn.net/spiremoon/article/details/111519064">修改缩进（vscode）</a>。</p>
-<h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">¶</a></h2>
-<h3 id="参考资料">参考资料<a class="headerlink" href="#参考资料" title="链接到此节">¶</a></h3>
+<h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">&para;</a></h2>
+<h3 id="参考资料">参考资料<a class="headerlink" href="#参考资料" title="链接到此节">&para;</a></h3>
 <p><a href="https://www.jetbrains.com/help/clion/embedded-overview.html">CLion官网</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/145801160">整体配置教程1（稚晖君）</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/478097828">整体配置教程2</a></p>
@@ -1567,7 +2762,7 @@
 <p><a href="https://blog.t123yh.xyz:2/index.php/archives/922">OpenOCD在debug时PLL卡死问题</a></p>
 <p><a href="https://blog.csdn.net/qq_39161804/article/details/83865853">CLion自动添加文件头部注释</a></p>
 <p><a href="https://blog.csdn.net/spiremoon/article/details/111519064">修改缩进（vscode）</a></p>
-<h3 id="版本说明">版本说明<a class="headerlink" href="#版本说明" title="链接到此节">¶</a></h3>
+<h3 id="版本说明">版本说明<a class="headerlink" href="#版本说明" title="链接到此节">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1579,152 +2774,210 @@
 </thead>
 <tbody>
 <tr>
-<td><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/version-1.0.0-green"><img alt="hh" src="https://img.shields.io/badge/version-1.0.0-green"/></a></td>
+<td><a class="glightbox" href="https://img.shields.io/badge/version-1.0.0-green" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-1.0.0-green" /></a></td>
 <td>2022.09.01</td>
 <td>基本配置</td>
 <td>胡天扬</td>
 </tr>
 <tr>
-<td><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/version-1.1.0-green"><img alt="hh" src="https://img.shields.io/badge/version-1.1.0-green"/></a></td>
+<td><a class="glightbox" href="https://img.shields.io/badge/version-1.1.0-green" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-1.1.0-green" /></a></td>
 <td>2022.09.03</td>
 <td>添加debug流程</td>
 <td>胡天扬</td>
 </tr>
 <tr>
-<td><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/version-1.2.0-green"><img alt="hh" src="https://img.shields.io/badge/version-1.2.0-green"/></a></td>
+<td><a class="glightbox" href="https://img.shields.io/badge/version-1.2.0-green" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-1.2.0-green" /></a></td>
 <td>2022.09.03</td>
 <td>添加其他clion功能</td>
 <td>胡天扬</td>
 </tr>
 <tr>
-<td><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/version-1.3.0-green"><img alt="hh" src="https://img.shields.io/badge/version-1.3.0-green"/></a></td>
+<td><a class="glightbox" href="https://img.shields.io/badge/version-1.3.0-green" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-1.3.0-green" /></a></td>
 <td>2022.09.04</td>
 <td>添加RTT流程</td>
 <td>胡天扬</td>
 </tr>
 <tr>
-<td><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="https://img.shields.io/badge/version-1.4.0-green"><img alt="hh" src="https://img.shields.io/badge/version-1.4.0-green"/></a></td>
+<td><a class="glightbox" href="https://img.shields.io/badge/version-1.4.0-green" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-1.4.0-green" /></a></td>
 <td>2022.09.04</td>
 <td>删除mingw</td>
 <td>胡天扬</td>
 </tr>
 </tbody>
 </table>
-<hr/>
+
+  <hr>
 <div class="md-source-file">
-<small>
+  <small>
     
       最后更新:
       <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-12</span>
-<br/>
+      
+        <br>
         创建日期:
         <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-14</span>
-</small>
+      
+    
+  </small>
 </div>
-<form class="md-feedback" hidden="" name="feedback">
-<fieldset>
-<legend class="md-feedback__title">
+
+
+  
+
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
         此页面如何?
       </legend>
-<div class="md-feedback__inner">
-<div class="md-feedback__list">
-<button class="md-feedback__icon md-icon" data-md-value="0" title="完全没帮助" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"></path></svg>
-</button>
-<button class="md-feedback__icon md-icon" data-md-value="1" title="有点拉" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"></path></svg>
-</button>
-<button class="md-feedback__icon md-icon" data-md-value="2" title="一般般" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"></path></svg>
-</button>
-<button class="md-feedback__icon md-icon" data-md-value="3" title="还不错" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"></path></svg>
-</button>
-<button class="md-feedback__icon md-icon" data-md-value="4" title="很棒！" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"></path></svg>
-</button>
-</div>
-<div class="md-feedback__note">
-<div data-md-value="0" hidden="">
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="完全没帮助" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="有点拉" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="一般般" data-md-value="2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="还不错" data-md-value="3">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="很棒！" data-md-value="4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="0" hidden>
               
               
                 
               
               感谢反馈！联系作者或点击标题右侧的浅色 pencil 标记来帮助改进XD
             </div>
-<div data-md-value="1" hidden="">
+          
+            <div data-md-value="1" hidden>
               
               
                 
               
               感谢反馈！联系作者或点击标题右侧的浅色 pencil 标记来帮助改进XD
             </div>
-<div data-md-value="2" hidden="">
+          
+            <div data-md-value="2" hidden>
               
               
                 
               
               感谢反馈！联系作者或点击标题右侧的浅色 pencil 标记来帮助改进XD
             </div>
-<div data-md-value="3" hidden="">
+          
+            <div data-md-value="3" hidden>
               
               
                 
               
               感谢反馈！联系作者或点击标题右侧的浅色 pencil 标记来帮助改进XD
             </div>
-<div data-md-value="4" hidden="">
+          
+            <div data-md-value="4" hidden>
               
               
                 
               
               感谢反馈！
             </div>
-</div>
-</div>
-</fieldset>
-</form>
-</article>
-</div>
-</div>
-<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             回到页面顶部
           </button>
-</main>
-<footer class="md-footer">
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-copyright">
-<div class="md-copyright__highlight">
-      Copyright © 2022 - 2023 Hello World Team, Zhejiang University
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 - 2023 Hello World Team, Zhejiang University
     </div>
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
       Material for MkDocs
     </a>
+  
 </div>
-<div class="md-social">
-<a class="md-social__link" href="https://github.com/ZJU-HelloWorld" rel="noopener" target="_blank" title="github.com">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
-</a>
-<a class="md-social__link" href="mailto:&lt;ZJU_HelloWorld@163.com&gt;" rel="noopener" target="_blank" title="">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"></path></svg>
-</a>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ZJU-HelloWorld" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:<ZJU_HelloWorld@163.com>" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
 </div>
-</div>
-</div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<div class="md-dialog" data-md-component="dialog">
-<div class="md-dialog__inner md-typeset"></div>
-</div>
-<script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
-<script src="../../../../assets/javascripts/bundle.51198bba.min.js"></script>
-<script src="../../../../javascripts/mathjax.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.fac441b0.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>
