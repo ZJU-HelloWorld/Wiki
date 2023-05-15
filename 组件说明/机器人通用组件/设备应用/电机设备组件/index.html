@@ -15,7 +15,7 @@
         <link rel="next" href="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
       
       <link rel="icon" href="../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.9">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
     
     
       
@@ -1959,7 +1959,8 @@
 
 
 <h1 id="电机motor设备组件">电机（Motor）设备组件<a class="headerlink" href="#电机motor设备组件" title="链接到此节">&para;</a></h1>
-<p><img src = "https://img.shields.io/badge/version-1.1.1-green"><sp> <img src = "https://img.shields.io/badge/author-ckz-lightgrey"></p>
+<p><img src = "https://img.shields.io/badge/version-1.1.2-green"><sp> <img src = "https://img.shields.io/badge/author-ckz-lightgrey"></p>
+<p><strong>1.1.2版本相比先前版本新增了一部分初始化参数，由先前版本更新为后续版本的程序需修改初始化方式！！！</strong></p>
 <h2 id="适用电机种类">适用电机种类<a class="headerlink" href="#适用电机种类" title="链接到此节">&para;</a></h2>
 <p>该组件当前适用的电机有：GM6020，M3508，M2006，M8910，宇树 A1，DM-J4310-2EC，各个电机使用注意事项详见附录部分</p>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
@@ -1996,24 +1997,33 @@
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dev_config.h&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>实例化一个电机参数配置结构并进行相关配置，如：</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
-<span class="normal"><a href="#__codelineno-2-2">2</a></span>
-<span class="normal"><a href="#__codelineno-2-3">3</a></span>
-<span class="normal"><a href="#__codelineno-2-4">4</a></span>
-<span class="normal"><a href="#__codelineno-2-5">5</a></span>
-<span class="normal"><a href="#__codelineno-2-6">6</a></span>
-<span class="normal"><a href="#__codelineno-2-7">7</a></span>
-<span class="normal"><a href="#__codelineno-2-8">8</a></span>
-<span class="normal"><a href="#__codelineno-2-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">MotorInitParams_t</span><span class="w"> </span><span class="n">init_params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="p">.</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FWD</span><span class="p">,</span><span class="w">                         </span><span class="c1">// 电机转动正方向与程序定义正方向一致</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">                            </span><span class="c1">// 电调id为1</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">MotorInitParams_t</span><span class="w"> </span><span class="n">init_params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="p">.</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FWD</span><span class="p">,</span><span class="w">                 </span><span class="c1">// 电机转动正方向与程序定义正方向一致</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">                    </span><span class="c1">// 电调id为1</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="p">.</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANG_NPI_PPI</span><span class="p">,</span><span class="w">               </span><span class="c1">// 输出端角度范围[-π, π)</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="p">.</span><span class="n">redution_rat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">                  </span><span class="c1">// 外加减速箱减速比为1（无外加减速箱）</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M3508</span><span class="p">,</span><span class="w">                      </span><span class="c1">// M3508电机</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="p">.</span><span class="n">ang_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                    </span><span class="c1">// 实际角度与程序设定的角度相同</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="p">.</span><span class="n">remove_build_in_reducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w">   </span><span class="c1">// 不移除自带减速器</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="p">};</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="p">.</span><span class="n">max_raw_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEFAULT_VALUE</span><span class="p">,</span><span class="w">     </span><span class="c1">// 使用默认报文输入限制</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="p">.</span><span class="n">max_torque</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">                    </span><span class="c1">// 限制电机输出端最大力矩指令为1N·m</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="p">.</span><span class="n">max_current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w">                 </span><span class="c1">// 限制电机最大电流指令为0.2A</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
+<ul>
+<li>注意只有当设置的输入限制小于原有的默认限制时才可产生作用，比如某电机最大输出端输出力矩为1N·m，则设置2N·m的最大输出端力矩指令限制不会产生作用，实际的输出端力矩指令仍会被限制为1N·m</li>
+</ul>
 <p>实例化一个电机组件并放入对应电机参数进行初始化，如：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">Motor_t</span><span class="w"> </span><span class="n">motor1</span><span class="p">;</span>
@@ -2140,7 +2150,7 @@
 <td align="left"><code>kMaxTorque</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机转子端最大允许输出力矩，单位 N·m</td>
+<td align="left">电机<strong>转子端</strong>最大允许输出力矩，单位 N·m</td>
 </tr>
 <tr>
 <td align="left"><code>kMaxCurrent</code></td>
@@ -2152,7 +2162,7 @@
 <td align="left"><code>kTorqueConst</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机转子的转矩常数，单位 N·m/A</td>
+<td align="left">电机<strong>转子</strong>的转矩常数，单位 N·m/A</td>
 </tr>
 <tr>
 <td align="left"><code>kReduRat</code></td>
@@ -2217,7 +2227,7 @@
 <td align="left"><code>range</code></td>
 <td align="left"><code>AngRange_e</code></td>
 <td align="left">ANG_NPI_PPI</td>
-<td align="left">电机输出端角度范围</td>
+<td align="left">电机<strong>输出端</strong>角度范围</td>
 </tr>
 <tr>
 <td align="left"><code>redution_rat</code></td>
@@ -2229,13 +2239,31 @@
 <td align="left"><code>ang_offset</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">0</td>
-<td align="left">实际角度与程序设定的角度之差</td>
+<td align="left">实际<strong>输出端</strong>角度与程序设定的角度之差</td>
 </tr>
 <tr>
 <td align="left"><code>remove_build_in_reducer</code></td>
 <td align="left"><code>bool</code></td>
 <td align="left">false</td>
 <td align="left">是否去除自带减速器</td>
+</tr>
+<tr>
+<td align="left"><code>max_raw_input</code></td>
+<td align="left"><code>int16_t</code></td>
+<td align="left">16384</td>
+<td align="left">程序中电机接收报文最大输入限制</td>
+</tr>
+<tr>
+<td align="left"><code>max_torque</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">2</td>
+<td align="left">程序中电机<strong>输出端</strong>最大允许输出力矩限制，单位 N·m</td>
+</tr>
+<tr>
+<td align="left"><code>max_current</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">2</td>
+<td align="left">程序中电机最大允许电流限制，单位 A</td>
 </tr>
 </tbody>
 </table>
@@ -2255,13 +2283,13 @@
 <td align="left"><code>omg</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机输出端的角速度，单位 rad/s</td>
+<td align="left">电机<strong>输出端</strong>的角速度，单位 rad/s</td>
 </tr>
 <tr>
 <td align="left"><code>ang</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机输出端角度，单位 rad</td>
+<td align="left">电机<strong>输出端</strong>角度，单位 rad</td>
 </tr>
 <tr>
 <td align="left"><code>current</code></td>
@@ -2273,7 +2301,7 @@
 <td align="left"><code>torque</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机输出端的力矩，单位 N·m</td>
+<td align="left">电机<strong>输出端</strong>的力矩，单位 N·m</td>
 </tr>
 <tr>
 <td align="left"><code>temp</code></td>
@@ -2336,13 +2364,13 @@
 <td align="left"><code>ang_offset</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">0</td>
-<td align="left">电机输出端角度偏置值，单位 rad</td>
+<td align="left">电机<strong>输出端</strong>角度偏置值，单位 rad</td>
 </tr>
 <tr>
 <td align="left"><code>kAngRange</code></td>
 <td align="left"><code>AngRange_e</code></td>
 <td align="left">ANG_NPI_PPI</td>
-<td align="left">电机输出单角度范围，单位 rad</td>
+<td align="left">电机<em>*</em><em>输出端</em>*角度范围，单位 rad</td>
 </tr>
 <tr>
 <td align="left"><code>is_start</code></td>
@@ -2354,7 +2382,7 @@
 <td align="left"><code>input.torque</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机输出端的期望输出力矩，单位 N·m</td>
+<td align="left">电机<strong>输出端</strong>的期望输出力矩，单位 N·m</td>
 </tr>
 <tr>
 <td align="left"><code>input.current</code></td>
@@ -2372,25 +2400,25 @@
 <td align="left"><code>feedback.omg</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机输出端的转速，单位 rad/s</td>
+<td align="left">电机<strong>输出端</strong>的转速，单位 rad/s</td>
 </tr>
 <tr>
 <td align="left"><code>feedback.ang</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机输出端角度，单位为 rad</td>
+<td align="left">电机<strong>输出端</strong>角度，单位为 rad</td>
 </tr>
 <tr>
 <td align="left"><code>feedback.actual_ang</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机输出端未修正角度角度，单位 rad</td>
+<td align="left">电机<strong>输出端</strong>未修正角度角度，单位 rad</td>
 </tr>
 <tr>
 <td align="left"><code>feedback.round</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机转子记圈，用于计算输出端角度</td>
+<td align="left">电机转子记圈，用于计算<strong>输出端</strong>角度</td>
 </tr>
 <tr>
 <td align="left"><code>feedback.current</code></td>
@@ -2408,13 +2436,13 @@
 <td align="left"><code>feedback.ang_raw</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">电机转子端编码器反馈值</td>
+<td align="left">电机<strong>转子端</strong>编码器反馈值</td>
 </tr>
 <tr>
 <td align="left"><code>feedback.ang_raw_last</code></td>
 <td align="left"><code>float</code></td>
 <td align="left">/</td>
-<td align="left">上一时刻电机转子端编码器反馈值</td>
+<td align="left">上一时刻电机<strong>转子端</strong>编码器反馈值</td>
 </tr>
 <tr>
 <td align="left"><code>feedback.temp</code></td>
@@ -2446,8 +2474,8 @@
 </tr>
 <tr>
 <td align="left"><code>setTorque</code></td>
-<td align="left">torque：电机输出端期望力矩，单位 N·m</td>
-<td>设置电机输出端的期望力矩（限幅），返回实际设定的期望输出力矩，适用于个别电机，不适用的电机调用会报错</td>
+<td align="left">torque：电机<strong>输出端</strong>期望力矩，单位 N·m</td>
+<td>设置电机<strong>输出端</strong>的期望力矩（限幅），返回实际设定的期望输出力矩，适用于个别电机，不适用的电机调用会报错</td>
 </tr>
 <tr>
 <td align="left"><code>setCurrent</code></td>
@@ -2591,8 +2619,14 @@
 </tr>
 <tr>
 <td><img src = "https://img.shields.io/badge/version-1.1.1-green"></td>
-<td>2023.04.14</td>
+<td>2023.05.08</td>
 <td>1.新增部分电机温度读取</td>
+<td>蔡坤镇</td>
+</tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-1.1.2-green"></td>
+<td>2023.05.14</td>
+<td>1.新增程序设定电机输入指令限制<br>2.修改电机参数描述</td>
 <td>蔡坤镇</td>
 </tr>
 </tbody>
@@ -2603,7 +2637,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-15</span>
       
         <br>
         创建日期:
@@ -2762,7 +2796,7 @@
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.fac441b0.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.c2be25ad.min.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
       
