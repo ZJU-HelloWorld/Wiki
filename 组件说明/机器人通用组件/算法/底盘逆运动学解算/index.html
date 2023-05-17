@@ -2121,7 +2121,7 @@
 
 
 <h1 id="底盘逆运动学解算">底盘逆运动学解算<a class="headerlink" href="#底盘逆运动学解算" title="链接到此节">&para;</a></h1>
-<p><img src = "https://img.shields.io/badge/version-1.2.0-green" >  <sp> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey" ></p>
+<p><img src = "https://img.shields.io/badge/version-1.2.1-green" >  <sp> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey" ></p>
 <h2 id="理论">理论<a class="headerlink" href="#理论" title="链接到此节">&para;</a></h2>
 <p>根据给定的底盘 <span class="arithmatex">\(x,y\)</span> 方向上的目标平动速度分量和绕 <span class="arithmatex">\(z\)</span> 轴的目标旋转角速度分量，经逆运动学解算，能够得出：</p>
 <ul>
@@ -2352,19 +2352,19 @@ s\psi_i\   &amp;-c\psi_i\    &amp;0\\
 \end{bmatrix}
 \end{align}
 \]</div>
-<p>有
-$$
+<p>有</p>
+<div class="arithmatex">\[
 \begin{align}
 ^{M_i} \boldsymbol V_i =
-{^{M_i}<em xi="xi">OR}  ^O\boldsymbol V_i
+{^{M_i}_OR} \ ^O\boldsymbol V_i
 \triangleq
 \begin{bmatrix}
-^{M_i}v</em>\ 
-^{M_i}v_{yi}\
+^{M_i}v_{xi}\\ 
+^{M_i}v_{yi}\\
 0
 \end{bmatrix}
 \end{align}
-$$</p>
+\]</div>
 <p>可以进一步计算：</p>
 <ul>
 <li><strong>航向电机角度</strong> <span class="arithmatex">\(^{M_i}\theta_i\)</span>，单位：<span class="arithmatex">\(\rm rad\)</span>.</li>
