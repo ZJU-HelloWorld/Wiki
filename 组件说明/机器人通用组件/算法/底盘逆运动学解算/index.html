@@ -15,7 +15,7 @@
         <link rel="next" href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
       
       <link rel="icon" href="../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
     
     
       
@@ -2135,7 +2135,7 @@
 <ul>
 <li><strong>驱动电机（driving motor）</strong> 驱动底盘移动。目前型号为 M3508，反馈转子转速单位为 <span class="arithmatex">\(\rm rpm\)</span></li>
 <li><strong>航向电机（steering motor）</strong> 在舵轮轮组中负责改变驱动轮朝向。目前（2022赛季）型号为 GM6020，编码器反馈机械转子刻度 0 ~ 8191，程序中线性映射到 <span class="arithmatex">\(-\pi\)</span> ~ <span class="arithmatex">\(0\)</span> ~ <span class="arithmatex">\(\pi\)</span>；对其他型号的航向电机，可采用类似的映射</li>
-<li>记<strong>驱动轮直径</strong>为 <span class="arithmatex">\(d\)</span>，该值可由模型读出，单位：<span class="arithmatex">\(\rm m\)</span></li>
+<li><strong>驱动轮直径（diameter）</strong>记为 <span class="arithmatex">\(d\)</span>，该值可由模型读出，单位：<span class="arithmatex">\(\rm m\)</span></li>
 <li><strong>轴距（wheelbase）</strong> 即前后轮轴间距离，该值可由模型读出，记为 <span class="arithmatex">\(l\)</span>，单位：<span class="arithmatex">\(\rm m\)</span></li>
 <li><strong>轮距（track）</strong> 即左右驱动轮中心距离，该值可由模型读出，记为 <span class="arithmatex">\(w\)</span>，单位：<span class="arithmatex">\(\rm m\)</span></li>
 </ul>
@@ -2162,10 +2162,7 @@
 <p>其动力学与运动学原理与麦轮类似，只是其辊子轴线与轮毂轴线的夹角为 90°，且在轮组布局上有所差异，速度分解时相关系数发生改变。</p>
 <h3 id="坐标系和运动状态表示">坐标系和运动状态表示<a class="headerlink" href="#坐标系和运动状态表示" title="链接到此节">&para;</a></h3>
 <p>对本文中所有坐标系，绕坐标轴逆时针旋转（CCW）为正（右手定则）。</p>
-<p>根据航向电机编码器的零位朝向，定义电机（定子）坐标系，转子朝向向量指向 <span class="arithmatex">\(x^+\)</span>。图1所示情况电机角度约为 <span class="arithmatex">\({2\over3}\pi\ \rm rad\)</span>。</p>
-<blockquote>
-<p><strong>说明：</strong>转子朝向向量在 GM6020 电机实体上可描述为：由电机中轴指向销孔中心的方向向量。</p>
-</blockquote>
+<p>根据航向电机编码器的零位朝向，定义电机（定子）坐标系，转子朝向指向 <span class="arithmatex">\(x^+\)</span>。</p>
 <figure>
 <p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/gm6020_coordinate.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97.assets/gm6020_coordinate.png" width="200" /></a>
   </p>
@@ -2195,7 +2192,7 @@
 <figcaption>图4 麦轮 / 全向轮底盘俯视图</figcaption>
 </figure>
 <p>对每个麦克纳姆轮 / 全向轮，用一个向量 <span class="arithmatex">\(\boldsymbol V_i\)</span> 表征其运动速度（如图4）。</p>
-<p>则所有轮（组）的运动状态均可表示为：</p>
+<p>则各轮（组）的运动状态可表示为：</p>
 <div class="arithmatex">\[
 \begin{align}
 ^O\boldsymbol V_i=
@@ -2266,7 +2263,7 @@ v_{yi}\\
 </tr>
 </tbody>
 </table>
-<p>对于每个轮（组），平动分量仍为 <span class="arithmatex">\(\boldsymbol v\)</span> . 将 <span class="arithmatex">\(\boldsymbol \omega\)</span> 定义为 <span class="arithmatex">\([0\ 0\ \omega]^{\mathrm T}\)</span>，记叉乘矩阵</p>
+<p>对于每个轮（组），平动分量仍为 <span class="arithmatex">\(\boldsymbol v\)</span> . 将 <span class="arithmatex">\(\boldsymbol \omega\)</span> 定义为 <span class="arithmatex">\([0\ 0\ \omega]^{\mathrm T}\)</span>，记反对称矩阵</p>
 <div class="arithmatex">\[
 \boldsymbol S=
 \begin{bmatrix}
@@ -2318,12 +2315,12 @@ v_y \\
 <p>应用上述通用算法，<u>暂不考虑优化</u>，给出以下信息：</p>
 <ul>
 <li>目前（2022赛季）航向电机安装方式为转子朝下；</li>
-<li>认为 <span class="arithmatex">\(oxy\)</span> 平面平行于  <span class="arithmatex">\(m_ix_iy_i\)</span> 平面，则 <span class="arithmatex">\(ox\)</span> 相对 <span class="arithmatex">\(m_ix_i\)</span> 在平面上的夹角可在模型中读出，记为 <span class="arithmatex">\(\psi_i\)</span>，单位：<span class="arithmatex">\(\rm rad.\)</span> </li>
+<li>认为 <span class="arithmatex">\(oxy\)</span> 平面平行于  <span class="arithmatex">\(m_ix_iy_i\)</span> 平面。现实中，标定当驱动轮向量指向底盘 <span class="arithmatex">\(x^+\)</span> 方向时的航向电机角度，记为 <span class="arithmatex">\(\psi_i\)</span>，单位：<span class="arithmatex">\(\rm rad.\)</span> </li>
 </ul>
-<p>可确定旋转矩阵：</p>
+<p>可求电机坐标系到底盘坐标系的变换：</p>
 <div class="arithmatex">\[
 \begin{align}
-^{M_i}_O R = 
+^O _{M_i}R = 
 \begin{bmatrix}
 c\psi_i\   &amp;-s\psi_i\   &amp;0\\
 s\psi_i\   &amp;c\psi_i\    &amp;0\\
@@ -2342,19 +2339,32 @@ s\psi_i\   &amp;-c\psi_i\    &amp;0\\
 \end{bmatrix}
 \end{align}
 \]</div>
-<p>则有</p>
+<p>则</p>
 <div class="arithmatex">\[
 \begin{align}
-^{M_i} \boldsymbol V_i =
-{^{M_i}_OR} \ ^O\boldsymbol V_i
-\triangleq
+^{M_i}_O R = 
+^O _{M_i}R^{-1}
+=
 \begin{bmatrix}
-^{M_i}v_{xi}\\ 
-^{M_i}v_{yi}\\
-0
+c\psi_i\   &amp;s\psi_i\   &amp;0\\
+s\psi_i\   &amp;-c\psi_i\    &amp;0\\
+0\       &amp;0\        &amp;-1\\
 \end{bmatrix}
 \end{align}
 \]</div>
+<p>有
+$$
+\begin{align}
+^{M_i} \boldsymbol V_i =
+{^{M_i}<em xi="xi">OR}  ^O\boldsymbol V_i
+\triangleq
+\begin{bmatrix}
+^{M_i}v</em>\ 
+^{M_i}v_{yi}\
+0
+\end{bmatrix}
+\end{align}
+$$</p>
 <p>可以进一步计算：</p>
 <ul>
 <li><strong>航向电机角度</strong> <span class="arithmatex">\(^{M_i}\theta_i\)</span>，单位：<span class="arithmatex">\(\rm rad\)</span>.</li>
@@ -2630,13 +2640,13 @@ p=\frac {n_{\max}}{{\max}_{i}\{n_i\}}
 <li>在使用 STM32CubeMX 生成项目时，请在 <code>Code Generator</code> 界面 <code>Enable Full Assert</code>，来帮助断言算法中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果</li>
 <li>在 <code>system.h</code> 中 <code>system options: user config</code> 处进行系统设置</li>
 </ul>
-<p>此外，还需要预先自行标定轮毂电机转速的正负，使其正方向与图3及图4 一致。</p>
+<p>此外，还需要预先自行标定航向电机误差角，可使驱动轮向量指向底盘 <span class="arithmatex">\(x^+\)</span> 方向，读取电机角度反馈。</p>
 <h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">&para;</a></h3>
 <p>首先在求解器头文件 <code>chas_ik_solver.h</code> 中输入相关静态参数，包括：</p>
 <ul>
 <li>轮直径和轮轴距参数（m）</li>
-<li>（仅舵轮需要） 底盘 <span class="arithmatex">\(x^+\)</span> 方向与轮组 <span class="arithmatex">\(x^+\)</span> 方向的夹角（°）</li>
 <li>（仅三轮全向轮需要）底盘中心到轮中心距离（m）</li>
+<li>（仅舵轮需要） 航向电机误差夹角（°）</li>
 </ul>
 <p>例如：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
@@ -2655,7 +2665,7 @@ p=\frac {n_{\max}}{{\max}_{i}\{n_i\}}
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="cp">#define TRACK_M 0.3f</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="cp">#define OMNI_3_R 0.3f</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="cm">/* (swerve drive only) angle bias (degree): chassis(O) to wheel module(Mi) */</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="cm">/* (swerve drive only) angle bias (degree) */</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="cp">#define PSI_FL_DEG 0.0f</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="cp">#define PSI_BL_DEG 0.0f</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="cp">#define PSI_BR_DEG 0.0f</span>
@@ -2904,6 +2914,12 @@ p=\frac {n_{\max}}{{\max}_{i}\{n_i\}}
 <td>更新原理描述，添加全向轮</td>
 <td>薛东来</td>
 </tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-1.2.1-green" ></td>
+<td>2023.05.17</td>
+<td>更正舵轮航向电机偏角相关的表述</td>
+<td>薛东来</td>
+</tr>
 </tbody>
 </table>
 <h2 id="参考资料">参考资料<a class="headerlink" href="#参考资料" title="链接到此节">&para;</a></h2>
@@ -2917,7 +2933,7 @@ p=\frac {n_{\max}}{{\max}_{i}\{n_i\}}
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-17</span>
       
         <br>
         创建日期:
@@ -3076,7 +3092,7 @@ p=\frac {n_{\max}}{{\max}_{i}\{n_i\}}
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.c2be25ad.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
       
