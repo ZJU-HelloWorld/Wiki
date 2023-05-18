@@ -2161,7 +2161,7 @@ P_{pred}=\hat k_{M}\sum_j \Omega_j\cdot  i_{ref_j}+\sum_j \hat R \cdot i_{ref_j}
 <div class="arithmatex">\[
 \hat k_{M} = {\hat P - \sum_j \hat R\cdot i_{q_j}^2-P_0\over \sum_j \Omega_j\cdot  i_{q_j}}
 \]</div>
-<p>需要注意，裁判系统无法量测负功率，因此当估计功率为负时，不应更新 <span class="arithmatex">\(\hat k_M\)</span>。</p>
+<p>需要注意，裁判系统无法量测负功率，因此当以裁判系统作为功率量测且估计功率为负时，不应更新 <span class="arithmatex">\(\hat k_M\)</span>。</p>
 <blockquote>
 <p>进行功率估计是为了得到更准确的预测模型，我们使用该模型进行下文所述的功率限制。</p>
 </blockquote>
