@@ -15,7 +15,7 @@
         <link rel="next" href="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97/">
       
       <link rel="icon" href="../../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.14">
     
     
       
@@ -2114,15 +2114,15 @@
 P=\Omega\cdot M+P_{loss}
 \]</div>
 <p>其中 <span class="arithmatex">\(M\)</span> 表示输出转矩，<span class="arithmatex">\(P_{loss}\)</span> 表示除机械输出以外的功率损耗，主要为铜损耗。</p>
-<p>考虑转矩和转矩电流 <span class="arithmatex">\(i_q\)</span> 近似成正比（如下图，C620 电调搭配 M3508 电机速度闭环控制的电机性能曲线），定义转矩系数 <span class="arithmatex">\(k_{M}\)</span>，有</p>
+<p>考虑电磁转矩和转矩电流 <span class="arithmatex">\(i_q\)</span> 近似成正比（如下图，C620 电调搭配 M3508 电机速度闭环控制的电机性能曲线），定义转矩系数 <span class="arithmatex">\(k_{M}\)</span>，有</p>
 <div class="arithmatex">\[
 M = k_{M}\cdot i_q
 \]</div>
 <p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/image-20230109180629888.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20230109180629888" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/image-20230109180629888.png" /></a></p>
 <blockquote>
-<p>根据手册，转矩常数为 <span class="arithmatex">\(0.3\  \rm N\cdot m/A\)</span>，但该数据对应线电流，因此并不能直接使用；但可以经过量纲转换，作为 <span class="arithmatex">\(k_M\)</span> 的初值参考。</p>
+<p>根据手册，转矩常数为 <span class="arithmatex">\(0.3\  \rm N\cdot m/A\)</span>，可作为 <span class="arithmatex">\(k_M\)</span> 的初值参考。</p>
 </blockquote>
-<p>使用转矩电流近似表示线电流，基于 <span class="arithmatex">\(P_{loss} = R\cdot i^2\)</span>，在电机堵转的情况下统计 <span class="arithmatex">\(i_q\)</span> 和功率观测 <span class="arithmatex">\(P_{measure}\)</span> ，拟合损耗曲线。以 C620 电调 + M3508 电机为例，堵转电机，在 2000ms 内以 <span class="arithmatex">\([0:16384/2000:16384]\)</span> 扫描转矩电流，<span class="arithmatex">\(P-i\)</span> 曲线拟合结果如下（供参考）：</p>
+<p>使用转矩电流近似表示线电流，基于 <span class="arithmatex">\(P_{loss} = R\cdot i^2\)</span>，在电机堵转的情况下统计 <span class="arithmatex">\(i_q\)</span> 和功率观测 <span class="arithmatex">\(P_{measure}\)</span> ，拟合损耗曲线。以 C620 电调 + M3508 电机为例，堵转电机，在 5000ms 内以 <span class="arithmatex">\([0:16384/2000:16384]\)</span> 扫描转矩电流，<span class="arithmatex">\(P-i\)</span> 曲线拟合结果如下（供参考）：</p>
 <p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/3508_total_fit_ref.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="3508_total_fit_ref" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/3508_total_fit_ref.jpg" /></a></p>
 <p>其中 <span class="arithmatex">\(\hat R=p_1\)</span>；<span class="arithmatex">\(p_2\)</span> 视为 0；<span class="arithmatex">\(p_3\)</span> 为电机所接入电路的静息功率。</p>
 <h3 id="功率估计">功率估计<a class="headerlink" href="#功率估计" title="链接到此节">&para;</a></h3>
@@ -2149,9 +2149,9 @@ M = k_{M}\cdot i_q
 <div class="arithmatex">\[
 P_{pred_j}= \hat k_{M}\cdot\Omega_j\cdot i_{ref_j}+\hat R\cdot i^2_{ref_j}
 \]</div>
-<p>本算法<strong>要求使用纯比例控制</strong>计算电机的目标转矩电流 <span class="arithmatex">\(i_{ref}\)</span>，按照各电机的 <span class="arithmatex">\(PID\)</span> 控制器参数，比例系数分别为 <span class="arithmatex">\(K_{p_j}\)</span>，同时进行限幅：</p>
+<p>本算法<strong>要求使用纯比例控制</strong>计算电机的目标转矩电流 <span class="arithmatex">\(i_{ref}\)</span>，按照各电机的 <span class="arithmatex">\(PID\)</span> 控制器参数，比例系数分别为 <span class="arithmatex">\(K_{p_j}\)</span>，同时进行结果的量纲转换（转换至 A）和限幅：</p>
 <div class="arithmatex">\[
-i_{ref_j}={\rm LIMIT\_MAX}\ [K_{p_j}(\Omega_{ref_j}-\Omega_j)]
+i_{ref_j}={\rm TO\_A\ [}{\rm LIMIT\_MAX}\ (K_{p_j}(\Omega_{ref_j}-\Omega_j))]
 \]</div>
 <p>对于底盘的全部电机以及底盘的静息功率 <span class="arithmatex">\(P_0\)</span>，叠加以预测总功率：</p>
 <div class="arithmatex">\[
@@ -2198,35 +2198,39 @@ P_{ref}=P_m-u(Z)
 K_{pz}=\frac{P_m}{Z_{ref}}
 \]</div>
 <h4 id="求解转速削减系数">求解转速削减系数<a class="headerlink" href="#求解转速削减系数" title="链接到此节">&para;</a></h4>
-<p>由功率预测模型，当预测出的底盘功率大于动态功率上限时，同比例削减各电机目标转速。设置削减系数 <span class="arithmatex">\(k_l\)</span>，削减后电机 <span class="arithmatex">\(\Omega_{ref}'=k_l\cdot\Omega_{ref}\)</span> .</p>
-<p>首先处理存在电机输出电流超出控制器限幅的情况，记限制系数为 <span class="arithmatex">\(k_{0}\)</span>，输出上限为 <span class="arithmatex">\(U_m\)</span>:</p>
+<p>由功率预测模型，当预测出的底盘功率大于动态功率上限时，同比例削减各电机目标转速。设置削减系数 <span class="arithmatex">\(k_l\)</span>，削减后电机 <span class="arithmatex">\(\Omega_{ref}'=k_l\cdot\Omega_{ref}\)</span> . 求取 <span class="arithmatex">\(k_l\)</span>，使得</p>
 <div class="arithmatex">\[
-\Omega_{ref_j}'={U_{m_j}\over K_{p_j}}+\Omega_j\Rightarrow k_{0_j}={{U_{m_j}}+K_{p_j}\cdot \Omega_j \over K_{p_j} \cdot \Omega_{ref_j}}
-\]</div>
-<p>若电机未超限则 <span class="arithmatex">\(k_{0_j}=1\)</span>. 随后求取 <span class="arithmatex">\(k_1\)</span>，使得</p>
-<div class="arithmatex">\[
-\hat k_{M}\sum_j \Omega_j \cdot K_{p_j}( k_1\cdot k_{0_j} \Omega_{ref_j}-\Omega_j)+
+\hat k_{M}\sum_j \Omega_j \cdot K_{p_j}( k_l \Omega_{ref_j}-\Omega_j)+
 \sum_j 
-\hat R \cdot K_{p_j}^2 (k_1 \cdot k_{0_j}\Omega_{ref_j}-\Omega_j)^2
+\hat R \cdot [K_{p_j} (k_l\Omega_{ref_j}-\Omega_j)]^2
 +P_0 \triangleq P_{ref}
+\tag{1}
 \]</div>
 <p>记</p>
 <div class="arithmatex">\[
 \begin{split}
-\alpha = &amp;  \hat R \sum_j  K_{p_j}^2  k_{0_j}^2 \Omega_{ref_j}^2\\
-\beta = &amp;\sum_j    (\hat k_{M}K_{p_j}-2\hat RK_{p_j}^2 ) k_{0_j}\Omega_j\Omega_{ref_j}\\
+\alpha = &amp;  \hat R \sum_j  K_{p_j}^2   \Omega_{ref_j}^2\\
+\beta = &amp;\sum_j    (\hat k_{M}K_{p_j}-2\hat RK_{p_j}^2 ) \Omega_j\Omega_{ref_j}\\
 \gamma= &amp;\sum_j    (\hat RK_{p_j}^2-\hat k_{M}K_{p_j})  \Omega_j^2+P_0-P_{ref}\\
 \end{split}
 \]</div>
-<p>解得</p>
-<div class="arithmatex">\[
-k_1=\frac{-\beta\pm\sqrt{\beta^2-4\alpha\gamma}}{2\alpha},取解\in (0,1)
-\]</div>
-<p>最终各电机</p>
-<div class="arithmatex">\[
-k_l=k_{0_j}\cdot k_1
-\]</div>
-<p>经证明，削减转速的整个控制过程均能达到降低功率的效果。</p>
+<p>若解存在（<span class="arithmatex">\(\beta^2-4\alpha\gamma\ge0\)</span>），解得
+$$
+k_l=\frac{-\beta\pm\sqrt{\beta^2-4\alpha\gamma}}{2\alpha},取解\in (0,1)
+$$</p>
+<p>若出现解不存在的情况，求使得 <span class="arithmatex">\((1)\)</span> 式左边结果最小的 <span class="arithmatex">\(k_l\)</span> 值，以尽可能地限制功率：
+$$
+k_l = -{\beta \over 2\alpha }
+$$
+若 <span class="arithmatex">\(K_{p_j}( k_l \Omega_{ref_j}-\Omega_j)\)</span> 超出电机可输出的转矩电流上限，则应按照该上限额外计算一个转速限制 <span class="arithmatex">\(k_{e_j}\)</span> ，使得
+$$
+K_{p_j}(k_{e_j} k_l \Omega_{ref_j}-\Omega_j)\triangleq 对应超出的上限
+$$
+并按照所有超限轮组中的 <span class="arithmatex">\(\min\{k_{e_j}\}\)</span>，作用于底盘的全部轮组。经削减的轮组目标转速表示为：
+$$
+\Omega_{ref}'=\min{k_{e_j}}\cdot k_l\cdot\Omega_{ref}
+$$
+经证明，削减转速的整个控制过程均能达到降低功率的效果。</p>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
 <p>组件源码仓库地址：<a href="https://github.com/ZJU-HelloWorld/HW-Components">https://github.com/ZJU-HelloWorld/HW-Components</a></p>
 <p>底盘功率限制算法依赖于卡尔曼滤波器和 PID 控制器。要在项目中使用该组件，需添加仓库内的以下文件：</p>
@@ -2604,7 +2608,7 @@ k_l=k_{0_j}\cdot k_1
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-18</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-05-23</span>
       
         <br>
         Created:
