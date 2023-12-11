@@ -1,0 +1,3881 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../">
+      
+      
+        <link rel="next" href="../%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%99%A8/">
+      
+      
+      <link rel="icon" href="../../../../assets/rm.svg">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.1">
+    
+    
+      
+        <title>PID 控制器 - Hello World 技术知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.45e1311d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-12BWRJ4SWG"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-12BWRJ4SWG",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-12BWRJ4SWG",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pid-控制器" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="不再显示此消息">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+              </button>
+            
+            
+
+<!-- Add announcement here, including arbitrary HTML -->
+<b>公&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;告</b>&nbsp;&nbsp;&nbsp;&nbsp;已添加 CPP 版本组件说明文档<br>
+<b>重要更新</b>&nbsp;&nbsp;&nbsp;&nbsp;更新 CPP 版本的组件
+
+
+          </div>
+          
+            <script>var content,el=document.querySelector("[data-md-component=announce]");el&&(content=el.querySelector(".md-typeset"),__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0))</script>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="Hello World 技术知识库" class="md-header__button md-logo" aria-label="Hello World 技术知识库" data-md-component="logo">
+      
+  <img src="../../../../assets/rm.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hello World 技术知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PID 控制器
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ZJU-HelloWorld/Wiki" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ZJU-HelloWorld/Wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../%E5%85%A5%E9%97%A8/%E4%BA%86%E8%A7%A3%20Hello%20World%20%E7%94%B5%E6%8E%A7%E7%BB%84/" class="md-tabs__link">
+          
+  
+    
+  
+  入门
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+    
+  
+  开发指南
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+    
+  
+  测试指南
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E6%BA%90%E7%A0%81%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+    
+  
+  贡献指南
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/" class="md-tabs__link">
+          
+  
+    
+  
+  组件说明
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../" class="md-tabs__link">
+          
+  
+    
+  
+  组件说明（旧）
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../%E5%85%B3%E4%BA%8E/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC/" class="md-tabs__link">
+          
+  
+    
+  
+  关于
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Hello World 技术知识库" class="md-nav__button md-logo" aria-label="Hello World 技术知识库" data-md-component="logo">
+      
+  <img src="../../../../assets/rm.svg" alt="logo">
+
+    </a>
+    Hello World 技术知识库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ZJU-HelloWorld/Wiki" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ZJU-HelloWorld/Wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    入门
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            入门
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%85%A5%E9%97%A8/%E4%BA%86%E8%A7%A3%20Hello%20World%20%E7%94%B5%E6%8E%A7%E7%BB%84/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    了解 Hello World 电控组
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%85%A5%E9%97%A8/%E5%9C%A8%20Hello%20World%EF%BC%8C%E4%BD%A0%E5%8F%AF%E4%BB%A5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    你可以...
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%85%A5%E9%97%A8/%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    机器人系统概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    开发指南
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            开发指南
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    开发环境
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            开发环境
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BCLion%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CubeMX + CLion 配置 STM32 开发环境
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/CubeMX%2BVSCode%2BOzone%20%E9%85%8D%E7%BD%AESTM32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CubeMX + VS Code + Ozone 配置 STM32 开发环境
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    第三方库
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            第三方库
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/CMSIS-DSP%20%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CMSIS-DSP 软件库使用指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    维护指南
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            维护指南
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E7%BB%B4%E6%8A%A4%E6%8C%87%E5%8D%97/%E6%9B%B4%E6%8D%A2%E5%BC%80%E5%8F%91%E6%9D%BF/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更换开发板
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    设计指南
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            设计指南
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    嵌入式编程风格指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    机器人软件系统架构
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    机器人软件系统设计指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    测试指南
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            测试指南
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E5%AE%9E%E6%88%98%E6%B5%8B%E8%AF%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    实战测试
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E6%95%B4%E6%9C%BA%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    整机功能测试
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/%E8%81%94%E5%90%88%E6%B5%8B%E8%AF%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    联合测试
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    贡献指南
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            贡献指南
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E6%BA%90%E7%A0%81%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    源码贡献指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/%E7%9F%A5%E8%AF%86%E5%BA%93%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    知识库贡献指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    组件说明
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            组件说明
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    机器人通用组件
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            机器人通用组件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2_2" id="__nav_6_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    设备应用
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            设备应用
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E7%94%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    电机（Motor）设备组件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    红点激光器（Laser）设备组件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    舵机（Servo）设备组件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%9C%82%E9%B8%A3%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蜂鸣器（Buzzer）设备组件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    嵌入式系统支持
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            嵌入式系统支持
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3_2" id="__nav_6_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    中间件
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            中间件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/%E4%B8%AD%E9%97%B4%E4%BB%B6/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    设备管理框架
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3_3" id="__nav_6_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    板级支持包
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            板级支持包
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/%E6%9D%BF%E7%BA%A7%E6%94%AF%E6%8C%81%E5%8C%85/CAN%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CAN总线驱动
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    组件说明（旧）
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            组件说明（旧）
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    机器人通用组件
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            机器人通用组件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_2" id="__nav_7_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    PID 控制器
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    PID 控制器
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#理论" class="md-nav__link">
+    <span class="md-ellipsis">
+      理论
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="理论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#积分项优化" class="md-nav__link">
+    <span class="md-ellipsis">
+      积分项优化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="积分项优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#无扰动操作bumpless-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      无扰动操作（Bumpless Operation）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#梯形积分trapezoidal-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      梯形积分（Trapezoidal Rule）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#抗积分饱和anti-windup" class="md-nav__link">
+    <span class="md-ellipsis">
+      抗积分饱和（Anti-windup）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#积分分离integration-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      积分分离（Integration Separation）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#变速积分changing-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      变速积分（Changing Rate）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#微分项优化" class="md-nav__link">
+    <span class="md-ellipsis">
+      微分项优化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="微分项优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#微分滤波derivative-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      微分滤波（Derivative Filter）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#只对输出微分derivative-of-the-process-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      只对输出微分（Derivative of the process variable）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#其他优化" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他优化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="其他优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#带死区dead-band" class="md-nav__link">
+    <span class="md-ellipsis">
+      带死区（Dead Band）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#给定值平滑setpoint-ramping" class="md-nav__link">
+    <span class="md-ellipsis">
+      给定值平滑（Setpoint Ramping）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#前馈校正feed-forward" class="md-nav__link">
+    <span class="md-ellipsis">
+      前馈校正（Feed-forward）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#串级控制cascade-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      串级控制（Cascade Control）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#快速开始" class="md-nav__link">
+    <span class="md-ellipsis">
+      快速开始
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="快速开始">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#使用前准备" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用前准备
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#示例" class="md-nav__link">
+    <span class="md-ellipsis">
+      示例
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#组件说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      组件说明
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="组件说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pid-类" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pid 类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pidnode-结构体" class="md-nav__link">
+    <span class="md-ellipsis">
+      PidNode 结构体
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pidparams-结构体" class="md-nav__link">
+    <span class="md-ellipsis">
+      PidParams 结构体
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#附录" class="md-nav__link">
+    <span class="md-ellipsis">
+      附录
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#版本说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      版本说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#参考资料" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%99%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    卡尔曼滤波器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    底盘功率限制
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%BA%95%E7%9B%98%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E8%A7%A3%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    底盘逆运动学解算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_3" id="__nav_7_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    设备应用
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            设备应用
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OLED 设备组件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E7%94%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    电机（Motor）设备组件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    红点激光器（Laser）设备组件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    舵机（Servo）设备组件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E5%A4%87%E5%BA%94%E7%94%A8/%E8%9C%82%E9%B8%A3%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蜂鸣器（Buzzer）设备组件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    嵌入式系统支持
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            嵌入式系统支持
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3_2" id="__nav_7_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    中间件
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            中间件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/%E4%B8%AD%E9%97%B4%E4%BB%B6/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    设备管理框架
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3_3" id="__nav_7_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    板级支持包
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            板级支持包
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/%E6%9D%BF%E7%BA%A7%E6%94%AF%E6%8C%81%E5%8C%85/CAN%E6%80%BB%E7%BA%BF%E9%A9%B1%E5%8A%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CAN总线驱动
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    关于
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            关于
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%85%B3%E4%BA%8E/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    关于我们
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%E5%85%B3%E4%BA%8E/%E5%85%B3%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%BA%93/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    关于知识库
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#理论" class="md-nav__link">
+    <span class="md-ellipsis">
+      理论
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="理论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#积分项优化" class="md-nav__link">
+    <span class="md-ellipsis">
+      积分项优化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="积分项优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#无扰动操作bumpless-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      无扰动操作（Bumpless Operation）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#梯形积分trapezoidal-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      梯形积分（Trapezoidal Rule）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#抗积分饱和anti-windup" class="md-nav__link">
+    <span class="md-ellipsis">
+      抗积分饱和（Anti-windup）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#积分分离integration-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      积分分离（Integration Separation）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#变速积分changing-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      变速积分（Changing Rate）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#微分项优化" class="md-nav__link">
+    <span class="md-ellipsis">
+      微分项优化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="微分项优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#微分滤波derivative-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      微分滤波（Derivative Filter）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#只对输出微分derivative-of-the-process-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      只对输出微分（Derivative of the process variable）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#其他优化" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他优化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="其他优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#带死区dead-band" class="md-nav__link">
+    <span class="md-ellipsis">
+      带死区（Dead Band）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#给定值平滑setpoint-ramping" class="md-nav__link">
+    <span class="md-ellipsis">
+      给定值平滑（Setpoint Ramping）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#前馈校正feed-forward" class="md-nav__link">
+    <span class="md-ellipsis">
+      前馈校正（Feed-forward）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#串级控制cascade-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      串级控制（Cascade Control）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#快速开始" class="md-nav__link">
+    <span class="md-ellipsis">
+      快速开始
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="快速开始">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#使用前准备" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用前准备
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#示例" class="md-nav__link">
+    <span class="md-ellipsis">
+      示例
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#组件说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      组件说明
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="组件说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pid-类" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pid 类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pidnode-结构体" class="md-nav__link">
+    <span class="md-ellipsis">
+      PidNode 结构体
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pidparams-结构体" class="md-nav__link">
+    <span class="md-ellipsis">
+      PidParams 结构体
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#附录" class="md-nav__link">
+    <span class="md-ellipsis">
+      附录
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#版本说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      版本说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#参考资料" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/ZJU-HelloWorld/Wiki/edit/main/docs/组件说明（旧）/机器人通用组件/算法/PID控制器.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/ZJU-HelloWorld/Wiki/raw/main/docs/组件说明（旧）/机器人通用组件/算法/PID控制器.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="pid-控制器">PID 控制器<a class="headerlink" href="#pid-控制器" title="链接到此节">&para;</a></h1>
+<p><img src = "https://img.shields.io/badge/version-1.0.1-green"> <sp> <img src = "https://img.shields.io/badge/author-dungloi-lightgrey"> </p>
+<h2 id="理论">理论<a class="headerlink" href="#理论" title="链接到此节">&para;</a></h2>
+<p>PID（<em>Proportional-Integral-Derivative</em>）控制器是一种线性控制器，根据被控对象给定值 <span class="arithmatex">\(r(t)\)</span> 和实际值 <span class="arithmatex">\(y(t)\)</span> 的控制偏差</p>
+<div class="arithmatex">\[
+e(t)=r(t)-y(t)
+\]</div>
+<p>构成控制律</p>
+<div class="arithmatex">\[
+u(t)=K_c[e(t)+{1 \over {T_i}}\int ^t_0e(t){\mathrm{d}}t+T_d{\frac{\mathrm de(t)}{\mathrm dt}}]
+\]</div>
+<p>或以传递函数表示</p>
+<div class="arithmatex">\[
+G(s)=\frac{U(s)}{E(s)}=K_c(1+\frac1{T_is}+T_ds)
+\]</div>
+<p>其中积分分量能够提升系统的稳态性能；微分分量能够改善系统的动态性能。</p>
+<p>在数字 PID 控制中，使用的是离散化的 PID 控制器。在模拟 PID 的理论基础上，以一系列采样时刻点 <span class="arithmatex">\(kT\)</span> 代表连续时间 <span class="arithmatex">\(t\)</span>，以矩形法数值积分近似代替积分，以一阶后向差分近似替代微分，可得离散 PID 表达式</p>
+<div class="arithmatex">\[
+\begin{align}
+u(k)&amp;=K_p[e(k)+\frac{1}{T_i}\sum^k_{j=0}e(j)T+T_d\frac{e(k)-e(k-1)}{T}]\\
+&amp;=K_pe(k)+K_i\sum^k_{j=0}e(j)T+K_d\frac{e(k)-e(k-1)}{T}
+\end{align}
+\]</div>
+<p>在标准的数字 PID 控制器的基础上，还可以引入一系列优化算法，形成非标准控制算法，以改善系统品质，满足不同控制系统的需要。</p>
+<blockquote>
+<p>说明：以下优化均假设被控对象输出从两个方向接近给定值的过程是对称的，实际实现时可能需要针对不同方向的收敛过程设置不同的阈值。</p>
+</blockquote>
+<h3 id="积分项优化">积分项优化<a class="headerlink" href="#积分项优化" title="链接到此节">&para;</a></h3>
+<h4 id="无扰动操作bumpless-operation">无扰动操作（Bumpless Operation）<img src = "https://img.shields.io/badge/feature-embedded-blue" ><a class="headerlink" href="#无扰动操作bumpless-operation" title="链接到此节">&para;</a></h4>
+<p>无扰动操作包括参数初始化过程和变参数的情况。考虑在控制器工作过程中改变积分增益参数，可能引起输出的较大变化，不利于控制。因此将积分项改进为积分增益与误差乘积的累积，而不是误差累积后再乘以积分增益。积分项表示为：</p>
+<div class="arithmatex">\[
+u_i(k)=\sum^k_{j=0}K_ie(j)T
+\]</div>
+<h4 id="梯形积分trapezoidal-rule">梯形积分（Trapezoidal Rule）<img src = "https://img.shields.io/badge/feature-embedded-blue" ><a class="headerlink" href="#梯形积分trapezoidal-rule" title="链接到此节">&para;</a></h4>
+<p>为尽量减小余差，提高积分项的运算精度，可将矩形积分改为梯形积分。积分项表示为：</p>
+<div class="arithmatex">\[
+u_i(k)=\sum^k_{j=0}K_i{e(j)+e(j-1)\over 2}T \\
+\]</div>
+<h4 id="抗积分饱和anti-windup">抗积分饱和（Anti-windup）<img src = "https://img.shields.io/badge/feature-embedded-blue" ><img src = "https://img.shields.io/badge/default-u=11451.4-white"><a class="headerlink" href="#抗积分饱和anti-windup" title="链接到此节">&para;</a></h4>
+<p>积分饱和现象指若系统存在一个方向的偏差，控制器输出由于积分作用的不断累加而持续增大，若超出执行机构正常运行范围便进入了饱和区。一旦系统出现反向偏差，控制器输出逐渐从饱和区退出，进入饱和区越深则退出所需时间越长。在这段时间内，执行机构仍停留在极限位置，而不能随偏差反向立即做出相应的改变，此时将造成控制性能恶化。抗积分饱和法在计算控制器输出 <span class="arithmatex">\(u(k)\)</span> 时，首先判断上一时刻 <span class="arithmatex">\(u(k-1)\)</span> 是否已超出限制范围：若 <span class="arithmatex">\(u(k-1)&gt;u_{m}\)</span>，只累加负偏差；若 <span class="arithmatex">\(u(k-1)&lt;-u_{m}\)</span>，只累加正偏差。积分项表示为：</p>
+<div class="arithmatex">\[
+\begin{align}
+u_i(k)=\sum^{k-1}_{j=0}K_ie(j)T+\alpha K_i e(k)T\\
+其中\ \alpha=
+\begin{cases}
+0, &amp;u(k-1)\cdot e(k)&gt;0\ ,|u(k-1)| {\geqslant}u_m\\
+1, &amp;else
+\end{cases}
+ \end{align}
+\]</div>
+<p>其中阈值 <span class="arithmatex">\(u_m\)</span> 根据实际情况人为指定。</p>
+<h4 id="积分分离integration-separation">积分分离（Integration Separation）<img src = "https://img.shields.io/badge/feature-optional-orange"><img src = "https://img.shields.io/badge/default-OFF-black"><a class="headerlink" href="#积分分离integration-separation" title="链接到此节">&para;</a></h4>
+<p>积分环节的作用主要为消除静差，提高控制精度。但在短时间系统输出产生较大偏差时，可能会造成积分过度积累，使控制量过大，引起系统超调甚至振荡。此时需要引入积分分离，当被控量与给定值偏差较大时，取消积分作用；接近时引入积分控制。积分项表示为：</p>
+<div class="arithmatex">\[
+\begin{align}
+u_i(k)=\beta \sum^k_{j=t_0}K_ie(j)T \\ 
+其中\ \beta=
+\begin{cases}
+1, &amp;|e(k)| {\leqslant} \epsilon_0\\
+0, &amp;|e(k)| {&gt;} \epsilon_0
+\end{cases}
+  \end{align}
+\]</div>
+<p>其中 <span class="arithmatex">\(t_0\)</span> 表示引入积分控制的时刻，阈值 <span class="arithmatex">\(\epsilon_0\)</span> 根据实际情况人为指定。</p>
+<h4 id="变速积分changing-rate">变速积分（Changing Rate）<img src = "https://img.shields.io/badge/feature-optional-orange"><img src = "https://img.shields.io/badge/default-OFF | f=1.0-black"><a class="headerlink" href="#变速积分changing-rate" title="链接到此节">&para;</a></h4>
+<p>基于积分分离优化的思想，根据系统偏差大小改变积分的速度，偏差越大，积分越慢，反之则越快，形成连续的变化过程。为此，设置系数 <span class="arithmatex">\(f[e(k)]\)</span>，当 <span class="arithmatex">\(|e(k)|\)</span> 增大时，<span class="arithmatex">\(f\)</span> 减小，反之增大，其值在 <span class="arithmatex">\([0,1]\)</span> 变化。积分项表示为：</p>
+<div class="arithmatex">\[
+u_i(k)=\sum^{k-1}_{j=0}K_ie(j)T+f[e(k)]\cdot K_i  e(k)T\\
+\]</div>
+<p>系数 <span class="arithmatex">\(f\)</span> 与当前偏差 <span class="arithmatex">\(e(k)\)</span> 的关系可以是线性的，可设为</p>
+<div class="arithmatex">\[
+f[e(k)]=
+\begin{cases}
+1, &amp;|e(k)| {\leqslant}A\\
+\frac{B-|e(k)|}{B-A},&amp;A&lt;|e(k)|{\leqslant} B\\
+0, &amp;|e(k)|&gt;B
+\end{cases}
+\]</div>
+<p>其中阈值 <span class="arithmatex">\(A,B\in(0,+\infty)\)</span> 根据实际情况人为指定。</p>
+<h3 id="微分项优化">微分项优化<a class="headerlink" href="#微分项优化" title="链接到此节">&para;</a></h3>
+<h4 id="微分滤波derivative-filter">微分滤波（Derivative Filter）<img src = "https://img.shields.io/badge/feature-embedded-blue"><img src = "https://img.shields.io/badge/default-w=1.0-white"><a class="headerlink" href="#微分滤波derivative-filter" title="链接到此节">&para;</a></h4>
+<p>微分项可改善系统的动态特性，但也易引进高频干扰，在误差扰动突变时尤其显出微分项的不足。因此，可以在控制算法中加入一阶惯性环节（低通滤波器），可使系统性能得到改善。可将滤波器直接加在微分环节上或控制器输出上。此方案也称为“不完全微分”。</p>
+<p>事实上，还可以针对系统的频域特性设计合适的滤波器，这里不做更深入的探究。</p>
+<p>对微分环节输出进行一阶滤波，微分项表示为：</p>
+<div class="arithmatex">\[
+u_d(k)=K_d\cdot w_0\cdot {e(k)-e(k-1)\over T}+(1-w_0) \cdot u_d(k-1)
+\]</div>
+<p>其中系数 <span class="arithmatex">\(w_0\in (0,1]\)</span> 根据实际情况人为指定。</p>
+<h4 id="只对输出微分derivative-of-the-process-variable">只对输出微分（Derivative of the process variable）<img src = "https://img.shields.io/badge/feature-embedded-blue"><a class="headerlink" href="#只对输出微分derivative-of-the-process-variable" title="链接到此节">&para;</a></h4>
+<p>为避免由于给定值频繁升降（尤其是阶跃）而引起的系统振荡，可采用只对输出微分的优化算法，其特点是只对系统输出进行微分。这样，在改变给定值时，微分项输出仅与被控量的变化相关，而这种变化通常是比较缓和的，从而能够明显改善系统的动态特性。此方案也称为“微分先行”。</p>
+<p>简单的离散形式优化的微分项表示为：</p>
+<div class="arithmatex">\[
+u_d(k)=K_d\frac{y(k-1)-y(k)}{T}\\
+\]</div>
+<h3 id="其他优化">其他优化<a class="headerlink" href="#其他优化" title="链接到此节">&para;</a></h3>
+<h4 id="带死区dead-band">带死区（Dead Band）<img src = "https://img.shields.io/badge/feature-optional-orange"><img src = "https://img.shields.io/badge/default-OFF-black"><a class="headerlink" href="#带死区dead-band" title="链接到此节">&para;</a></h4>
+<p>为避免控制作用过于频繁，消除由于频繁动作所引起的振荡，必要时可采用带死区的 PID 控制算法，即判断控制偏差是否小于给定阈值，若小于则不输出。控制器输出表示如下：</p>
+<div class="arithmatex">\[
+u(k)=
+\begin{cases}
+0, &amp;|e(k)| {\leqslant} \epsilon_1\\
+u(k), &amp;|e(k)| {&gt;} \epsilon_1
+\end{cases}
+\]</div>
+<p>其中阈值 <span class="arithmatex">\(\epsilon_1\)</span> 根据实际情况人为指定。</p>
+<h4 id="给定值平滑setpoint-ramping">给定值平滑（Setpoint Ramping）<img src = "https://img.shields.io/badge/feature-optional-orange"><img src = "https://img.shields.io/badge/default-OFF-black"><a class="headerlink" href="#给定值平滑setpoint-ramping" title="链接到此节">&para;</a></h4>
+<p>当给定值出现较大的阶跃变化，很容易引起超调。使用线性斜坡函数或一阶滤波为给定值安排过渡过程，使其从其旧值逐渐变化到新值，以避免阶跃变化产生的不连续性，进而使对象运行平稳，适用于高精度伺服系统的位置跟踪。</p>
+<p>实际应用中，一般给出最大阶跃范围。若超出该范围，对给定值进行一阶滤波处理。给定值表示如下：</p>
+<div class="arithmatex">\[
+r(k)=
+\begin{cases}
+r(k), &amp;|e(k)| {\leqslant} \epsilon_2\\
+w_1\cdot r(k)+(1-w_1)r(k-1), &amp;|e(k)| {&gt;} \epsilon_2
+\end{cases}
+\]</div>
+<p>其中阈值 <span class="arithmatex">\(\epsilon_2\)</span> 及系数 <span class="arithmatex">\(w_1\in (0,1]\)</span> 根据实际情况人为指定。</p>
+<h4 id="前馈校正feed-forward">前馈校正（Feed-forward）<img src = "https://img.shields.io/badge/feature-optional-orange"><img src = "https://img.shields.io/badge/default-OFF-black"><a class="headerlink" href="#前馈校正feed-forward" title="链接到此节">&para;</a></h4>
+<p>在前馈控制（开环）中考虑系统的已知信息，再将输出加到 PID 控制器（闭环）的控制输出，形成复合校正，能够进一步提升整体的系统性能。前馈校正通路由于不受反馈的影响，不会造成系统的振荡，从而能够在不影响稳定性的情况下改善系统的响应。前馈量通常可以单独提供控制器输出的主要部分；PID 控制器则用来补偿给定值和实际值之间的误差。</p>
+<p>前馈量依可量测扰动或给定量来产生，构成按扰动补偿和按输入补偿两种复合控制形式。</p>
+<p><a class="glightbox" href="../PID%E6%8E%A7%E5%88%B6%E5%99%A8.assets/image-20221125075755503.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221125075755503" src="../PID%E6%8E%A7%E5%88%B6%E5%99%A8.assets/image-20221125075755503.png" /></a></p>
+<p>我们重点关注按输入补偿的复合控制系统设计。由上图 (b) ，系统输出为
+$$
+C(s)=\frac{[G_1(s)+G_r(s)]G_2(s)}{1+G_1(s)G_2(s)}R(s)
+$$
+如果选择前馈补偿装置传函 <span class="arithmatex">\(G_r(s)=\frac1{G_2(s)}\)</span>，则有
+$$
+C(s)=R(s)
+$$
+使得系统输出复现输入，具有理想的时间响应特性。实际这种全补偿难以实现，因此一般采用部分补偿，常用的方法有取输入信号的一阶导数作为前馈补偿信号，即：
+$$
+G_r(s)=\lambda_1s
+$$
+此方案原理可参考资料[2]第283页。实际中由于控制器工作频率可能高于给定信号频率，此时若采用后向差分则不能获得平滑的前馈量。因此考虑采用跟踪微分器，输出量表示为
+$$
+u_f(k)=\lambda_1 \cdot TD[r(k)]
+$$
+其中常系数 <span class="arithmatex">\(\lambda_1\in[0,+\infty)\)</span> 表示前馈补偿信号的强度，根据实际情况人为指定。</p>
+<h3 id="串级控制cascade-control">串级控制（Cascade Control）<a class="headerlink" href="#串级控制cascade-control" title="链接到此节">&para;</a></h3>
+<p>二（或多）个 PID 控制器可以组合在一起，以产生更好的动态性能，称之为串级 PID 控制。以两个 PID 控制器组成的串级控制器为例，其中一个 PID 控制器充当外（主）回路控制器，控制像液面高度或是速度等主要的物理量；另一个 PID 控制器充当内（副）回路控制器，以外回路控制器的输出做为其给定值，通常控制更快速变化的参数，例如流量或加速度等。使用串级 PID 控制可以提升控制器的工作频率，并降低其时间常数；内回路能够抑制扰动，从而大大减小扰动对外回路的影响。 </p>
+<h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
+<p>组件源码仓库地址：<a href="https://github.com/ZJU-HelloWorld/HW-Components">https://github.com/ZJU-HelloWorld/HW-Components</a></p>
+<p>PID 模块依赖于滤波器和跟踪微分器（可选）。要在项目中使用该组件，需添加仓库内的以下文件：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>algorithms/pid.c
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>algorithms/pid.h
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>algorithms/filter.c  # 可选，若使用跟踪微分器，请添加
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>algorithms/filter.h
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>tools.h
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>system.h
+</code></pre></div></td></tr></table></div>
+<h3 id="使用前准备">使用前准备<a class="headerlink" href="#使用前准备" title="链接到此节">&para;</a></h3>
+<p>本组件依赖的 filter.c/h 涉及 CMSIS-DSP 矩阵运算等操作。</p>
+<p>使用本组件前需要做以下准备：</p>
+<ul>
+<li>添加源文件, 包含头文件路径；注意 DSP 版本须在 1.10.0 及以上</li>
+<li>添加预处理宏以开启浮点运算单元（FPU）</li>
+<li>在使用 STM32CubeMX 生成项目时，请在 Code Generator 界面 Enable Full Assert，来帮助断言设备驱动中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果，如添加 <code>while(1);</code></li>
+<li>在 <code>system.h</code> 中 <code>system options: user config</code> 处进行系统设置</li>
+</ul>
+<h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">&para;</a></h3>
+<p>在项目中引用头文件：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;pid.h&quot;</span>
+</code></pre></div></td></tr></table></div>
+<p>实例化一个 PID 控制器：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Standard Controller</label><label for="__tabbed_1_2">N-loop Cascade Controller</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">Pid_t</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">Pid_t</span><span class="w"> </span><span class="n">pid_n_loop</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>创建参数结构体数组，按节点顺序（外回路 -&gt; 内回路）设置控制器节点参数，参数含义见组件说明。如带给定值过零处理（单位 <span class="arithmatex">\(\rm rad\)</span>）的控制器：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Standard Controller</label><label for="__tabbed_2_2">N-loop Cascade Controller</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">const</span><span class="w"> </span><span class="n">PidParams_t</span><span class="w"> </span><span class="n">pid_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">  </span><span class="p">.</span><span class="n">kType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PID_ACROSS0_RAD</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">  </span><span class="p">.</span><span class="n">kImprvOption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INTE_SEPARATION</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">INTE_CHANGING_RATE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">DEAD_BAND</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SETPOINT_RAMPING</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SETPOINT_FEED_FORWARD</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">  </span><span class="p">.</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">500.0f</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">  </span><span class="p">.</span><span class="n">ki</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0f</span><span class="p">,</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">  </span><span class="p">.</span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">  </span><span class="p">.</span><span class="n">kOutMin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-30000</span><span class="p">,</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">  </span><span class="p">.</span><span class="n">kOutMax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">  </span><span class="p">.</span><span class="n">kWindUpOutMax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">  </span><span class="p">.</span><span class="n">kDWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.9f</span><span class="p">,</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">  </span><span class="p">.</span><span class="n">kISeparThresUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">  </span><span class="p">.</span><span class="n">kISeparThresLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">  </span><span class="p">.</span><span class="n">kUpperB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">  </span><span class="p">.</span><span class="n">kLowerA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">,</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="w">  </span><span class="p">.</span><span class="n">kDeadBandThresUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="w">  </span><span class="p">.</span><span class="n">kDeadBandThresLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="w">  </span><span class="p">.</span><span class="n">kSpThresUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="w">  </span><span class="p">.</span><span class="n">kSpThresLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-30</span><span class="p">,</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="w">  </span><span class="p">.</span><span class="n">kSpWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">,</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="w">  </span><span class="p">.</span><span class="n">kf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">const</span><span class="w"> </span><span class="n">PidParams_t</span><span class="w"> </span><span class="n">pid_n_loop_param</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{...},</span><span class="w"> </span><span class="p">{...},</span><span class="w"> </span><span class="p">...};</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>其中 <code>kType, kImprvOption, kp, ki, kd, kOutMin, kOutMax, kWindUpOutMax, kDWeight</code> 为基础参数，请在初始化时按需求指定；其他参数为搭配优化选项的可选参数。若无需优化，使用 <code>.kImprvOption = IMPRV_NONE</code> 语句。</p>
+<blockquote>
+<p>说明：所有参数均具有缺省值，部分参数的缺省值已在理论部分给出，未给出的默认为 0。</p>
+</blockquote>
+<p>初始化 PID 控制器，如：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Standard Controller</label><label for="__tabbed_3_2">N-loop Cascade Controller</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">PidInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pid_param</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">PidInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid_n_loop</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">pid_n_loop_param</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<blockquote>
+<p>若希望引入按输入前馈补偿，则需开启 <code>SETPOINT_FEED_FORWARD</code> 优化选项，并使用跟踪微分器，该组件位于 <code>Utils/filter.c</code> 中。实例化一个跟踪微分器并传入参数进行初始化，然后向已实例化的 PID 控制器指明节点编号（编号顺序为外回路 -&gt; 内回路，从 0 开始），向该节点注册（线性）跟踪微分器：</p>
+<p><div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">Td_t</span><span class="w"> </span><span class="n">td</span><span class="p">;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">TdInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">td</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">h0</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">);</span><span class="w">        </span><span class="c1">// h = 1.0f / CTRL_FREQ</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="n">pid</span><span class="p">.</span><span class="n">tdRegister</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">td</span><span class="p">);</span><span class="w"> </span><span class="c1">// loop no.N, numbered from 0</span>
+</code></pre></div></td></tr></table></div>
+其中 <span class="arithmatex">\(h_0\)</span> 为滤波因子， <span class="arithmatex">\(h_0\)</span> 越大滤波效果越好； <span class="arithmatex">\(h\)</span> 为步长， <span class="arithmatex">\(h\)</span> 越小滤波效果越好；一般来说， <span class="arithmatex">\(h_0\)</span> 略大于步长 <span class="arithmatex">\(h\)</span>； <span class="arithmatex">\(r\)</span> 为快速因子， <span class="arithmatex">\(r\)</span> 越大，跟踪越快。</p>
+<p>更多原理和参数调节规律详见滤波器算法组件说明，或咨询沈组长 <img alt="😍" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f60d.svg" title=":heart_eyes:" /></p>
+</blockquote>
+<p>传入 PID 控制器句柄、最外回路给定值、各回路反馈值（存储顺序由外回路到内回路）数组首地址、存储输出量的内存地址，计算 PID 控制器输出：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">pid</span><span class="p">.</span><span class="n">calcPid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span><span class="w"> </span>
+</code></pre></div></td></tr></table></div>
+<p>若 PID 控制器是动态创建的，在其生存周期终止前还需要手动释放内存：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">pid</span><span class="p">.</span><span class="n">delPid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="组件说明">组件说明<a class="headerlink" href="#组件说明" title="链接到此节">&para;</a></h3>
+<h4 id="pid-类"><code>Pid</code> 类<a class="headerlink" href="#pid-类" title="链接到此节">&para;</a></h4>
+<p>PID 控制器。</p>
+<p>属性</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">名称</th>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">示例值</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>loops</code></td>
+<td style="text-align: left;"><code>uint8_t</code></td>
+<td style="text-align: left;">1 / 2 / 3</td>
+<td style="text-align: left;">PID 级数</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>p_node_list</code></td>
+<td style="text-align: left;"><code>PidNode_t*</code></td>
+<td style="text-align: left;">/</td>
+<td style="text-align: left;">PID 节点列表首地址</td>
+</tr>
+</tbody>
+</table>
+<p>方法</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">名称<img width=250/></th>
+<th style="text-align: left;">参数说明</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>PidInit</code></td>
+<td style="text-align: left;">传入参数 <code>loops</code> 标识本 PID 控制器级数；<code>params_list</code> 为存储各节点 PID 参数结构体数组的首地址，请设定所有 <code>loops</code>个节点参数，将按外回路 -&gt; 内回路顺序读取数据</td>
+<td>用传入的参数初始化一个 PID 控制器。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>calcPid</code></td>
+<td style="text-align: left;">传入参数 <code>ref</code> 为最外回路给定值；<code>fdb</code> 为各回路反馈值（存储顺序由外回路到内回路）数组首地址；传入地址 <code>out</code>，存储最内回路（末级） PID 输出结果</td>
+<td>根据输入的数据，计算 PID 控制器输出。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>tdRegister</code></td>
+<td style="text-align: left;">传入参数 <code>loop_no</code> 为指定回路按外回路 -&gt; 内回路顺序从 0 开始得到的编号；传入指定回路 ref 的跟踪微分器指针 <code>p_td</code> 以实现前馈</td>
+<td>为对应 PID 节点注册跟踪微分器。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>delPid</code></td>
+<td style="text-align: left;">/</td>
+<td>释放为 PID 控制器所有节点动态申请的内存。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resetData</code></td>
+<td style="text-align: left;">/</td>
+<td>重置所有节点 PID 中间项。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resetNodeParams</code></td>
+<td style="text-align: left;">传入参数 <code>loop_no</code> 为指定回路按外回路 -&gt; 内回路顺序从 0 开始得到的编号；传入 PID 节点参数数值</td>
+<td>重置对应节点 PID 参数。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>getNode</code></td>
+<td style="text-align: left;">传入参数 <code>loop_no</code> 为指定回路按外回路 -&gt; 内回路顺序从 0 开始得到的编号；返回类型 <code>PidNode_t*</code></td>
+<td>返回对应 PID 节点指针。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>getNodeData</code></td>
+<td style="text-align: left;">传入参数 <code>loop_no</code> 为指定回路按外回路 -&gt; 内回路顺序从 0 开始得到的编号；返回类型 <code>PidData_t*</code></td>
+<td>返回对应 PID 节点中间项结构体指针。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>getNodeParams</code></td>
+<td style="text-align: left;">传入参数 <code>loop_no</code> 为指定回路按外回路 -&gt; 内回路顺序从 0 开始得到的编号；返回类型 <code>PidParams_t*</code></td>
+<td>返回对应 PID 节点参数结构体指针。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pidnode-结构体"><code>PidNode</code> 结构体<a class="headerlink" href="#pidnode-结构体" title="链接到此节">&para;</a></h4>
+<p>存储 PID 节点数据，用户不可操作。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">名称<img width=100/></th>
+<th style="text-align: left;">类型<img width=100/></th>
+<th style="text-align: left;">示例值</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>ref</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">1.0</td>
+<td style="text-align: left;">给定值</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>fdb</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">1.0</td>
+<td style="text-align: left;">反馈值</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>out</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">1.0</td>
+<td style="text-align: left;">控制器输出</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>td</code></td>
+<td style="text-align: left;"><code>Td_t*</code></td>
+<td style="text-align: left;">/</td>
+<td style="text-align: left;">指向跟踪微分器，可选，若不使用输入量前馈则为空</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>params</code></td>
+<td style="text-align: left;"><code>PidParams_t</code></td>
+<td style="text-align: left;">/</td>
+<td style="text-align: left;">控制器相关初始参数</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>data</code></td>
+<td style="text-align: left;"><code>PidData_t</code></td>
+<td style="text-align: left;">/</td>
+<td style="text-align: left;">运行时中间项数据</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>last_tick</code></td>
+<td style="text-align: left;"><code>uint32_t</code></td>
+<td style="text-align: left;">1919810</td>
+<td style="text-align: left;">上一次调用该控制器的时刻，单位：<span class="arithmatex">\(\rm ms\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sample_interval</code></td>
+<td style="text-align: left;"><code>uint32_t</code></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">调用控制器的间隔，单位：<span class="arithmatex">\(\rm ms\)</span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="pidparams-结构体"><code>PidParams</code> 结构体<a class="headerlink" href="#pidparams-结构体" title="链接到此节">&para;</a></h4>
+<p>存储 PID 参数。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">名称</th>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">示例值</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>kType</code></td>
+<td style="text-align: left;"><code>PidType_t</code></td>
+<td style="text-align: left;">PID_ACROSS0_RAD<br>PID_ACROSS0_DEGREE<br>PID_DEFAULT</td>
+<td style="text-align: left;">PID 处理类型</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kImprvOption</code></td>
+<td style="text-align: left;"><code>uint16_t</code></td>
+<td style="text-align: left;">/</td>
+<td style="text-align: left;">优化选项集合,由所有需启用的优化枚举类型 <code>PidImprvType_t</code> 的优化选项 “按位与” 合成 <code>uint16_t</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kp / ki / kd</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">500.0 / 5.0 /1.0</td>
+<td style="text-align: left;">PID 增益</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kOutMin</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">-30000</td>
+<td style="text-align: left;">最小输出</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kOutMax</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">30000</td>
+<td style="text-align: left;">最大输出</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kWindUpOutMax</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">5000</td>
+<td style="text-align: left;">使能抗积分饱和的临界输出，<span class="arithmatex">\(\pm\)</span>kWindUpOutMax</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kDWeight</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">微分一阶滤波系数，默认值 1.0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kISeparThresUpper</code><br><code>kISeparThresLower</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">1.0 / -1.0</td>
+<td style="text-align: left;">使能积分分离的临界误差</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kUpperB</code><br><code>kLowerA</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">2.0 / 0.1</td>
+<td style="text-align: left;">线性变速积分误差区间，<span class="arithmatex">\(\pm\)</span>kUpperB / kLowerA</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kDeadBandThresUpper</code><br><code>kDeadBandThresLower</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">1.0/ -1.0</td>
+<td style="text-align: left;">误差死区上下限</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kSpThresUpper</code><br><code>kSpThresLower</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">30 / -30</td>
+<td style="text-align: left;">使能给定值平滑的临界误差</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kSpWeight</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;">给定值平滑一阶滤波系数</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>kf</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">1.0</td>
+<td style="text-align: left;">前馈补偿强度系数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">&para;</a></h2>
+<h3 id="版本说明">版本说明<a class="headerlink" href="#版本说明" title="链接到此节">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>版本号</th>
+<th>发布日期</th>
+<th>说明</th>
+<th>贡献者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-0.9.0-green" ></td>
+<td>2022.10.31</td>
+<td>完成PID优化文档并实现</td>
+<td>薛东来</td>
+</tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-1.0.0-green" ></td>
+<td>2022.12.01</td>
+<td>加入串级、前馈内容，测试发布</td>
+<td>薛东来</td>
+</tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-1.0.1-green" ></td>
+<td>2022.12.03</td>
+<td>修正部分表述，使用动态内存分配，无需手动</td>
+<td>薛东来</td>
+</tr>
+</tbody>
+</table>
+<h3 id="参考资料">参考资料<a class="headerlink" href="#参考资料" title="链接到此节">&para;</a></h3>
+<p>[1] <a href="https://g6ursaxeei.feishu.cn/wiki/wikcnfVj5iRhjhn4QNNpaFGMeDh?table=tblDBoGzi8ASFqbx&amp;view=vewx5ZOj1f&amp;record=recg9aNIxo&amp;field=fldSN7AY4l">刘金琨. 先进PID控制MATLAB仿真. 第4版. 北京: 电子工业出版社, 2016.</a></p>
+<p>[2] <a href="https://g6ursaxeei.feishu.cn/wiki/wikcnfVj5iRhjhn4QNNpaFGMeDh?table=tblDBoGzi8ASFqbx&amp;view=vewx5ZOj1f&amp;record=recWdpyDk3&amp;field=fldSN7AY4l">胡寿松主编. 自动控制原理. 第7版. 北京: 科学出版社, 2019.02.</a></p>
+<p>[3] <a href="https://en.wikipedia.org/wiki/PID_controller">https://en.wikipedia.org/wiki/PID_controller</a></p>
+<p>[4] <a href="http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/">http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/</a> （Arduino PID 库作者博客，实现在<a href="https://github.com/br3ttb/Arduino-PID-Library">这里</a>）</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-11</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-01</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        此页面如何?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="完全没帮助" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="有点拉" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="一般般" data-md-value="2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="还不错" data-md-value="3">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="很棒！" data-md-value="4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21 12 17.27Z"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              感谢反馈！联系作者或点击标题右侧的浅色 pencil 标记来帮助改进XD
+            </div>
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              感谢反馈！联系作者或点击标题右侧的浅色 pencil 标记来帮助改进XD
+            </div>
+          
+            <div data-md-value="2" hidden>
+              
+              
+                
+              
+              感谢反馈！联系作者或点击标题右侧的浅色 pencil 标记来帮助改进XD
+            </div>
+          
+            <div data-md-value="3" hidden>
+              
+              
+                
+              
+              感谢反馈！联系作者或点击标题右侧的浅色 pencil 标记来帮助改进XD
+            </div>
+          
+            <div data-md-value="4" hidden>
+              
+              
+                
+              
+              感谢反馈！
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 - 2024 Hello World Team, Zhejiang University
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ZJU-HelloWorld" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:<ZJU_HelloWorld@163.com>" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
