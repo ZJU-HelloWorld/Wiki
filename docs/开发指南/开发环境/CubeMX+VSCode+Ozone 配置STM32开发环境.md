@@ -1,6 +1,6 @@
 # CubeMX + VS Code + Ozone 配置 STM32 开发环境
 
-<img src = "https://img.shields.io/badge/version-1.1.1-green"> <sp> <img src = "https://img.shields.io/badge/author-dungloi | kunzhen-lightgrey"><sp> <img src = "https://img.shields.io/badge/system-windows-blue">
+<img src = "https://img.shields.io/badge/version-2.0.0-green"> <sp> <img src = "https://img.shields.io/badge/author-dungloi | Caikunzhen-lightgrey"><sp> <img src = "https://img.shields.io/badge/system-windows-blue">
 
 
 ```mermaid
@@ -329,149 +329,335 @@ openocd -v
 * 可编程，支持编写脚本进行自动化调试；
 * 更多功能自行探索，或查阅 Ozone 安装目录下的 `UM08025_Ozone.pdf` 手册。
 
-
-
-
 ## 附录
 
 ### CMakeLists 模板
 
-```cmake
-# #############################################################################
-# #################        CMake Template (CUSTOM)       ######################
-# #################    Copyright (c) 2022 Hello World    ######################
-# #############################################################################
+推荐使用新版本
 
-set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_SYSTEM_VERSION 1)
-cmake_minimum_required(VERSION 3.22)
+=== "新版本"
 
-# specify cross-compilers and tools
-set(CMAKE_C_COMPILER arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
-set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
-set(CMAKE_AR arm-none-eabi-ar)
-set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
-set(CMAKE_OBJDUMP arm-none-eabi-objdump)
-set(SIZE arm-none-eabi-size)
-set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
+    该版本与新组件库相对应（只适用于 STM32F4 系列的芯片，若要适配其他芯片需要进行进一步修改）
 
-# project settings
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_C_STANDARD 11)
+    ```cmake
+    # ##############################################################################
+    # #################        CMake Template (CUSTOM)       ######################
+    # #################    Copyright (c) 2023 Hello World    ######################
+    # ##############################################################################
 
-# ########################## USER CONFIG SECTION ##############################
-# set up proj
-project(your_proj_name C CXX ASM) # TODO
-set(CMSISDSP your_dsp_path) # if using DSP, modify your_dsp_path here
-			                      # e.g. set(CMSISDSP Drivers/CMSIS/DSP)
+    # Set the system name and version
+    set(CMAKE_SYSTEM_NAME Generic)
+    set(CMAKE_SYSTEM_VERSION 1)
 
-# ! rebuild or use command line `cmake .. -D` to switch option
-# floating point settings
-option(ENABLE_HARD_FP "enable hard floating point" OFF) # TODO
-option(ENABLE_SOFT_FP "enable soft floating point" OFF) # TODO
-option(USE_NEW_VERSION_DSP "DSP version >= 1.10.0" ON) # TODO
+    # Specify the minimum required version of CMake
+    cmake_minimum_required(VERSION 3.22)
 
-# add inc and src here	
-include_directories(
-  Core/Inc 
-  Drivers/STM32F4xx_HAL_Driver/Inc
-  Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
-  Drivers/CMSIS/Device/ST/STM32F4xx/Include 
-  Drivers/CMSIS/Include 
-  
-  if(ENABLE_HARD_FP)
-  if(USE_NEW_VERSION_DSP)
-  ${CMSISDSP}/Include/dsp
-  ${CMSISDSP}/Include
-  ${CMSISDSP}/PrivateInclude
-  else()
-  ${CMSISDSP}/Include
-  endif()
-  endif()
+    # Specify the cross-compilers and tools
+    set(CMAKE_C_COMPILER arm-none-eabi-gcc)
+    set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
+    set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
+    set(CMAKE_AR arm-none-eabi-ar)
+    set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
+    set(CMAKE_OBJDUMP arm-none-eabi-objdump)
+    set(SIZE arm-none-eabi-size)
 
-  # TODO
-)
+    # Specify the type of libraries to try to compile
+    set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
-# !! Keep only sub folders required to build and use CMSIS-DSP Library.
-# !! If DSP version >= 1.10, for all paths including DSP folders, plz add [^a] to filter DSP files.
-# !! e.g. your_dsp_path = Drivers/CMSIS/DSP, use "Drivers/[^a]*.*" "${CMSISDSP}/[^a]*.*" 
-file(GLOB_RECURSE SOURCES
-  "Core/*.*"
-  "Drivers/*.*"
-	
-  # "${CMSISDSP}/*.*" # uncomment this line when using DSP
-  # TODO
-)
+    # Set the project name and the languages used
+    project(your_proj_name C CXX ASM) # TODO: change project name here
 
-# #############################################################################
-if(ENABLE_HARD_FP)
-  message(STATUS "Use FPU")
+    # Set the C++ and C standards
+    set(CMAKE_CXX_STANDARD 17)
+    set(CMAKE_CXX_STANDARD_REQUIRED ON)
+    set(CMAKE_C_STANDARD 11)
+    set(CMAKE_C_STANDARD_REQUIRED ON)
 
-  if(USE_NEW_VERSION_DSP)
-    message(STATUS "DSP version >= 1.10.0")
-    add_compile_definitions(
-      ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
-  else()
-    message(STATUS "DSP version < 1.10.0")
-    add_compile_definitions(
-      ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING;__FPU_PRESENT=1U)
-  endif()
+    # Set the library path
+    set(CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Lib")
 
-  add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
-  add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
-else()
-  message(STATUS "Unuse FPU")
-endif()
+    # Set the linker script
+    file(GLOB LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32*_FLASH.ld)
 
-if(ENABLE_SOFT_FP)
-  add_compile_options(-mfloat-abi=soft)
-endif()
+    # ########################## USER CONFIG SECTION ##############################
+    # TODO: Enable or disable software floating point
+    set(enable_soft_fp
+        OFF
+        CACHE INTERNAL "Enable software floating point")
 
-add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
-add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
+    # TODO: Enable or disable hardware floating point ! This option is required by
+    # the HW-Components/Third_Party/DSP library
+    set(enable_hard_fp
+        ON
+        CACHE INTERNAL "Enable hardware floating point")
 
-# Enable assembler files preprocessing
-add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
+    # ! You can only choose one floating point mode
+    if(enable_soft_fp AND enable_hard_fp)
+      message(FATAL_ERROR "You can only choose one floating point mode")
+    endif()
 
-if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
-  message(STATUS "Maximum optimization for speed")
-  add_compile_options(-Ofast)
-elseif("${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo")
-  message(STATUS "Maximum optimization for speed, debug info included")
-  add_compile_options(-Ofast -g)
-elseif("${CMAKE_BUILD_TYPE}" STREQUAL "MinSizeRel")
-  message(STATUS "Maximum optimization for size")
-  add_compile_options(-Os)
-else()
-  message(STATUS "Minimal optimization, debug info included")
-  add_compile_options(-Og -g)
-endif()
+    # TODO: Modify according to the chip model used, 
+    # you can find the required macro definition in the stm32f4xx.h file 
+    set(STM32_DEVICE STM32F407xx)
 
-add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
+    # Specify user folders
+    set(user_folders "user_folder1" "user_folder2") # TODO Add your own user folders here
 
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407IGHX_FLASH.ld)
+    # Specify the path to the HW-Components directory
+    set(HWC_DIR "HW-Components") # TODO: Set your own HW-Components path here
 
-add_link_options(
-  -Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map
-)
-add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
-add_link_options(-T ${LINKER_SCRIPT})
+    # Include utility functions and default configuration
+    include("${HWC_DIR}/cmake/utils/function_tools.cmake")
+    include("${HWC_DIR}/config.cmake") # Default configuration
 
-add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
+    # TODO: Overwrite default configuration instead of changing it in file
 
-set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
-set(BIN_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.bin)
+    # TODO: Add your own `config.cmake` file or set your own configuration here
 
-add_custom_command(
-  TARGET ${PROJECT_NAME}.elf
-  POST_BUILD
-  COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE}
-  COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf>
-  ${BIN_FILE}
-  COMMENT "Building ${HEX_FILE}
-Building ${BIN_FILE}")
-```
+    # ###################### COMPILE AND LINK OPTIONS SECTION ######################
+    # If hardware floating point is enabled, add the corresponding compile and link
+    # options
+    if(enable_hard_fp)
+      message(STATUS "Enable hard floating point")
+      add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
+      add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
+    endif()
+
+    # If software floating point is enabled, add the corresponding compile options
+    if(enable_soft_fp)
+      message(STATUS "Enable soft floating point")
+      add_compile_options(-mfloat-abi=soft)
+    endif()
+
+    # Add compile options for the target CPU and instruction set,function and data
+    # sections
+    add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+    add_compile_options(-ffunction-sections -fdata-sections -fno-common
+      -fmessage-length=0)
+
+    # Enable preprocessing for assembler files
+    add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
+
+    # Set optimization level based on the build type
+    if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+      message(STATUS "Maximum optimization for speed")
+      add_compile_options(-Ofast)
+    elseif("${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo")
+      message(STATUS "Maximum optimization for speed, debug info included")
+      add_compile_options(-Ofast -g)
+    elseif("${CMAKE_BUILD_TYPE}" STREQUAL "MinSizeRel")
+      message(STATUS "Maximum optimization for size")
+      add_compile_options(-Os)
+    else()
+      message(STATUS "Minimal optimization, debug info included")
+      add_compile_options(-Og -g)
+    endif()
+
+    # Add definitions for the preprocessor
+    add_definitions(-DDEBUG -DUSE_HAL_DRIVER -D${STM32_DEVICE} -D__CC_ASM)
+
+    # Add link options for garbage collection, memory usage printing, map file
+    # generation, the target CPU and instruction set, the linker script to the link
+    # options
+    add_link_options(
+      -Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map
+    )
+    add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+    add_link_options(-T ${LINKER_SCRIPT})
+
+    # #################### ADD LIBRARIES AND EXECUTABLE SECTION ####################
+    # Initialize source and include lists
+    set(project_srcs)
+    set(project_incs)
+
+    # Search for include files and source files in the Core directory
+    search_incs_recurse("${CMAKE_CURRENT_SOURCE_DIR}/Core" core_incs)
+    file(GLOB_RECURSE core_srcs "Core/*.*")
+    list(APPEND project_srcs ${core_srcs})
+    list(APPEND project_incs ${core_incs})
+
+    # Search for include files and source files in the Drivers directory
+    search_incs_recurse("${CMAKE_CURRENT_SOURCE_DIR}/Drivers" drivers_incs)
+    file(GLOB_RECURSE drivers_srcs "Drivers/*.*")
+    list(APPEND project_incs ${drivers_incs})
+
+    # For each user folder, search for include files and source files
+    foreach(user_folder ${user_folders})
+      search_incs_recurse("${CMAKE_CURRENT_SOURCE_DIR}/${user_folder}"
+        ${user_folder}_incs)
+      file(GLOB_RECURSE ${user_folder}_srcs "${user_folder}/*.*")
+      list(APPEND project_incs ${${user_folder}_incs})
+      list(APPEND project_srcs ${${user_folder}_srcs})
+    endforeach()
+
+    # Add a static library for the drivers
+    add_library(drivers STATIC ${drivers_srcs})
+    target_include_directories(drivers PUBLIC ${core_incs} ${drivers_incs})
+
+    # Add the HW-Components directory as a subdirectory
+    add_subdirectory(${HWC_DIR})
+
+    # Add an executable for the project
+    add_executable(${PROJECT_NAME}.elf ${project_srcs} ${LINKER_SCRIPT})
+
+    # Add the project includes to the executable
+    target_include_directories(${PROJECT_NAME}.elf PUBLIC ${project_incs})
+    target_include_directories(${PROJECT_NAME}.elf PUBLIC ${${HWC_LIB_PREFIX}_incs})
+
+    # Link the drivers library and the HW-Components library to the executable
+    target_link_libraries(${PROJECT_NAME}.elf PUBLIC drivers)
+    target_link_libraries(${PROJECT_NAME}.elf PUBLIC ${${HWC_LIB_PREFIX}_libs})
+
+    # Define the output hex and bin files
+    set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
+    set(BIN_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.bin)
+
+    # Add a post-build command to generate the hex and bin files
+    add_custom_command(
+      TARGET ${PROJECT_NAME}.elf
+      POST_BUILD
+      COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE}
+      COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf>
+      ${BIN_FILE}
+      COMMENT "Building ${HEX_FILE} Building ${BIN_FILE}")
+    ```
+=== "旧版本"
+    ```cmake
+    # #############################################################################
+    # #################        CMake Template (CUSTOM)       ######################
+    # #################    Copyright (c) 2022 Hello World    ######################
+    # #############################################################################
+
+    set(CMAKE_SYSTEM_NAME Generic)
+    set(CMAKE_SYSTEM_VERSION 1)
+    cmake_minimum_required(VERSION 3.22)
+
+    # specify cross-compilers and tools
+    set(CMAKE_C_COMPILER arm-none-eabi-gcc)
+    set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
+    set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
+    set(CMAKE_AR arm-none-eabi-ar)
+    set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
+    set(CMAKE_OBJDUMP arm-none-eabi-objdump)
+    set(SIZE arm-none-eabi-size)
+    set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
+
+    # project settings
+    set(CMAKE_CXX_STANDARD 17)
+    set(CMAKE_C_STANDARD 11)
+
+    # ########################## USER CONFIG SECTION ##############################
+    # set up proj
+    project(your_proj_name C CXX ASM) # TODO
+    set(CMSISDSP your_dsp_path) # if using DSP, modify your_dsp_path here
+                                # e.g. set(CMSISDSP Drivers/CMSIS/DSP)
+
+    # ! rebuild or use command line `cmake .. -D` to switch option
+    # floating point settings
+    option(ENABLE_HARD_FP "enable hard floating point" OFF) # TODO
+    option(ENABLE_SOFT_FP "enable soft floating point" OFF) # TODO
+    option(USE_NEW_VERSION_DSP "DSP version >= 1.10.0" ON) # TODO
+
+    # add inc and src here	
+    include_directories(
+      Core/Inc 
+      Drivers/STM32F4xx_HAL_Driver/Inc
+      Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
+      Drivers/CMSIS/Device/ST/STM32F4xx/Include 
+      Drivers/CMSIS/Include 
+      
+      if(ENABLE_HARD_FP)
+      if(USE_NEW_VERSION_DSP)
+      ${CMSISDSP}/Include/dsp
+      ${CMSISDSP}/Include
+      ${CMSISDSP}/PrivateInclude
+      else()
+      ${CMSISDSP}/Include
+      endif()
+      endif()
+
+      # TODO
+    )
+
+    # !! Keep only sub folders required to build and use CMSIS-DSP Library.
+    # !! If DSP version >= 1.10, for all paths including DSP folders, plz add [^a] to filter DSP files.
+    # !! e.g. your_dsp_path = Drivers/CMSIS/DSP, use "Drivers/[^a]*.*" "${CMSISDSP}/[^a]*.*" 
+    file(GLOB_RECURSE SOURCES
+      "Core/*.*"
+      "Drivers/*.*"
+      
+      # "${CMSISDSP}/*.*" # uncomment this line when using DSP
+      # TODO
+    )
+
+    # #############################################################################
+    if(ENABLE_HARD_FP)
+      message(STATUS "Use FPU")
+
+      if(USE_NEW_VERSION_DSP)
+        message(STATUS "DSP version >= 1.10.0")
+        add_compile_definitions(
+          ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
+      else()
+        message(STATUS "DSP version < 1.10.0")
+        add_compile_definitions(
+          ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING;__FPU_PRESENT=1U)
+      endif()
+
+      add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
+      add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
+    else()
+      message(STATUS "Unuse FPU")
+    endif()
+
+    if(ENABLE_SOFT_FP)
+      add_compile_options(-mfloat-abi=soft)
+    endif()
+
+    add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+    add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
+
+    # Enable assembler files preprocessing
+    add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
+
+    if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+      message(STATUS "Maximum optimization for speed")
+      add_compile_options(-Ofast)
+    elseif("${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo")
+      message(STATUS "Maximum optimization for speed, debug info included")
+      add_compile_options(-Ofast -g)
+    elseif("${CMAKE_BUILD_TYPE}" STREQUAL "MinSizeRel")
+      message(STATUS "Maximum optimization for size")
+      add_compile_options(-Os)
+    else()
+      message(STATUS "Minimal optimization, debug info included")
+      add_compile_options(-Og -g)
+    endif()
+
+    add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
+
+    set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407IGHX_FLASH.ld)
+
+    add_link_options(
+      -Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map
+    )
+    add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+    add_link_options(-T ${LINKER_SCRIPT})
+
+    add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
+
+    set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
+    set(BIN_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.bin)
+
+    add_custom_command(
+      TARGET ${PROJECT_NAME}.elf
+      POST_BUILD
+      COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE}
+      COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf>
+      ${BIN_FILE}
+      COMMENT "Building ${HEX_FILE}
+    Building ${BIN_FILE}")
+    ```
 
 ### 参考资料
 
@@ -495,3 +681,4 @@ Building ${BIN_FILE}")
 | ![hh](https://img.shields.io/badge/version-1.0.0-green) | 2022.11.13 | 首次发布                       | 薛东来 |
 | ![hh](https://img.shields.io/badge/version-1.1.0-green) | 2022.11.25 | 添加 make 部分，修正模糊的表述 | 薛东来 |
 | ![hh](https://img.shields.io/badge/version-1.1.1-green) | 2022.11.29 | 修复不同版本dsp开启问题 | 蔡坤镇 |
+| ![hh](https://img.shields.io/badge/version-2.0.0-green) | 2023.12.11 | 将 CMakeLists.txt 模板修改为新版本 | 蔡坤镇 |
