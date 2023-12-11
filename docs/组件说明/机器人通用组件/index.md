@@ -5,11 +5,15 @@ hide:
 
 # 机器人通用组件
 
-> 机器人通用组件源码仓库：<https://github.com/ZJU-HelloWorld/HW-Components>
+> 机器人通用组件源码仓库：<https://github.com/ZJU-HelloWorld/HW-Components>，对应分支为`cpp24`
+
+## 基本功能（tools）
+
+包括实用功能聚合。
 
 ## 算法（algorithms）
 
-涵盖了机器人开发相关的各类数学计算、信号处理及控制算法实现。包括实用功能聚合（tools）。
+涵盖了机器人开发相关的各类数学计算、信号处理及控制算法实现。
 
 ## 设备应用（devices）
 
