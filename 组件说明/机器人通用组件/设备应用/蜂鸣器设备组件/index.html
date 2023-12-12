@@ -12,11 +12,11 @@
         <link rel="prev" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
       
       
-        <link rel="next" href="../../../%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81/">
+        <link rel="next" href="../%E9%81%A5%E6%8E%A7%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
       
       
       <link rel="icon" href="../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.1">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.45e1311d.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.50c56a3b.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
@@ -1395,6 +1395,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1424,6 +1428,27 @@
             设备应用
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IMU（Inertial Measurement Unit）设备组件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1661,6 +1686,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%81%A5%E6%8E%A7%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    遥控器（Remote Control）设备组件
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -2837,7 +2883,7 @@
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
 <p>组件源码仓库地址：<a href="https://github.com/ZJU-HelloWorld/HW-Components">https://github.com/ZJU-HelloWorld/HW-Components</a></p>
 <h3 id="外设驱动配置">外设驱动配置<a class="headerlink" href="#外设驱动配置" title="链接到此节">&para;</a></h3>
-<p>在使用 PWM 波控制蜂鸣器时，使用 CubeMX 配置时将对应定时器预分频至 1MHz，以方便控制。例如对于RoboMaster 开发板 C 型板载的蜂鸣器，驱动流程如下：</p>
+<p>在使用 PWM 波控制蜂鸣器时，使用 CubeMX 配置时将对应定时器预分频至 1MHz，以方便控制。例如对于 RoboMaster 开发板 C 型板载的蜂鸣器，驱动流程如下：</p>
 <ul>
 <li>对于 TIM4，查看数据手册可知其挂载在 APB1 总线上，时钟频率 84MHz，为达到 1MHz 需要 84 分频 ，因此将预分频值（Prescaler）设置为 83；</li>
 <li>工作频率与鸣响音调相关，因此重载值（Counter Period）在运行时由指定的音调频率计算得到，设频率 <span class="arithmatex">\(f\)</span>，则重载值为 <span class="arithmatex">\(1000000 / f-1\)</span>，CubeMX 配置可随意；</li>
@@ -2958,7 +3004,7 @@
 <td style="text-align: left;"><code>tune_duration</code></td>
 <td style="text-align: left;"><code>uint16_t</code></td>
 <td style="text-align: left;">500</td>
-<td style="text-align: left;">单音持续时长，单位：ms</td>
+<td style="text-align: left;">单音持续时长，单位：<span class="arithmatex">\(\rm{ms}\)</span></td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>list</code></td>
@@ -3075,7 +3121,7 @@
 <td style="text-align: left;"><code>tune_start_tick_</code></td>
 <td style="text-align: left;"><code>uint32_t</code></td>
 <td style="text-align: left;">/</td>
-<td style="text-align: left;">当前播放的音符的开始时刻，单位：ms</td>
+<td style="text-align: left;">当前播放的音符的开始时刻，单位：<span class="arithmatex">\(\rm{ms}\)</span></td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>tune_switch_</code></td>
@@ -3167,7 +3213,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-11</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-12</span>
   </span>
 
     
