@@ -1657,6 +1657,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#外部函数" class="md-nav__link">
+    <span class="md-ellipsis">
+      外部函数
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3068,6 +3077,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#外部函数" class="md-nav__link">
+    <span class="md-ellipsis">
+      外部函数
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3324,18 +3342,82 @@
 <a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="c1">//              .max_torq_input_lim = 2.0f,</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="c1">//          });</span>
 </code></pre></div></td></tr></table></div>
+<p>当需要不同种电机一起初始化时，可以调用 <code>CreateMotor</code> 函数进行生成，如：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span>
+<span class="normal"><a href="#__codelineno-3-24">24</a></span>
+<span class="normal"><a href="#__codelineno-3-25">25</a></span>
+<span class="normal"><a href="#__codelineno-3-26">26</a></span>
+<span class="normal"><a href="#__codelineno-3-27">27</a></span>
+<span class="normal"><a href="#__codelineno-3-28">28</a></span>
+<span class="normal"><a href="#__codelineno-3-29">29</a></span>
+<span class="normal"><a href="#__codelineno-3-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">motor</span><span class="o">::</span><span class="n">Motor</span><span class="o">*</span><span class="w"> </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">motor</span><span class="o">::</span><span class="n">MotorType</span><span class="w"> </span><span class="n">motor_type_ls</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="n">motor</span><span class="o">::</span><span class="n">kMotorTypeA1</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="n">motor</span><span class="o">::</span><span class="n">kMotorTypeDM_J4310</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="n">motor</span><span class="o">::</span><span class="n">kMotorTypeDM_J4310</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="n">motor</span><span class="o">::</span><span class="n">kMotorTypeM3508</span><span class="p">,</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="p">};</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="n">motor</span><span class="o">::</span><span class="n">OptionalParams</span><span class="w"> </span><span class="n">optional_params_ls</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="n">motor</span><span class="o">::</span><span class="n">OptionalParams</span><span class="p">{</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">        </span><span class="p">.</span><span class="n">input_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">kInputTypeTorq</span><span class="p">,</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">        </span><span class="p">.</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">kDirFwd</span><span class="p">,</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">    </span><span class="n">motor</span><span class="o">::</span><span class="n">OptionalParams</span><span class="p">{</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">        </span><span class="p">.</span><span class="n">input_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">kInputTypeTorq</span><span class="p">,</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">        </span><span class="p">.</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">kDirRev</span><span class="p">,</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">    </span><span class="n">motor</span><span class="o">::</span><span class="n">OptionalParams</span><span class="p">{</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">        </span><span class="p">.</span><span class="n">input_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">kInputTypeTorq</span><span class="p">,</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">        </span><span class="p">.</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">kDirFwd</span><span class="p">,</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">    </span><span class="n">motor</span><span class="o">::</span><span class="n">OptionalParams</span><span class="p">{</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">        </span><span class="p">.</span><span class="n">input_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">kInputTypeTorq</span><span class="p">,</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">        </span><span class="p">.</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">kDirRev</span><span class="p">,</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="p">};</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26"></a>
+<a id="__codelineno-3-27" name="__codelineno-3-27"></a><span class="k">for</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28"></a><span class="w">  </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">CreateMotor</span><span class="p">(</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29"></a><span class="w">    </span><span class="n">motor_type_ls</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">optional_params_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>返回的电机类是经过内存申请得到的，不使用时需要自行释放内存</li>
+</ul>
 <p>设定电机的输入（共三种输入方式：期望电流、期望输出力矩，报文原始输入，个别电机的输入方式有所减少），输入当前正在编码的报文的标识符，当标识符与电机接收报文标识符对应时得到编码后的报文，如：</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#__codelineno-3-3">3</a></span>
-<span class="normal"><a href="#__codelineno-3-4">4</a></span>
-<span class="normal"><a href="#__codelineno-3-5">5</a></span>
-<span class="normal"><a href="#__codelineno-3-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kt">float</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">;</span><span class="w"> </span><span class="c1">// 输出端输出 0.1N·m 的力矩</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="kt">uint8_t</span><span class="w"> </span><span class="n">tx_data</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="n">tx_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x200</span><span class="p">;</span><span class="w"> </span><span class="c1">// 当前 CAN 报文的 ID</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">encode</span><span class="p">(</span><span class="n">tx_data</span><span class="p">,</span><span class="w"> </span><span class="n">tx_id</span><span class="p">);</span><span class="w"> </span><span class="c1">// 编码报文</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kt">float</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">;</span><span class="w"> </span><span class="c1">// 输出端输出 0.1N·m 的力矩</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="kt">uint8_t</span><span class="w"> </span><span class="n">tx_data</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="n">tx_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x200</span><span class="p">;</span><span class="w"> </span><span class="c1">// 当前 CAN 报文的 ID</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">encode</span><span class="p">(</span><span class="n">tx_data</span><span class="p">,</span><span class="w"> </span><span class="n">tx_id</span><span class="p">);</span><span class="w"> </span><span class="c1">// 编码报文</span>
 </code></pre></div></td></tr></table></div>
 <ul>
 <li>输入的类型由初始化时 <code>OptionalParams</code> 结构体中的 <code>input_type</code> 决定，可通过类方法 <code>get_input_type</code> 与 <code>set_input_type</code> 进行读取与重设定</li>
@@ -3343,82 +3425,82 @@
 <li>当 <code>tx_id</code> 与电机实际接收的报文 ID 不对应时，<code>encode</code> 方法不会对报文进行编译</li>
 </ul>
 <p>对同一报文控制的多个电机则采用对同一报文多次编码的方式，如：</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#__codelineno-4-2">2</a></span>
-<span class="normal"><a href="#__codelineno-4-3">3</a></span>
-<span class="normal"><a href="#__codelineno-4-4">4</a></span>
-<span class="normal"><a href="#__codelineno-4-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kt">uint8_t</span><span class="w"> </span><span class="n">tx_data</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="n">tx_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">tx_id</span><span class="p">();</span><span class="w"> </span><span class="c1">// 当前 CAN 报文的 ID</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="k">for</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">  </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">encode</span><span class="p">(</span><span class="n">tx_data</span><span class="p">,</span><span class="w"> </span><span class="n">tx_id</span><span class="p">);</span><span class="w"> </span><span class="c1">// 编码报文</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-<p>然后调用 CAN 发送编码后的报文，如：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
 <span class="normal"><a href="#__codelineno-5-3">3</a></span>
 <span class="normal"><a href="#__codelineno-5-4">4</a></span>
-<span class="normal"><a href="#__codelineno-5-5">5</a></span>
-<span class="normal"><a href="#__codelineno-5-6">6</a></span>
-<span class="normal"><a href="#__codelineno-5-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">CAN_TxHeaderTypeDef</span><span class="w"> </span><span class="n">tx_header</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="n">mail_box</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">tx_header</span><span class="p">.</span><span class="n">StdId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tx_id</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">tx_header</span><span class="p">.</span><span class="n">IDE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAN_ID_STD</span><span class="p">;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="n">tx_header</span><span class="p">.</span><span class="n">RTR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAN_RTR_DATA</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="n">tx_header</span><span class="p">.</span><span class="n">DLC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="n">HAL_CAN_AddTxMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tx_header</span><span class="p">,</span><span class="w"> </span><span class="n">tx_data</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mail_box</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kt">uint8_t</span><span class="w"> </span><span class="n">tx_data</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="n">tx_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">tx_id</span><span class="p">();</span><span class="w"> </span><span class="c1">// 当前 CAN 报文的 ID</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="k">for</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">  </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">encode</span><span class="p">(</span><span class="n">tx_data</span><span class="p">,</span><span class="w"> </span><span class="n">tx_id</span><span class="p">);</span><span class="w"> </span><span class="c1">// 编码报文</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>然后调用 CAN 发送编码后的报文，如：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span>
+<span class="normal"><a href="#__codelineno-6-4">4</a></span>
+<span class="normal"><a href="#__codelineno-6-5">5</a></span>
+<span class="normal"><a href="#__codelineno-6-6">6</a></span>
+<span class="normal"><a href="#__codelineno-6-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">CAN_TxHeaderTypeDef</span><span class="w"> </span><span class="n">tx_header</span><span class="p">;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="n">mail_box</span><span class="p">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="n">tx_header</span><span class="p">.</span><span class="n">StdId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tx_id</span><span class="p">;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="n">tx_header</span><span class="p">.</span><span class="n">IDE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAN_ID_STD</span><span class="p">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="n">tx_header</span><span class="p">.</span><span class="n">RTR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAN_RTR_DATA</span><span class="p">;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="n">tx_header</span><span class="p">.</span><span class="n">DLC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="n">HAL_CAN_AddTxMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tx_header</span><span class="p">,</span><span class="w"> </span><span class="n">tx_data</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mail_box</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>电机发回法报文在 CAN 接收中断中进行，在当前报文标识符与电机标识符对应时，对接收到的报文进行解包，得到反馈信息，如：</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-6-10">10</a></span>
-<span class="normal"><a href="#__codelineno-6-11">11</a></span>
-<span class="normal"><a href="#__codelineno-6-12">12</a></span>
-<span class="normal"><a href="#__codelineno-6-13">13</a></span>
-<span class="normal"><a href="#__codelineno-6-14">14</a></span>
-<span class="normal"><a href="#__codelineno-6-15">15</a></span>
-<span class="normal"><a href="#__codelineno-6-16">16</a></span>
-<span class="normal"><a href="#__codelineno-6-17">17</a></span>
-<span class="normal"><a href="#__codelineno-6-18">18</a></span>
-<span class="normal"><a href="#__codelineno-6-19">19</a></span>
-<span class="normal"><a href="#__codelineno-6-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">CAN_RxHeaderTypeDef</span><span class="w"> </span><span class="n">rx_header</span><span class="p">;</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="kt">uint8_t</span><span class="w"> </span><span class="n">rx_data</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_CAN_RxFifo0MsgPendingCallback</span><span class="p">(</span><span class="n">CAN_HandleTypeDef</span><span class="w"> </span><span class="o">*</span><span class="n">hcan</span><span class="p">)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="p">{</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hcan</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">)</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">HAL_CAN_GetRxMessage</span><span class="p">(</span><span class="n">hcan</span><span class="p">,</span><span class="w"> </span><span class="n">CAN_RX_FIFO0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rx_header</span><span class="p">,</span><span class="w"> </span><span class="n">rx_data</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HAL_OK</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获得接收到的数据头和数据</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">            </span><span class="c1">// 若与某电机can和接收id对应，则会进行解码</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">            </span><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">decode</span><span class="p">(</span><span class="n">rx_date</span><span class="p">,</span><span class="w"> </span><span class="n">rx_header</span><span class="p">.</span><span class="n">StdId</span><span class="p">);</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">            </span><span class="c1">// for (uint8_t i = 0; i &lt; 4; i++) {</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">            </span><span class="c1">//   if (motor_ptr_ls[i]-&gt;decode(rx_date, rx_header.StdId)) {</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="w">            </span><span class="c1">//     break;</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">            </span><span class="c1">//   }</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="w">            </span><span class="c1">// }</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="w">    </span><span class="n">HAL_CAN_ActivateNotification</span><span class="p">(</span><span class="n">hcan</span><span class="p">,</span><span class="w"> </span><span class="n">CAN_IT_RX_FIFO0_MSG_PENDING</span><span class="p">);</span><span class="w"> </span><span class="c1">// 再次使能FIFO0接收中断</span>
-<a id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">CAN_RxHeaderTypeDef</span><span class="w"> </span><span class="n">rx_header</span><span class="p">;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="kt">uint8_t</span><span class="w"> </span><span class="n">rx_data</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_CAN_RxFifo0MsgPendingCallback</span><span class="p">(</span><span class="n">CAN_HandleTypeDef</span><span class="w"> </span><span class="o">*</span><span class="n">hcan</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="p">{</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hcan</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">HAL_CAN_GetRxMessage</span><span class="p">(</span><span class="n">hcan</span><span class="p">,</span><span class="w"> </span><span class="n">CAN_RX_FIFO0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rx_header</span><span class="p">,</span><span class="w"> </span><span class="n">rx_data</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HAL_OK</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获得接收到的数据头和数据</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">            </span><span class="c1">// 若与某电机can和接收id对应，则会进行解码</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">            </span><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">decode</span><span class="p">(</span><span class="n">rx_date</span><span class="p">,</span><span class="w"> </span><span class="n">rx_header</span><span class="p">.</span><span class="n">StdId</span><span class="p">);</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">            </span><span class="c1">// for (uint8_t i = 0; i &lt; 4; i++) {</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">            </span><span class="c1">//   if (motor_ptr_ls[i]-&gt;decode(rx_date, rx_header.StdId)) {</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="w">            </span><span class="c1">//     break;</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="w">            </span><span class="c1">//   }</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="w">            </span><span class="c1">// }</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="w">    </span><span class="n">HAL_CAN_ActivateNotification</span><span class="p">(</span><span class="n">hcan</span><span class="p">,</span><span class="w"> </span><span class="n">CAN_IT_RX_FIFO0_MSG_PENDING</span><span class="p">);</span><span class="w"> </span><span class="c1">// 再次使能FIFO0接收中断</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>接收到电机的反馈信号后，可以调用对应的类方法，获取电机的状态（包括输入电流，输出端力矩，输出端角度，输出端角速度等），如：</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
-<span class="normal"><a href="#__codelineno-7-2">2</a></span>
-<span class="normal"><a href="#__codelineno-7-3">3</a></span>
-<span class="normal"><a href="#__codelineno-7-4">4</a></span>
-<span class="normal"><a href="#__codelineno-7-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">angle</span><span class="p">();</span><span class="w">                             </span><span class="c1">// 获取输出端角度</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">vel</span><span class="p">();</span><span class="w">                               </span><span class="c1">// 获取输出端转速</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">torq</span><span class="p">();</span><span class="w">                              </span><span class="c1">// 获取输出端的输出力矩</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">curr</span><span class="p">();</span><span class="w">                              </span><span class="c1">// 获取电机的输入电流</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">motor</span><span class="o">::</span><span class="n">M3508</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">motor_ptr</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">temp</span><span class="p">();</span><span class="w">  </span><span class="c1">// 获取电机温度（个别电机具有）</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">angle</span><span class="p">();</span><span class="w">                             </span><span class="c1">// 获取输出端角度</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">vel</span><span class="p">();</span><span class="w">                               </span><span class="c1">// 获取输出端转速</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">torq</span><span class="p">();</span><span class="w">                              </span><span class="c1">// 获取输出端的输出力矩</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">curr</span><span class="p">();</span><span class="w">                              </span><span class="c1">// 获取电机的输入电流</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">motor</span><span class="o">::</span><span class="n">M3508</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">motor_ptr</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">temp</span><span class="p">();</span><span class="w">  </span><span class="c1">// 获取电机温度（个别电机具有）</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="组件说明">组件说明<a class="headerlink" href="#组件说明" title="链接到此节">&para;</a></h3>
 <h4 id="motorbaseinfo-结构体"><code>MotorBaseInfo</code> 结构体<a class="headerlink" href="#motorbaseinfo-结构体" title="链接到此节">&para;</a></h4>
@@ -4244,6 +4326,23 @@
 </tr>
 </tbody>
 </table>
+<h4 id="外部函数">外部函数<a class="headerlink" href="#外部函数" title="链接到此节">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">名称 <img width=250/></th>
+<th style="text-align: left;">参数说明</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>CreateMotor</code></td>
+<td style="text-align: left;"><code>motor_type</code>: 电机类型</br><code>id</code>: 电机 ID</br><code>optinal_params</code>: 电机可选配置参数</br>返回: 创建的电机类指针</td>
+<td>根据所需的电机类型创建电机并初始化，返回的电机类是经过内存申请得到的，不使用时需要自行释放内存</td>
+</tr>
+</tbody>
+</table>
 <h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">&para;</a></h2>
 <h3 id="电机使用注意事项">电机使用注意事项<a class="headerlink" href="#电机使用注意事项" title="链接到此节">&para;</a></h3>
 <h4 id="gm6020">GM6020<a class="headerlink" href="#gm6020" title="链接到此节">&para;</a></h4>
@@ -4409,7 +4508,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-12</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-13</span>
   </span>
 
     
