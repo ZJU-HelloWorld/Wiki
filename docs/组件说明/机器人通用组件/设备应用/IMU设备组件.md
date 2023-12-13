@@ -54,7 +54,7 @@ BMI088 为满足在剧烈震动环境下高性能消费类设备的所有需求�
 #include "imu.hpp"
 ```
 
-实例化一个 BMI088 硬件配置结构体并进行相关配置，如：
+实例化一个 BMI088 硬件配置结构体并进行相关配置，同时根据安装方式设定旋转矩阵，如：
 
 ```cpp
 imu::BMI088HWConfig hw_config = {
@@ -64,6 +64,11 @@ imu::BMI088HWConfig hw_config = {
   .gyro_cs_port = GPIOB,
   .gyro_cs_pin = GPIO_PIN_0,
 };
+
+float rot_mat_flatten[9] = {
+    1, 0, 0,
+    0, 1, 0,
+    0, 0, 1};
 ```
 
 实例化一个 BMI088 组件并放入对应硬件配置进行初始化，如：
@@ -72,7 +77,7 @@ imu::BMI088HWConfig hw_config = {
 namespace imu = hello_world::devices::imu;
 
 imu::BMI088* imu_ptr = nullptr;
-imu_ptr = new imu::BMI088(hw_config);
+imu_ptr = new imu::BMI088(hw_config, rot_mat_flatten);
 ```
 
 当有特殊需求时，还可以调整 BMI088 的配置，如：
@@ -86,7 +91,7 @@ imu::BMI088Config config = {
     .gyro_odr_fbw = imu::BMI088GyroOdrFbw1000_116,
 };
 
-imu_ptr = new imu::BMI088(hw_config, config);
+imu_ptr = new imu::BMI088(hw_config, rot_mat_flatten, config);
 ```
 
 - `BMI088Config` 具有默认参数，因此可以在需要对某些默认参数进行修改时进行个别修改，但是需要保证前后结构体成员前后的复制顺序需要与结构体中的声明顺序相同
@@ -151,10 +156,10 @@ BMI088 硬件配置
 
 | 名称 <img width=250/>            | 参数说明                                                              | 描述                                                                                                 |
 | :--------------- | :-------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-|`BMI088`|`hw_config`: 硬件配置</br>`config`: 设备配置|BMI088 初始化|
+|`BMI088`|`hw_config`: 硬件配置</br>`config`: 设备配置</br>`rot_mat_flatten`: 旋转矩阵（展平）[$r_{0,0}$ $r_{0,1}$ $r_{0,2}$ $r_{1,0}$ $r_{1,1}$ $r_{1,2}$ $r_{2,0}$ $r_{2,1}$ $r_{2,2}$]，使用后可释放|BMI088 初始化|
 |`~BMI088`|/|BMI088 析构函数|
 |`setInput`|`input`: 发给电调的期望值|设定发给电调的期望值|
-|`init`|`self_test`: 是否开启传感器自检测</br>返回: 错误状态|进行 BMI088 芯片配置|
+|`init`|`self_test`: 是否开启传感器自检测</br>返回: 错误状态|进行 BMI088 芯片配置，该函数内部会阻塞运行，请不要在中断中调用|
 |`getData`|`acc_data`: 加速度计三轴数据，[$a_x$ $a_y$ $a_z$]，单位：$\rm{m/s^2}$</br>`gyro_data`: 陀螺仪三轴数据，[$\omega_x$ $\omega_y$ $\omega_z$]，单位：$\rm{rad/s}$</br>`temp_ptr`: 温度数据指针，单位：℃|获取传感器数据，传入 `null_ptr` 则不获取对应数据|
 
 ##### private
@@ -164,6 +169,8 @@ BMI088 硬件配置
 | 名称                    | 类型            | 示例值      | 描述                                                      |
 | :---------------------- | :-------------- | :---------- | :-------------------------------------------------------- |
 |`config_`|`BMI088Config`|/|BMI088 设备配置|
+|`rot_mat_flatten_`|`float*`|/|展平的旋转矩阵|
+|`rot_mat_`|`arm_matrix_instance_f32`|/|旋转矩阵|
 
 方法
 
@@ -186,6 +193,11 @@ BMI088 硬件配置
 |`accWrite`|`mem_addr`: 寄存器地址</br>`value`: 待写入数据|向加速度计寄存器写入数据|
 |`accRead`|`mem_addr`: 寄存器地址</br>返回: 读取数据|读取加速度计寄存器数据|
 |`accMultiRead`|`start_mem_addr`: 寄存器起始地址</br>`len`: 带读取数据长度</br>`rx_data`: 读取得到的数据|加速度计多寄存器数据读取|
+
+#### 内部函数
+| 名称 <img width=250/>            | 参数说明                                                              | 描述                                                                                                 |
+| :--------------- | :-------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+|`DelayUs`|`us`: 需要延时的时间，单位：$\rm{\mu s}$|微秒级延时|
 
 ## 附录
 
