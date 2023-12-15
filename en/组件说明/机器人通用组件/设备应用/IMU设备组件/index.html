@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../../">
+        <link rel="prev" href="../../%E7%AE%97%E6%B3%95/AHRS%E5%A7%BF%E6%80%81%E8%A7%A3%E7%AE%97/">
       
       
         <link rel="next" href="../%E7%94%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6/">
@@ -1336,6 +1336,8 @@
       
         
       
+        
+      
     
     
     
@@ -1380,6 +1382,78 @@
                 
   
   
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2_2" id="__nav_6_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AE%97%E6%B3%95/AHRS%E5%A7%BF%E6%80%81%E8%A7%A3%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AHRS 姿态解算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1408,10 +1482,10 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_6_2_2" id="__nav_6_2_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6_2_3" id="__nav_6_2_3_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1422,8 +1496,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_6_2_2">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_2_3">
             <span class="md-nav__icon md-icon"></span>
             设备应用
           </label>
@@ -2966,6 +3040,7 @@
 </ul>
 <p><a class="glightbox" href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212153710.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20231212153710" src="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212153710.png" /></a></p>
 <h3 id="使用前准备">使用前准备<a class="headerlink" href="#使用前准备" title="链接到此节">&para;</a></h3>
+<p>本组件依赖 CMSIS-DSP 运算加速。</p>
 <p>使用前需要做以下准备：</p>
 <ul>
 <li>在使用 STM32CubeMX 生成项目时，请在 <code>Code Generator</code> 界面 <code>Enable Full Assert</code>，来帮助断言设备驱动中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果，如添加 <code>while(1);</code></li>
@@ -3381,6 +3456,12 @@
 <td>IMU 组件（Cpp）</td>
 <td>蔡坤镇</td>
 </tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-1.0.1-green"></td>
+<td>2023.12.13</td>
+<td>添加旋转配置</td>
+<td>蔡坤镇</td>
+</tr>
 </tbody>
 </table>
 
@@ -3405,7 +3486,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-13</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-15</span>
   </span>
 
     

@@ -1336,6 +1336,8 @@
       
         
       
+        
+      
     
     
     
@@ -1389,6 +1391,78 @@
       
         
       
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2_2" id="__nav_6_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%AE%97%E6%B3%95/AHRS%E5%A7%BF%E6%80%81%E8%A7%A3%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AHRS 姿态解算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
         
       
         
@@ -1410,10 +1484,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2_3" >
         
           
-          <label class="md-nav__link" for="__nav_6_2_2" id="__nav_6_2_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6_2_3" id="__nav_6_2_3_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1424,8 +1498,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_2_2">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2_3">
             <span class="md-nav__icon md-icon"></span>
             设备应用
           </label>
@@ -2633,6 +2707,7 @@
 <ol>
 <li>为保证 <em>CPP</em> 类的封装效果，组件中的类绝大多数属性均为非 <em>public</em>，以避免使用者不小心修改对应属性导致运行出错。其中直接以 <em>public</em> 形式暴露的属性均有 <em>const</em> 修饰</li>
 <li>而针对使用者需要对某些内部属性进行访问或修改，类提供对特定属性的读取或修改方法。假设类其中有 <strong>variable_</strong> 属性，则或提供如：<strong>variable</strong> 的方法或 <strong>set_variable</strong> 与 <strong>get_variable</strong> 的方法对，前者用于只读的属性，而后者用于可读可写的属性。而这些用于访问内部变量的接口作用明显，因此<strong>只会在说明文档中列出但不会进行说明，因此实际使用时组件时还应查看头文件中提供的访问接口</strong></li>
+<li>为适配不同的内存申请方法，组件中提供了 <code>MemMang</code> 类，其中重载了类的内存申请与释放方法。因此所有可能会调用内存申请与释放的类均需为该类的子类，文档中也会省略所有类均继承自 <code>MemMang</code> 类的说明</li>
 </ol>
 </blockquote>
 <h2 id="机器人通用组件">机器人通用组件<a class="headerlink" href="#机器人通用组件" title="链接到此节">&para;</a></h2>
@@ -2668,7 +2743,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-11</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-15</span>
   </span>
 
     
