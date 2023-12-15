@@ -41,6 +41,8 @@ BMI088 为满足在剧烈震动环境下高性能消费类设备的所有需求�
 
 ### 使用前准备
 
+本组件依赖 CMSIS-DSP 运算加速。
+
 使用前需要做以下准备：
 
 * 在使用 STM32CubeMX 生成项目时，请在 `Code Generator` 界面 `Enable Full Assert`，来帮助断言设备驱动中的错误；在 `main.c` 中修改 `assert_failed` 函数以指示断言结果，如添加 `while(1);`
@@ -210,3 +212,4 @@ BMI088 硬件配置
 | 版本号                                                       | 发布日期   | 说明               | 贡献者 |
 | ------------------------------------------------------------ | ---------- | ------------------ | ------ |
 | <img src = "https://img.shields.io/badge/version-1.0.0-green"> | 2023.12.12 | IMU 组件（Cpp） | 蔡坤镇 |
+| <img src = "https://img.shields.io/badge/version-1.0.1-green"> | 2023.12.13 | 添加旋转配置 | 蔡坤镇 |
