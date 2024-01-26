@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
@@ -66,17 +66,15 @@
     
     
    <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-        html.glightbox-open { overflow: initial; height: 100%; }
-        .gslide-title { margin-top: 0px; user-select: text; }
-        .gslide-desc { color: #666; user-select: text; }
-        .gslide-image img { background: white; }
-        
-            .gscrollbar-fixer { padding-right: 15px; }
-            .gdesc-inner { font-size: 0.75rem; }
-            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-            </style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -3032,12 +3030,12 @@
 <h2 id="理论">理论<a class="headerlink" href="#理论" title="链接到此节">&para;</a></h2>
 <p>OLED 即有机发光管（Organic Light-Emitting Diode，OLED）或有机电激光显示（Organic Electroluminescence Display）。OLED 显示技术具有自发光、广视角、几乎无穷高的对比度、较低功耗、极高反应速度、可用于绕曲性面板、使用温度范围广、构造及制程简单等优点，被认为是下一代的平面显示屏新兴应用技术。OLED 显示和传统的 LCD 显示不同，其可以自发光，所以不需要背光灯，这使得 OLED 显示屏相对于 LCD 显示屏尺寸更薄，同时显示效果更优。</p>
 <p>实车上 OLED 模块可用于显示关键信息、指示设备状态等场景。常用的 OLED 屏幕有蓝 /黄色、白色等几种，屏幕尺寸通常为 0.96 寸，分辨率 128 * 64，支持 SPI、I2C 等通信协议。实验室使用的 OLED 模块引出接口为 I2C，驱动芯片型号为 SSD1306，如下图所示：</p>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221210010356782.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221210010356782" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221210010356782.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221210010356782.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221210010356782" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221210010356782.png" /></a></p>
 <p>I2C 是一种半双工、双向二线制（数据线 SDA，时钟线 SCL）同步串行总线，总线允许挂载多个主设备，但总线时钟同一时刻只能由一个主设备产生，并且要求每个连接到总线上的器件都有唯一的 I2C 地址，从设备可以被主设备寻址。</p>
 <blockquote>
 <p>以 RoboMaster 开发板 C 型为例，板上的用户 I2C 接口原理图和实物图如下图所示：</p>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209081541325.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221209081541325" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209081541325.png" /></a></p>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209082504594.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221209082504594" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209082504594.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209081541325.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221209081541325" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209081541325.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209082504594.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221209082504594" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209082504594.png" /></a></p>
 <p>对应的外设接口为 <code>I2C2</code>，SDA 对应引脚为 PF0，SCL 对应引脚为 PF1。</p>
 </blockquote>
 <h3 id="主要驱动原理">主要驱动原理<a class="headerlink" href="#主要驱动原理" title="链接到此节">&para;</a></h3>
@@ -3045,7 +3043,7 @@
 <p>上述模块的 I2C 设备默认地址为 <code>0x78</code>.</p>
 </blockquote>
 <p>我们通过 I2C 总线向 OLED 模块写指令和数据，使用 HAL 库封装的硬件 I2C；对于大量数据传输，开启 DMA 传输模式。通信协议如下图所示：</p>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209094927257.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221209094927257" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209094927257.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209094927257.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221209094927257" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209094927257.png" /></a></p>
 <p>在发送从机地址之后，首先发送一个控制字节（由 Co、D/C# 位和 6 个 “0” 组成）。</p>
 <ul>
 <li>
@@ -3072,9 +3070,9 @@
 </ul>
 <hr />
 <p>在驱动 OLED 模块时，我们不去读取其显存（Graphic Display Data RAM, GDDRAM）的内容，而是在 STM32 中开辟一块大小相同的内存（8 pages * 128 bytes）作为 GDDRAM 映射的画板，完成操作后，使用持续写数据格式指令，将全部数据一次性写入 OLED 模块。GDDRAM 的结构如下图所示：</p>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085535845.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221209085535845" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085535845.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085535845.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221209085535845" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085535845.png" /></a></p>
 <p>当一个数据字节被写入 GDDRAM 时，当前列（SEG，程序中写为 COL）同一页（PAGE）的所有行（COM，程序中写为 ROW）图像数据都被填充（即由列地址指针指向的当前页整列 8 bit 数据被一次性填充）。数据位 D0 被写入顶行，数据位 D7 被写入底行。</p>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085805369.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221209085805369" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085805369.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085805369.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221209085805369" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085805369.png" /></a></p>
 <p>SSD1306中有三种不同的存储器寻址模式：页寻址模式（<code>0x02</code>）、水平寻址模式（<code>0x00</code>）和垂直（<code>0x01</code>）寻址模式。<code>0x20, 0x02 / 0x00 / 0x01</code> 时序组合命令将内存寻址方式设置为上述三种模式之一。由于我们需要一次性对整个显存进行操作，因此采取了对大面积读写而言更方便的<strong>水平寻址</strong>模式，该模式下：</p>
 <ul>
 <li>
@@ -3087,14 +3085,14 @@
 <p>当列和页地址指针都到达结束地址时，指针将重置为列起始地址和页起始地址。如下图所示：</p>
 </li>
 </ul>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209091606029.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221209091606029" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209091606029.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209091606029.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221209091606029" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209091606029.png" /></a></p>
 <blockquote>
 <p>更多设备相关信息和指令含义可参考资料[2]：SDD1306 数据手册。</p>
 </blockquote>
 <hr />
 <p>在生成字符或图标数据时，要求采取垂直扫描模式，从左至右，自顶至底，生成常量数组并按组件要求写入结构体。在组件中实现的 GDDRAM 映射画板不存在 “page” 的概念，这意味着一列数据最多可以有 64 bits。</p>
 <p>可使用 <code>bmp2lcd</code> 软件生成字节数据 <a href="https://g6ursaxeei.feishu.cn/wiki/wikcnPOJ639qdTBPh0ucMcRcCDg">下载</a>，例如：</p>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209204749974.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221209204749974" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209204749974.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209204749974.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221209204749974" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209204749974.png" /></a></p>
 <p>注意其输出大小为 64 * 64，对应了后续图标结构体中的 width 和 height 参数。</p>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
 <p>组件源码仓库地址：<a href="https://github.com/ZJU-HelloWorld/HW-Components">https://github.com/ZJU-HelloWorld/HW-Components</a></p>
@@ -3113,9 +3111,9 @@
 <li>配置 I2C 模式，设置主机特性，其中速率模式为 <code>Fast Mode</code>，时钟频率 <code>400 KHz</code>；</li>
 <li>使能 DMA 发送以减小 CPU 占用，注意 <code>event interrupt</code> 也须使能，优先级可自行设置；</li>
 </ul>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209084505763.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221209084505763" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209084505763.png" /></a></p>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221215235806051.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221215235806051" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221215235806051.png" /></a></p>
-<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085021148.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221209085021148" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085021148.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209084505763.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221209084505763" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209084505763.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221215235806051.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221215235806051" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221215235806051.png" /></a></p>
+<p><a class="glightbox" href="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085021148.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221209085021148" src="../OLED%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221209085021148.png" /></a></p>
 <h3 id="使用前准备">使用前准备<a class="headerlink" href="#使用前准备" title="链接到此节">&para;</a></h3>
 <p>使用前需要做以下准备：</p>
 <ul>
@@ -3579,10 +3577,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
       

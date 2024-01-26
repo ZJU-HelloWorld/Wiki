@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
@@ -66,17 +66,15 @@
     
     
    <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-        html.glightbox-open { overflow: initial; height: 100%; }
-        .gslide-title { margin-top: 0px; user-select: text; }
-        .gslide-desc { color: #666; user-select: text; }
-        .gslide-image img { background: white; }
-        
-            .gscrollbar-fixer { padding-right: 15px; }
-            .gdesc-inner { font-size: 0.75rem; }
-            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-            </style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -3106,7 +3104,7 @@
 
 
 <h1 id="底盘功率限制">底盘功率限制<a class="headerlink" href="#底盘功率限制" title="链接到此节">&para;</a></h1>
-<p><a class="glightbox" href="https://img.shields.io/badge/version-1.2.0-green" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://img.shields.io/badge/version-1.2.0-green" /></a> <a class="glightbox" href="https://img.shields.io/badge/author-dungloi-lightgrey" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://img.shields.io/badge/author-dungloi-lightgrey" /></a></p>
+<p><a class="glightbox" href="https://img.shields.io/badge/version-1.2.0-green" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://img.shields.io/badge/version-1.2.0-green" /></a> <a class="glightbox" href="https://img.shields.io/badge/author-dungloi-lightgrey" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://img.shields.io/badge/author-dungloi-lightgrey" /></a></p>
 <h2 id="理论">理论<a class="headerlink" href="#理论" title="链接到此节">&para;</a></h2>
 <p>RoboMaster 对抗赛相关规则针对步兵、英雄和哨兵三个兵种设置了底盘功率限制，机器人底盘需在功率限制范围内运行；裁判系统持续监控机器人底盘功率，对功率超限的机器人按一定规则进行惩罚。考虑到机器人在运动过程中难以准确控制瞬时输出功率，为避免因瞬时超功率导致的惩罚，规则设置了缓冲能量 Z。</p>
 <blockquote>
@@ -3227,12 +3225,12 @@ P=\Omega\cdot M+P_{loss}
 <div class="arithmatex">\[
 M = k_{M}\cdot i_q
 \]</div>
-<p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/image-20230109180629888.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20230109180629888" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/image-20230109180629888.png" /></a></p>
+<p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/image-20230109180629888.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20230109180629888" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/image-20230109180629888.png" /></a></p>
 <blockquote>
 <p>根据手册，转矩常数为 <span class="arithmatex">\(0.3\  \rm N\cdot m/A\)</span>，可作为 <span class="arithmatex">\(k_M\)</span> 的初值参考。</p>
 </blockquote>
 <p>使用转矩电流近似表示线电流，基于 <span class="arithmatex">\(P_{loss} = R\cdot i^2\)</span>，在电机堵转的情况下统计 <span class="arithmatex">\(i_q\)</span> 和功率观测 <span class="arithmatex">\(P_{measure}\)</span> ，拟合损耗曲线。以 C620 电调 + M3508 电机为例，堵转电机，在 5000ms 内以 <span class="arithmatex">\([0:16384/2000:16384]\)</span> 扫描转矩电流，<span class="arithmatex">\(P-i\)</span> 曲线拟合结果如下（供参考）：</p>
-<p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/3508_total_fit_ref.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="3508_total_fit_ref" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/3508_total_fit_ref.jpg" /></a></p>
+<p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/3508_total_fit_ref.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="3508_total_fit_ref" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/3508_total_fit_ref.jpg" /></a></p>
 <p>其中 <span class="arithmatex">\(\hat R=p_1\)</span>；<span class="arithmatex">\(p_2\)</span> 视为 0；<span class="arithmatex">\(p_3\)</span> 为电机所接入电路的静息功率。</p>
 <h3 id="功率估计">功率估计<a class="headerlink" href="#功率估计" title="链接到此节">&para;</a></h3>
 <h4 id="融合估计">融合估计<a class="headerlink" href="#融合估计" title="链接到此节">&para;</a></h4>
@@ -3252,7 +3250,7 @@ M = k_{M}\cdot i_q
 <li><strong>若底盘上未装有超级电容模块：</strong> <span class="arithmatex">\(\rm \mathbb P_r\)</span> 量测（10Hz）与 <span class="arithmatex">\(\rm \mathbb P_{model}\)</span>（1kHz）融合进行功率估计。</li>
 <li><strong>若底盘上装有超级电容模块：</strong>裁判系统不再直接监测底盘输出功率，此时 <span class="arithmatex">\(\rm \mathbb P_c\)</span> 量测（1kHz）与 <span class="arithmatex">\(\rm \mathbb P_{model}\)</span> 融合进行功率估计。</li>
 </ul>
-<p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/fusion.drawio.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="fusion.drawio" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/fusion.drawio.png" /></a></p>
+<p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/fusion.drawio.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="fusion.drawio" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/fusion.drawio.png" /></a></p>
 <h4 id="功率计算及预测模型">功率计算及预测模型<a class="headerlink" href="#功率计算及预测模型" title="链接到此节">&para;</a></h4>
 <p>考虑 C620 电调具有优良的转矩电流调控性能，认为实际转矩电流能够密切跟随给定的转矩电流目标值。而电机的转速是缓慢变化的过程，不能突变，1ms 控制周期内的变化忽略不计。给出电机目标转速后，使用下式预测一个控制周期（1ms）后单个电机的功率：</p>
 <div class="arithmatex">\[
@@ -3276,7 +3274,7 @@ P_{pred}=\hat k_{M}\sum_j \Omega_j\cdot  i_{ref_j}+\sum_j \hat R \cdot i_{ref_j}
 </blockquote>
 <h3 id="功率限制">功率限制<a class="headerlink" href="#功率限制" title="链接到此节">&para;</a></h3>
 <p>算法主要流程如下：</p>
-<p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/power_limiter.drawio.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="power_limiter.drawio" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/power_limiter.drawio.png" /></a></p>
+<p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/power_limiter.drawio.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="power_limiter.drawio" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/power_limiter.drawio.png" /></a></p>
 <p>此外，注意以下特殊情况：</p>
 <ul>
 <li>单个电机期望输出电流超限，需要按照电流上限解出其转速限制系数</li>
@@ -3900,10 +3898,10 @@ $$
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
       

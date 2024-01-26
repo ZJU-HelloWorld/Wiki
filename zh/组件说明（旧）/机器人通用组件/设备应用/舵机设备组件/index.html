@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
@@ -66,17 +66,15 @@
     
     
    <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-        html.glightbox-open { overflow: initial; height: 100%; }
-        .gslide-title { margin-top: 0px; user-select: text; }
-        .gslide-desc { color: #666; user-select: text; }
-        .gslide-image img { background: white; }
-        
-            .gscrollbar-fixer { padding-right: 15px; }
-            .gdesc-inner { font-size: 0.75rem; }
-            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-            </style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -2948,12 +2946,12 @@
 <h2 id="理论">理论<a class="headerlink" href="#理论" title="链接到此节">&para;</a></h2>
 <p>舵机是机器人中的常见执行部件，适用于简单的动作控制，通常使用特定频率的 PWM 进行驱动。实车上舵机可应用于控制弹仓盖开合等场景。</p>
 <p>通常使用三根线一组来驱动舵机，按照颜色分别对应： <code>黑色 / 棕色 - GND</code>，<code>红色 - VCC</code>，<code>黄色 / 白色 - PWM 信号</code>。使用舵机时，将与其连接的杜邦线接入对应的 PWM 接口。下图为市面上常见的舵机：</p>
-<p><a class="glightbox" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180127349.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221207180127349" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180127349.png" /></a></p>
+<p><a class="glightbox" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180127349.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221207180127349" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180127349.png" /></a></p>
 <p>舵机使用的 PWM 信号一般频率为 50Hz，高电平时间为 0.5ms - 2.5ms。不同占空比的 PWM 信号线性对应舵机转动的目标角度，以 180 度舵机为例，对应角度图如下图所示：</p>
-<p><a class="glightbox" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180140026.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221207180140026" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180140026.png" /></a></p>
+<p><a class="glightbox" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180140026.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221207180140026" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180140026.png" /></a></p>
 <blockquote>
 <p>以 RoboMaster 开发板 C 型为例，板上有 7 个 PWM 接口，原理图和实物图如下图所示：</p>
-<p><a class="glightbox" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180458452.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221207180458452" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180458452.png" /></a></p>
+<p><a class="glightbox" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180458452.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221207180458452" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207180458452.png" /></a></p>
 <p>从右至左对应 <code>TIM1 CHANNEL 1-4, TIM8 CHANNEL 1-3</code></p>
 </blockquote>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
@@ -2974,7 +2972,7 @@
 <li>工作频率定为 50Hz，对应周期为 20ms (20000us)，因此重载值（Counter Period）设置为 19999。此“工作频率”选项仍可在组件初始化时指定更改，CubeMX 配置可随意；</li>
 <li>设置初始高电平时间即脉宽（Pulse），一般最小为 0.5ms，即 500us，占空比 2.5%，对应了最小角度 0°；最大为 2.5ms，即 2500us，占空比 12.5%，对应了最大角度 180°. 此“初始角度”选项可在组件初始化时更改，“角度”选项可在组件运行时更改，CubeMX 配置可随意。</li>
 </ul>
-<p><a class="glightbox" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221208081137300.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221208081137300" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221208081137300.png" /></a></p>
+<p><a class="glightbox" href="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221208081137300.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221208081137300" src="../%E8%88%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221208081137300.png" /></a></p>
 <h3 id="使用前准备">使用前准备<a class="headerlink" href="#使用前准备" title="链接到此节">&para;</a></h3>
 <p>使用前需要做以下准备：</p>
 <ul>
@@ -3341,10 +3339,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
         <script src="../../../../../javascripts/mathjax.js"></script>
       

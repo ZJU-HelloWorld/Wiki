@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
@@ -66,17 +66,15 @@
     
     
    <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-        html.glightbox-open { overflow: initial; height: 100%; }
-        .gslide-title { margin-top: 0px; user-select: text; }
-        .gslide-desc { color: #666; user-select: text; }
-        .gslide-image img { background: white; }
-        
-            .gscrollbar-fixer { padding-right: 15px; }
-            .gdesc-inner { font-size: 0.75rem; }
-            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-            </style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -2890,7 +2888,7 @@
 <p><a href="https://github.com/ARM-software/CMSIS-DSP/releases">最新版本</a></p>
 <h2 id="使用说明">使用说明<a class="headerlink" href="#使用说明" title="链接到此节">&para;</a></h2>
 <h3 id="主要版本差异">主要版本差异<a class="headerlink" href="#主要版本差异" title="链接到此节">&para;</a></h3>
-<p>建议使用最新版本的 CMSIS-DSP 源码加入工程进行编译. 当前最新发布版本为 <a class="glightbox" href="https://img.shields.io/github/v/release/ARM-software/CMSIS-DSP" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/ARM-software/CMSIS-DSP" /></a></p>
+<p>建议使用最新版本的 CMSIS-DSP 源码加入工程进行编译. 当前最新发布版本为 <a class="glightbox" href="https://img.shields.io/github/v/release/ARM-software/CMSIS-DSP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/ARM-software/CMSIS-DSP" /></a></p>
 <ul>
 <li>V1.10.1 及之后的版本迁移到新的仓库</li>
 <li>V1.10.0 添加了 <code>atan2</code> 支持</li>
@@ -2980,7 +2978,7 @@
 <a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="c"># #############################################################################</span>
 </code></pre></div></td></tr></table></div>
 <p>最后需要注意的是源文件的选取。我们建议将软件包裁剪后加入工程，可使用上文提供的已裁剪版本，裁剪规则参考源码仓库的 <code>README.md</code>：</p>
-<p><a class="glightbox" href="../CMSIS-DSP%20%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.assets/image-20221214012731420.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221214012731420" src="../CMSIS-DSP%20%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.assets/image-20221214012731420.png" /></a></p>
+<p><a class="glightbox" href="../CMSIS-DSP%20%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.assets/image-20221214012731420.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221214012731420" src="../CMSIS-DSP%20%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.assets/image-20221214012731420.png" /></a></p>
 <p>需要注意，对于这样裁剪得到的软件包，直接编译会有大量 <code>WARNING</code>，具体原因可参考 <a href="https://g6ursaxeei.feishu.cn/wiki/wikcnvTNsHomNrfLE0PVHN5VWhc?field=fldrk77lHy&amp;record=recDLg4nf3&amp;table=tbl5nghP4qHQIiZ5&amp;view=vewlyW2exr">这条经验</a>。因此，当添加  <strong>CMSIS-DSP 目录</strong>以及<strong>包含有 CMSIS-DSP 文件夹的父目录</strong>时，可以加上正则表达式 <code>[^a]</code> 来解决 <code>WARNING</code>. </p>
 <blockquote>
 <p>例如你之前将 <code>your_dsp_path</code> 改为 <code>Drivers/CMSIS/CMSIS-DSP-1.14.2</code>，意味着 <code>Drivers/</code> 是CMSIS-DSP 文件夹的父目录，那么你可以这样筛选源文件：</p>
@@ -3002,7 +3000,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a class="glightbox" href="https://img.shields.io/badge/version-1.0.0-green" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-1.0.0-green" /></a></td>
+<td><a class="glightbox" href="https://img.shields.io/badge/version-1.0.0-green" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-1.0.0-green" /></a></td>
 <td>2022.12.14</td>
 <td>首次发布</td>
 <td>薛东来</td>
@@ -3198,10 +3196,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
       

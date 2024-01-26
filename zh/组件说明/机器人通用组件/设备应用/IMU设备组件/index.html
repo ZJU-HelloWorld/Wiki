@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
@@ -66,17 +66,15 @@
     
     
    <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-        html.glightbox-open { overflow: initial; height: 100%; }
-        .gslide-title { margin-top: 0px; user-select: text; }
-        .gslide-desc { color: #666; user-select: text; }
-        .gslide-image img { background: white; }
-        
-            .gscrollbar-fixer { padding-right: 15px; }
-            .gdesc-inner { font-size: 0.75rem; }
-            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-            </style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -3014,7 +3012,7 @@
 <h2 id="理论">理论<a class="headerlink" href="#理论" title="链接到此节">&para;</a></h2>
 <p>惯性测量单元(Inertial measurement unit，简称 IMU)，是测量物体三轴姿态角及加速度的装置。一般IMU包括三轴陀螺仪及三轴加速度计，部分IMU还包括三轴磁力计。</p>
 <h3 id="bmi088">BMI088<a class="headerlink" href="#bmi088" title="链接到此节">&para;</a></h3>
-<p><a class="glightbox" href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212151943.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20231212151943" src="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212151943.png" /></a></p>
+<p><a class="glightbox" href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212151943.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20231212151943" src="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212151943.png" /></a></p>
 <p>BMI088 是一款能检测运动与旋转共 6 个自由度的 IMU。其将两个惯性传感器的功能包括在了一个设备之中：一个先进的三轴 16-bit 陀螺仪和一个多功能、先进的三轴 16-bit 加速度计。</p>
 <p>BMI088 为满足在剧烈震动环境下高性能消费类设备的所有需求，如比那些安装在无人机和机器人上的设备。该 IMU 是为有效抑制高于几百赫兹的震动而设计的，而这些震动往往因 PCB 或系统结构的谐振而产生。</p>
 <p>该 IMU 能够提供三轴的加速度与三轴的角速度，同时还能提供温度测量的功能。可以通过 SPI 或 I2C 的协议与该 IMU 进行通信。</p>
@@ -3023,7 +3021,7 @@
 </ul>
 <blockquote>
 <p>以 RoboMaster 开发板 C 型为例，板上已集成一个 BMI088，使用 <code>SPI1</code> 进行通信需要的硬件配置方式如下图所示：
-<a class="glightbox" href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212152356.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20231212152356" src="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212152356.png" /></a>
+<a class="glightbox" href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212152356.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20231212152356" src="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212152356.png" /></a>
 需要配置其中的 CS_Accel、CS1_Gyro、SPI1_CLK、SPI1_MOSI 与 SPI1_MISO 引脚</p>
 </blockquote>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
@@ -3034,11 +3032,11 @@
 <li>对于 SPI1，调整器分频值（Prescaler），使其波特率在 10Mbits/s 以下。</li>
 <li>需改 SPI1 时钟极性（CPOL）与时钟相位（CPHA）至要求值（CPOL=Low，CPHA=1 Edge或CPOL=High，CPHA=2 Edge）</li>
 </ul>
-<p><a class="glightbox" href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212152746.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20231212152746" src="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212152746.png" /></a></p>
+<p><a class="glightbox" href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212152746.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20231212152746" src="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212152746.png" /></a></p>
 <ul>
 <li>配置片选信号线的 GPIO</li>
 </ul>
-<p><a class="glightbox" href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212153710.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20231212153710" src="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212153710.png" /></a></p>
+<p><a class="glightbox" href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212153710.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20231212153710" src="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212153710.png" /></a></p>
 <h3 id="使用前准备">使用前准备<a class="headerlink" href="#使用前准备" title="链接到此节">&para;</a></h3>
 <p>本组件依赖 CMSIS-DSP 运算加速。</p>
 <p>使用前需要做以下准备：</p>
@@ -3653,10 +3651,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
         <script src="../../../../../javascripts/mathjax.js"></script>
       

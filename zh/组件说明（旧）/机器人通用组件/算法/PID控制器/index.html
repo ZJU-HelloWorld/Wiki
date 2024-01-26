@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
@@ -66,17 +66,15 @@
     
     
    <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-        html.glightbox-open { overflow: initial; height: 100%; }
-        .gslide-title { margin-top: 0px; user-select: text; }
-        .gslide-desc { color: #666; user-select: text; }
-        .gslide-image img { background: white; }
-        
-            .gscrollbar-fixer { padding-right: 15px; }
-            .gdesc-inner { font-size: 0.75rem; }
-            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-            </style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -3362,7 +3360,7 @@ w_1\cdot r(k)+(1-w_1)r(k-1), &amp;|e(k)| {&gt;} \epsilon_2
 <h4 id="前馈校正feed-forward">前馈校正（Feed-forward）<img src = "https://img.shields.io/badge/feature-optional-orange"><img src = "https://img.shields.io/badge/default-OFF-black"><a class="headerlink" href="#前馈校正feed-forward" title="链接到此节">&para;</a></h4>
 <p>在前馈控制（开环）中考虑系统的已知信息，再将输出加到 PID 控制器（闭环）的控制输出，形成复合校正，能够进一步提升整体的系统性能。前馈校正通路由于不受反馈的影响，不会造成系统的振荡，从而能够在不影响稳定性的情况下改善系统的响应。前馈量通常可以单独提供控制器输出的主要部分；PID 控制器则用来补偿给定值和实际值之间的误差。</p>
 <p>前馈量依可量测扰动或给定量来产生，构成按扰动补偿和按输入补偿两种复合控制形式。</p>
-<p><a class="glightbox" href="../PID%E6%8E%A7%E5%88%B6%E5%99%A8.assets/image-20221125075755503.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221125075755503" src="../PID%E6%8E%A7%E5%88%B6%E5%99%A8.assets/image-20221125075755503.png" /></a></p>
+<p><a class="glightbox" href="../PID%E6%8E%A7%E5%88%B6%E5%99%A8.assets/image-20221125075755503.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221125075755503" src="../PID%E6%8E%A7%E5%88%B6%E5%99%A8.assets/image-20221125075755503.png" /></a></p>
 <p>我们重点关注按输入补偿的复合控制系统设计。由上图 (b) ，系统输出为
 $$
 C(s)=\frac{[G_1(s)+G_r(s)]G_2(s)}{1+G_1(s)G_2(s)}R(s)
@@ -3512,7 +3510,7 @@ $$
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="n">pid</span><span class="p">.</span><span class="n">tdRegister</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">td</span><span class="p">);</span><span class="w"> </span><span class="c1">// loop no.N, numbered from 0</span>
 </code></pre></div></td></tr></table></div>
 其中 <span class="arithmatex">\(h_0\)</span> 为滤波因子， <span class="arithmatex">\(h_0\)</span> 越大滤波效果越好； <span class="arithmatex">\(h\)</span> 为步长， <span class="arithmatex">\(h\)</span> 越小滤波效果越好；一般来说， <span class="arithmatex">\(h_0\)</span> 略大于步长 <span class="arithmatex">\(h\)</span>； <span class="arithmatex">\(r\)</span> 为快速因子， <span class="arithmatex">\(r\)</span> 越大，跟踪越快。</p>
-<p>更多原理和参数调节规律详见滤波器算法组件说明，或咨询沈组长 <img alt="😍" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f60d.svg" title=":heart_eyes:" /></p>
+<p>更多原理和参数调节规律详见滤波器算法组件说明，或咨询沈组长 <img alt="😍" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f60d.svg" title=":heart_eyes:" /></p>
 </blockquote>
 <p>传入 PID 控制器句柄、最外回路给定值、各回路反馈值（存储顺序由外回路到内回路）数组首地址、存储输出量的内存地址，计算 PID 控制器输出：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">pid</span><span class="p">.</span><span class="n">calcPid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span><span class="w"> </span>
@@ -3985,10 +3983,10 @@ $$
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
         <script src="../../../../../javascripts/mathjax.js"></script>
       

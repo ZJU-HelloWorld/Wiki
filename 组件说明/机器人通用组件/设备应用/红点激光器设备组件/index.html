@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
@@ -66,17 +66,15 @@
     
     
    <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-        html.glightbox-open { overflow: initial; height: 100%; }
-        .gslide-title { margin-top: 0px; user-select: text; }
-        .gslide-desc { color: #666; user-select: text; }
-        .gslide-image img { background: white; }
-        
-            .gscrollbar-fixer { padding-right: 15px; }
-            .gdesc-inner { font-size: 0.75rem; }
-            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-            </style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -2911,11 +2909,11 @@
 <p><img src = "https://img.shields.io/badge/version-2.0.0-green"><sp> <img src = "https://img.shields.io/badge/author-dungloi | Caikunzhen-lightgrey"></p>
 <h2 id="理论">理论<a class="headerlink" href="#理论" title="链接到此节">&para;</a></h2>
 <p>RoboMaster RL35 红点激光器是专为 RoboMaster 机器人设计的一款辅助瞄准设备，可发射出点状、出瞳光束为 5 mm 的红色激光以辅助瞄准，如下图所示：</p>
-<p><a class="glightbox" href="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207205128088.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221207205128088" src="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207205128088.png" /></a></p>
+<p><a class="glightbox" href="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207205128088.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221207205128088" src="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207205128088.png" /></a></p>
 <p>使用时，将电源线（红色为正极，黑色为负极）接入开发板电压为 5V 的直流电源接口。可以直接操作引脚来开关设备；或通过 PWM 调节占空比以改变输出电压，来控制红点激光器亮度（对预分频值没有要求）。</p>
 <blockquote>
 <p>以 RoboMaster 开发板 C 型为例，板上已集成一个可控的激光专用 5V 电源接口，如下图所示：</p>
-<p><a class="glightbox" href="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207204102515.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20221207204102515" src="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207204102515.png" /></a> </p>
+<p><a class="glightbox" href="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207204102515.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221207204102515" src="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221207204102515.png" /></a> </p>
 <p>对应的开关控制 IO 为 PC8，PWM 由 <code>TIM3 CHANNEL3</code> 输出。</p>
 </blockquote>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
@@ -2925,7 +2923,7 @@
 <ul>
 <li>对于 TIM3，查看数据手册可知其挂载在 APB1 总线上，时钟频率 84MHz，为达到 1kHz 的频率 ，可将预分频值（Prescaler）设置为 83，计数周期（Counter Period）设置为 999。</li>
 </ul>
-<p><a class="glightbox" href="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231210160415.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="image-20231210160415" src="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231210160415.png" /></a></p>
+<p><a class="glightbox" href="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231210160415.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20231210160415" src="../%E7%BA%A2%E7%82%B9%E6%BF%80%E5%85%89%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231210160415.png" /></a></p>
 <h3 id="使用前准备">使用前准备<a class="headerlink" href="#使用前准备" title="链接到此节">&para;</a></h3>
 <p>使用前需要做以下准备：</p>
 <ul>
@@ -3248,10 +3246,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
       

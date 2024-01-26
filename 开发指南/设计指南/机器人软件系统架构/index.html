@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
@@ -66,17 +66,15 @@
     
     
    <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-        html.glightbox-open { overflow: initial; height: 100%; }
-        .gslide-title { margin-top: 0px; user-select: text; }
-        .gslide-desc { color: #666; user-select: text; }
-        .gslide-image img { background: white; }
-        
-            .gscrollbar-fixer { padding-right: 15px; }
-            .gdesc-inner { font-size: 0.75rem; }
-            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-            </style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -2998,17 +2996,17 @@
 
 
 <h1 id="机器人软件系统架构">机器人软件系统架构<a class="headerlink" href="#机器人软件系统架构" title="链接到此节">&para;</a></h1>
-<p><a class="glightbox" href="https://img.shields.io/badge/version-0.9.2-green" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-0.9.2-green" /></a></p>
+<p><a class="glightbox" href="https://img.shields.io/badge/version-0.9.2-green" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-0.9.2-green" /></a></p>
 <h2 id="写在前面">写在前面<a class="headerlink" href="#写在前面" title="链接到此节">&para;</a></h2>
 <p>在设计机器人系统时，需要遵循一定的体系结构，使各部分、各层级功能充分解耦、各司其职、密切合作、流畅运行，以实现系统的全部功能和特性。机器人系统是嵌入式系统的一种，而对于一个一般的嵌入式系统而言，其体系结构包括嵌入式系统的元素、与嵌入式系统交互的元素、每个单独元素的属性以及元素之间的交互关系。常见的嵌入式系统模型如下图所示：</p>
-<p><a class="glightbox" href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/img_1_9_1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/img_1_9_1.png" /></a></p>
+<p><a class="glightbox" href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/img_1_9_1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/img_1_9_1.png" /></a></p>
 <p>在概念上，这些模型适用于任何嵌入式系统；但对应于实际开发过程，应结合应用需求，对其进行适当的补充和调整，使各概念的含义更清晰、各模块功能更明确，以适用于机器人系统的开发。</p>
 <p>大到一个机器人开发团队的软件工作、小到每一位成员的代码产出，写出能用的程序固然重要，但也要考虑到设计上的逻辑性、合理性和可移植、可拓展性。唯有如此，才能够提升开发和维护的效率，维持软件的活力，帮助团队持续稳定地发展。没有架构设计或不合理的架构设计，其弊端已经在过往的赛季中逐渐显现，是时候推广一个更为完善、更有发展潜力的架构，来<strong>理清对象逻辑层次关系，合理设计系统流程架构，引导自研应用生态发展</strong>。</p>
 <p>因此，我们参考大量资料，包括 <em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/stm32cube.png">STM32Cube Package 架构</a></em>，<em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/dji.png">DJI 自动驾驶域控制器架构</a></em>（<a href="https://auto.dji.com/components">link</a>），<em><a href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/rtt_io.png">RT-Thread I/O 设备模型</a></em> （<a href="https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/programming-manual/device/device">link</a>）等，结合开发过程和应用的实际需求，形成战队机器人软件系统架构；该架构尚不成熟，需要更多的队员秉承科学的设计理念，不断优化和完善。</p>
 <h2 id="软件架构概述">软件架构概述<a class="headerlink" href="#软件架构概述" title="链接到此节">&para;</a></h2>
 <p>嵌入式软件大体上可以分为两大类：<strong>系统软件</strong>和<strong>应用软件</strong>。系统软件是支持应用程序的任何软件，例如设备驱动程序、操作系统和中间件。应用软件是上层软件，它定义了嵌入式设备的功能和用途，并处理与用户的大部分交互。</p>
 <p>以步兵机器人的软件架构为例，下图中彩色色块覆盖的部分代表应用软件，其他部分代表系统软件及硬件。</p>
-<p><a class="glightbox" href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/swerve-architecture.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="swerve-architecture" src="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/swerve-architecture.png" /></a></p>
+<p><a class="glightbox" href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/swerve-architecture.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="swerve-architecture" src="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/swerve-architecture.png" /></a></p>
 <p>以下部分将介绍具体模型，从体系结构层级的抽象向下具体到伪代码层级。</p>
 <h2 id="系统软件层system-software-layer">系统软件层（System Software Layer）<a class="headerlink" href="#系统软件层system-software-layer" title="链接到此节">&para;</a></h2>
 <h3 id="硬件抽象层hardware-abstraction-layer-hal">硬件抽象层（Hardware Abstraction Layer, HAL）<a class="headerlink" href="#硬件抽象层hardware-abstraction-layer-hal" title="链接到此节">&para;</a></h3>
@@ -3028,7 +3026,7 @@
 </blockquote>
 <h3 id="操作系统operating-system">操作系统（Operating System）<a class="headerlink" href="#操作系统operating-system" title="链接到此节">&para;</a></h3>
 <p>嵌入式系统对实时性要求较高，采用实时操作系统（Real Time Operating System）。RTOS 的核心功能如下：</p>
-<p><a class="glightbox" href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/freertos_core.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="FreeRTOS Core" src="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/freertos_core.png" /></a></p>
+<p><a class="glightbox" href="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/freertos_core.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="FreeRTOS Core" src="../%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.assets/freertos_core.png" /></a></p>
 <blockquote>
 <p>我们选用 FreeRTOS 进行开发。STM32Cube Packge 将 RTOS 内核组件定义在 Middleware 层级，在此不做改动</p>
 </blockquote>
@@ -3108,13 +3106,13 @@
 </thead>
 <tbody>
 <tr>
-<td><a class="glightbox" href="https://img.shields.io/badge/version-0.9.1-green" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-0.9.1-green" /></a></td>
+<td><a class="glightbox" href="https://img.shields.io/badge/version-0.9.1-green" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-0.9.1-green" /></a></td>
 <td>2022.09</td>
 <td>预发布，适用于裸机架构</td>
 <td>薛东来</td>
 </tr>
 <tr>
-<td><a class="glightbox" href="https://img.shields.io/badge/version-0.9.2-green" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-0.9.2-green" /></a></td>
+<td><a class="glightbox" href="https://img.shields.io/badge/version-0.9.2-green" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="hh" src="https://img.shields.io/badge/version-0.9.2-green" /></a></td>
 <td>2023.03</td>
 <td>适用于 RTOS</td>
 <td>薛东来</td>
@@ -3314,10 +3312,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
         <script src="../../../javascripts/mathjax.js"></script>
       
