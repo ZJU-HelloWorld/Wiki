@@ -3210,7 +3210,24 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head></p>
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<p>=======</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>8ab09d8ddbd1a4c7fa3e0c8c45f0d42a88883256</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <h1 id="轮式机器人底盘约束求解">轮式机器人底盘约束求解<a class="headerlink" href="#轮式机器人底盘约束求解" title="链接到此节">&para;</a></h1>
 <p>移动机器人的工作空间定义了移动机器人在其环境中可实现的所有可能姿态的范围。移动机器人的可控性定义了其在工作空间内可能的路径和轨迹。移动机器人也受到动力学的限制，例如，快速转弯时，较高的重心会带来翻车的风险，这限制了轮式移动机器人的实际转弯半径。理解机器人运动的过程首先是描述每个车轮对运动的贡献。每个轮子都在使整个机器人移动方面发挥作用。同样，每个轮子也对机器人的运动施加了限制，例如，拒绝横向滑行。</p>
 <blockquote>
@@ -3238,12 +3255,12 @@
 <blockquote>
 <p>此处坐标系的描述采用机械臂中常用的符号描述，更多可以参考 ^[https://zhuanlan.zhihu.com/p/146835822]</p>
 </blockquote>
-<p>按照机器人的建模， <span class="arithmatex">\(Z_R \parallel Z_I\)</span> ，点 <span class="arithmatex">\(P\)</span> 在全局坐标系的位置表达可以由点 <span class="arithmatex">\(P\)</span> 的位置 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 得到 <span class="arithmatex">\(^IP_P={\begin{bmatrix} x &amp; y &amp; 0 \end{bmatrix}}^T\)</span>，姿态仅由 <span class="arithmatex">\(X_I\)</span> 和 <span class="arithmatex">\(X_R\)</span> 之间的角差 <span class="arithmatex">\(\theta\)</span> 给出
-<span class="arithmatex">\(<span class="arithmatex">\(^I_RR=R_Z(\theta)= \begin{bmatrix}
+<p>按照机器人的建模， <span class="arithmatex">\(Z_R \parallel Z_I\)</span> ，点 <span class="arithmatex">\(P\)</span> 在全局坐标系的位置表达可以由点 <span class="arithmatex">\(P\)</span> 的位置 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 得到 <span class="arithmatex">\(^IP_P={\begin{bmatrix} x &amp; y &amp; 0 \end{bmatrix}}^T\)</span>，姿态仅由 <span class="arithmatex">\(X_I\)</span> 和 <span class="arithmatex">\(X_R\)</span> 之间的角差 <span class="arithmatex">\(\theta\)</span> 给出</p>
+<div class="arithmatex">\[^I_RR=R_Z(\theta)= \begin{bmatrix}
   \cos{\theta} &amp; -\sin{\theta} &amp; 0\\
   \sin{\theta} &amp; \cos{\theta} &amp; 0\\
   0 &amp; 0 &amp; 1
-\end{bmatrix}\)</span>\)</span></p>
+\end{bmatrix}\]</div>
 <p>机器人的位姿表达也可以简化为包含这三个元素的向量 <span class="arithmatex">\(^I\xi ={\begin{bmatrix} x &amp; y &amp; \theta \end{bmatrix}}^T\)</span>。</p>
 <p>为了将机器人在全局坐标系下的运动描述为在机器人局部坐标系下的运动，需要将沿着全局参考框架轴线的运动向量映射到沿着机器人局部参考框架轴线的运动分量。当然，这个映射是机器人当前姿态的函数，即 <em>正交旋转矩阵 <span class="arithmatex">\(R_Z(\theta)\)</span></em> 。给定全局参考框架中的某个速度向量 <span class="arithmatex">\(^I\dot{\xi} ={\begin{bmatrix} \dot{x} &amp; \dot{y} &amp; \dot{\theta} \end{bmatrix}}^T\)</span>，可以得到其在机器人局部坐标系下的表达</p>
 <div class="arithmatex">\[^R\dot{\xi}=R_Z(\theta)^I\dot{\xi}=\begin{bmatrix}
@@ -3283,13 +3300,11 @@
 <p>可以得到标准轮的滚动约束方程</p>
 <div class="arithmatex">\[\begin{bmatrix}
 \sin{(\alpha+\beta)} &amp; -\cos{(\alpha+\beta)} &amp; -l\cos{\beta}
-\end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}
-\]</div>
+\end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}\]</div>
 <p>以及无侧滑约束方程</p>
 <div class="arithmatex">\[\begin{bmatrix}
 \cos{(\alpha+\beta)} &amp; \sin{(\alpha+\beta)} &amp; l\sin{\beta}
-\end{bmatrix} ^R\dot{\xi} = 0
-\]</div>
+\end{bmatrix} ^R\dot{\xi} = 0\]</div>
 <p>固定标准轮一旦安装，其相对于底盘的位姿 <span class="arithmatex">\(^R\xi_w\)</span> 就确定了。当其作为主动驱动轮时，只有一个控制量 <span class="arithmatex">\(\dot{\varphi}\)</span>，可以通过滚动约束方程求解以满足底盘运动速度的要求。当其作为被动轮时， <span class="arithmatex">\(\dot{\varphi}\)</span> 为自由量，滚动约束总能满足。但无论如何，固定标准轮总是存在无侧滑约束。</p>
 <p>转向标准轮的运动学也为上述两个约束，但转向标准轮比固定标准轮要多一个自由度，即轮子可以绕着穿过轮子中心和地面接触点的垂直轴旋转。此时，<span class="arithmatex">\(\beta\)</span> 不再是一个固定值，而是一个时变函数 <span class="arithmatex">\(\beta{(t)}\)</span>。从两个约束方程可以看出，<span class="arithmatex">\(\dot{\beta}\)</span> 对机器人当前的运动约束没有直接的影响。并且，与固定标准轮同样的，转动标准轮总是存在无侧滑约束。</p>
 <h3 id="脚轮">脚轮<a class="headerlink" href="#脚轮" title="链接到此节">&para;</a></h3>
@@ -3297,13 +3312,11 @@
 脚轮与转向标准轮基本相同，除了其垂直旋转轴并不通过其地面接触点。假设在机器人局部坐标系下，标准轮在底盘上的安装如图所示。点 <span class="arithmatex">\(A\)</span> 为其与底盘连接的位置，也是其垂直旋转轴的投影位置，点 <span class="arithmatex">\(B\)</span> 是其地面接触点的位置，记点 <span class="arithmatex">\(B\)</span> 与其垂直旋转轴的距离为 <span class="arithmatex">\(d\)</span>。脚轮运动时，轮平面始终与 <span class="arithmatex">\(\overrightharpoon{PA}\)</span> 平行。与标准轮类似，可以得到脚轮的滚动约束</p>
 <div class="arithmatex">\[\begin{bmatrix}
 \sin{(\alpha+\beta)} &amp; -\cos{(\alpha+\beta)} &amp; -l\cos{\beta}
-\end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}
-\]</div>
+\end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}\]</div>
 <p>以及无侧滑约束方程</p>
 <div class="arithmatex">\[\begin{bmatrix}
 \cos{(\alpha+\beta)} &amp; \sin{(\alpha+\beta)} &amp; l\sin{\beta}
-\end{bmatrix} ^R\dot{\xi} + d\dot{\beta}= 0
-\]</div>
+\end{bmatrix} ^R\dot{\xi} + d\dot{\beta}= 0\]</div>
 <p>可以看到，垂直旋转轴的偏移对于平行于轮平面的运动没有作用，但是对无侧滑约束产生了重要影响。由于脚轮绕点 <span class="arithmatex">\(A\)</span> 旋转，其旋转速度为 <span class="arithmatex">\(\dot{\beta}\)</span> ，因此在与地面接触的标准轮的发现方向形成一个运动速度 <span class="arithmatex">\(d\dot{\beta}\)</span> ，其与 <span class="arithmatex">\(^R\dot{\xi}\)</span> 在与地面接触的标准轮法方向所形成的速度叠加值必须为 0 才能满足标准轮的无侧滑约束。</p>
 <p>作为主动驱动轮时，根据上述约束方程可以找到合适的 <span class="arithmatex">\(\dot{\varphi}\)</span> 和 <span class="arithmatex">\(\dot{\beta}\)</span>，使得满足底盘的速度需求，并使机器人的任意侧向运动变得可行。作为随动轮时，脚轮的 <span class="arithmatex">\(\dot{\varphi}\)</span> 和 <span class="arithmatex">\(\dot{\beta}\)</span> 都是自由量，上述方程都会被满足。</p>
 <h3 id="swedish-轮">Swedish 轮<a class="headerlink" href="#swedish-轮" title="链接到此节">&para;</a></h3>
@@ -3311,13 +3324,11 @@
 Swedish 轮由主标准轮和附在主轮周围一圈的辊子组成。通常， Swedish 按照固定标准轮的方式进行安装，一旦安装，其在机器人局部坐标系的位姿将被 <span class="arithmatex">\(^R\xi_w\)</span> 确定。假设在机器人局部坐标系下，标准轮在底盘上的安装如图所示。点 <span class="arithmatex">\(A\)</span> 为其与底盘连接的位置，也是其垂直旋转轴的投影位置以及地面接触点的位置。与地面接触的棍子是标准轮。棍子的半径为 <span class="arithmatex">\(r_{sw}\)</span>。转速为 <span class="arithmatex">\(\dot{\varphi}_{sw}\)</span>，是一个自由量。主轮的轮速向量与棍子的水平转轴之间的夹角为 <span class="arithmatex">\(\gamma\)</span>。通过棍子的无侧滑约束和滚动约束可以得到 Swedish 轮的滚动约束</p>
 <div class="arithmatex">\[\begin{bmatrix}
 \sin{(\alpha+\beta+\gamma)} &amp; -\cos{(\alpha+\beta+\gamma)} &amp; -l\cos{(\beta+\gamma)}
-\end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}\cos{\gamma}
-\]</div>
+\end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}\cos{\gamma}\]</div>
 <p>以及无侧滑约束方程</p>
 <div class="arithmatex">\[\begin{bmatrix}
 \cos{(\alpha+\beta+\gamma)} &amp; \sin{(\alpha+\beta+\gamma)} &amp; l\sin{(\beta+\gamma)}
-\end{bmatrix} ^R\dot{\xi} =  r \dot{\varphi}\sin{\gamma} + r_{sw}\dot{\varphi}_{sw}
-\]</div>
+\end{bmatrix} ^R\dot{\xi} =  r \dot{\varphi}\sin{\gamma} + r_{sw}\dot{\varphi}_{sw}\]</div>
 <p>由于 <span class="arithmatex">\(\dot{\varphi}_{sw}\)</span> 是一个自由量，Swedish 轮的无侧滑约束总能被满足。</p>
 <h4 id="全向轮">全向轮<a class="headerlink" href="#全向轮" title="链接到此节">&para;</a></h4>
 <p>全向轮 (omnidirectional wheel) 通常由一个大的中心轮和若干围绕中心轮边缘排列的棍子组成，这些棍子的轴线与大轮的轴线成90度角，即 90° Swedish 轮。这种设计允许轮子在中心轮的旋转方向上提供前进或后退的力，而棍子可以在垂直于中心轮旋转方向的任意角度上实现滑动。</p>
@@ -3336,13 +3347,11 @@ Swedish 轮由主标准轮和附在主轮周围一圈的辊子组成。通常，
 球轮的任意一个剖面都是一个标准轮，其运动学约束与标准轮完全相同，因此，可以得到球轮的滚动约束</p>
 <div class="arithmatex">\[\begin{bmatrix}
 \sin{(\alpha+\beta)} &amp; -\cos{(\alpha+\beta)} &amp; -l\cos{\beta}
-\end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}
-\]</div>
+\end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}\]</div>
 <p>以及无侧滑约束方程</p>
 <div class="arithmatex">\[\begin{bmatrix}
 \cos{(\alpha+\beta)} &amp; \sin{(\alpha+\beta)} &amp; l\sin{\beta}
-\end{bmatrix} ^R\dot{\xi} = 0
-\]</div>
+\end{bmatrix} ^R\dot{\xi} = 0\]</div>
 <p>如果对球轮进行驱动控制，则需要根据方向要求确定剖面，从而根据滚动约束方程计算 <span class="arithmatex">\(\dot{\varphi}\)</span>。如果进行转向控制，则与转向标准轮基本一致。如果不进行转向控制，在剖面方向存在无侧滑约束，但在运动过程中，其方向容易受到扰动而变化，即 <span class="arithmatex">\(\beta\)</span> 是自由量，使得球轮本质上不存在无侧滑约束，是一个全方向系统。这一点在球轮作为被动轮时也适用。</p>
 <h3 id="轮的运动学约束和运动状态关系">轮的运动学约束和运动状态关系<a class="headerlink" href="#轮的运动学约束和运动状态关系" title="链接到此节">&para;</a></h3>
 <table>
@@ -3588,7 +3597,7 @@ Swedish 轮由主标准轮和附在主轮周围一圈的辊子组成。通常，
 <div class="arithmatex">\[m_i=\frac{1+\exp c_i}{1-\exp c_i},c_i=\sqrt{a_i^2+b_i^2} \left ( \frac{\bigtriangleup  t}{d_i} -C \right )\]</div>
 <p>又因为 <span class="arithmatex">\(m_i= \frac{a_i}{\sqrt{a_i^2+b_i^2} }\left ( t_i-\frac{b_i}{a_i}  \right )\)</span> ， <span class="arithmatex">\(\tan \frac{\beta _i }{2}\)</span>，
 所以</p>
-<div class="arithmatex">\[\beta_i=2\arctan {\frac{\sqrt{a_i^2+b_i^2}m_i+b_i }{a_i} }\]</div>
+<div class="arithmatex">\[\beta_i=2\arctan{\frac{\sqrt{a_i^2+b_i^2}m_i+b_i }{a_i} }\]</div>
 <p><strong>如何消去常数项 <span class="arithmatex">\(C\)</span></strong></p>
 <p>现假设采样时间间隔为 <span class="arithmatex">\(\bigtriangleup  t\)</span>，已知当前的初始值 <span class="arithmatex">\(\beta_{i0}\)</span>，则</p>
 <p><span class="arithmatex">\(<span class="arithmatex">\(C=-\frac{1}{\sqrt{a_i^2+b_i^2}}\ln_{}{\frac{m_i-1}{m_i+1} } =-\frac{1}{\sqrt{a_i^2+b_i^2}}\ln_{}{\frac{m_{i0}-1}{m_{i0}+1} }\)</span>\)</span>
