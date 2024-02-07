@@ -1700,6 +1700,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#转向标准轮和球轮的解算" class="md-nav__link">
+    <span class="md-ellipsis">
+      转向标准轮和球轮的解算
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#脚轮的解算" class="md-nav__link">
     <span class="md-ellipsis">
       脚轮的解算
@@ -3115,6 +3124,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#转向标准轮和球轮的解算" class="md-nav__link">
+    <span class="md-ellipsis">
+      转向标准轮和球轮的解算
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#脚轮的解算" class="md-nav__link">
     <span class="md-ellipsis">
       脚轮的解算
@@ -3187,15 +3205,15 @@
 <p>机器人的建模为一个在水平面上运行的带轮子的刚体，在平面上的总维度是三维，两维用于平面内的位置，另一维用于垂直于平面的轴线上的方向。当谈论机器人底盘时，仅指机器人的刚体部分，忽略了机器人内部及其轮子的关节和自由度 (由于轮轴、轮子转向关节和脚轮关节的存在，还有额外的自由度和灵活性)。</p>
 <h2 id="2-机器人的位姿描述以及速度映射">2 机器人的位姿描述以及速度映射<a class="headerlink" href="#2-机器人的位姿描述以及速度映射" title="链接到此节">&para;</a></h2>
 <p><a class="glightbox" href="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E5%85%A8%E5%B1%80%E5%9D%90%E6%A0%87%E7%B3%BB%E5%92%8C%E5%B1%80%E9%83%A8%E5%9D%90%E6%A0%87%E7%B3%BB.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="平面的全局坐标系和机器人的局部坐标系之间的关系" src="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E5%85%A8%E5%B1%80%E5%9D%90%E6%A0%87%E7%B3%BB%E5%92%8C%E5%B1%80%E9%83%A8%E5%9D%90%E6%A0%87%E7%B3%BB.png" /></a></p>
-<p>平面的全局坐标系和机器人的局部坐标系之间的关系如图所示。<span class="arithmatex">\(\hat{X}_I\)</span> 和 <span class="arithmatex">\(\hat{Y}_I\)</span> 定义了以平面上某点 <span class="arithmatex">\(O\)</span> 为坐标原点的全局坐标系 <span class="arithmatex">\(\{ I \}\)</span> 。为了指定机器人的位置，选择机器人底盘上的点 <span class="arithmatex">\(P\)</span> 作为其位置参考点 (通常为机器人底盘中心)。同样， <span class="arithmatex">\(\hat{X}_R\)</span> 和 <span class="arithmatex">\(\hat{Y}_R\)</span> 确定了以点 <span class="arithmatex">\(P\)</span> 为原点的机器人局部坐标系  <span class="arithmatex">\(\{ R \}\)</span> 。点 <span class="arithmatex">\(P\)</span> 在全局坐标系的位置表达为 <span class="arithmatex">\(^IP_P={\begin{bmatrix} p_x &amp; p_y &amp;p_z\end{bmatrix}}^T\)</span>，姿态通过机器人局部坐标系在全局坐标系中的描述来表达，即
-<span class="arithmatex">\(<span class="arithmatex">\(^I_RR=
+<p>平面的全局坐标系和机器人的局部坐标系之间的关系如图所示。<span class="arithmatex">\(\hat{X}_I\)</span> 和 <span class="arithmatex">\(\hat{Y}_I\)</span> 定义了以平面上某点 <span class="arithmatex">\(O\)</span> 为坐标原点的全局坐标系 <span class="arithmatex">\(\{ I \}\)</span> 。为了指定机器人的位置，选择机器人底盘上的点 <span class="arithmatex">\(P\)</span> 作为其位置参考点 (通常为机器人底盘中心)。同样， <span class="arithmatex">\(\hat{X}_R\)</span> 和 <span class="arithmatex">\(\hat{Y}_R\)</span> 确定了以点 <span class="arithmatex">\(P\)</span> 为原点的机器人局部坐标系  <span class="arithmatex">\(\{ R \}\)</span> 。点 <span class="arithmatex">\(P\)</span> 在全局坐标系的位置表达为 <span class="arithmatex">\(^IP_P={\begin{bmatrix} p_x &amp; p_y &amp;p_z\end{bmatrix}}^T\)</span>，姿态通过机器人局部坐标系在全局坐标系中的描述来表达，即</p>
+<div class="arithmatex">\[^I_RR=
 \begin{bmatrix} {^I\hat{X}_R} &amp; {^I\hat{Y}_R} &amp; {^I\hat{Z}_R} \end{bmatrix}
 =\begin{bmatrix}
   \hat{X}_{R}\cdot\hat{X}_{I} &amp; \hat{Y}_{R}\cdot\hat{X}_{I} &amp; \hat{Z}_{R}\cdot\hat{X}_{I}\\
   \hat{X}_{R}\cdot\hat{Y}_{I} &amp; \hat{Y}_{R}\cdot\hat{Y}_{I} &amp; \hat{Z}_{R}\cdot\hat{Y}_{I}\\
   \hat{X}_{R}\cdot\hat{Z}_{I} &amp; \hat{Y}_{R}\cdot\hat{Z}_{I} &amp; \hat{Z}_{R}\cdot\hat{Z}_{I}
 \end{bmatrix}
-=\begin{bmatrix} {^R\hat{X}_I}^T &amp; {^R\hat{Y}_I}^T &amp; {^R\hat{Z}_I}^T \end{bmatrix}\)</span>\)</span></p>
+=\begin{bmatrix} {^R\hat{X}_I}^T &amp; {^R\hat{Y}_I}^T &amp; {^R\hat{Z}_I}^T \end{bmatrix}\]</div>
 <p>如此，可以得到 <span class="arithmatex">\(\{ R \}\)</span> 在 <span class="arithmatex">\(\{ I \}\)</span> 的描述 <span class="arithmatex">\(\{ R \}=  \{ ^I_RR , ^IP_P \}\)</span> 。</p>
 <blockquote>
 <p>此处坐标系的描述采用机械臂中常用的符号描述，更多可以参考 ^[https://zhuanlan.zhihu.com/p/146835822]</p>
@@ -3207,19 +3225,18 @@
   0 &amp; 0 &amp; 1
 \end{bmatrix}\)</span>\)</span></p>
 <p>机器人的位姿表达也可以简化为包含这三个元素的向量 <span class="arithmatex">\(^I\xi ={\begin{bmatrix} x &amp; y &amp; \theta \end{bmatrix}}^T\)</span>。</p>
-<p>为了将机器人在全局坐标系下的运动描述为在机器人局部坐标系下的运动，需要将沿着全局参考框架轴线的运动向量映射到沿着机器人局部参考框架轴线的运动分量。当然，这个映射是机器人当前姿态的函数，即 <em>正交旋转矩阵 <span class="arithmatex">\(R_Z(\theta)\)</span></em> 。给定全局参考框架中的某个速度向量 <span class="arithmatex">\(^I\dot{\xi} ={\begin{bmatrix} \dot{x} &amp; \dot{y} &amp; \dot{\theta} \end{bmatrix}}^T\)</span>，可以得到其在机器人局部坐标系下的表达
-$$<sup>R\dot{\xi}=R_Z(\theta)</sup>I\dot{\xi}=\begin{bmatrix}
-  \cos{\theta} &amp; -\sin{\theta} &amp; 0\
-  \sin{\theta} &amp; \cos{\theta} &amp; 0\
+<p>为了将机器人在全局坐标系下的运动描述为在机器人局部坐标系下的运动，需要将沿着全局参考框架轴线的运动向量映射到沿着机器人局部参考框架轴线的运动分量。当然，这个映射是机器人当前姿态的函数，即 <em>正交旋转矩阵 <span class="arithmatex">\(R_Z(\theta)\)</span></em> 。给定全局参考框架中的某个速度向量 <span class="arithmatex">\(^I\dot{\xi} ={\begin{bmatrix} \dot{x} &amp; \dot{y} &amp; \dot{\theta} \end{bmatrix}}^T\)</span>，可以得到其在机器人局部坐标系下的表达</p>
+<div class="arithmatex">\[^R\dot{\xi}=R_Z(\theta)^I\dot{\xi}=\begin{bmatrix}
+  \cos{\theta} &amp; -\sin{\theta} &amp; 0\\
+  \sin{\theta} &amp; \cos{\theta} &amp; 0\\
   0 &amp; 0 &amp; 1
 \end{bmatrix}
 \begin{bmatrix}
-  \dot{x} \ \dot{y} \ \dot{\theta}
+  \dot{x} \\ \dot{y} \\ \dot{\theta}
 \end{bmatrix}
 =\begin{bmatrix}
-  ^R\dot{x} \ ^R\dot{y} \ ^R\dot{\theta}
-\end{bmatrix}</p>
-<p>$$</p>
+  ^R\dot{x} \\ ^R\dot{y} \\ ^R\dot{\theta}
+\end{bmatrix}\]</div>
 <h2 id="车轮的运动学约束">车轮的运动学约束<a class="headerlink" href="#车轮的运动学约束" title="链接到此节">&para;</a></h2>
 <p>到目前为止，轮子已经成为移动机器人和一般车辆中最流行的运动机制：它可以提供非常高的效率，并且其机械实现相对简单。轮式机器人几乎总是设计为所有车轮时刻与地面接触。当使用超过三个车轮时，需要一个悬挂系统来确保机器人在遇到不平坦地形时所有轮子能保持接触地面。</p>
 <p>目前，轮式移动机器人主要采用四种类型的轮子：标准轮 (standard wheel) 、脚轮 (caster wheel) 、 Swedish 轮 (Swedish wheel) 和球轮 (ball or spherical wheel) ，如下图所示。标准轮又根据是否控制转向分固定标准轮 (fixed standard wheel) 和转向标准轮 (steer standard wheel)。</p>
@@ -3243,44 +3260,44 @@ $$<sup>R\dot{\xi}=R_Z(\theta)</sup>I\dot{\xi}=\begin{bmatrix}
 假设在机器人局部坐标系下，标准轮在底盘上的安装如图所示。点 <span class="arithmatex">\(A\)</span> 为其与底盘连接的位置，也是其垂直旋转轴的投影位置以及地面接触点的位置。其位姿还可以用 <span class="arithmatex">\({\begin{bmatrix} \alpha &amp; l &amp; \beta \end{bmatrix}}^T\)</span> 来描述。其中 <span class="arithmatex">\(\alpha= \arctan(y_w,x_w)\)</span>，<span class="arithmatex">\(l=\sqrt{x_w^2+y_w^2}\)</span>，<span class="arithmatex">\(\beta=\theta_v+\pi/2-\alpha\)</span>。</p>
 <p>给定底盘点 <span class="arithmatex">\(P\)</span> 在全局坐标系下的速度 <span class="arithmatex">\(^I\dot{\xi}\)</span>，可以得到其在机器人局部坐标系下的描述 <span class="arithmatex">\(^R\dot{\xi}\)</span> 。
 由于轮子和底盘刚性连接，因此点 <span class="arithmatex">\(A\)</span> 的速度包括 <span class="arithmatex">\(\hat{X}_R\)</span> 、 <span class="arithmatex">\(\hat{Y}_R\)</span> 方向上的速度 <span class="arithmatex">\(^R\dot{x}\)</span> 和 <span class="arithmatex">\(\dot{y}_R\)</span> 以及垂直于 <span class="arithmatex">\(\overrightharpoon{PA}\)</span> 的速度 <span class="arithmatex">\(l\dot{\theta_R}\)</span>（由 <span class="arithmatex">\(\dot{\theta_R}\)</span> 根据右手法则确定方向）。</p>
-<p>可以得到标准轮的滚动约束方程
-$$\begin{bmatrix}
+<p>可以得到标准轮的滚动约束方程</p>
+<div class="arithmatex">\[\begin{bmatrix}
 \sin{(\alpha+\beta)} &amp; -\cos{(\alpha+\beta)} &amp; -l\cos{\beta}
 \end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}
-$$
-以及无侧滑约束方程
-$$\begin{bmatrix}
+\]</div>
+<p>以及无侧滑约束方程</p>
+<div class="arithmatex">\[\begin{bmatrix}
 \cos{(\alpha+\beta)} &amp; \sin{(\alpha+\beta)} &amp; l\sin{\beta}
 \end{bmatrix} ^R\dot{\xi} = 0
-$$</p>
+\]</div>
 <p>固定标准轮一旦安装，其相对于底盘的位姿 <span class="arithmatex">\(^R\xi_w\)</span> 就确定了。当其作为主动驱动轮时，只有一个控制量 <span class="arithmatex">\(\dot{\varphi}\)</span>，可以通过滚动约束方程求解以满足底盘运动速度的要求。当其作为被动轮时， <span class="arithmatex">\(\dot{\varphi}\)</span> 为自由量，滚动约束总能满足。但无论如何，固定标准轮总是存在无侧滑约束。</p>
 <p>转向标准轮的运动学也为上述两个约束，但转向标准轮比固定标准轮要多一个自由度，即轮子可以绕着穿过轮子中心和地面接触点的垂直轴旋转。此时，<span class="arithmatex">\(\beta\)</span> 不再是一个固定值，而是一个时变函数 <span class="arithmatex">\(\beta{(t)}\)</span>。从两个约束方程可以看出，<span class="arithmatex">\(\dot{\beta}\)</span> 对机器人当前的运动约束没有直接的影响。并且，与固定标准轮同样的，转动标准轮总是存在无侧滑约束。</p>
 <h3 id="脚轮">脚轮<a class="headerlink" href="#脚轮" title="链接到此节">&para;</a></h3>
 <p><a class="glightbox" href="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E7%90%83%E8%BD%AE.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="脚轮在底盘上的安装示意" src="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E7%90%83%E8%BD%AE.png" /></a>
-脚轮与转向标准轮基本相同，除了其垂直旋转轴并不通过其地面接触点。假设在机器人局部坐标系下，标准轮在底盘上的安装如图所示。点 <span class="arithmatex">\(A\)</span> 为其与底盘连接的位置，也是其垂直旋转轴的投影位置，点 <span class="arithmatex">\(B\)</span> 是其地面接触点的位置，记点 <span class="arithmatex">\(B\)</span> 与其垂直旋转轴的距离为 <span class="arithmatex">\(d\)</span>。脚轮运动时，轮平面始终与 <span class="arithmatex">\(\overrightharpoon{PA}\)</span> 平行。与标准轮类似，可以得到脚轮的滚动约束
-$$\begin{bmatrix}
+脚轮与转向标准轮基本相同，除了其垂直旋转轴并不通过其地面接触点。假设在机器人局部坐标系下，标准轮在底盘上的安装如图所示。点 <span class="arithmatex">\(A\)</span> 为其与底盘连接的位置，也是其垂直旋转轴的投影位置，点 <span class="arithmatex">\(B\)</span> 是其地面接触点的位置，记点 <span class="arithmatex">\(B\)</span> 与其垂直旋转轴的距离为 <span class="arithmatex">\(d\)</span>。脚轮运动时，轮平面始终与 <span class="arithmatex">\(\overrightharpoon{PA}\)</span> 平行。与标准轮类似，可以得到脚轮的滚动约束</p>
+<div class="arithmatex">\[\begin{bmatrix}
 \sin{(\alpha+\beta)} &amp; -\cos{(\alpha+\beta)} &amp; -l\cos{\beta}
 \end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}
-$$
-以及无侧滑约束方程
-$$\begin{bmatrix}
+\]</div>
+<p>以及无侧滑约束方程</p>
+<div class="arithmatex">\[\begin{bmatrix}
 \cos{(\alpha+\beta)} &amp; \sin{(\alpha+\beta)} &amp; l\sin{\beta}
 \end{bmatrix} ^R\dot{\xi} + d\dot{\beta}= 0
-$$</p>
+\]</div>
 <p>可以看到，垂直旋转轴的偏移对于平行于轮平面的运动没有作用，但是对无侧滑约束产生了重要影响。由于脚轮绕点 <span class="arithmatex">\(A\)</span> 旋转，其旋转速度为 <span class="arithmatex">\(\dot{\beta}\)</span> ，因此在与地面接触的标准轮的发现方向形成一个运动速度 <span class="arithmatex">\(d\dot{\beta}\)</span> ，其与 <span class="arithmatex">\(^R\dot{\xi}\)</span> 在与地面接触的标准轮法方向所形成的速度叠加值必须为 0 才能满足标准轮的无侧滑约束。</p>
 <p>作为主动驱动轮时，根据上述约束方程可以找到合适的 <span class="arithmatex">\(\dot{\varphi}\)</span> 和 <span class="arithmatex">\(\dot{\beta}\)</span>，使得满足底盘的速度需求，并使机器人的任意侧向运动变得可行。作为随动轮时，脚轮的 <span class="arithmatex">\(\dot{\varphi}\)</span> 和 <span class="arithmatex">\(\dot{\beta}\)</span> 都是自由量，上述方程都会被满足。</p>
 <h3 id="swedish-轮">Swedish 轮<a class="headerlink" href="#swedish-轮" title="链接到此节">&para;</a></h3>
 <p><a class="glightbox" href="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E9%BA%A6%E5%85%8B%E7%BA%B3%E5%A7%86%E8%BD%AE.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Swedish 轮在底盘上的安装示意" src="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E9%BA%A6%E5%85%8B%E7%BA%B3%E5%A7%86%E8%BD%AE.png" /></a>
-Swedish 轮由主标准轮和附在主轮周围一圈的辊子组成。通常， Swedish 按照固定标准轮的方式进行安装，一旦安装，其在机器人局部坐标系的位姿将被 <span class="arithmatex">\(^R\xi_w\)</span> 确定。假设在机器人局部坐标系下，标准轮在底盘上的安装如图所示。点 <span class="arithmatex">\(A\)</span> 为其与底盘连接的位置，也是其垂直旋转轴的投影位置以及地面接触点的位置。与地面接触的棍子是标准轮。棍子的半径为 <span class="arithmatex">\(r_{sw}\)</span>。转速为 <span class="arithmatex">\(\dot{\varphi}_{sw}\)</span>，是一个自由量。主轮的轮速向量与棍子的水平转轴之间的夹角为 <span class="arithmatex">\(\gamma\)</span>。通过棍子的无侧滑约束和滚动约束可以得到 Swedish 轮的滚动约束
-$$\begin{bmatrix}
+Swedish 轮由主标准轮和附在主轮周围一圈的辊子组成。通常， Swedish 按照固定标准轮的方式进行安装，一旦安装，其在机器人局部坐标系的位姿将被 <span class="arithmatex">\(^R\xi_w\)</span> 确定。假设在机器人局部坐标系下，标准轮在底盘上的安装如图所示。点 <span class="arithmatex">\(A\)</span> 为其与底盘连接的位置，也是其垂直旋转轴的投影位置以及地面接触点的位置。与地面接触的棍子是标准轮。棍子的半径为 <span class="arithmatex">\(r_{sw}\)</span>。转速为 <span class="arithmatex">\(\dot{\varphi}_{sw}\)</span>，是一个自由量。主轮的轮速向量与棍子的水平转轴之间的夹角为 <span class="arithmatex">\(\gamma\)</span>。通过棍子的无侧滑约束和滚动约束可以得到 Swedish 轮的滚动约束</p>
+<div class="arithmatex">\[\begin{bmatrix}
 \sin{(\alpha+\beta+\gamma)} &amp; -\cos{(\alpha+\beta+\gamma)} &amp; -l\cos{(\beta+\gamma)}
 \end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}\cos{\gamma}
-$$
-以及无侧滑约束方程
-$$\begin{bmatrix}
+\]</div>
+<p>以及无侧滑约束方程</p>
+<div class="arithmatex">\[\begin{bmatrix}
 \cos{(\alpha+\beta+\gamma)} &amp; \sin{(\alpha+\beta+\gamma)} &amp; l\sin{(\beta+\gamma)}
 \end{bmatrix} ^R\dot{\xi} =  r \dot{\varphi}\sin{\gamma} + r_{sw}\dot{\varphi}_{sw}
-$$</p>
+\]</div>
 <p>由于 <span class="arithmatex">\(\dot{\varphi}_{sw}\)</span> 是一个自由量，Swedish 轮的无侧滑约束总能被满足。</p>
 <h4 id="全向轮">全向轮<a class="headerlink" href="#全向轮" title="链接到此节">&para;</a></h4>
 <p>全向轮 (omnidirectional wheel) 通常由一个大的中心轮和若干围绕中心轮边缘排列的棍子组成，这些棍子的轴线与大轮的轴线成90度角，即 90° Swedish 轮。这种设计允许轮子在中心轮的旋转方向上提供前进或后退的力，而棍子可以在垂直于中心轮旋转方向的任意角度上实现滑动。</p>
@@ -3296,16 +3313,16 @@ $$</p>
 </ul>
 <h3 id="球轮">球轮<a class="headerlink" href="#球轮" title="链接到此节">&para;</a></h3>
 <p><a class="glightbox" href="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E7%90%83%E8%BD%AE.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="球轮在底盘上的安装示意" src="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E7%90%83%E8%BD%AE.png" /></a>
-球轮的任意一个剖面都是一个标准轮，其运动学约束与标准轮完全相同，因此，可以得到球轮的滚动约束
-$$\begin{bmatrix}
+球轮的任意一个剖面都是一个标准轮，其运动学约束与标准轮完全相同，因此，可以得到球轮的滚动约束</p>
+<div class="arithmatex">\[\begin{bmatrix}
 \sin{(\alpha+\beta)} &amp; -\cos{(\alpha+\beta)} &amp; -l\cos{\beta}
 \end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}
-$$
-以及无侧滑约束方程
-$$\begin{bmatrix}
+\]</div>
+<p>以及无侧滑约束方程</p>
+<div class="arithmatex">\[\begin{bmatrix}
 \cos{(\alpha+\beta)} &amp; \sin{(\alpha+\beta)} &amp; l\sin{\beta}
 \end{bmatrix} ^R\dot{\xi} = 0
-$$</p>
+\]</div>
 <p>如果对球轮进行驱动控制，则需要根据方向要求确定剖面，从而根据滚动约束方程计算 <span class="arithmatex">\(\dot{\varphi}\)</span>。如果进行转向控制，则与转向标准轮基本一致。如果不进行转向控制，在剖面方向存在无侧滑约束，但在运动过程中，其方向容易受到扰动而变化，即 <span class="arithmatex">\(\beta\)</span> 是自由量，使得球轮本质上不存在无侧滑约束，是一个全方向系统。这一点在球轮作为被动轮时也适用。</p>
 <h3 id="轮的运动学约束和运动状态关系">轮的运动学约束和运动状态关系<a class="headerlink" href="#轮的运动学约束和运动状态关系" title="链接到此节">&para;</a></h3>
 <table>
@@ -3403,40 +3420,37 @@ $$</p>
 <p>假设机器人共有N个标准轮，其参数如下
 <span class="arithmatex">\(N_f\)</span> 个固定标准轮，轮子 <span class="arithmatex">\(N_f\times 1\)</span> 的角度向量 <span class="arithmatex">\(\beta_f\)</span> ，<span class="arithmatex">\(N_f\times 1\)</span> 的旋转速度向量 <span class="arithmatex">\(\dot{\varphi}_f\)</span>
 <span class="arithmatex">\(N_s\)</span> 个固定标准轮，轮子 <span class="arithmatex">\(N_s\times 1\)</span> 角度的向量 <span class="arithmatex">\(\beta_s\)</span>， <span class="arithmatex">\(N_s\times 1\)</span> 旋转速度的向量 <span class="arithmatex">\(\dot{\varphi}_s\)</span>
-则机器人约束可以表示为
-<span class="arithmatex">\(<span class="arithmatex">\(\begin{pmatrix}
+则机器人约束可以表示为</p>
+<div class="arithmatex">\[\begin{pmatrix}
   \mathbf{J_{1}(\beta_s)}\\
   \mathbf{C_{1}(\beta_s)}  
 \end{pmatrix} \mathbf{^R\dot{\xi}}=
 \begin{pmatrix}
   \mathbf{J_{2}\dot{\varphi }} \\
   0
-\end{pmatrix}\)</span>\)</span>
-其中
-$$\begin{align<em>}
-  \mathbf{J_{1}} &amp;= \begin{pmatrix} \mathbf{J_{1f}} \\mathbf{J_{1s}(\beta_s)} \end{pmatrix}, \
-  \mathbf{C_{1}(\beta)} &amp;= \begin{pmatrix} \mathbf{C_{1f}}\\mathbf{C_{1s}(\beta_s)}  \end{pmatrix}, \
-  \mathbf{\dot{\varphi }} &amp;= \begin{pmatrix} \mathbf{\dot{\varphi }_f(t)}\\mathbf{\dot{\varphi }_s(t)} \end{pmatrix}
-\end{align</em>}
-$$</p>
+\end{pmatrix}\]</div>
+<p>其中</p>
+<div class="arithmatex">\[\begin{align*}
+  \mathbf{J_{1}} &amp;= \begin{pmatrix} \mathbf{J_{1f}} \\\mathbf{J_{1s}(\beta_s)} \end{pmatrix}, \\
+  \mathbf{C_{1}(\beta)} &amp;= \begin{pmatrix} \mathbf{C_{1f}}\\\mathbf{C_{1s}(\beta_s)}  \end{pmatrix}, \\
+  \mathbf{\dot{\varphi }} &amp;= \begin{pmatrix} \mathbf{\dot{\varphi }_f(t)}\\\mathbf{\dot{\varphi }_s(t)} \end{pmatrix}
+\end{align*}\]</div>
 <p>其中
 <span class="arithmatex">\(\mathbf{J_{1f}}\)</span> ， <span class="arithmatex">\(\mathbf{J_{1s}(\beta_s)}\)</span> 分别为 <span class="arithmatex">\(N_f\times 3\)</span> 和 <span class="arithmatex">\(N_s\times 3\)</span> 的矩阵 <span class="arithmatex">\(\mathbf{C_{1f}}\)</span> ，<span class="arithmatex">\(\mathbf{C_{1s}(\beta_s)}\)</span> 分别为 <span class="arithmatex">\(N_f\times 3\)</span> 和 <span class="arithmatex">\(N_s\times 3\)</span> 的矩阵:</p>
-<p>$$
-\begin{align<em>}
-  \mathbf{J_{1f}} &amp;= \begin{bmatrix}\sin(\mathbf{\alpha_{f}}+\mathbf{\beta_{f}})&amp;-\cos(\mathbf{\alpha_{f}}+\mathbf{\beta_{f}})&amp;(-l)\cos\mathbf{\beta_{f}}\end{bmatrix}\
-  \mathbf{J_{1s}(\beta_s)} &amp;= \begin{bmatrix}\sin(\mathbf{\alpha_{s}}+\mathbf{\beta_{s}})&amp;-\cos(\mathbf{\alpha_{s}}+\mathbf{\beta_{s}})&amp;(-l)\cos\mathbf{\beta_{s}}\end{bmatrix} \
-  \mathbf{C_{1f}} &amp;= \begin{bmatrix}\cos(\mathbf{\alpha_{f}}+\mathbf{\beta_{f}})&amp;\sin(\mathbf{\alpha_{f}}+\mathbf{\beta_{f}})&amp;l\sin\mathbf{\beta_{f}}\end{bmatrix}\
+<div class="arithmatex">\[\begin{align*}
+  \mathbf{J_{1f}} &amp;= \begin{bmatrix}\sin(\mathbf{\alpha_{f}}+\mathbf{\beta_{f}})&amp;-\cos(\mathbf{\alpha_{f}}+\mathbf{\beta_{f}})&amp;(-l)\cos\mathbf{\beta_{f}}\end{bmatrix}\\
+  \mathbf{J_{1s}(\beta_s)} &amp;= \begin{bmatrix}\sin(\mathbf{\alpha_{s}}+\mathbf{\beta_{s}})&amp;-\cos(\mathbf{\alpha_{s}}+\mathbf{\beta_{s}})&amp;(-l)\cos\mathbf{\beta_{s}}\end{bmatrix} \\
+  \mathbf{C_{1f}} &amp;= \begin{bmatrix}\cos(\mathbf{\alpha_{f}}+\mathbf{\beta_{f}})&amp;\sin(\mathbf{\alpha_{f}}+\mathbf{\beta_{f}})&amp;l\sin\mathbf{\beta_{f}}\end{bmatrix}\\
   \mathbf{C_{1s}(\beta_s)} &amp;= \begin{bmatrix}\cos(\mathbf{\alpha_{s}}+\mathbf{\beta_{s}})&amp;\sin(\mathbf{\alpha_{s}}+\mathbf{\beta_{s}})&amp;l\sin\mathbf{\beta_{s}}\end{bmatrix}
-\end{align</em>}
-$$
-此处假定所有轮子的 <span class="arithmatex">\(l\)</span> 都是一致的常数，
+\end{align*}\]</div>
+<p>此处假定所有轮子的 <span class="arithmatex">\(l\)</span> 都是一致的常数，
 其展开为
 <span class="arithmatex">\(\mathbf{J_{1f}}=\begin{bmatrix}\sin(\mathbf{\alpha_{f}}+\mathbf{\beta_{f}})&amp;-\cos(\mathbf{\alpha_{f}}+\mathbf{\beta_{f}})&amp;(-l)\cos\mathbf{\beta_{f}}\end{bmatrix}\)</span>
 <span class="arithmatex">\(\mathbf{J_2}\)</span>为 <span class="arithmatex">\(N\times N\)</span> 的对角矩阵，对角元素为各轮的半径。</p>
 <h3 id="更一般的约束公式">更一般的约束公式<a class="headerlink" href="#更一般的约束公式" title="链接到此节">&para;</a></h3>
 <p>假设机器人共有 <span class="arithmatex">\(N\)</span> 个轮子。</p>
-<p>通过对四种车轮滚动约束和无侧滑约束的叠加，有
-<span class="arithmatex">\(<span class="arithmatex">\(\begin{bmatrix}
+<p>通过对四种车轮滚动约束和无侧滑约束的叠加，有</p>
+<div class="arithmatex">\[\begin{bmatrix}
   \sin \left ( \alpha_1 +\beta_1 +\gamma_1  \right ) &amp; -\cos \left ( \alpha_1 +\beta_1 +\gamma_1  \right ) &amp; -l_1\cos \left ( \beta_1 +\gamma_1  \right ) \\
   &amp;  \dots &amp; \\
   \sin \left ( \alpha_N +\beta_N +\gamma_N  \right )&amp; -  \cos \left ( \alpha_N +\beta_N +\gamma_N  \right ) &amp; -l_N\cos \left ( \beta_N +\gamma_N  \right ) \\
@@ -3450,7 +3464,7 @@ $$
  r_1\dot{\varphi }_1\sin \gamma _1+r_{sw1}\dot{\varphi} _{sw1} \\
  \dots\\
  r_N\dot{\varphi }_N\sin \gamma _N+r_{swN}\dot{\varphi} _{swN}
-\end{bmatrix}\)</span>\)</span></p>
+\end{bmatrix}\]</div>
 <p>其中，<span class="arithmatex">\(\overrightharpoon{l}_i\)</span> 为机器人局部坐标系原点指向车轮垂直旋转轴的向量。
 <span class="arithmatex">\(l_i=||\overrightharpoon{l}_i||\)</span>。
 <span class="arithmatex">\(\alpha_i\)</span> 为 <span class="arithmatex">\(\hat{X}_R\)</span> 与 <span class="arithmatex">\(\overrightharpoon{l}_i\)</span> 之间的夹角。
@@ -3464,32 +3478,32 @@ $$
 <h3 id="矩阵方法">矩阵方法<a class="headerlink" href="#矩阵方法" title="链接到此节">&para;</a></h3>
 <p>使用支持矩阵和常微分(或进行数值近似)的编程语言可以快速求解</p>
 <h3 id="单独求解">单独求解<a class="headerlink" href="#单独求解" title="链接到此节">&para;</a></h3>
-<p>假设机器人共有 <span class="arithmatex">\(N\)</span> 个轮子。对于第 <span class="arithmatex">\(i\)</span> 个轮子，有
-<span class="arithmatex">\(<span class="arithmatex">\(\begin{bmatrix}
+<p>假设机器人共有 <span class="arithmatex">\(N\)</span> 个轮子。对于第 <span class="arithmatex">\(i\)</span> 个轮子，有</p>
+<div class="arithmatex">\[\begin{bmatrix}
   \sin \left ( \alpha_i +\beta_i +\gamma_i  \right ) &amp; -\cos \left ( \alpha_i +\beta_i +\gamma_i  \right ) &amp; -l_i\cos \left ( \beta_i +\gamma_i  \right ) \\
  \cos \left ( \alpha_i +\beta_i +\gamma_i  \right )&amp;\sin \left ( \alpha_i +\beta_i +\gamma_i  \right )&amp;l_i\sin \left ( \beta_i +\gamma_i  \right )+d_i \dot{\beta} \\
 \end{bmatrix}\mathbf{^R\dot{\xi}}=\begin{bmatrix}
  r_i\dot{\varphi }_i \cos \gamma_i\\
  r_i\dot{\varphi }_i\sin \gamma_i+r_{swi}\dot{\varphi}_{swi}
-\end{bmatrix}\)</span>\)</span></p>
-<p>将矩阵展开，则有
-<span class="arithmatex">\(<span class="arithmatex">\(\begin{cases}
- \sin \left ( \alpha_i +\beta_i +\gamma_i  \right ) ^R\dot{x}
+\end{bmatrix}\]</div>
+<p>将矩阵展开，则有</p>
+<div class="arithmatex">\[\begin{cases}
+\sin \left ( \alpha_i +\beta_i +\gamma_i  \right ) ^R\dot{x}
  -\cos \left ( \alpha_i +\beta_i +\gamma_i  \right )\dot{y}_R
  -l_i\cos \left ( \beta_i +\gamma_i  \right )\dot{\theta}_R &amp; = r_i\dot{\varphi }_i\cos {\gamma _i} \\
 \cos \left ( \alpha_i +\beta_i +\gamma_i  \right )^R\dot{x}
 +\sin \left ( \alpha_i +\beta_i +\gamma_i  \right )\dot{y}_R
 +\left (l_i\sin \left ( \beta_i +\gamma_i  \right )+d_i\dot{\beta}  \right ) \dot{\theta}_R &amp; = r_i\dot{\varphi }_i\sin \gamma _i+r_{swi}\dot{\varphi} _{swi}
-\end{cases}\)</span>\)</span></p>
+\end{cases}\]</div>
 <p>对于主动驱动轮，都可以通过滚动约束来计算满足底盘运动速度的车轮转速。对于可以控制转向的车轮，可以通过无侧滑约束来计算合适的转向角来满足底盘在任意侧向的运动。</p>
 <h4 id="固定标准轮和-swedish-轮的解算">固定标准轮和 Swedish 轮的解算<a class="headerlink" href="#固定标准轮和-swedish-轮的解算" title="链接到此节">&para;</a></h4>
-<p>固定标准轮和 Swedish 轮通常一旦安装，其在机器人局部坐标系的位姿就固定，它们只有一个控制量，即车轮转速 <span class="arithmatex">\(\dot{\varphi}\)</span> ，。给定 <span class="arithmatex">\(^R\dot{\xi}=\begin{bmatrix} ^R\dot{x} &amp; ^R\dot{y} &amp; ^R\dot{\theta} \end{bmatrix}\)</span>，根据滚动约束 <span class="arithmatex">\(\sin \left ( \alpha_i +\beta_i +\gamma_i  \right ) ^R\dot{x} -\cos \left ( \alpha_i +\beta_i +\gamma_i  \right )\dot{y}_R -l_i\cos \left ( \beta_i +\gamma_i  \right )\dot{\theta}_R = r_i\dot{\varphi }_i\cos {\gamma _i}\)</span> ，可以得到
-<span class="arithmatex">\(<span class="arithmatex">\(\dot{\varphi }_i=\frac{
+<p>固定标准轮和 Swedish 轮通常一旦安装，其在机器人局部坐标系的位姿就固定，它们只有一个控制量，即车轮转速 <span class="arithmatex">\(\dot{\varphi}\)</span> ，。给定 <span class="arithmatex">\(^R\dot{\xi}=\begin{bmatrix} ^R\dot{x} &amp; ^R\dot{y} &amp; ^R\dot{\theta} \end{bmatrix}\)</span>，根据滚动约束 <span class="arithmatex">\(\sin \left ( \alpha_i +\beta_i +\gamma_i  \right ) ^R\dot{x} -\cos \left ( \alpha_i +\beta_i +\gamma_i  \right )\dot{y}_R -l_i\cos \left ( \beta_i +\gamma_i  \right )\dot{\theta}_R = r_i\dot{\varphi }_i\cos {\gamma _i}\)</span> ，可以得到</p>
+<div class="arithmatex">\[\dot{\varphi }_i=\frac{
 \sin \left ( \alpha_i +\beta_i +\gamma_i  \right ) ^R\dot{x}
  -\cos \left ( \alpha_i +\beta_i +\gamma_i  \right )\dot{y}_R
  -l_i\cos \left ( \beta_i +\gamma_i  \right )\dot{\theta}_R}
-{r_i\cos\gamma_i}\)</span>\)</span></p>
-<h5 id="转向标准轮和球轮的解算">转向标准轮和球轮的解算<a class="headerlink" href="#转向标准轮和球轮的解算" title="链接到此节">&para;</a></h5>
+{r_i\cos\gamma_i}\]</div>
+<h4 id="转向标准轮和球轮的解算">转向标准轮和球轮的解算<a class="headerlink" href="#转向标准轮和球轮的解算" title="链接到此节">&para;</a></h4>
 <p>若将球轮的水平转轴视作标准轮的法线，则球轮可以视作一个转向标准轮。
 对于转向标准轮，变量只有 <span class="arithmatex">\(\dot{\varphi}_i\)</span> 和 <span class="arithmatex">\(\beta_i\)</span> ，约束方程组可以简化为</p>
 <div class="arithmatex">\[\begin{cases}
@@ -3516,56 +3530,58 @@ $$
 \\
  \left (^R\dot{x} \cos \alpha_i + \dot{y}_R\sin \alpha_i \right )\cos \beta _{i} - \left ( ^R\dot{x} \sin \alpha_i- \dot{y }_R\cos \alpha_i-l \dot{\theta }_R \right )\sin\beta _{i} +d_i\dot{\beta}_i
 =0
-\end{cases}\)</span>\)</span>
-简化其无侧滑约束为
-<span class="arithmatex">\(<span class="arithmatex">\(a_i\cos\beta_i+b_i\sin\beta_i+d_i\dot\beta_i=0\)</span>\)</span>
-其中， <span class="arithmatex">\(a_i\)</span> 、 <span class="arithmatex">\(b_i\)</span> 、 <span class="arithmatex">\(d_i\)</span> 为常数，且<span class="arithmatex">\(a_i=^R\dot{x} \cos \alpha_i + \dot{y}_R\sin \alpha_i\)</span>，<span class="arithmatex">\(b_i=- \left ( ^R\dot{x} \sin \alpha_i- \dot{y }_R\cos \alpha_i-l \dot{\theta }_R \right )\)</span>
-则有，
-$$\dot{\beta }_i= \frac{\mathrm{d}\beta _i }{\mathrm{d}t } =-\frac{a_i\cos\beta_i+b_i\sin\beta_i}{d_i} $$
-即
-$$-\frac{\mathrm{d}\beta_i }{a_i\cos\beta_i+b_i\sin\beta_i} =\frac{\mathrm{d}t }{d_i} $$
-分别对左右两边积分
- $$\int -\frac{\mathrm{d}\beta_i }{a_i\cos\beta_i+b_i\sin\beta_i} =\int \frac{\mathrm{d}t }{d_i} =\frac{\bigtriangleup  t}{d_i} $$
-因为
-$$\cos \beta _i = \frac{1-\tan ^{2} \frac{\beta _i}{2} }{1+\tan ^{2 } \frac{\beta _i}{2}} ,\space
-\sin \beta _i = \frac{\tan \frac{\beta_i }{2} }{1+\tan ^{2} \frac{\beta _i}{2}} $$
-则令 <span class="arithmatex">\(\tan \frac{\beta _i }{2}=t_i\)</span> ， <span class="arithmatex">\(\mathrm{d}\beta _i=2\cdot \frac{1}{1+t_i^{2} } \mathrm{d}t_i\)</span>，
-则
-<span class="arithmatex">\(<span class="arithmatex">\(\begin{align*}
+\end{cases}\)</span>\)</span></p>
+<p>简化其无侧滑约束为</p>
+<div class="arithmatex">\[a_i\cos\beta_i+b_i\sin\beta_i+d_i\dot\beta_i=0\]</div>
+<p>其中， <span class="arithmatex">\(a_i\)</span> 、 <span class="arithmatex">\(b_i\)</span> 、 <span class="arithmatex">\(d_i\)</span> 为常数，且<span class="arithmatex">\(a_i=^R\dot{x} \cos \alpha_i + \dot{y}_R\sin \alpha_i\)</span>，<span class="arithmatex">\(b_i=- \left ( ^R\dot{x} \sin \alpha_i- \dot{y }_R\cos \alpha_i-l \dot{\theta }_R \right )\)</span>
+则有，</p>
+<div class="arithmatex">\[\dot{\beta }_i= \frac{\mathrm{d}\beta _i }{\mathrm{d}t } =-\frac{a_i\cos\beta_i+b_i\sin\beta_i}{d_i} \]</div>
+<p>即</p>
+<div class="arithmatex">\[-\frac{\mathrm{d}\beta_i }{a_i\cos\beta_i+b_i\sin\beta_i} =\frac{\mathrm{d}t }{d_i} \]</div>
+<p>分别对左右两边积分</p>
+<div class="arithmatex">\[\int -\frac{\mathrm{d}\beta_i }{a_i\cos\beta_i+b_i\sin\beta_i} =\int \frac{\mathrm{d}t }{d_i} =\frac{\bigtriangleup  t}{d_i} \]</div>
+<p>因为</p>
+<div class="arithmatex">\[\cos \beta _i = \frac{1-\tan ^{2} \frac{\beta _i}{2} }{1+\tan ^{2 } \frac{\beta _i}{2}} ,\space
+\sin \beta _i = \frac{\tan \frac{\beta_i }{2} }{1+\tan ^{2} \frac{\beta _i}{2}} \]</div>
+<p>则令 <span class="arithmatex">\(\tan \frac{\beta _i }{2}=t_i\)</span> ， <span class="arithmatex">\(\mathrm{d}\beta _i=2\cdot \frac{1}{1+t_i^{2} } \mathrm{d}t_i\)</span>，</p>
+<p>则</p>
+<div class="arithmatex">\[\begin{align*}
 \int -\frac{\mathrm{d}\beta_i }{a_i\cos\beta_i+b_i\sin\beta_i} &amp;=\int {\frac{2\mathrm{d}t_{i} }{a_it_i^2-2b_it_i-a_i} }\\
 &amp;=\int {\frac{2\mathrm{d}t _i}{\frac{a_i^2+b_i^2}{a_i}\left
 [ \frac{a_i^2}{a_i^2+b_i^2} \left ( t_i-\frac{b_i}{a_i}  \right ) ^2 -1\right ]  } }\\
 &amp;=\frac{2a_i}{a_i^2+b_i^2} \int {\frac{\mathrm{d}t _i}{\left [
 \frac{a_i}{\sqrt{a_i^2+b_i^2} }\left ( t_i-\frac{b_i}{a_i}  \right )
  \right ] ^2-1} }
-\end{align*}\)</span>\)</span>
-令 <span class="arithmatex">\(m_i=\frac{a_i}{\sqrt{a_i^2+b_i^2} }\left ( t_i-\frac{b_i}{a_i}  \right )\)</span> ， <span class="arithmatex">\(\mathrm{d}t _i=\frac{\sqrt{a_i^2+b_i^2} }{a_i}\mathrm{d}m_i\)</span>，
-则
-<span class="arithmatex">\(<span class="arithmatex">\(\begin{align*}
+\end{align*}\]</div>
+<p>令 <span class="arithmatex">\(m_i=\frac{a_i}{\sqrt{a_i^2+b_i^2} }\left ( t_i-\frac{b_i}{a_i}  \right )\)</span> ， <span class="arithmatex">\(\mathrm{d}t _i=\frac{\sqrt{a_i^2+b_i^2} }{a_i}\mathrm{d}m_i\)</span>，</p>
+<p>则</p>
+<div class="arithmatex">\[\begin{align*}
 \int -\frac{\mathrm{d}\beta_i }{a_i\cos\beta_i+b_i\sin\beta_i} &amp;=\frac{2}{\sqrt{a_i^2+b_i^2}} \int \frac{\mathrm{d}m_i }{m_i^2-1} \\
 &amp;=\frac{1}{\sqrt{a_i^2+b_i^2}} \int \left (  
 \frac{1}{m_i-1}- \frac{1}{m_i+1}
 \right ) \mathrm{d}m_i \\
 &amp;=\frac{1}{\sqrt{a_i^2+b_i^2}}\ln_{}{\frac{m_i-1}{m_i+1} } +C
-\end{align*}\)</span>\)</span>
-即
-<span class="arithmatex">\(<span class="arithmatex">\(\frac{1}{\sqrt{a_i^2+b_i^2}}\ln_{}{\frac{m_i-1}{m_i+1} } +C=\frac{\bigtriangleup  t}{d_i}\)</span>\)</span>
-即
-<span class="arithmatex">\(<span class="arithmatex">\(m_i=\frac{1+\exp c_i}{1-\exp c_i},c_i=\sqrt{a_i^2+b_i^2} \left ( \frac{\bigtriangleup  t}{d_i} -C \right )\)</span>\)</span>
-又因为 <span class="arithmatex">\(m_i= \frac{a_i}{\sqrt{a_i^2+b_i^2} }\left ( t_i-\frac{b_i}{a_i}  \right )\)</span> ， <span class="arithmatex">\(\tan \frac{\beta _i }{2}\)</span>，
-所以
-<span class="arithmatex">\(<span class="arithmatex">\(\beta_i=2\arctan {\frac{\sqrt{a_i^2+b_i^2}m_i+b_i }{a_i} }\)</span>\)</span></p>
+\end{align*}\]</div>
+<p>即</p>
+<div class="arithmatex">\[\frac{1}{\sqrt{a_i^2+b_i^2}}\ln_{}{\frac{m_i-1}{m_i+1} } +C=\frac{\bigtriangleup  t}{d_i}\]</div>
+<p>即</p>
+<div class="arithmatex">\[m_i=\frac{1+\exp c_i}{1-\exp c_i},c_i=\sqrt{a_i^2+b_i^2} \left ( \frac{\bigtriangleup  t}{d_i} -C \right )\]</div>
+<p>又因为 <span class="arithmatex">\(m_i= \frac{a_i}{\sqrt{a_i^2+b_i^2} }\left ( t_i-\frac{b_i}{a_i}  \right )\)</span> ， <span class="arithmatex">\(\tan \frac{\beta _i }{2}\)</span>，
+所以</p>
+<div class="arithmatex">\[\beta_i=2\arctan {\frac{\sqrt{a_i^2+b_i^2}m_i+b_i }{a_i} }\]</div>
 <p><strong>如何消去常数项 <span class="arithmatex">\(C\)</span></strong></p>
-<p>现假设采样时间间隔为 <span class="arithmatex">\(\bigtriangleup  t\)</span>，已知当前的初始值 <span class="arithmatex">\(\beta_{i0}\)</span>，则
-<span class="arithmatex">\(<span class="arithmatex">\(C=-\frac{1}{\sqrt{a_i^2+b_i^2}}\ln_{}{\frac{m_i-1}{m_i+1} } =-\frac{1}{\sqrt{a_i^2+b_i^2}}\ln_{}{\frac{m_{i0}-1}{m_{i0}+1} }\)</span>\)</span>
+<p>现假设采样时间间隔为 <span class="arithmatex">\(\bigtriangleup  t\)</span>，已知当前的初始值 <span class="arithmatex">\(\beta_{i0}\)</span>，则</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(C=-\frac{1}{\sqrt{a_i^2+b_i^2}}\ln_{}{\frac{m_i-1}{m_i+1} } =-\frac{1}{\sqrt{a_i^2+b_i^2}}\ln_{}{\frac{m_{i0}-1}{m_{i0}+1} }\)</span>\)</span>
 将 <span class="arithmatex">\(\beta_{i0}\)</span> 代入 <span class="arithmatex">\(m_{i0}= \frac{a_i}{\sqrt{a_i^2+b_i^2} }\left ( \tan \frac{\beta _{i0} }{2}-\frac{b_i}{a_i}  \right )\)</span>，即可求得常数 <span class="arithmatex">\(C\)</span>。</p>
-<p>再根据其滚动约束，可以得到
-$$\dot{\varphi}_i =\frac{\left (^R\dot{x} \cos \alpha_i + \dot{y}_R\sin \alpha_i \right )\sin \beta _{i} - \left ( ^R\dot{x} \sin \alpha_i- \dot{y }_R\cos \alpha_i-l \dot{\theta }_R \right )\cos\beta _{i} }{r_i} $$</p>
+<p>再根据其滚动约束，可以得到</p>
+<div class="arithmatex">\[\dot{\varphi}_i =\frac{\left (^R\dot{x} \cos \alpha_i + \dot{y}_R\sin \alpha_i \right )\sin \beta _{i} - \left ( ^R\dot{x} \sin \alpha_i- \dot{y }_R\cos \alpha_i-l \dot{\theta }_R \right )\cos\beta _{i} }{r_i} \]</div>
 <p>因为其控制较复杂，一般脚轮是作随动轮。此外，脚轮 <span class="arithmatex">\(\beta\)</span> 角变化还会给机器人本身带来一定的转矩影响。</p>
 <h2 id="参考链接">参考链接<a class="headerlink" href="#参考链接" title="链接到此节">&para;</a></h2>
-<p><a href="https://wuli.wiki//online/RHRul.html">right hand rule</a>
-<a href="https://vdoc.pub/download/introduction-to-autonomous-mobile-robots-42fhm17lqoc0">introduction to autonomous mobile robots</a>
-本文主要通过翻译、整理以及文章作者经验完成</p>
+<ol>
+<li><a href="https://wuli.wiki//online/RHRul.html">right hand rule</a></li>
+<li><a href="https://vdoc.pub/download/introduction-to-autonomous-mobile-robots-42fhm17lqoc0">introduction to autonomous mobile robots</a></li>
+</ol>
+<p>本文主要通过翻译、整理以及文章作者经验完成</p>
 
 
 
