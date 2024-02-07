@@ -3191,6 +3191,26 @@
   
 
 
+<p><head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['<span class="arithmatex">\(','\)</span>']]
+            }
+        });
+    </script>
+ <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head></p>
 <h1 id="轮式机器人底盘约束求解">轮式机器人底盘约束求解<a class="headerlink" href="#轮式机器人底盘约束求解" title="链接到此节">&para;</a></h1>
 <p>移动机器人的工作空间定义了移动机器人在其环境中可实现的所有可能姿态的范围。移动机器人的可控性定义了其在工作空间内可能的路径和轨迹。移动机器人也受到动力学的限制，例如，快速转弯时，较高的重心会带来翻车的风险，这限制了轮式移动机器人的实际转弯半径。理解机器人运动的过程首先是描述每个车轮对运动的贡献。每个轮子都在使整个机器人移动方面发挥作用。同样，每个轮子也对机器人的运动施加了限制，例如，拒绝横向滑行。</p>
 <blockquote>
