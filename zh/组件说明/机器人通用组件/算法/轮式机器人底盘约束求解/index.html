@@ -1518,18 +1518,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-机器人的建模" class="md-nav__link">
+  <a href="#机器人的建模" class="md-nav__link">
     <span class="md-ellipsis">
-      1. 机器人的建模
+      机器人的建模
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-机器人的位姿描述以及速度映射" class="md-nav__link">
+  <a href="#机器人的位姿描述以及速度映射" class="md-nav__link">
     <span class="md-ellipsis">
-      2 机器人的位姿描述以及速度映射
+      机器人的位姿描述以及速度映射
     </span>
   </a>
   
@@ -2942,18 +2942,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-机器人的建模" class="md-nav__link">
+  <a href="#机器人的建模" class="md-nav__link">
     <span class="md-ellipsis">
-      1. 机器人的建模
+      机器人的建模
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-机器人的位姿描述以及速度映射" class="md-nav__link">
+  <a href="#机器人的位姿描述以及速度映射" class="md-nav__link">
     <span class="md-ellipsis">
-      2 机器人的位姿描述以及速度映射
+      机器人的位姿描述以及速度映射
     </span>
   </a>
   
@@ -3208,12 +3208,6 @@
       "HTML-CSS": { fonts: ["TeX"] }
     }
   });
-  MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
-        alert("Math Processing Error: "+message[1]);
-      });
-  MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
-        alert("Math Processing Error: "+message[1]);
-      });
 </script></p>
 <p><script
   type="text/javascript"
@@ -3240,9 +3234,9 @@
 <li>当描述向量之间的角度时，向量出现的先后顺序表示前向量需要在两向量张成的平面上旋转该角度才能达到后向量</li>
 </ul>
 </blockquote>
-<h2 id="1-机器人的建模">1. 机器人的建模<a class="headerlink" href="#1-机器人的建模" title="链接到此节">&para;</a></h2>
+<h2 id="机器人的建模">机器人的建模<a class="headerlink" href="#机器人的建模" title="链接到此节">&para;</a></h2>
 <p>机器人的建模为一个在水平面上运行的带轮子的刚体，在平面上的总维度是三维，两维用于平面内的位置，另一维用于垂直于平面的轴线上的方向。当谈论机器人底盘时，仅指机器人的刚体部分，忽略了机器人内部及其轮子的关节和自由度 (由于轮轴、轮子转向关节和脚轮关节的存在，还有额外的自由度和灵活性)。</p>
-<h2 id="2-机器人的位姿描述以及速度映射">2 机器人的位姿描述以及速度映射<a class="headerlink" href="#2-机器人的位姿描述以及速度映射" title="链接到此节">&para;</a></h2>
+<h2 id="机器人的位姿描述以及速度映射">机器人的位姿描述以及速度映射<a class="headerlink" href="#机器人的位姿描述以及速度映射" title="链接到此节">&para;</a></h2>
 <p><a class="glightbox" href="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E5%85%A8%E5%B1%80%E5%9D%90%E6%A0%87%E7%B3%BB%E5%92%8C%E5%B1%80%E9%83%A8%E5%9D%90%E6%A0%87%E7%B3%BB.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="平面的全局坐标系和机器人的局部坐标系之间的关系" src="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E5%85%A8%E5%B1%80%E5%9D%90%E6%A0%87%E7%B3%BB%E5%92%8C%E5%B1%80%E9%83%A8%E5%9D%90%E6%A0%87%E7%B3%BB.png" /></a></p>
 <p>平面的全局坐标系和机器人的局部坐标系之间的关系如图所示。<span class="arithmatex">\(\hat{X}_I\)</span> 和 <span class="arithmatex">\(\hat{Y}_I\)</span> 定义了以平面上某点 <span class="arithmatex">\(O\)</span> 为坐标原点的全局坐标系 <span class="arithmatex">\(\{ I \}\)</span> 。为了指定机器人的位置，选择机器人底盘上的点 <span class="arithmatex">\(P\)</span> 作为其位置参考点 (通常为机器人底盘中心)。同样， <span class="arithmatex">\(\hat{X}_R\)</span> 和 <span class="arithmatex">\(\hat{Y}_R\)</span> 确定了以点 <span class="arithmatex">\(P\)</span> 为原点的机器人局部坐标系  <span class="arithmatex">\(\{ R \}\)</span> 。点 <span class="arithmatex">\(P\)</span> 在全局坐标系的位置表达为 <span class="arithmatex">\(^IP_P={\begin{bmatrix} p_x &amp; p_y &amp;p_z\end{bmatrix}}^T\)</span>，姿态通过机器人局部坐标系在全局坐标系中的描述来表达，即</p>
 <div class="arithmatex">\[^I_RR=
@@ -3298,7 +3292,7 @@
 <p><a class="glightbox" href="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E6%A0%87%E5%87%86%E8%BD%AE.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="标准轮在底盘上的安装示意" src="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E6%A0%87%E5%87%86%E8%BD%AE.png" /></a>
 假设在机器人局部坐标系下，标准轮在底盘上的安装如图所示。点 <span class="arithmatex">\(A\)</span> 为其与底盘连接的位置，也是其垂直旋转轴的投影位置以及地面接触点的位置。其位姿还可以用 <span class="arithmatex">\({\begin{bmatrix} \alpha &amp; l &amp; \beta \end{bmatrix}}^T\)</span> 来描述。其中 <span class="arithmatex">\(\alpha= \arctan(y_w,x_w)\)</span>，<span class="arithmatex">\(l=\sqrt{x_w^2+y_w^2}\)</span>，<span class="arithmatex">\(\beta=\theta_v+\pi/2-\alpha\)</span>。</p>
 <p>给定底盘点 <span class="arithmatex">\(P\)</span> 在全局坐标系下的速度 <span class="arithmatex">\(^I\dot{\xi}\)</span>，可以得到其在机器人局部坐标系下的描述 <span class="arithmatex">\(^R\dot{\xi}\)</span> 。
-由于轮子和底盘刚性连接，因此点 <span class="arithmatex">\(A\)</span> 的速度包括 <span class="arithmatex">\(\hat{X}_R\)</span> 、 <span class="arithmatex">\(\hat{Y}_R\)</span> 方向上的速度 <span class="arithmatex">\(^R\dot{x}\)</span> 和 <span class="arithmatex">\(\dot{y}_R\)</span> 以及垂直于 <span class="arithmatex">\(\overrightharpoon{PA}\)</span> 的速度 <span class="arithmatex">\(l\dot{\theta_R}\)</span>（由 <span class="arithmatex">\(\dot{\theta_R}\)</span> 根据右手法则确定方向）。</p>
+由于轮子和底盘刚性连接，因此点 <span class="arithmatex">\(A\)</span> 的速度包括 <span class="arithmatex">\(\hat{X}_R\)</span> 、 <span class="arithmatex">\(\hat{Y}_R\)</span> 方向上的速度 <span class="arithmatex">\(^R\dot{x}\)</span> 和 <span class="arithmatex">\(\dot{y}_R\)</span> 以及垂直于 <span class="arithmatex">\(\overrightarrow{PA}\)</span> 的速度 <span class="arithmatex">\(l\dot{\theta_R}\)</span>（由 <span class="arithmatex">\(\dot{\theta_R}\)</span> 根据右手法则确定方向）。</p>
 <p>可以得到标准轮的滚动约束方程</p>
 <div class="arithmatex">\[\begin{bmatrix}
 \sin{(\alpha+\beta)} &amp; -\cos{(\alpha+\beta)} &amp; -l\cos{\beta}
@@ -3311,7 +3305,7 @@
 <p>转向标准轮的运动学也为上述两个约束，但转向标准轮比固定标准轮要多一个自由度，即轮子可以绕着穿过轮子中心和地面接触点的垂直轴旋转。此时，<span class="arithmatex">\(\beta\)</span> 不再是一个固定值，而是一个时变函数 <span class="arithmatex">\(\beta{(t)}\)</span>。从两个约束方程可以看出，<span class="arithmatex">\(\dot{\beta}\)</span> 对机器人当前的运动约束没有直接的影响。并且，与固定标准轮同样的，转动标准轮总是存在无侧滑约束。</p>
 <h3 id="脚轮">脚轮<a class="headerlink" href="#脚轮" title="链接到此节">&para;</a></h3>
 <p><a class="glightbox" href="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E7%90%83%E8%BD%AE.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="脚轮在底盘上的安装示意" src="../%E8%BD%AE%E5%BC%8F%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BA%95%E7%9B%98%E7%BA%A6%E6%9D%9F%E6%B1%82%E8%A7%A3.assets/%E7%90%83%E8%BD%AE.png" /></a>
-脚轮与转向标准轮基本相同，除了其垂直旋转轴并不通过其地面接触点。假设在机器人局部坐标系下，标准轮在底盘上的安装如图所示。点 <span class="arithmatex">\(A\)</span> 为其与底盘连接的位置，也是其垂直旋转轴的投影位置，点 <span class="arithmatex">\(B\)</span> 是其地面接触点的位置，记点 <span class="arithmatex">\(B\)</span> 与其垂直旋转轴的距离为 <span class="arithmatex">\(d\)</span>。脚轮运动时，轮平面始终与 <span class="arithmatex">\(\overrightharpoon{PA}\)</span> 平行。与标准轮类似，可以得到脚轮的滚动约束</p>
+脚轮与转向标准轮基本相同，除了其垂直旋转轴并不通过其地面接触点。假设在机器人局部坐标系下，标准轮在底盘上的安装如图所示。点 <span class="arithmatex">\(A\)</span> 为其与底盘连接的位置，也是其垂直旋转轴的投影位置，点 <span class="arithmatex">\(B\)</span> 是其地面接触点的位置，记点 <span class="arithmatex">\(B\)</span> 与其垂直旋转轴的距离为 <span class="arithmatex">\(d\)</span>。脚轮运动时，轮平面始终与 <span class="arithmatex">\(\overrightarrow{PA}\)</span> 平行。与标准轮类似，可以得到脚轮的滚动约束</p>
 <div class="arithmatex">\[\begin{bmatrix}
 \sin{(\alpha+\beta)} &amp; -\cos{(\alpha+\beta)} &amp; -l\cos{\beta}
 \end{bmatrix} ^R\dot{\xi} = r \dot{\varphi}\]</div>
@@ -3496,10 +3490,10 @@ Swedish 轮由主标准轮和附在主轮周围一圈的辊子组成。通常，
  \dots\\
  r_N\dot{\varphi }_N\sin \gamma _N+r_{swN}\dot{\varphi} _{swN}
 \end{bmatrix}\]</div>
-<p>其中，<span class="arithmatex">\(\overrightharpoon{l}_i\)</span> 为机器人局部坐标系原点指向车轮垂直旋转轴的向量。
-<span class="arithmatex">\(l_i=||\overrightharpoon{l}_i||\)</span>。
-<span class="arithmatex">\(\alpha_i\)</span> 为 <span class="arithmatex">\(\hat{X}_R\)</span> 与 <span class="arithmatex">\(\overrightharpoon{l}_i\)</span> 之间的夹角。
-<span class="arithmatex">\(\beta_i\)</span> 为 <span class="arithmatex">\(\overrightharpoon{l}_i\)</span> 与车轮法向量之间的夹角，法向量的方向由车轮正向旋转时通过右手法则确定。
+<p>其中，<span class="arithmatex">\(\overrightarrow{l}_i\)</span> 为机器人局部坐标系原点指向车轮垂直旋转轴的向量。
+<span class="arithmatex">\(l_i=||\overrightarrow{l}_i||\)</span>。
+<span class="arithmatex">\(\alpha_i\)</span> 为 <span class="arithmatex">\(\hat{X}_R\)</span> 与 <span class="arithmatex">\(\overrightarrow{l}_i\)</span> 之间的夹角。
+<span class="arithmatex">\(\beta_i\)</span> 为 <span class="arithmatex">\(\overrightarrow{l}_i\)</span> 与车轮法向量之间的夹角，法向量的方向由车轮正向旋转时通过右手法则确定。
 <span class="arithmatex">\(d_i\)</span> 与地面接触接触点与控制车轮转向的垂直旋转轴的距离，一般对非脚轮而言，此值为 0 。
 <span class="arithmatex">\(\gamma_i\)</span> 为棍子的水平转轴和车轮速度向量 <span class="arithmatex">\(v_i\)</span> 之间的夹角，<span class="arithmatex">\(r_{swi}\)</span> ，<span class="arithmatex">\(\dot{\varphi} _{swi}\)</span> 分别为与地面接的的棍子的半径和转速，对于没有棍子的车轮，该值为 0 。</p>
 <p>该式适合于快速搭建矩阵进行矩阵运算。</p>
