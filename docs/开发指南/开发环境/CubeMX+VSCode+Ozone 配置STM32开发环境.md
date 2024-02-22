@@ -50,6 +50,8 @@ id16-->id15
 
 ## 软件和工具下载
 
+**注意安装路径不要含有中文，最好只含有字母、数字、“-”与“_”**
+
 ### STM32CubeMX
 
 * [STM32CubeMX 官网](https://www.st.com/en/development-tools/stm32cubemx.html)下载安装。
@@ -67,6 +69,8 @@ id16-->id15
 
 * 建议安装 [MinGW](https://sourceforge.net/projects/mingw/)，我们只需要使用工具包内含的 make 工具。
 * 自行选择路径进行安装。
+* 使用 MinGW Installation Manager 选中 mingw32-base，然后选择 Installation 中的 Apply Changes 进行安装。
+* 将 MinGW 文件夹下的 bin 文件夹中的 mingw32-make.exe **复制一份**，并重命名为 make.exe。
 
 ### GNU Arm Embedded Toolchain
 
@@ -99,11 +103,11 @@ id16-->id15
 
 ## 环境配置
 
-* Windows 系统搜索 `环境变量-->编辑系统环境变量-->环境变量-->Path-->编辑-->新建`，添加 `MinGW`、 `gcc-arm-none-eabi` 、 `OpenOCD`（可选）安装目录下 `bin` 的路径。
+* Windows 系统搜索 `环境变量-->编辑系统环境变量-->环境变量-->Path（系统变量）-->编辑-->新建`，添加 `MinGW`、 `gcc-arm-none-eabi` 、 `OpenOCD`（可选）安装目录下 `bin` 的路径。
 * 在终端测试是否安装成功
 
 ```shell
-make -v                 # 我们只需用到MinGW中的make工具，如果你发现测试不成功，不妨问问项管gg;-)
+make -v
 arm-none-eabi-gcc -v
 openocd -v
 ```
@@ -192,9 +196,11 @@ openocd -v
 
 * 基于 CMake Tools 配置 CMake 工程。首先选择构建工具链套件，若未选择，状态栏将显示 **No Kit Selected**：
 
+  > 注意：只有刚打开 VS Code 时检测到有 CMakeLists.txt 文件时才会出现 CMake Tools，如打开后才将 CMakeLists.txt 复制至文件夹下则需要重新启动 VS Code。
+
   ![_images/no_kits.png](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/no_kits.png)
 
-  单击此状态栏按钮，或从命令面板运行 *CMake: Select a Kit* 命令。将出现一个快速选择栏，选择 `arm-none-eabi`：
+  单击此状态栏按钮，或从命令面板运行 *CMake: Select a Kit* 命令。将出现一个快速选择栏，选择 `arm-none-eabi`，如果选择栏中没有找到，则选择 `Scan for kits` 扫描已有的编译工具链：
   
   ![cmake00](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/cmake00.png)
 
