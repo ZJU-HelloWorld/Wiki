@@ -54,7 +54,7 @@ id16-->id15
 
 ### STM32CubeMX
 
-* [STM32CubeMX 官网](https://www.st.com/en/development-tools/stm32cubemx.html)下载安装。
+* [STM32CubeMX 官网](https://www.st.com/en/development-tools/stm32cubemx.html)下载安装，**版本建议 6.10 及以下**。
 * 运行该软件需要有 Java 支持。
 
 ### Visual Studio Code
