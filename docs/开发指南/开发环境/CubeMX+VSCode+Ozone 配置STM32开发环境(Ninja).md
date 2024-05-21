@@ -152,6 +152,8 @@ openocd -v
 
 ![vscode01](CubeMX+VSCode+Ozone%20%E9%85%8D%E7%BD%AE%20STM32%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83(Ninja).assets/vscode01.png)
 
+> **注意事项**：若原始 Toolchain/IDE 选择为 STM32CubeIDE 而后改为 CMake 的工程需要检查 `Core/` 文件夹下是否存在 `Startup/` 文件夹，如果存在则需要删去。
+
 * 在工程根目录添加子目录和文件，在 VS Code 中编辑
 
   > 注意：若开发工程与战队相关、需要队内共享或合作或开源，请遵循文件组织规范、代码架构规范和风格指南
