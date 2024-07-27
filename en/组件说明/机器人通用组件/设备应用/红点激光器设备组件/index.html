@@ -1412,6 +1412,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -1478,6 +1482,48 @@
   
   <span class="md-ellipsis">
     PID 控制器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AE%97%E6%B3%95/%E6%BB%A4%E6%B3%A2%E5%99%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    滤波器（Filter）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AE%97%E6%B3%95/%E8%A7%82%E6%B5%8B%E5%99%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    观测器（Observer）
   </span>
   
 
@@ -2015,7 +2061,7 @@
         
   
   <span class="md-ellipsis">
-    通用通信（comm）驱动
+    通用通信（Comm）驱动
   </span>
   
 
@@ -2957,16 +3003,18 @@
 </ul>
 <h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">&para;</a></h3>
 <p>在项目中引用头文件：</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;laser.hpp&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;laser.hpp&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">hw_laser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">laser</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 <p>实例化一个红点激光器设备并初始化，默认使能，如：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
-<span class="normal"><a href="#__codelineno-1-3">3</a></span>
-<span class="normal"><a href="#__codelineno-1-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">hw_laser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">laser</span><span class="p">;</span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">hw_laser</span><span class="o">::</span><span class="n">Laser</span><span class="o">*</span><span class="w"> </span><span class="n">laser_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="n">hw_laser</span><span class="o">::</span><span class="n">Laser</span><span class="o">*</span><span class="w"> </span><span class="n">laser_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">laser_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_laser</span><span class="o">::</span><span class="n">Laser</span><span class="p">(</span><span class="o">&amp;</span><span class="n">htim3</span><span class="p">,</span><span class="w"> </span><span class="n">TIM_CHANNEL_3</span><span class="p">,</span><span class="w"> </span><span class="n">lumin</span><span class="p">);</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="n">laser_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_laser</span><span class="o">::</span><span class="n">Laser</span><span class="p">(</span><span class="o">&amp;</span><span class="n">htim3</span><span class="p">,</span><span class="w"> </span><span class="n">TIM_CHANNEL_3</span><span class="p">,</span><span class="w"> </span><span class="n">lumin</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <p>设定红点激光器亮度百分数（0 - 100）：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
