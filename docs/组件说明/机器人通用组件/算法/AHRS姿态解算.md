@@ -28,15 +28,16 @@ Mahony 算法是常见的姿态融合算法，将加速度计，磁力计，陀�
 
 ```cpp
 #include "ahrs.hpp"
+
+namespace hw_ahrs = hello_world::ahrs;
 ```
 
 实例化一个 AHRS 姿态解算并根据需要进行配置：
 
 ```cpp
-namespace hw_ahrs = hello_world::ahrs;
-
 hw_ahrs::Ahrs* ahrs_ptr = nullptr;
 float samp_freq = 1000.0f, kp = 1.0f, ki = 0.0f;
+
 ahrs_ptr = new hw_ahrs::Mahony(samp_freq, kp, ki);
 ```
 
