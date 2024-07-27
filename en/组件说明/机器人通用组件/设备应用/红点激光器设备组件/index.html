@@ -2974,11 +2974,13 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">laser_ptr</span><span class="o">-&gt;</span><span class="n">setLuminPct</span><span class="p">(</span><span class="n">lumin</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <blockquote>
-<p><strong>注意：由于内部使用了硬件句柄，因此如果计划将实例作为全局变量时（全局变量初始化时对应的硬件句柄可能会还未初始化完毕），建议采取一下方法：</strong>
-1. 声明指针，后续通过 <strong><code>new</code></strong> 的方式进行初始化。
-2. 声明指针，后续通过返回函数（CreateXXXIns）中的静态变量（因为该变量只有在<strong>第一次调用</strong>该函数时才会运行初始化程序）进行初始化。
-3. 使用无参构造函数，后续调用 <strong><code>init</code></strong> 方法进行初始化。
-4. 使用无参构造函数，后续使用<strong>拷贝赋值函数</strong>或是<strong>移动赋值函数</strong>进行初始化。</p>
+<p><strong>注意：由于内部使用了硬件句柄，因此如果计划将实例作为全局变量时（全局变量初始化时对应的硬件句柄可能会还未初始化完毕），建议采取一下方法：</strong></p>
+<ol>
+<li>声明指针，后续通过 <strong><code>new</code></strong> 的方式进行初始化。</li>
+<li>声明指针，后续通过返回函数（CreateXXXIns）中的静态变量（因为该变量只有在<strong>第一次调用</strong>该函数时才会运行初始化程序）进行初始化。</li>
+<li>使用无参构造函数，后续调用 <strong><code>init</code></strong> 方法进行初始化。</li>
+<li>使用无参构造函数，后续使用<strong>拷贝赋值函数</strong>或是<strong>移动赋值函数</strong>进行初始化。</li>
+</ol>
 </blockquote>
 <h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">&para;</a></h2>
 <h3 id="版本说明">版本说明<a class="headerlink" href="#版本说明" title="链接到此节">&para;</a></h3>
