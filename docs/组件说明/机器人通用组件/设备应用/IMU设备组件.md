@@ -53,12 +53,13 @@ BMI088 为满足在剧烈震动环境下高性能消费类设备的所有需求�
 
 ```cpp
 #include "imu.hpp"
+
+namespace hw_imu = hello_world::imu;
 ```
 
 实例化一个 BMI088 硬件配置结构体并进行相关配置，同时根据安装方式设定旋转矩阵，如：
 
 ```cpp
-namespace hw_imu = hello_world::imu;
 hw_imu::BMI088HWConfig hw_config = {
   .hspi = &hspi1,
   .acc_cs_port = GPIOA,
@@ -76,8 +77,8 @@ float rot_mat_flatten[9] = {
 实例化一个 BMI088 组件并放入对应硬件配置进行初始化，如：
 
 ```cpp
-
 hw_imu::BMI088* imu_ptr = nullptr;
+
 imu_ptr = new hw_imu::BMI088(hw_config, rot_mat_flatten);
 ```
 
