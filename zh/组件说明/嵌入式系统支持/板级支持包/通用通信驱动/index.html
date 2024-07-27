@@ -2115,6 +2115,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hal-库-uart-部分注意事项" class="md-nav__link">
+    <span class="md-ellipsis">
+      HAL 库 UART 部分注意事项
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#h7-变量位置配置" class="md-nav__link">
     <span class="md-ellipsis">
       H7 变量位置配置
@@ -3125,6 +3134,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hal-库-uart-部分注意事项" class="md-nav__link">
+    <span class="md-ellipsis">
+      HAL 库 UART 部分注意事项
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#h7-变量位置配置" class="md-nav__link">
     <span class="md-ellipsis">
       H7 变量位置配置
@@ -3225,6 +3243,13 @@
 <li>在接受回调中，接收管理器会根据接收到数据对应的 ID，将报文传递给<strong>对应 ID 的所有接收端进行数据解包</strong>。</li>
 </ol>
 <h2 id="2-硬件配置与使用示例">2. 硬件配置与使用示例<a class="headerlink" href="#2-硬件配置与使用示例" title="链接到此节">&para;</a></h2>
+<blockquote>
+<p><strong>注意：由于内部使用了硬件句柄，因此如果计划将实例作为全局变量时（全局变量初始化时对应的硬件句柄可能会还未初始化完毕），建议采取一下方法：</strong>
+1. 声明指针，后续通过 <strong><code>new</code></strong> 的方式进行初始化。
+2. 声明指针，后续通过返回函数（CreateXXXIns）中的静态变量（因为该变量只有在<strong>第一次调用</strong>该函数时才会运行初始化程序）进行初始化。
+3. 使用无参构造函数，后续调用 <strong><code>init</code></strong> 方法进行初始化。
+4. 使用无参构造函数，后续使用<strong>拷贝赋值函数</strong>或是<strong>移动赋值函数</strong>进行初始化。</p>
+</blockquote>
 <h3 id="21-can">2.1 CAN<a class="headerlink" href="#21-can" title="链接到此节">&para;</a></h3>
 <h4 id="外设驱动配置">外设驱动配置<a class="headerlink" href="#外设驱动配置" title="链接到此节">&para;</a></h4>
 <p><a class="glightbox" href="../%E9%80%9A%E7%94%A8%E9%80%9A%E4%BF%A1%E9%A9%B1%E5%8A%A8.assets/2024-06-30%20133947.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="CAN 配置" src="../%E9%80%9A%E7%94%A8%E9%80%9A%E4%BF%A1%E9%A9%B1%E5%8A%A8.assets/2024-06-30%20133947.png" /></a></p>
@@ -3321,12 +3346,12 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="p">{</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">  </span><span class="cm">/* FIFO 与 CubeMx 中 RX 中断对应 */</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">  </span><span class="n">can_rx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">CanRxMgr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">CanRxMgr</span><span class="o">::</span><span class="n">RxType</span><span class="o">::</span><span class="n">kFifo0</span><span class="p">);</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">  </span><span class="n">can_tx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">CanTxMgr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">);</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">  </span><span class="n">can_rx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">CanRxMgr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">,</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">CanRxMgr</span><span class="o">::</span><span class="n">RxType</span><span class="o">::</span><span class="n">kFifo0</span><span class="p">);</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">  </span><span class="n">can_tx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">CanTxMgr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">);</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14"></a>
 <a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">    </span><span class="cm">/* 创建电机 */</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="w">    </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">A1</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="w">    </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">A1</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18"></a>
 <a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="w">    </span><span class="cm">/* 将电机添加到对应 CAN 的发送、接受管理器中 */</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="w">    </span><span class="n">can_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addTransmitter</span><span class="p">(</span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
@@ -3483,16 +3508,16 @@
 <a id="__codelineno-1-8" name="__codelineno-1-8"></a>
 <a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="p">{</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">  </span><span class="n">fdcan_rx_mang_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">FdCanRxMgr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hfdcan1</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">FdCanRxMgr</span><span class="o">::</span><span class="n">RxType</span><span class="o">::</span><span class="n">kFifo0</span><span class="p">);</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">  </span><span class="n">fdcan_tx_mang_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">FdCanTxMgr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hfdcan1</span><span class="p">);</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">  </span><span class="n">fdcan_rx_mang_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">FdCanRxMgr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hfdcan1</span><span class="p">,</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">FdCanRxMgr</span><span class="o">::</span><span class="n">RxType</span><span class="o">::</span><span class="n">kFifo0</span><span class="p">);</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">  </span><span class="n">fdcan_tx_mang_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">FdCanTxMgr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hfdcan1</span><span class="p">);</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13"></a>
 <a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">  </span><span class="cm">/* Interrupt Line 需与 CubeMx 中勾选的中断相对应 */</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">  </span><span class="n">fdcan_rx_mang_ptr</span><span class="o">-&gt;</span><span class="n">configInterruptLines</span><span class="p">(</span><span class="n">comm</span><span class="o">::</span><span class="n">FdCanRxMgr</span><span class="o">::</span><span class="n">ItLine</span><span class="o">::</span><span class="n">k0</span><span class="p">);</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">  </span><span class="n">fdcan_tx_mang_ptr</span><span class="o">-&gt;</span><span class="n">configInterruptLines</span><span class="p">(</span><span class="n">comm</span><span class="o">::</span><span class="n">FdCanTxMgr</span><span class="o">::</span><span class="n">ItLine</span><span class="o">::</span><span class="n">k0</span><span class="p">);</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">  </span><span class="n">fdcan_rx_mang_ptr</span><span class="o">-&gt;</span><span class="n">configInterruptLines</span><span class="p">(</span><span class="n">hw_comm</span><span class="o">::</span><span class="n">FdCanRxMgr</span><span class="o">::</span><span class="n">ItLine</span><span class="o">::</span><span class="n">k0</span><span class="p">);</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">  </span><span class="n">fdcan_tx_mang_ptr</span><span class="o">-&gt;</span><span class="n">configInterruptLines</span><span class="p">(</span><span class="n">hw_comm</span><span class="o">::</span><span class="n">FdCanTxMgr</span><span class="o">::</span><span class="n">ItLine</span><span class="o">::</span><span class="n">k0</span><span class="p">);</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17"></a>
 <a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="w">    </span><span class="cm">/* 创建电机 */</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="w">    </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motor</span><span class="o">::</span><span class="n">A1</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="w">    </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">A1</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <a id="__codelineno-1-21" name="__codelineno-1-21"></a>
 <a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="w">    </span><span class="cm">/* 将电机添加到对应 FDCAN 的发送、接受管理器中 */</span>
 <a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="w">    </span><span class="n">fdcan_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addTransmitter</span><span class="p">(</span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
@@ -3816,10 +3841,17 @@
 <span class="normal"><a href="#__codelineno-2-258">258</a></span>
 <span class="normal"><a href="#__codelineno-2-259">259</a></span>
 <span class="normal"><a href="#__codelineno-2-260">260</a></span>
-<span class="normal"><a href="#__codelineno-2-261">261</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">hw_comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">comm</span><span class="p">;</span>
+<span class="normal"><a href="#__codelineno-2-261">261</a></span>
+<span class="normal"><a href="#__codelineno-2-262">262</a></span>
+<span class="normal"><a href="#__codelineno-2-263">263</a></span>
+<span class="normal"><a href="#__codelineno-2-264">264</a></span>
+<span class="normal"><a href="#__codelineno-2-265">265</a></span>
+<span class="normal"><a href="#__codelineno-2-266">266</a></span>
+<span class="normal"><a href="#__codelineno-2-267">267</a></span>
+<span class="normal"><a href="#__codelineno-2-268">268</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">hw_comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">comm</span><span class="p">;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">hw_rc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">remote_control</span><span class="p">;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">TxRx</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">Transmitter</span><span class="p">,</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">Receiver</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">TxRx</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">Transmitter</span><span class="p">,</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">Receiver</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="p">{</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w"> </span><span class="k">public</span><span class="o">:</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">  </span><span class="n">TxRx</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">tx_id</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">rx_id</span><span class="p">)</span>
@@ -3997,87 +4029,101 @@
 <a id="__codelineno-2-179" name="__codelineno-2-179"></a><span class="n">DataProcesser</span><span class="o">::</span><span class="n">Fsm</span><span class="w"> </span><span class="n">DataProcesser</span><span class="o">::</span><span class="n">fsm_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataProcesser</span><span class="o">::</span><span class="n">Fsm</span><span class="o">::</span><span class="n">kWaiForHeader</span><span class="p">;</span>
 <a id="__codelineno-2-180" name="__codelineno-2-180"></a><span class="kt">size_t</span><span class="w"> </span><span class="n">DataProcesser</span><span class="o">::</span><span class="n">tmp_data_idx_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-2-181" name="__codelineno-2-181"></a>
-<a id="__codelineno-2-182" name="__codelineno-2-182"></a><span class="cm">/* 看门狗刷新函数（封装） */</span>
-<a id="__codelineno-2-183" name="__codelineno-2-183"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">RefreshIwdg</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<a id="__codelineno-2-184" name="__codelineno-2-184"></a><span class="p">{</span>
-<a id="__codelineno-2-185" name="__codelineno-2-185"></a><span class="w">  </span><span class="n">HAL_IWDG_Refresh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hiwdg1</span><span class="p">);</span>
-<a id="__codelineno-2-186" name="__codelineno-2-186"></a><span class="p">}</span>
-<a id="__codelineno-2-187" name="__codelineno-2-187"></a>
-<a id="__codelineno-2-188" name="__codelineno-2-188"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<a id="__codelineno-2-189" name="__codelineno-2-189"></a><span class="p">{</span>
-<a id="__codelineno-2-190" name="__codelineno-2-190"></a><span class="w">  </span><span class="n">tx_rx1_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TxRx</span><span class="p">(</span><span class="mh">0x01</span><span class="p">,</span><span class="w"> </span><span class="mh">0x02</span><span class="p">);</span>
-<a id="__codelineno-2-191" name="__codelineno-2-191"></a><span class="w">  </span><span class="n">tx_rx2_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TxRx</span><span class="p">(</span><span class="mh">0x02</span><span class="p">,</span><span class="w"> </span><span class="mh">0x01</span><span class="p">);</span>
-<a id="__codelineno-2-192" name="__codelineno-2-192"></a>
-<a id="__codelineno-2-193" name="__codelineno-2-193"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="p">(</span>
-<a id="__codelineno-2-194" name="__codelineno-2-194"></a><span class="w">      </span><span class="o">&amp;</span><span class="n">huart6</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="o">::</span><span class="n">EofType</span><span class="o">::</span><span class="n">kManual</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">);</span>
+<a id="__codelineno-2-182" name="__codelineno-2-182"></a><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="o">*</span><span class="w"> </span><span class="n">uart_rx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-2-183" name="__codelineno-2-183"></a><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartTxMgr</span><span class="o">*</span><span class="w"> </span><span class="n">uart_tx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-2-184" name="__codelineno-2-184"></a><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="o">*</span><span class="w"> </span><span class="n">rc_rx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-2-185" name="__codelineno-2-185"></a>
+<a id="__codelineno-2-186" name="__codelineno-2-186"></a><span class="n">hw_rc</span><span class="o">::</span><span class="n">DT7</span><span class="o">*</span><span class="w"> </span><span class="n">rc_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-2-187" name="__codelineno-2-187"></a><span class="n">TxRx</span><span class="o">*</span><span class="w"> </span><span class="n">tx_rx1_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-2-188" name="__codelineno-2-188"></a><span class="n">TxRx</span><span class="o">*</span><span class="w"> </span><span class="n">tx_rx2_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-2-189" name="__codelineno-2-189"></a>
+<a id="__codelineno-2-190" name="__codelineno-2-190"></a><span class="cm">/* 看门狗刷新函数（封装） */</span>
+<a id="__codelineno-2-191" name="__codelineno-2-191"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">RefreshIwdg</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a id="__codelineno-2-192" name="__codelineno-2-192"></a><span class="p">{</span>
+<a id="__codelineno-2-193" name="__codelineno-2-193"></a><span class="w">  </span><span class="n">HAL_IWDG_Refresh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hiwdg1</span><span class="p">);</span>
+<a id="__codelineno-2-194" name="__codelineno-2-194"></a><span class="p">}</span>
 <a id="__codelineno-2-195" name="__codelineno-2-195"></a>
-<a id="__codelineno-2-196" name="__codelineno-2-196"></a><span class="w">  </span><span class="cm">/* 配置自定义处理函数 */</span>
-<a id="__codelineno-2-197" name="__codelineno-2-197"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">registerProcessDataFunc</span><span class="p">(</span><span class="n">DataProcesser</span><span class="o">::</span><span class="n">ProcessData</span><span class="p">);</span>
-<a id="__codelineno-2-198" name="__codelineno-2-198"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="n">tx_rx1_ptr</span><span class="p">);</span>
-<a id="__codelineno-2-199" name="__codelineno-2-199"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="n">tx_rx2_ptr</span><span class="p">);</span>
+<a id="__codelineno-2-196" name="__codelineno-2-196"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a id="__codelineno-2-197" name="__codelineno-2-197"></a><span class="p">{</span>
+<a id="__codelineno-2-198" name="__codelineno-2-198"></a><span class="w">  </span><span class="n">tx_rx1_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TxRx</span><span class="p">(</span><span class="mh">0x01</span><span class="p">,</span><span class="w"> </span><span class="mh">0x02</span><span class="p">);</span>
+<a id="__codelineno-2-199" name="__codelineno-2-199"></a><span class="w">  </span><span class="n">tx_rx2_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TxRx</span><span class="p">(</span><span class="mh">0x02</span><span class="p">,</span><span class="w"> </span><span class="mh">0x01</span><span class="p">);</span>
 <a id="__codelineno-2-200" name="__codelineno-2-200"></a>
-<a id="__codelineno-2-201" name="__codelineno-2-201"></a><span class="w">  </span><span class="n">uart_tx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">UartTxMgr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart6</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">);</span>
-<a id="__codelineno-2-202" name="__codelineno-2-202"></a><span class="w">  </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addTransmitter</span><span class="p">(</span><span class="n">tx_rx1_ptr</span><span class="p">);</span>
-<a id="__codelineno-2-203" name="__codelineno-2-203"></a><span class="w">  </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addTransmitter</span><span class="p">(</span><span class="n">tx_rx2_ptr</span><span class="p">);</span>
-<a id="__codelineno-2-204" name="__codelineno-2-204"></a>
-<a id="__codelineno-2-205" name="__codelineno-2-205"></a><span class="w">  </span><span class="n">rc_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">remote_control</span><span class="o">::</span><span class="n">DT7</span><span class="p">;</span>
-<a id="__codelineno-2-206" name="__codelineno-2-206"></a><span class="w">  </span><span class="cm">/* 注册更新回调函数，用于在接收到遥控器信号时刷新看门狗 */</span>
-<a id="__codelineno-2-207" name="__codelineno-2-207"></a><span class="w">  </span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">registerUpdateCallback</span><span class="p">(</span><span class="n">RefreshIwdg</span><span class="p">);</span>
+<a id="__codelineno-2-201" name="__codelineno-2-201"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="p">(</span>
+<a id="__codelineno-2-202" name="__codelineno-2-202"></a><span class="w">      </span><span class="o">&amp;</span><span class="n">huart6</span><span class="p">,</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="o">::</span><span class="n">EofType</span><span class="o">::</span><span class="n">kManual</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">);</span>
+<a id="__codelineno-2-203" name="__codelineno-2-203"></a>
+<a id="__codelineno-2-204" name="__codelineno-2-204"></a><span class="w">  </span><span class="cm">/* 配置自定义处理函数 */</span>
+<a id="__codelineno-2-205" name="__codelineno-2-205"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">registerProcessDataFunc</span><span class="p">(</span><span class="n">DataProcesser</span><span class="o">::</span><span class="n">ProcessData</span><span class="p">);</span>
+<a id="__codelineno-2-206" name="__codelineno-2-206"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="n">tx_rx1_ptr</span><span class="p">);</span>
+<a id="__codelineno-2-207" name="__codelineno-2-207"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="n">tx_rx2_ptr</span><span class="p">);</span>
 <a id="__codelineno-2-208" name="__codelineno-2-208"></a>
-<a id="__codelineno-2-209" name="__codelineno-2-209"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="p">(</span>
-<a id="__codelineno-2-210" name="__codelineno-2-210"></a><span class="w">      </span><span class="o">&amp;</span><span class="n">huart3</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="o">::</span><span class="n">EofType</span><span class="o">::</span><span class="n">kIdle</span><span class="p">,</span>
-<a id="__codelineno-2-211" name="__codelineno-2-211"></a><span class="w">      </span><span class="n">remote_control</span><span class="o">::</span><span class="n">DT7</span><span class="o">::</span><span class="n">kRcRxDataLen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<a id="__codelineno-2-212" name="__codelineno-2-212"></a><span class="w">      </span><span class="n">remote_control</span><span class="o">::</span><span class="n">DT7</span><span class="o">::</span><span class="n">kRcRxDataLen</span><span class="p">);</span>
-<a id="__codelineno-2-213" name="__codelineno-2-213"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="n">rc_ptr</span><span class="p">);</span>
-<a id="__codelineno-2-214" name="__codelineno-2-214"></a>
-<a id="__codelineno-2-215" name="__codelineno-2-215"></a><span class="w">  </span><span class="cm">/* 开启接收 */</span>
-<a id="__codelineno-2-216" name="__codelineno-2-216"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">startReceive</span><span class="p">();</span>
-<a id="__codelineno-2-217" name="__codelineno-2-217"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">startReceive</span><span class="p">();</span>
-<a id="__codelineno-2-218" name="__codelineno-2-218"></a><span class="p">}</span>
-<a id="__codelineno-2-219" name="__codelineno-2-219"></a>
-<a id="__codelineno-2-220" name="__codelineno-2-220"></a><span class="cm">/* 以 1ms 为周期调用的函数 */</span>
-<a id="__codelineno-2-221" name="__codelineno-2-221"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Loop1ms</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<a id="__codelineno-2-222" name="__codelineno-2-222"></a><span class="p">{</span>
-<a id="__codelineno-2-223" name="__codelineno-2-223"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-2-224" name="__codelineno-2-224"></a><span class="w">  </span><span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
-<a id="__codelineno-2-225" name="__codelineno-2-225"></a>
-<a id="__codelineno-2-226" name="__codelineno-2-226"></a><span class="w">  </span><span class="cm">/* 定时发送 */</span>
-<a id="__codelineno-2-227" name="__codelineno-2-227"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cnt</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-228" name="__codelineno-2-228"></a><span class="w">    </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">setTransmitterNeedToTransmit</span><span class="p">(</span><span class="n">tx_rx1_ptr</span><span class="p">);</span>
-<a id="__codelineno-2-229" name="__codelineno-2-229"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cnt</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-230" name="__codelineno-2-230"></a><span class="w">    </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">setTransmitterNeedToTransmit</span><span class="p">(</span><span class="n">tx_rx2_ptr</span><span class="p">);</span>
-<a id="__codelineno-2-231" name="__codelineno-2-231"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-209" name="__codelineno-2-209"></a><span class="w">  </span><span class="n">uart_tx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartTxMgr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart6</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">);</span>
+<a id="__codelineno-2-210" name="__codelineno-2-210"></a><span class="w">  </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addTransmitter</span><span class="p">(</span><span class="n">tx_rx1_ptr</span><span class="p">);</span>
+<a id="__codelineno-2-211" name="__codelineno-2-211"></a><span class="w">  </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addTransmitter</span><span class="p">(</span><span class="n">tx_rx2_ptr</span><span class="p">);</span>
+<a id="__codelineno-2-212" name="__codelineno-2-212"></a>
+<a id="__codelineno-2-213" name="__codelineno-2-213"></a><span class="w">  </span><span class="n">rc_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_rc</span><span class="o">::</span><span class="n">DT7</span><span class="p">();</span>
+<a id="__codelineno-2-214" name="__codelineno-2-214"></a><span class="w">  </span><span class="cm">/* 注册更新回调函数，用于在接收到遥控器信号时刷新看门狗 */</span>
+<a id="__codelineno-2-215" name="__codelineno-2-215"></a><span class="w">  </span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">registerUpdateCallback</span><span class="p">(</span><span class="n">RefreshIwdg</span><span class="p">);</span>
+<a id="__codelineno-2-216" name="__codelineno-2-216"></a>
+<a id="__codelineno-2-217" name="__codelineno-2-217"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="p">(</span>
+<a id="__codelineno-2-218" name="__codelineno-2-218"></a><span class="w">      </span><span class="o">&amp;</span><span class="n">huart3</span><span class="p">,</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="o">::</span><span class="n">EofType</span><span class="o">::</span><span class="n">kIdle</span><span class="p">,</span>
+<a id="__codelineno-2-219" name="__codelineno-2-219"></a><span class="w">      </span><span class="n">hw_rc</span><span class="o">::</span><span class="n">DT7</span><span class="o">::</span><span class="n">kRcRxDataLen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">hw_rc</span><span class="o">::</span><span class="n">DT7</span><span class="o">::</span><span class="n">kRcRxDataLen</span><span class="p">);</span>
+<a id="__codelineno-2-220" name="__codelineno-2-220"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="n">rc_ptr</span><span class="p">);</span>
+<a id="__codelineno-2-221" name="__codelineno-2-221"></a>
+<a id="__codelineno-2-222" name="__codelineno-2-222"></a><span class="w">  </span><span class="cm">/* 开启接收 */</span>
+<a id="__codelineno-2-223" name="__codelineno-2-223"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">startReceive</span><span class="p">();</span>
+<a id="__codelineno-2-224" name="__codelineno-2-224"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">startReceive</span><span class="p">();</span>
+<a id="__codelineno-2-225" name="__codelineno-2-225"></a><span class="p">}</span>
+<a id="__codelineno-2-226" name="__codelineno-2-226"></a>
+<a id="__codelineno-2-227" name="__codelineno-2-227"></a><span class="cm">/* 以 1ms 为周期调用的函数 */</span>
+<a id="__codelineno-2-228" name="__codelineno-2-228"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Loop1ms</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a id="__codelineno-2-229" name="__codelineno-2-229"></a><span class="p">{</span>
+<a id="__codelineno-2-230" name="__codelineno-2-230"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-2-231" name="__codelineno-2-231"></a><span class="w">  </span><span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
 <a id="__codelineno-2-232" name="__codelineno-2-232"></a>
-<a id="__codelineno-2-233" name="__codelineno-2-233"></a><span class="w">  </span><span class="cm">/* 开启本轮发送 */</span>
-<a id="__codelineno-2-234" name="__codelineno-2-234"></a><span class="w">  </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">startTransmit</span><span class="p">();</span>
-<a id="__codelineno-2-235" name="__codelineno-2-235"></a>
-<a id="__codelineno-2-236" name="__codelineno-2-236"></a><span class="w">  </span><span class="cm">/* 当遥控器更新时处理数据 */</span>
-<a id="__codelineno-2-237" name="__codelineno-2-237"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">isUpdate</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-238" name="__codelineno-2-238"></a><span class="w">    </span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">clearUpdateFlag</span><span class="p">();</span>
-<a id="__codelineno-2-239" name="__codelineno-2-239"></a><span class="w">    </span><span class="p">...</span>
-<a id="__codelineno-2-240" name="__codelineno-2-240"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-2-241" name="__codelineno-2-241"></a><span class="p">}</span>
+<a id="__codelineno-2-233" name="__codelineno-2-233"></a><span class="w">  </span><span class="cm">/* 定时发送 */</span>
+<a id="__codelineno-2-234" name="__codelineno-2-234"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cnt</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-235" name="__codelineno-2-235"></a><span class="w">    </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">setTransmitterNeedToTransmit</span><span class="p">(</span><span class="n">tx_rx1_ptr</span><span class="p">);</span>
+<a id="__codelineno-2-236" name="__codelineno-2-236"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cnt</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-237" name="__codelineno-2-237"></a><span class="w">    </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">setTransmitterNeedToTransmit</span><span class="p">(</span><span class="n">tx_rx2_ptr</span><span class="p">);</span>
+<a id="__codelineno-2-238" name="__codelineno-2-238"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-239" name="__codelineno-2-239"></a>
+<a id="__codelineno-2-240" name="__codelineno-2-240"></a><span class="w">  </span><span class="cm">/* 开启本轮发送 */</span>
+<a id="__codelineno-2-241" name="__codelineno-2-241"></a><span class="w">  </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">startTransmit</span><span class="p">();</span>
 <a id="__codelineno-2-242" name="__codelineno-2-242"></a>
-<a id="__codelineno-2-243" name="__codelineno-2-243"></a><span class="cm">/* 接收回调函数 */</span>
-<a id="__codelineno-2-244" name="__codelineno-2-244"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span><span class="o">*</span><span class="w"> </span><span class="n">huart</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">Size</span><span class="p">)</span>
-<a id="__codelineno-2-245" name="__codelineno-2-245"></a><span class="p">{</span>
-<a id="__codelineno-2-246" name="__codelineno-2-246"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">rxEventCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">,</span><span class="w"> </span><span class="n">Size</span><span class="p">);</span>
-<a id="__codelineno-2-247" name="__codelineno-2-247"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">rxEventCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">,</span><span class="w"> </span><span class="n">Size</span><span class="p">);</span>
+<a id="__codelineno-2-243" name="__codelineno-2-243"></a><span class="w">  </span><span class="cm">/* 当遥控器更新时处理数据 */</span>
+<a id="__codelineno-2-244" name="__codelineno-2-244"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">isUpdate</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-245" name="__codelineno-2-245"></a><span class="w">    </span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">clearUpdateFlag</span><span class="p">();</span>
+<a id="__codelineno-2-246" name="__codelineno-2-246"></a><span class="w">    </span><span class="p">...</span>
+<a id="__codelineno-2-247" name="__codelineno-2-247"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-2-248" name="__codelineno-2-248"></a><span class="p">}</span>
 <a id="__codelineno-2-249" name="__codelineno-2-249"></a>
-<a id="__codelineno-2-250" name="__codelineno-2-250"></a><span class="cm">/* 错误回调 */</span>
-<a id="__codelineno-2-251" name="__codelineno-2-251"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_UART_ErrorCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span><span class="o">*</span><span class="w"> </span><span class="n">huart</span><span class="p">)</span>
+<a id="__codelineno-2-250" name="__codelineno-2-250"></a><span class="cm">/* 接收回调函数 */</span>
+<a id="__codelineno-2-251" name="__codelineno-2-251"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span><span class="o">*</span><span class="w"> </span><span class="n">huart</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">Size</span><span class="p">)</span>
 <a id="__codelineno-2-252" name="__codelineno-2-252"></a><span class="p">{</span>
-<a id="__codelineno-2-253" name="__codelineno-2-253"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">errorCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>
-<a id="__codelineno-2-254" name="__codelineno-2-254"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">errorCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>
+<a id="__codelineno-2-253" name="__codelineno-2-253"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">rxEventCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">,</span><span class="w"> </span><span class="n">Size</span><span class="p">);</span>
+<a id="__codelineno-2-254" name="__codelineno-2-254"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">rxEventCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">,</span><span class="w"> </span><span class="n">Size</span><span class="p">);</span>
 <a id="__codelineno-2-255" name="__codelineno-2-255"></a><span class="p">}</span>
 <a id="__codelineno-2-256" name="__codelineno-2-256"></a>
-<a id="__codelineno-2-257" name="__codelineno-2-257"></a><span class="cm">/* 发送回调函数 */</span>
-<a id="__codelineno-2-258" name="__codelineno-2-258"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_UART_TxCpltCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span><span class="o">*</span><span class="w"> </span><span class="n">huart</span><span class="p">)</span>
+<a id="__codelineno-2-257" name="__codelineno-2-257"></a><span class="cm">/* 错误回调 */</span>
+<a id="__codelineno-2-258" name="__codelineno-2-258"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_UART_ErrorCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span><span class="o">*</span><span class="w"> </span><span class="n">huart</span><span class="p">)</span>
 <a id="__codelineno-2-259" name="__codelineno-2-259"></a><span class="p">{</span>
-<a id="__codelineno-2-260" name="__codelineno-2-260"></a><span class="w">  </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">txCpltCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>
-<a id="__codelineno-2-261" name="__codelineno-2-261"></a><span class="p">}</span>
+<a id="__codelineno-2-260" name="__codelineno-2-260"></a><span class="w">  </span><span class="n">uart_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">errorCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>
+<a id="__codelineno-2-261" name="__codelineno-2-261"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">errorCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>
+<a id="__codelineno-2-262" name="__codelineno-2-262"></a><span class="p">}</span>
+<a id="__codelineno-2-263" name="__codelineno-2-263"></a>
+<a id="__codelineno-2-264" name="__codelineno-2-264"></a><span class="cm">/* 发送回调函数 */</span>
+<a id="__codelineno-2-265" name="__codelineno-2-265"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_UART_TxCpltCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span><span class="o">*</span><span class="w"> </span><span class="n">huart</span><span class="p">)</span>
+<a id="__codelineno-2-266" name="__codelineno-2-266"></a><span class="p">{</span>
+<a id="__codelineno-2-267" name="__codelineno-2-267"></a><span class="w">  </span><span class="n">uart_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">txCpltCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>
+<a id="__codelineno-2-268" name="__codelineno-2-268"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+<h4 id="hal-库-uart-部分注意事项">HAL 库 UART 部分注意事项<a class="headerlink" href="#hal-库-uart-部分注意事项" title="链接到此节">&para;</a></h4>
+<ol>
+<li>串口接收常用 <code>HAL_UARTEx_ReceiveToIdle_DMA</code> 进行接收，其对应的回调函数为 <code>HAL_UARTEx_RxEventCallback</code>（触发空闲中断时会被调用），而对于 DMA 接收而言，其常见的回调函数为 <code>HAL_UART_RxCpltCallback</code> 和 <code>HAL_UART_RxHalfCpltCallback</code>，但当使用 <code>HAL_UARTEx_ReceiveToIdle_DMA</code> 进行 DMA 接收时，DMA 的半接收与全接受会转而调用 <code>HAL_UARTEx_RxEventCallback</code>，而触发的来源可以通过 <code>HAL_UARTEx_GetRxEventType</code> 函数进行确认。</li>
+<li>串口的 DMA 接收范围 <code>Normal</code> 与 <code>Circular</code> 两种模式。前者每次都从头开始接收，而后者则会紧跟上一次数据继续接收（比如上一次接收的数据最后一位位于索引为 10 的位置，则下一次接收将从索引为 11 的位置开始）。同时前者开启一次接收一次，后者则只需开启一次便会持续接收，因此前者常用的使用方法为在接收回调中在处理完数据后再次调用 <code>HAL_UARTEx_ReceiveToIdle_DMA</code> 开启接收。</li>
+<li>开启 <code>HAL_UARTEx_ReceiveToIdle_DMA</code> 时不一定总是开启成功，因为某些原因可能导致错误位被置位，因而导致 <code>HAL_UARTEx_ReceiveToIdle_DMA</code> 开启失败。实际使用时可以一直调用直到返回 <code>HAL_OK</code>，或是在 <code>HAL_UART_ErrorCallback</code> 中再次调用以开启接收。</li>
+<li><code>HAL_UARTEx_RxEventCallback</code> 函数的 <code>Size</code> 参数代表的是当前 DMA 接收到的数据的最后一位相对缓冲区开头的长度（为索引 +1），而非本次接收到的数据长度（<code>Normal</code> 等效于接收到数据的长度，而 <code>Circular</code> 不是），同时当接收的数据达到缓冲区半长与全长时都会触发，要注意的是，当接收到的数据恰好为缓冲区长度一半的时候，正常情况下会先因为半接收触发一次 <code>HAL_UARTEx_RxEventCallback</code>，然后再因为空闲中断再次触发一次 <code>HAL_UARTEx_RxEventCallback</code>。同时当接收的数据长度恰好为缓冲区长度时只会因全接收触发一次 <code>HAL_UARTEx_RxEventCallback</code>，而空闲中断不会触发。</li>
+</ol>
 <h4 id="h7-变量位置配置">H7 变量位置配置<a class="headerlink" href="#h7-变量位置配置" title="链接到此节">&para;</a></h4>
 <p>对 H7 而言 DMA 可工作的区域<strong>必须大于 0x24000000</strong>（具体查看数据手册），因此需修改 CubeMx 生成的 STM32xxx_FLASH.ld 配置文件，具体方法为：</p>
 <ol>
@@ -4160,7 +4206,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-26</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-27</span>
   </span>
 
     

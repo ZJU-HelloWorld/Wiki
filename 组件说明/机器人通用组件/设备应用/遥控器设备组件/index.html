@@ -1728,6 +1728,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#适用遥控器" class="md-nav__link">
+    <span class="md-ellipsis">
+      适用遥控器
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#理论" class="md-nav__link">
     <span class="md-ellipsis">
       理论
@@ -1773,32 +1782,17 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#组件说明" class="md-nav__link">
-    <span class="md-ellipsis">
-      组件说明
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="组件说明">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dt7-类" class="md-nav__link">
-    <span class="md-ellipsis">
-      DT7 类
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#调试技巧" class="md-nav__link">
+    <span class="md-ellipsis">
+      调试技巧
+    </span>
+  </a>
   
 </li>
       
@@ -2850,6 +2844,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#适用遥控器" class="md-nav__link">
+    <span class="md-ellipsis">
+      适用遥控器
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#理论" class="md-nav__link">
     <span class="md-ellipsis">
       理论
@@ -2895,32 +2898,17 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#组件说明" class="md-nav__link">
-    <span class="md-ellipsis">
-      组件说明
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="组件说明">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dt7-类" class="md-nav__link">
-    <span class="md-ellipsis">
-      DT7 类
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#调试技巧" class="md-nav__link">
+    <span class="md-ellipsis">
+      调试技巧
+    </span>
+  </a>
   
 </li>
       
@@ -2981,15 +2969,18 @@
 
 <h1 id="遥控器remote-control设备组件">遥控器（Remote Control）设备组件<a class="headerlink" href="#遥控器remote-control设备组件" title="链接到此节">&para;</a></h1>
 <p><img src = "https://img.shields.io/badge/version-1.0.0-green"><sp> <img src = "https://img.shields.io/badge/author-Caikunzhen-lightgrey"></p>
+<h2 id="适用遥控器">适用遥控器<a class="headerlink" href="#适用遥控器" title="链接到此节">&para;</a></h2>
+<p>当前组件适用的遥控器有：DT7 遥控器，天地飞 ET08A 遥控器，同时也有适配 SBus 协议的基类。</p>
 <h2 id="理论">理论<a class="headerlink" href="#理论" title="链接到此节">&para;</a></h2>
 <p>DT7 遥控器是一款工作于 2.4 GHz 频段的无线电通信设备，该遥控器仅能与 DR16 接收机配合使用。如下图所示：</p>
 <p><a class="glightbox" href="../%E9%81%A5%E6%8E%A7%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/imgae-20231212120115.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="imgae-20231212120115" src="../%E9%81%A5%E6%8E%A7%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/imgae-20231212120115.png" /></a></p>
 <p>使用时，将 DR16 的接口接到 Dbus 接口，以实现对遥控器指令的读取。</p>
 <blockquote>
 <p>以 RoboMaster 开发板 C 型为例，板上已集成一个 Dbus 接口，如下图所示：</p>
-<p><a class="glightbox" href="../%E9%81%A5%E6%8E%A7%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212122746.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20231212122746" src="../%E9%81%A5%E6%8E%A7%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212122746.png" /></a> </p>
+<p><a class="glightbox" href="../%E9%81%A5%E6%8E%A7%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212122746.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20231212122746" src="../%E9%81%A5%E6%8E%A7%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212122746.png" /></a></p>
 <p>对应的接收引脚为 <code>PC11</code>，信号由 <code>UART3</code> 接收。</p>
 </blockquote>
+<p><strong>同时，由于 Dbus 电平以及通信协议与市面上遥控器常见通信协议 SBus 通用，因此该配置方法也适用。</strong></p>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
 <p>组件源码仓库地址：<a href="https://github.com/ZJU-HelloWorld/HW-Components">https://github.com/ZJU-HelloWorld/HW-Components</a></p>
 <h3 id="外设驱动配置">外设驱动配置<a class="headerlink" href="#外设驱动配置" title="链接到此节">&para;</a></h3>
@@ -2998,37 +2989,57 @@
 <li>对于 USART3，将波特率配置为 100000Bit/s，字长 9Bits (including Parity)，校验位偶校验（Even），数据方向为只接收（Receive Only）。</li>
 </ul>
 <p><a class="glightbox" href="../%E9%81%A5%E6%8E%A7%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212123534.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20231210160415" src="../%E9%81%A5%E6%8E%A7%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20231212123534.png" /></a></p>
-<ul>
-<li>同时开启串口的 DMA 接收，并开启 USART3 的中断</li>
-</ul>
+<p>DMA 配置详见<a href="https://zju-helloworld.github.io/Wiki/组件说明/嵌入式系统支持/板级支持包/通用通信驱动/">通用通信驱动</a> 中 UART 部分的 DMA 配置。</p>
 <h3 id="使用前准备">使用前准备<a class="headerlink" href="#使用前准备" title="链接到此节">&para;</a></h3>
 <p>使用前需要做以下准备：</p>
 <ul>
-<li>在使用 STM32CubeMX 生成项目时，请在 <code>Code Generator</code> 界面 <code>Enable Full Assert</code>，来帮助断言设备驱动中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果，如添加 <code>while(1);</code></li>
-<li>在 <code>config.cmake</code> 文件中设置 <code>use_hwcomponents_devices_remote_control</code> 选项为 <code>ON</code>，开启该设备文件的编译</li>
+<li>在 <code>config.cmake</code> 文件中设置 <code>use_hwcomponents_devices_remote_control</code> 选项为 <code>ON</code>，开启该设备文件的编译，若为 <code>OFF</code> 则根驱动配置需求在 <code>CMakeLists.txt</code> 文件中重配置为 <code>ON</code>。</li>
 </ul>
 <h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">&para;</a></h3>
 <p>在项目中引用头文件：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;DT7.hpp&quot;</span>
 </code></pre></div></td></tr></table></div>
-<p>实例化一个遥控器设备并开启串口 DMA 接收至空闲帧，如：</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
-<span class="normal"><a href="#__codelineno-1-2">2</a></span>
-<span class="normal"><a href="#__codelineno-1-3">3</a></span>
-<span class="normal"><a href="#__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span>
-<span class="normal"><a href="#__codelineno-1-7">7</a></span>
-<span class="normal"><a href="#__codelineno-1-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">rc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">devices</span><span class="o">::</span><span class="nn">remote_control</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">rx_buf</span><span class="p">[</span><span class="n">remote_control</span><span class="o">::</span><span class="n">kRcRxDataLen</span><span class="p">];</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">rc</span><span class="o">::</span><span class="n">DT7</span><span class="o">*</span><span class="w"> </span><span class="n">rc_ptr</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">rc_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">rc</span><span class="o">::</span><span class="n">DT7</span><span class="p">;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="n">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart3</span><span class="p">,</span><span class="w"> </span><span class="n">rx_buf</span><span class="p">,</span><span class="w"> </span><span class="n">rc</span><span class="o">::</span><span class="n">kRcRxDataLen</span><span class="p">);</span>
+<p>实例化一个遥控器设备并将其加入串口接收管理器中，如：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">hw_comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">comm</span><span class="p">;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">hw_rc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">remote_control</span><span class="p">;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">hw_rc</span><span class="o">::</span><span class="n">DT7</span><span class="o">*</span><span class="w"> </span><span class="n">rc_ptr</span><span class="p">;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="o">*</span><span class="w"> </span><span class="n">rc_rx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">RcInit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="p">{</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">  </span><span class="cm">/* 事先完成管理器的初始化 */</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="p">(</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">      </span><span class="o">&amp;</span><span class="n">huart3</span><span class="p">,</span><span class="w"> </span><span class="n">hw_comm</span><span class="o">::</span><span class="n">UartRxMgr</span><span class="o">::</span><span class="n">EofType</span><span class="o">::</span><span class="n">kIdle</span><span class="p">,</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">      </span><span class="n">hw_rc</span><span class="o">::</span><span class="n">DT7</span><span class="o">::</span><span class="n">kRcRxDataLen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">hw_rc</span><span class="o">::</span><span class="n">DT7</span><span class="o">::</span><span class="n">kRcRxDataLen</span><span class="p">);</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">  </span><span class="n">rc_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_rc</span><span class="o">::</span><span class="n">DT7</span><span class="p">();</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">  </span><span class="n">rc_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="n">rc_ptr</span><span class="p">);</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">  </span><span class="cm">/* 事后调用接收管理器的开启接收 */</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<p>重写串口接收事件中断：</p>
+<p>接收管理器的其他配置按要求进行，详见 <a href="https://zju-helloworld.github.io/Wiki/组件说明/嵌入式系统支持/板级支持包/通用通信驱动/">通用通信驱动</a> 中 UART 部分的使用方法。</p>
+<p>在遥控器使用中，遥控器的接收端常常与看门狗刷新绑定，当关闭遥控器后，看门狗刷新也随之关闭，进而测量运行程序被杀死。因此可采用如下方法将看门狗刷新函数注册如遥控器内种，当接收到遥控器数据时会调用刷新函数：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -3038,166 +3049,53 @@
 <span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-2-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span><span class="o">*</span><span class="w"> </span><span class="n">huart</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">Size</span><span class="p">)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="p">{</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">huart</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">&amp;</span><span class="n">huart3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">rc</span><span class="o">::</span><span class="n">kRcRxDataLen</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">      </span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">decode</span><span class="p">(</span><span class="n">rx_buf</span><span class="p">);</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="n">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart3</span><span class="p">,</span><span class="w"> </span><span class="n">rx_buf</span><span class="p">,</span><span class="w"> </span><span class="n">rc</span><span class="o">::</span><span class="n">kRcRxDataLen</span><span class="p">);</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="p">}</span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cm">/* 看门狗刷新函数（封装） */</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">RefreshIwdg</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="p">{</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">  </span><span class="n">HAL_IWDG_Refresh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hiwdg1</span><span class="p">);</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="p">}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">RcInit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="p">{</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">  </span><span class="cm">/* 事先完成管理器的初始化 */</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">  </span><span class="n">rc_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_rc</span><span class="o">::</span><span class="n">DT7</span><span class="p">();</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">  </span><span class="cm">/* 注册更新回调函数，用于在接收到遥控器信号时刷新看门狗 */</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">  </span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">registerUpdateCallback</span><span class="p">(</span><span class="n">RefreshIwdg</span><span class="p">);</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">  </span><span class="cm">/* 事后调用接收管理器的开启接收 */</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>然后可通过对应的类方法获取遥控器指令：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#__codelineno-3-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">rc_l_switch</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">rc</span><span class="o">::</span><span class="n">kSwitchStateUp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">rc_l_switch</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">hw_rc</span><span class="o">::</span><span class="n">SwitchState</span><span class="o">::</span><span class="n">kUp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="c1">// ...</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="组件说明">组件说明<a class="headerlink" href="#组件说明" title="链接到此节">&para;</a></h3>
-<h4 id="dt7-类"><code>DT7</code> 类<a class="headerlink" href="#dt7-类" title="链接到此节">&para;</a></h4>
-<h5 id="public">public<a class="headerlink" href="#public" title="链接到此节">&para;</a></h5>
-<p>方法</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称<img width=250/></th>
-<th style="text-align: left;">参数说明</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>DT7</code></td>
-<td style="text-align: left;">/</td>
-<td>DT7 遥控器构造函数</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>~DT7</code></td>
-<td style="text-align: left;">/</td>
-<td>DT7 遥控器析构函数</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>decode</code></td>
-<td style="text-align: left;"><code>rx_data</code>: 接收到的数据</td>
-<td>将接收到的数据解包</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rc_*</code></td>
-<td style="text-align: left;">/</td>
-<td>/</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>mouse_*</code></td>
-<td style="text-align: left;">/</td>
-<td>/</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>mouse_*_btn</code></td>
-<td style="text-align: left;"><code>reset</code>: 读取后是否将该键复位</td>
-<td>/</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>key_*</code></td>
-<td style="text-align: left;"><code>reset</code>: 读取后是否将该键复位</td>
-<td>/</td>
-</tr>
-</tbody>
-</table>
-<h5 id="private">private<a class="headerlink" href="#private" title="链接到此节">&para;</a></h5>
-<p>属性</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称</th>
-<th style="text-align: left;">类型</th>
-<th style="text-align: left;">示例值</th>
-<th style="text-align: left;">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>rc_lv_</code></td>
-<td style="text-align: left;"><code>float</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">遥控器左摇杆竖直值，[-1, 1]</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rc_lh_</code></td>
-<td style="text-align: left;"><code>float</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">遥控器左摇杆水平值，[-1, 1]</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rc_rv_</code></td>
-<td style="text-align: left;"><code>float</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">遥控器右摇杆竖直值，[-1, 1]</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rc_rh_</code></td>
-<td style="text-align: left;"><code>float</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">遥控器右摇杆水平值，[-1, 1]</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rc_wheel_</code></td>
-<td style="text-align: left;"><code>float</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">遥控器拨轮值，[-1, 1]</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rc_l_switch_</code></td>
-<td style="text-align: left;"><code>SwitchState</code></td>
-<td style="text-align: left;"><code>kSwitchStateUp</code></td>
-<td style="text-align: left;">遥控器左拨杆值</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rc_r_switch_</code></td>
-<td style="text-align: left;"><code>SwitchState</code></td>
-<td style="text-align: left;"><code>kSwitchStateUp</code></td>
-<td style="text-align: left;">遥控器右拨杆值</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>mouse_l_btn_</code></td>
-<td style="text-align: left;"><code>bool</code></td>
-<td style="text-align: left;"><code>false</code></td>
-<td style="text-align: left;">鼠标左键是否按下</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>mouse_r_btn_</code></td>
-<td style="text-align: left;"><code>bool</code></td>
-<td style="text-align: left;"><code>false</code></td>
-<td style="text-align: left;">鼠标右键是否按下</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>mouse_x_</code></td>
-<td style="text-align: left;"><code>int16_t</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">鼠标 x 轴数值</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>mouse_y_</code></td>
-<td style="text-align: left;"><code>int16_t</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">鼠标 y 轴数值</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>mouse_z_</code></td>
-<td style="text-align: left;"><code>int16_t</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">鼠标 z 轴数值</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>key_.*</code></td>
-<td style="text-align: left;"><code>uint16_t : 1</code></td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">键盘按键*是否按下</td>
-</tr>
-</tbody>
-</table>
+<p>同时由于遥控器接收频率往往低于控制频率，因此可通过 <code>isUpdate</code> 接口判断当前数据是否是新收到的数据。</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cm">/* 当遥控器更新时处理数据 */</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">isUpdate</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">  </span><span class="n">rc_ptr</span><span class="o">-&gt;</span><span class="n">clearUpdateFlag</span><span class="p">();</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">  </span><span class="p">...</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="调试技巧">调试技巧<a class="headerlink" href="#调试技巧" title="链接到此节">&para;</a></h2>
+<ol>
+<li>遥控器实例中具有解码成功次数 <code>decode_success_cnt_</code> 和解码失败次数 <code>decode_fail_cnt_</code> 数据成员，当二者之和随时间增长变大时说明成功收到了遥控器的数据。</li>
+</ol>
 <h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">&para;</a></h2>
 <h3 id="版本说明">版本说明<a class="headerlink" href="#版本说明" title="链接到此节">&para;</a></h3>
 <table>
@@ -3240,7 +3138,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-12</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-27</span>
   </span>
 
     

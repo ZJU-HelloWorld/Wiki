@@ -1752,39 +1752,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#组件说明" class="md-nav__link">
-    <span class="md-ellipsis">
-      组件说明
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="组件说明">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tunelistinfo-结构" class="md-nav__link">
-    <span class="md-ellipsis">
-      TuneListInfo 结构
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#buzzer-类" class="md-nav__link">
-    <span class="md-ellipsis">
-      Buzzer 类
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2913,39 +2880,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#组件说明" class="md-nav__link">
-    <span class="md-ellipsis">
-      组件说明
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="组件说明">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tunelistinfo-结构" class="md-nav__link">
-    <span class="md-ellipsis">
-      TuneListInfo 结构
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#buzzer-类" class="md-nav__link">
-    <span class="md-ellipsis">
-      Buzzer 类
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -3032,21 +2966,20 @@
 <p>在使用 PWM 波控制蜂鸣器时，使用 CubeMX 配置时将对应定时器预分频至 1MHz，以方便控制。例如对于 RoboMaster 开发板 C 型板载的蜂鸣器，驱动流程如下：</p>
 <ul>
 <li>对于 TIM4，查看数据手册可知其挂载在 APB1 总线上，时钟频率 84MHz，为达到 1MHz 需要 84 分频 ，因此将预分频值（Prescaler）设置为 83；</li>
-<li>工作频率与鸣响音调相关，因此重载值（Counter Period）在运行时由指定的音调频率计算得到，设频率 <span class="arithmatex">\(f\)</span>，则重载值为 <span class="arithmatex">\(1000000 / f-1\)</span>，CubeMX 配置可随意；</li>
+<li>工作频率与鸣响音调相关，因此重载值（Counter Period）在运行时由指定的音调频率计算得到，设频率 <span class="arithmatex">\(f\)</span>，则重载值为 <span class="arithmatex">\(1000000 / f-1\)</span>，CubeMX 配置可随意（<strong>注意：重载值不能为 0，否则将导致运行错误</strong>）；</li>
 <li>高电平时间即脉宽（Pulse）与鸣响强弱相关，可在组件运行时更改输出不同占空比的方波，来控制声音的强弱，CubeMX 配置可随意。</li>
 </ul>
 <p><a class="glightbox" href="../%E8%9C%82%E9%B8%A3%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221208093940723.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20221208093940723" src="../%E8%9C%82%E9%B8%A3%E5%99%A8%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/image-20221208093940723.png" /></a></p>
 <h3 id="使用前准备">使用前准备<a class="headerlink" href="#使用前准备" title="链接到此节">&para;</a></h3>
 <p>使用前需要做以下准备：</p>
 <ul>
-<li>在使用 STM32CubeMX 生成项目时，请在 <code>Code Generator</code> 界面 <code>Enable Full Assert</code>，来帮助断言设备驱动中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果，如添加 <code>while(1);</code></li>
-<li>在 <code>config.cmake</code> 文件中设置 <code>use_hwcomponents_devices_buzzer</code> 选项为 <code>ON</code>，开启该设备文件的编译</li>
+<li>在 <code>config.cmake</code> 文件中设置 <code>use_hwcomponents_devices_buzzer</code> 选项为 <code>ON</code>，开启该设备文件的编译，若为 <code>OFF</code> 则根驱动配置需求在 <code>CMakeLists.txt</code> 文件中重配置为 <code>ON</code>。</li>
 </ul>
 <h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">&para;</a></h3>
 <p>在项目中引用头文件：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;buzzer.hpp&quot;</span>
 </code></pre></div></td></tr></table></div>
-<p>实例化一个蜂鸣器设备并初始化，默认失能，如：</p>
+<p>实例化一个蜂鸣器设备并初始化，默认使能，如：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -3068,27 +3001,27 @@
 <span class="normal"><a href="#__codelineno-1-19">19</a></span>
 <span class="normal"><a href="#__codelineno-1-20">20</a></span>
 <span class="normal"><a href="#__codelineno-1-21">21</a></span>
-<span class="normal"><a href="#__codelineno-1-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">buzzer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">devices</span><span class="o">::</span><span class="nn">buzzer</span><span class="p">;</span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">hw_buzzer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">buzzer</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="cm">/* 请确保该变量在播放期间不会被释放，建议为静态变量或全局变量 */</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="k">static</span><span class="w"> </span><span class="n">buzzer</span><span class="o">::</span><span class="n">TuneListInfo</span><span class="w"> </span><span class="n">tune_list_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 配置乐曲信息</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="k">static</span><span class="w"> </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">TuneListInfo</span><span class="w"> </span><span class="n">tune_list_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 配置乐曲信息</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="p">.</span><span class="n">intensity_scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="p">.</span><span class="n">tune_duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="p">.</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">        </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kTuneC4</span><span class="p">,</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">        </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kTuneD4</span><span class="p">,</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">        </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kTuneE4</span><span class="p">,</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">        </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kTuneF4</span><span class="p">,</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">        </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kTuneG4</span><span class="p">,</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">        </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kTuneA5</span><span class="p">,</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">        </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kTuneB5</span><span class="p">,</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">        </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kTuneC5</span><span class="p">,</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">        </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kTuneEnd</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">        </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">kTuneC4</span><span class="p">,</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">        </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">kTuneD4</span><span class="p">,</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">        </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">kTuneE4</span><span class="p">,</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">        </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">kTuneF4</span><span class="p">,</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">        </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">kTuneG4</span><span class="p">,</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">        </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">kTuneA5</span><span class="p">,</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">        </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">kTuneB5</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">        </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">kTuneC5</span><span class="p">,</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">        </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">kTuneEnd</span><span class="p">,</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">    </span><span class="p">},</span>
 <a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="p">};</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="n">buzzer</span><span class="o">::</span><span class="n">Buzzer</span><span class="o">*</span><span class="w"> </span><span class="n">buzzer_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="n">buzzer_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">buzzer</span><span class="o">::</span><span class="n">Buzzer</span><span class="p">(</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="w">      </span><span class="o">&amp;</span><span class="n">htim4</span><span class="p">,</span><span class="w"> </span><span class="n">TIM_CHANNEL_3</span><span class="p">,</span><span class="w"> </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kPlayConfigLoopPlayback</span><span class="p">,</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">Buzzer</span><span class="o">*</span><span class="w"> </span><span class="n">buzzer_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="n">buzzer_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">Buzzer</span><span class="p">(</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="w">      </span><span class="o">&amp;</span><span class="n">htim4</span><span class="p">,</span><span class="w"> </span><span class="n">TIM_CHANNEL_3</span><span class="p">,</span><span class="w"> </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">PlayConfig</span><span class="o">::</span><span class="n">kLoopPlayback</span><span class="p">,</span>
 <a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="w">      </span><span class="o">&amp;</span><span class="n">tune_list_info</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <p>指定每个音符的时长和整体强度 <span class="arithmatex">\(\in (0,1]\)</span>（数值太小可能无法正常播放），编写需要播放的音符列表（类型 <code>Tune</code>，音符表示如 <code>kTuneA4</code>：基本音，<code>kTuneA4S</code>：升，<code>kTuneA4F</code>：降，<code>kTuneRet</code>：休止），以 <code>kTuneEnd</code> 结尾</p>
@@ -3098,23 +3031,23 @@
 <div class="tabbed-block">
 <p><div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
-<span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">buzzer_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">buzzer</span><span class="o">::</span><span class="n">Buzzer</span><span class="p">(</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="o">&amp;</span><span class="n">htim4</span><span class="p">,</span><span class="w"> </span><span class="n">TIM_CHANNEL_3</span><span class="p">,</span><span class="w"> </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kPlayConfigSinglePlayback</span><span class="p">,</span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">buzzer_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">Buzzer</span><span class="p">(</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="o">&amp;</span><span class="n">htim4</span><span class="p">,</span><span class="w"> </span><span class="n">TIM_CHANNEL_3</span><span class="p">,</span><span class="w"> </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">PlayConfig</span><span class="o">::</span><span class="n">kSinglePlayback</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="o">&amp;</span><span class="n">tune_list_info</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 或：
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">buzzer_ptr</span><span class="o">-&gt;</span><span class="n">set_play_config</span><span class="p">(</span><span class="n">buzzer</span><span class="o">::</span><span class="n">kPlayConfigSinglePlayback</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">buzzer_ptr</span><span class="o">-&gt;</span><span class="n">set_play_config</span><span class="p">(</span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">PlayConfig</span><span class="o">::</span><span class="n">kSinglePlayback</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div></p>
 </div>
 <div class="tabbed-block">
 <p><div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
-<span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">buzzer_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">buzzer</span><span class="o">::</span><span class="n">Buzzer</span><span class="p">(</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">  </span><span class="o">&amp;</span><span class="n">htim4</span><span class="p">,</span><span class="w"> </span><span class="n">TIM_CHANNEL_3</span><span class="p">,</span><span class="w"> </span><span class="n">buzzer</span><span class="o">::</span><span class="n">kPlayConfigLoopPlayback</span><span class="p">,</span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">buzzer_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">Buzzer</span><span class="p">(</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">  </span><span class="o">&amp;</span><span class="n">htim4</span><span class="p">,</span><span class="w"> </span><span class="n">TIM_CHANNEL_3</span><span class="p">,</span><span class="w"> </span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">PlayConfig</span><span class="o">::</span><span class="n">kLoopPlayback</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">  </span><span class="o">&amp;</span><span class="n">tune_list_info</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 或：
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">buzzer_ptr</span><span class="o">-&gt;</span><span class="n">set_play_config</span><span class="p">(</span><span class="n">buzzer</span><span class="o">::</span><span class="n">kPlayConfigLoopPlayback</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">buzzer_ptr</span><span class="o">-&gt;</span><span class="n">set_play_config</span><span class="p">(</span><span class="n">hw_buzzer</span><span class="o">::</span><span class="n">PlayConfig</span><span class="o">::</span><span class="n">kLoopPlayback</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div></p>
 </div>
 </div>
@@ -3124,191 +3057,16 @@
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">buzzer_ptr</span><span class="o">-&gt;</span><span class="n">is_playing</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">  </span><span class="n">buzzer_ptr</span><span class="o">-&gt;</span><span class="n">play</span><span class="p">();</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="p">}</span><span class="w"> </span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>单次播放完毕后将自动失能蜂鸣器，循环播放模式下则在手动调用 <code>mute</code> 方法时失能蜂鸣器。</p>
-<h3 id="组件说明">组件说明<a class="headerlink" href="#组件说明" title="链接到此节">&para;</a></h3>
-<h4 id="tunelistinfo-结构"><code>TuneListInfo</code> 结构<a class="headerlink" href="#tunelistinfo-结构" title="链接到此节">&para;</a></h4>
-<p>属性</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称</th>
-<th style="text-align: left;">类型</th>
-<th style="text-align: left;">示例值</th>
-<th style="text-align: left;">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>intensity_scale</code></td>
-<td style="text-align: left;"><code>float</code></td>
-<td style="text-align: left;">0.5f</td>
-<td style="text-align: left;">声音强度，(0, 1]</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>tune_duration</code></td>
-<td style="text-align: left;"><code>uint16_t</code></td>
-<td style="text-align: left;">500</td>
-<td style="text-align: left;">单音持续时长，单位：<span class="arithmatex">\(\rm{ms}\)</span></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>list</code></td>
-<td style="text-align: left;"><code>Tune*</code></td>
-<td style="text-align: left;">/</td>
-<td style="text-align: left;">音符列表，最大长度为 <code>kTuneListMaxLen</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="buzzer-类"><code>Buzzer</code> 类<a class="headerlink" href="#buzzer-类" title="链接到此节">&para;</a></h4>
-<h5 id="public">public<a class="headerlink" href="#public" title="链接到此节">&para;</a></h5>
-<p>属性</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称</th>
-<th style="text-align: left;">类型</th>
-<th style="text-align: left;">示例值</th>
-<th style="text-align: left;">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>kHtim_</code></td>
-<td style="text-align: left;"><code>TIM_HandleTypeDef *const</code></td>
-<td style="text-align: left;">&amp;htim4</td>
-<td style="text-align: left;">定时器句柄指针</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>kChannel_</code></td>
-<td style="text-align: left;"><code>const uint32_t</code></td>
-<td style="text-align: left;">TIM_CHANNEL_3</td>
-<td style="text-align: left;">定时器 PWM 输出通道</td>
-</tr>
-</tbody>
-</table>
-<p>方法</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称<img width=250/></th>
-<th style="text-align: left;">参数说明</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>Buzzer</code></td>
-<td style="text-align: left;"><code>htim</code>: 定时器句柄指针</br><code>channel</code>: 定时器PWM对应输出通道</br><code>kTuneListInfoPtr</code>: 乐曲信息指针</td>
-<td>初始化蜂鸣器，默认关闭，同时请确保播放期间乐曲信息指针指针所指内容没有被释放</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>~Buzzer</code></td>
-<td style="text-align: left;">/</td>
-<td>蜂鸣器析构函数</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>is_playing</code></td>
-<td style="text-align: left;">/</td>
-<td>/</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>get_play_config</code></td>
-<td style="text-align: left;">/</td>
-<td>/</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>set_play_config</code></td>
-<td style="text-align: left;">/</td>
-<td>/</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>mute</code></td>
-<td style="text-align: left;">/</td>
-<td>关闭蜂鸣器</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>play</code></td>
-<td style="text-align: left;">/</td>
-<td>播放乐曲，请确保该方法以至少 1kHz 的频率被调用</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>setNewTune</code></td>
-<td style="text-align: left;"><code>kTuneListInfoPtr</code>: 乐曲信息指针</td>
-<td>配置新的播放乐曲，同时请确保播放期间乐曲信息指针指针所指内容没有被释放</td>
-</tr>
-</tbody>
-</table>
-<h5 id="private">private<a class="headerlink" href="#private" title="链接到此节">&para;</a></h5>
-<p>属性</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称</th>
-<th style="text-align: left;">类型</th>
-<th style="text-align: left;">示例值</th>
-<th style="text-align: left;">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>kTuneListInfoPtr_</code></td>
-<td style="text-align: left;"><code>const TuneListInfo*</code></td>
-<td style="text-align: left;">/</td>
-<td style="text-align: left;">乐曲信息指针</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>tune_idx_</code></td>
-<td style="text-align: left;"><code>size_t</code></td>
-<td style="text-align: left;">/</td>
-<td style="text-align: left;">当前播放的音符序号</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>tune_start_tick_</code></td>
-<td style="text-align: left;"><code>uint32_t</code></td>
-<td style="text-align: left;">/</td>
-<td style="text-align: left;">当前播放的音符的开始时刻，单位：<span class="arithmatex">\(\rm{ms}\)</span></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>tune_switch_</code></td>
-<td style="text-align: left;"><code>bool</code></td>
-<td style="text-align: left;">/</td>
-<td style="text-align: left;">是否切换至下一音符</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>is_playing_</code></td>
-<td style="text-align: left;"><code>bool</code></td>
-<td style="text-align: left;">true</td>
-<td style="text-align: left;">当前蜂鸣器是否处于播放状态</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>last_is_playing_</code></td>
-<td style="text-align: left;"><code>bool</code></td>
-<td style="text-align: left;">true</td>
-<td style="text-align: left;">上一时刻蜂鸣器是否处于播放状态</td>
-</tr>
-</tbody>
-</table>
-<p>方法</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称<img width=250/></th>
-<th style="text-align: left;">参数说明</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>tune2AutoReload</code></td>
-<td style="text-align: left;"><code>tune</code>: 音符</br>返会: 对应的定时器重载值</td>
-<td>将音符转化为对应的定时器重载值</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><code>kTuneListMaxLen</code> 默认设置为 512，表示支持播放的最长音符列表长度。</li>
-</ul>
+<blockquote>
+<p><strong>注意：由于内部使用了硬件句柄，因此如果计划将实例作为全局变量时（全局变量初始化时对应的硬件句柄可能会还未初始化完毕），建议采取一下方法：</strong>
+1. 声明指针，后续通过 <strong><code>new</code></strong> 的方式进行初始化。
+2. 声明指针，后续通过返回函数（CreateXXXIns）中的静态变量（因为该变量只有在<strong>第一次调用</strong>该函数时才会运行初始化程序）进行初始化。
+3. 使用无参构造函数，后续调用 <strong><code>init</code></strong> 方法进行初始化。
+4. 使用无参构造函数，后续使用<strong>拷贝赋值函数</strong>或是<strong>移动赋值函数</strong>进行初始化。</p>
+</blockquote>
 <h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">&para;</a></h2>
 <h3 id="版本说明">版本说明<a class="headerlink" href="#版本说明" title="链接到此节">&para;</a></h3>
 <table>
@@ -3359,7 +3117,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-12</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-27</span>
   </span>
 
     

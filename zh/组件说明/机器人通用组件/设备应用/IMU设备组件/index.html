@@ -1683,57 +1683,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#组件说明" class="md-nav__link">
-    <span class="md-ellipsis">
-      组件说明
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="组件说明">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#bmi088hwconfig-结构体" class="md-nav__link">
-    <span class="md-ellipsis">
-      BMI088HWConfig 结构体
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bmi088config-结构体" class="md-nav__link">
-    <span class="md-ellipsis">
-      BMI088Config 结构体
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bmi088-类" class="md-nav__link">
-    <span class="md-ellipsis">
-      BMI088 类
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#内部函数" class="md-nav__link">
-    <span class="md-ellipsis">
-      内部函数
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2961,57 +2910,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#组件说明" class="md-nav__link">
-    <span class="md-ellipsis">
-      组件说明
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="组件说明">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#bmi088hwconfig-结构体" class="md-nav__link">
-    <span class="md-ellipsis">
-      BMI088HWConfig 结构体
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bmi088config-结构体" class="md-nav__link">
-    <span class="md-ellipsis">
-      BMI088Config 结构体
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bmi088-类" class="md-nav__link">
-    <span class="md-ellipsis">
-      BMI088 类
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#内部函数" class="md-nav__link">
-    <span class="md-ellipsis">
-      内部函数
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -3115,8 +3013,7 @@
 <p>本组件依赖 CMSIS-DSP 运算加速。</p>
 <p>使用前需要做以下准备：</p>
 <ul>
-<li>在使用 STM32CubeMX 生成项目时，请在 <code>Code Generator</code> 界面 <code>Enable Full Assert</code>，来帮助断言设备驱动中的错误；在 <code>main.c</code> 中修改 <code>assert_failed</code> 函数以指示断言结果，如添加 <code>while(1);</code></li>
-<li>在 <code>config.cmake</code> 文件中设置 <code>use_hwcomponents_devices_imu</code> 选项为 <code>ON</code>，开启该设备文件的编译</li>
+<li>在 <code>config.cmake</code> 文件中设置 <code>use_hwcomponents_devices_imu</code> 选项为 <code>ON</code>，开启该设备文件的编译，若为 <code>OFF</code> 则根驱动配置需求在 <code>CMakeLists.txt</code> 文件中重配置为 <code>ON</code>。</li>
 </ul>
 <h3 id="示例">示例<a class="headerlink" href="#示例" title="链接到此节">&para;</a></h3>
 <p>在项目中引用头文件：</p>
@@ -3134,27 +3031,25 @@
 <span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-1-10">10</a></span>
 <span class="normal"><a href="#__codelineno-1-11">11</a></span>
-<span class="normal"><a href="#__codelineno-1-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">imu</span><span class="o">::</span><span class="n">BMI088HWConfig</span><span class="w"> </span><span class="n">hw_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="p">.</span><span class="n">hspi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hspi1</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">  </span><span class="p">.</span><span class="n">acc_cs_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIOA</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">  </span><span class="p">.</span><span class="n">acc_cs_pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_PIN_4</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">  </span><span class="p">.</span><span class="n">gyro_cs_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIOB</span><span class="p">,</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">  </span><span class="p">.</span><span class="n">gyro_cs_pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_PIN_0</span><span class="p">,</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="p">};</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="kt">float</span><span class="w"> </span><span class="n">rot_mat_flatten</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">hw_imu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">imu</span><span class="p">;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="n">hw_imu</span><span class="o">::</span><span class="n">BMI088HWConfig</span><span class="w"> </span><span class="n">hw_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">  </span><span class="p">.</span><span class="n">hspi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hspi1</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">  </span><span class="p">.</span><span class="n">acc_cs_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIOA</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">  </span><span class="p">.</span><span class="n">acc_cs_pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_PIN_4</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">  </span><span class="p">.</span><span class="n">gyro_cs_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIOB</span><span class="p">,</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">  </span><span class="p">.</span><span class="n">gyro_cs_pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_PIN_0</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="p">};</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="kt">float</span><span class="w"> </span><span class="n">rot_mat_flatten</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 <p>实例化一个 BMI088 组件并放入对应硬件配置进行初始化，如：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
-<span class="normal"><a href="#__codelineno-2-2">2</a></span>
-<span class="normal"><a href="#__codelineno-2-3">3</a></span>
-<span class="normal"><a href="#__codelineno-2-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">imu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">devices</span><span class="o">::</span><span class="nn">imu</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">imu</span><span class="o">::</span><span class="n">BMI088</span><span class="o">*</span><span class="w"> </span><span class="n">imu_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="n">imu_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">imu</span><span class="o">::</span><span class="n">BMI088</span><span class="p">(</span><span class="n">hw_config</span><span class="p">,</span><span class="w"> </span><span class="n">rot_mat_flatten</span><span class="p">);</span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">hw_imu</span><span class="o">::</span><span class="n">BMI088</span><span class="o">*</span><span class="w"> </span><span class="n">imu_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">imu_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_imu</span><span class="o">::</span><span class="n">BMI088</span><span class="p">(</span><span class="n">hw_config</span><span class="p">,</span><span class="w"> </span><span class="n">rot_mat_flatten</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <p>当有特殊需求时，还可以调整 BMI088 的配置，如：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
@@ -3165,22 +3060,22 @@
 <span class="normal"><a href="#__codelineno-3-6">6</a></span>
 <span class="normal"><a href="#__codelineno-3-7">7</a></span>
 <span class="normal"><a href="#__codelineno-3-8">8</a></span>
-<span class="normal"><a href="#__codelineno-3-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">imu</span><span class="o">::</span><span class="n">BMI088Config</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">    </span><span class="p">.</span><span class="n">acc_range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imu</span><span class="o">::</span><span class="n">kBMI088AccRange3G</span><span class="p">,</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="p">.</span><span class="n">acc_odr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imu</span><span class="o">::</span><span class="n">kBMI088AccOdr1600</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="p">.</span><span class="n">acc_osr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imu</span><span class="o">::</span><span class="n">kBMI088AccOsr4</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="p">.</span><span class="n">gyro_range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imu</span><span class="o">::</span><span class="n">kBMI088GyroRange1000Dps</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="p">.</span><span class="n">gyro_odr_fbw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imu</span><span class="o">::</span><span class="n">BMI088GyroOdrFbw1000_116</span><span class="p">,</span>
+<span class="normal"><a href="#__codelineno-3-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">hw_imu</span><span class="o">::</span><span class="n">BMI088Config</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">    </span><span class="p">.</span><span class="n">acc_range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_imu</span><span class="o">::</span><span class="n">kBMI088AccRange3G</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="p">.</span><span class="n">acc_odr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_imu</span><span class="o">::</span><span class="n">kBMI088AccOdr1600</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="p">.</span><span class="n">acc_osr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_imu</span><span class="o">::</span><span class="n">kBMI088AccOsr4</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="p">.</span><span class="n">gyro_range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_imu</span><span class="o">::</span><span class="n">kBMI088GyroRange1000Dps</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="p">.</span><span class="n">gyro_odr_fbw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_imu</span><span class="o">::</span><span class="n">BMI088GyroOdrFbw1000_116</span><span class="p">,</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="p">};</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="n">imu_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">imu</span><span class="o">::</span><span class="n">BMI088</span><span class="p">(</span><span class="n">hw_config</span><span class="p">,</span><span class="w"> </span><span class="n">rot_mat_flatten</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">);</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="n">imu_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_imu</span><span class="o">::</span><span class="n">BMI088</span><span class="p">(</span><span class="n">hw_config</span><span class="p">,</span><span class="w"> </span><span class="n">rot_mat_flatten</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <ul>
 <li><code>BMI088Config</code> 具有默认参数，因此可以在需要对某些默认参数进行修改时进行个别修改，但是需要保证前后结构体成员前后的复制顺序需要与结构体中的声明顺序相同</li>
 </ul>
-<p>然后调用方法 <code>init</code> 对 BMI088 的进行配置, 如：</p>
+<p>然后调用方法 <code>imuInit</code> 对 BMI088 的进行配置, 如：</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">imu_ptr</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">imu</span><span class="o">::</span><span class="n">kBMI088ErrStateNoErr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">imu_ptr</span><span class="o">-&gt;</span><span class="n">imuInit</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">hw_imu</span><span class="o">::</span><span class="n">kBMI088ErrStateNoErr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>在配置成功后，可调用方法 <code>getData</code> 获取传感器数据，如：</p>
@@ -3191,323 +3086,13 @@
 <ul>
 <li>可以传入空指针 <code>nullptr</code> 作为参数，此时不会读取对应的数据</li>
 </ul>
-<h3 id="组件说明">组件说明<a class="headerlink" href="#组件说明" title="链接到此节">&para;</a></h3>
-<h4 id="bmi088hwconfig-结构体"><code>BMI088HWConfig</code> 结构体<a class="headerlink" href="#bmi088hwconfig-结构体" title="链接到此节">&para;</a></h4>
-<p>BMI088 硬件配置</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称</th>
-<th style="text-align: left;">类型</th>
-<th style="text-align: left;">示例值</th>
-<th style="text-align: left;">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>hspi</code></td>
-<td style="text-align: left;"><code>SPI_HandleTypeDef*</code></td>
-<td style="text-align: left;"><code>&amp;hspi1</code></td>
-<td style="text-align: left;">IMU 对应的 SPI 句柄的指针</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>acc_cs_port</code></td>
-<td style="text-align: left;"><code>GPIO_TypeDef*</code></td>
-<td style="text-align: left;"><code>GPIOA</code></td>
-<td style="text-align: left;">加速度计片选端口</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>acc_cs_pin</code></td>
-<td style="text-align: left;"><code>uint32_t</code></td>
-<td style="text-align: left;"><code>GPIO_PIN_4</code></td>
-<td style="text-align: left;">加速度计片选端口</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>gyro_cs_port</code></td>
-<td style="text-align: left;"><code>GPIO_TypeDef*</code></td>
-<td style="text-align: left;"><code>GPIOB</code></td>
-<td style="text-align: left;">陀螺仪片选端口</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>gyro_cs_pin</code></td>
-<td style="text-align: left;"><code>uint32_t</code></td>
-<td style="text-align: left;"><code>GPIO_PIN_0</code></td>
-<td style="text-align: left;">陀螺仪片选引脚</td>
-</tr>
-</tbody>
-</table>
-<h4 id="bmi088config-结构体"><code>BMI088Config</code> 结构体<a class="headerlink" href="#bmi088config-结构体" title="链接到此节">&para;</a></h4>
-<p>BMI088 硬件配置</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称</th>
-<th style="text-align: left;">类型</th>
-<th style="text-align: left;">示例值</th>
-<th style="text-align: left;">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>acc_range</code></td>
-<td style="text-align: left;"><code>BMI088AccRange</code></td>
-<td style="text-align: left;"><code>kBMI088AccRange3G</code></td>
-<td style="text-align: left;">BMI088 加速度计量程，单位：<span class="arithmatex">\(\rm g\)</span></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>acc_odr</code></td>
-<td style="text-align: left;"><code>BMI088AccOdr</code></td>
-<td style="text-align: left;"><code>kBMI088AccOdr1600</code></td>
-<td style="text-align: left;">BMI088 加速度计输出频率（Output Data Rate），单位：<span class="arithmatex">\(\rm{Hz}\)</span></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>acc_osr</code></td>
-<td style="text-align: left;"><code>BMI088AccOsr</code></td>
-<td style="text-align: left;"><code>kBMI088AccOsr4</code></td>
-<td style="text-align: left;">加速度计过采样率（Oversampling Rate）</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>gyro_range</code></td>
-<td style="text-align: left;"><code>BMI088GyroRange</code></td>
-<td style="text-align: left;"><code>kBMI088GyroRange1000Dps</code></td>
-<td style="text-align: left;">BMI088 陀螺仪量程，单位：<span class="arithmatex">\(\rm{deg/s}\)</span></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>gyro_odr_fbw</code></td>
-<td style="text-align: left;"><code>BMI088GyroOdrFbw</code></td>
-<td style="text-align: left;"><code>kBMI088GyroOdrFbw1000_116</code></td>
-<td style="text-align: left;">BMI088 陀螺仪输出频率（Output Data Rate）与滤波器带宽（Filter Bandwidth），单位：<span class="arithmatex">\(\rm{Hz}\)</span></td>
-</tr>
-</tbody>
-</table>
-<h4 id="bmi088-类"><code>BMI088</code> 类<a class="headerlink" href="#bmi088-类" title="链接到此节">&para;</a></h4>
-<h5 id="public">public<a class="headerlink" href="#public" title="链接到此节">&para;</a></h5>
-<p>属性</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称</th>
-<th style="text-align: left;">类型</th>
-<th style="text-align: left;">示例值</th>
-<th style="text-align: left;">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>kHspi_</code></td>
-<td style="text-align: left;"><code>SPI_HandleTypeDef* const</code></td>
-<td style="text-align: left;"><code>&amp;hspi1</code></td>
-<td style="text-align: left;">IMU 对应的 SPI 句柄的指针</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>kAccCsPort_</code></td>
-<td style="text-align: left;"><code>GPIO_TypeDef* const</code></td>
-<td style="text-align: left;"><code>GPIOA</code></td>
-<td style="text-align: left;">加速度计片选端口</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>kAccCsPin_</code></td>
-<td style="text-align: left;"><code>const uint32_t</code></td>
-<td style="text-align: left;"><code>GPIO_PIN_4</code></td>
-<td style="text-align: left;">加速度计片选端口</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>kGyroCsPort_</code></td>
-<td style="text-align: left;"><code>GPIO_TypeDef* const</code></td>
-<td style="text-align: left;"><code>GPIOB</code></td>
-<td style="text-align: left;">陀螺仪片选端口</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>kGyroCsPin_</code></td>
-<td style="text-align: left;"><code>const uint32_t</code></td>
-<td style="text-align: left;"><code>GPIO_PIN_0</code></td>
-<td style="text-align: left;">陀螺仪片选引脚</td>
-</tr>
-</tbody>
-</table>
-<p>方法</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称 <img width=250/></th>
-<th style="text-align: left;">参数说明</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>BMI088</code></td>
-<td style="text-align: left;"><code>hw_config</code>: 硬件配置</br><code>config</code>: 设备配置</br><code>rot_mat_flatten</code>: 旋转矩阵（展平）[<span class="arithmatex">\(r_{0,0}\)</span> <span class="arithmatex">\(r_{0,1}\)</span> <span class="arithmatex">\(r_{0,2}\)</span> <span class="arithmatex">\(r_{1,0}\)</span> <span class="arithmatex">\(r_{1,1}\)</span> <span class="arithmatex">\(r_{1,2}\)</span> <span class="arithmatex">\(r_{2,0}\)</span> <span class="arithmatex">\(r_{2,1}\)</span> <span class="arithmatex">\(r_{2,2}\)</span>]，使用后可释放</td>
-<td>BMI088 初始化</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>~BMI088</code></td>
-<td style="text-align: left;">/</td>
-<td>BMI088 析构函数</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>setInput</code></td>
-<td style="text-align: left;"><code>input</code>: 发给电调的期望值</td>
-<td>设定发给电调的期望值</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>init</code></td>
-<td style="text-align: left;"><code>self_test</code>: 是否开启传感器自检测</br>返回: 错误状态</td>
-<td>进行 BMI088 芯片配置，该函数内部会阻塞运行，请不要在中断中调用</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>getData</code></td>
-<td style="text-align: left;"><code>acc_data</code>: 加速度计三轴数据，[<span class="arithmatex">\(a_x\)</span> <span class="arithmatex">\(a_y\)</span> <span class="arithmatex">\(a_z\)</span>]，单位：<span class="arithmatex">\(\rm{m/s^2}\)</span></br><code>gyro_data</code>: 陀螺仪三轴数据，[<span class="arithmatex">\(\omega_x\)</span> <span class="arithmatex">\(\omega_y\)</span> <span class="arithmatex">\(\omega_z\)</span>]，单位：<span class="arithmatex">\(\rm{rad/s}\)</span></br><code>temp_ptr</code>: 温度数据指针，单位：℃</td>
-<td>获取传感器数据，传入 <code>null_ptr</code> 则不获取对应数据</td>
-</tr>
-</tbody>
-</table>
-<h5 id="private">private<a class="headerlink" href="#private" title="链接到此节">&para;</a></h5>
-<p>属性</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称</th>
-<th style="text-align: left;">类型</th>
-<th style="text-align: left;">示例值</th>
-<th style="text-align: left;">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>config_</code></td>
-<td style="text-align: left;"><code>BMI088Config</code></td>
-<td style="text-align: left;">/</td>
-<td style="text-align: left;">BMI088 设备配置</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rot_mat_flatten_</code></td>
-<td style="text-align: left;"><code>float*</code></td>
-<td style="text-align: left;">/</td>
-<td style="text-align: left;">展平的旋转矩阵</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rot_mat_</code></td>
-<td style="text-align: left;"><code>arm_matrix_instance_f32</code></td>
-<td style="text-align: left;">/</td>
-<td style="text-align: left;">旋转矩阵</td>
-</tr>
-</tbody>
-</table>
-<p>方法</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称</th>
-<th style="text-align: left;">参数说明</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>accCsL</code></td>
-<td style="text-align: left;">/</td>
-<td>加速度计片选信号拉低</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>accCsH</code></td>
-<td style="text-align: left;">/</td>
-<td>加速度计片选信号拉高</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>gyroCsL</code></td>
-<td style="text-align: left;">/</td>
-<td>陀螺仪片选信号拉低</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>gyroCsH</code></td>
-<td style="text-align: left;">/</td>
-<td>陀螺仪片选信号拉高</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>accInit</code></td>
-<td style="text-align: left;"><code>self_test</code>: 是否进行自检测</br>返回: 错误状态</td>
-<td>加速度计配置</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>gyroInit</code></td>
-<td style="text-align: left;"><code>self_test</code>: 是否进行自检测</br>返回: 错误状态</td>
-<td>陀螺仪配置</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>accSelfTest</code></td>
-<td style="text-align: left;">返回: 错误状态</td>
-<td>加速度计自检测</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>gyroSelfTest</code></td>
-<td style="text-align: left;">返回: 错误状态</td>
-<td>陀螺仪自检测</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>getGyroData</code></td>
-<td style="text-align: left;"><code>gyro_data</code>: 陀螺仪三轴数据，[<span class="arithmatex">\(\omega_x\)</span> <span class="arithmatex">\(\omega_y\)</span> <span class="arithmatex">\(\omega_z\)</span>]，单位：<span class="arithmatex">\(\rm{rad/s}\)</span></td>
-<td>获取陀螺仪数据</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>getAccData</code></td>
-<td style="text-align: left;"><code>acc_data</code>: 加速度计三轴数据，[<span class="arithmatex">\(a_x\)</span> <span class="arithmatex">\(a_y\)</span> <span class="arithmatex">\(a_z\)</span>]，单位：<span class="arithmatex">\(\rm{m/s^2}\)</span></td>
-<td>获取加速度计数据</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>getTemp</code></td>
-<td style="text-align: left;">返回: 温度，单位：℃</td>
-<td>获取温度数据</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>gyroWrite</code></td>
-<td style="text-align: left;"><code>mem_addr</code>: 寄存器地址</br><code>value</code>: 待写入数据</td>
-<td>向陀螺仪寄存器写入数据</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>读取陀螺仪寄存器数据</code></td>
-<td style="text-align: left;"><code>mem_addr</code>: 寄存器地址</br>返回: 读取数据</td>
-<td>读取陀螺仪寄存器数据</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>gyroMultiRead</code></td>
-<td style="text-align: left;"><code>start_mem_addr</code>: 寄存器起始地址</br><code>len</code>: 带读取数据长度</br><code>rx_data</code>: 读取得到的数据</td>
-<td>陀螺仪多寄存器数据读取</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>accWrite</code></td>
-<td style="text-align: left;"><code>mem_addr</code>: 寄存器地址</br><code>value</code>: 待写入数据</td>
-<td>向加速度计寄存器写入数据</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>accRead</code></td>
-<td style="text-align: left;"><code>mem_addr</code>: 寄存器地址</br>返回: 读取数据</td>
-<td>读取加速度计寄存器数据</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>accMultiRead</code></td>
-<td style="text-align: left;"><code>start_mem_addr</code>: 寄存器起始地址</br><code>len</code>: 带读取数据长度</br><code>rx_data</code>: 读取得到的数据</td>
-<td>加速度计多寄存器数据读取</td>
-</tr>
-</tbody>
-</table>
-<h4 id="内部函数">内部函数<a class="headerlink" href="#内部函数" title="链接到此节">&para;</a></h4>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">名称 <img width=250/></th>
-<th style="text-align: left;">参数说明</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>DelayUs</code></td>
-<td style="text-align: left;"><code>us</code>: 需要延时的时间，单位：<span class="arithmatex">\(\rm{\mu s}\)</span></td>
-<td>微秒级延时</td>
-</tr>
-</tbody>
-</table>
+<blockquote>
+<p><strong>注意：由于内部使用了硬件句柄，因此如果计划将实例作为全局变量时（全局变量初始化时对应的硬件句柄可能会还未初始化完毕），建议采取一下方法：</strong>
+1. 声明指针，后续通过 <strong><code>new</code></strong> 的方式进行初始化。
+2. 声明指针，后续通过返回函数（CreateXXXIns）中的静态变量（因为该变量只有在<strong>第一次调用</strong>该函数时才会运行初始化程序）进行初始化。
+3. 使用无参构造函数，后续调用 <strong><code>init</code></strong> 方法进行初始化。
+4. 使用无参构造函数，后续使用<strong>拷贝赋值函数</strong>或是<strong>移动赋值函数</strong>进行初始化。</p>
+</blockquote>
 <h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">&para;</a></h2>
 <h3 id="bmi088-手册">BMI088 手册<a class="headerlink" href="#bmi088-手册" title="链接到此节">&para;</a></h3>
 <p><a href="../IMU%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/Bosch-BMI088.pdf">BMI088 数据手册</a></p>
@@ -3558,7 +3143,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-15</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-27</span>
   </span>
 
     
