@@ -1817,11 +1817,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#历史版本" class="md-nav__link">
+  <a href="#调试技巧" class="md-nav__link">
     <span class="md-ellipsis">
-      历史版本
+      调试技巧
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#附录" class="md-nav__link">
+    <span class="md-ellipsis">
+      附录
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#版本说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      版本说明
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3394,11 +3418,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#历史版本" class="md-nav__link">
+  <a href="#调试技巧" class="md-nav__link">
     <span class="md-ellipsis">
-      历史版本
+      调试技巧
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#附录" class="md-nav__link">
+    <span class="md-ellipsis">
+      附录
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#版本说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      版本说明
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3434,6 +3482,7 @@
 
 
 <h1 id="pid-控制器">PID 控制器<a class="headerlink" href="#pid-控制器" title="链接到此节">&para;</a></h1>
+<p><img src = "https://img.shields.io/badge/version-1.0.1-green"> <sp> <img src = "https://img.shields.io/badge/author-ZhouShichan-lightgrey"></p>
 <h2 id="标准-pid">标准 PID<a class="headerlink" href="#标准-pid" title="链接到此节">&para;</a></h2>
 <p>PID（<em>Proportional-Integral-Derivative</em>）控制器是一种线性控制器，根据被控对象给定值 <span class="arithmatex">\(r(t)\)</span> 和实际值 <span class="arithmatex">\(y(t)\)</span> 的控制偏差</p>
 <div class="arithmatex">\[
@@ -3610,182 +3659,247 @@ $$
 </figure>
 <p><code>MultiNidesPid</code> 内含以 <code>BasicPid</code> 作为节点的容器，通过不同的数据传输方式，可以实现串行或并行计算，具体如图所示。用户可以自行对 <code>BasicPid</code> 进行二次开发。</p>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
+<p>在项目中引用头文件：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;pid.hpp&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">hw_pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">pid</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
 <h3 id="basicpid">BasicPid<a class="headerlink" href="#basicpid" title="链接到此节">&para;</a></h3>
 <h4 id="实例化一个-pid-控制器">实例化一个 PID 控制器<a class="headerlink" href="#实例化一个-pid-控制器" title="链接到此节">&para;</a></h4>
 <p>创建一个使用默认参数的 PID 控制器实例：</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 <p>创建一个指定 <span class="arithmatex">\(K_p\)</span> , <span class="arithmatex">\(K_i\)</span> , <span class="arithmatex">\(K_d\)</span> 而其他参数默认的 PID 控制器实例：</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="w"> </span><span class="nf">pid</span><span class="p">(</span><span class="mf">0.6f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="w"> </span><span class="nf">pid</span><span class="p">(</span><span class="mf">0.6f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <p>创建一个指定所有参数的 PID 控制器实例：</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
-<span class="normal"><a href="#__codelineno-2-2">2</a></span>
-<span class="normal"><a href="#__codelineno-2-3">3</a></span>
-<span class="normal"><a href="#__codelineno-2-4">4</a></span>
-<span class="normal"><a href="#__codelineno-2-5">5</a></span>
-<span class="normal"><a href="#__codelineno-2-6">6</a></span>
-<span class="normal"><a href="#__codelineno-2-7">7</a></span>
-<span class="normal"><a href="#__codelineno-2-8">8</a></span>
-<span class="normal"><a href="#__codelineno-2-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">const</span><span class="w"> </span><span class="n">pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="o">::</span><span class="n">Params</span><span class="w"> </span><span class="n">kBasicPidParams</span><span class="o">=</span><span class="p">{</span><span class="w">  </span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="p">.</span><span class="n">auto_reset</span><span class="w"> </span><span class="o">=</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="c1">// 不开启自动清零  </span>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="p">.</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.6f</span><span class="p">,</span><span class="w">  </span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">  </span><span class="p">.</span><span class="n">ki</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w">  </span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span><span class="p">.</span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w">  </span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">  </span><span class="p">.</span><span class="n">max_interval_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="c1">// 两次调用间隔超过5ms，认为采样异常，若此时开启自动清零，则会将 PID 动态数据重置为初始值  </span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">  </span><span class="p">.</span><span class="n">out_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pid</span><span class="o">::</span><span class="n">OutLimit</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="mf">-100.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">100.0f</span><span class="p">),</span><span class="w">  </span><span class="c1">// 开启输出限幅，限幅范围为[-100, 100]  </span>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">  </span><span class="c1">// 其他优化项目</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="p">};</span>
-</code></pre></div></td></tr></table></div>
-<p>为了减少内存占用，建议使用常量或局部变量。
-尽管 <code>BasicPid::Params</code> 类型与 <code>BasicPidParams</code> 类型相同，但还是建议使用 <code>BasicPid::Params</code> 类型。</p>
-<h4 id="修改实例化后的参数">修改实例化后的参数<a class="headerlink" href="#修改实例化后的参数" title="链接到此节">&para;</a></h4>
-<p>提供了修改参数的接口 <code>params()</code>。</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
 <span class="normal"><a href="#__codelineno-3-4">4</a></span>
 <span class="normal"><a href="#__codelineno-3-5">5</a></span>
 <span class="normal"><a href="#__codelineno-3-6">6</a></span>
-<span class="normal"><a href="#__codelineno-3-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1">// 单个参数的修改</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">pid</span><span class="p">.</span><span class="n">params</span><span class="p">().</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="c1">// 设置比例系数为 10  </span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">pid</span><span class="p">.</span><span class="n">params</span><span class="p">().</span><span class="n">auto_reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// 开启自动清零  </span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="n">pid</span><span class="p">.</span><span class="n">params</span><span class="p">().</span><span class="n">inte_anti_windup</span><span class="p">.</span><span class="n">setParams</span><span class="p">(</span><span class="nb">true</span><span class="w"> </span><span class="p">,</span><span class="mf">-0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">);</span><span class="w"> </span><span class="c1">// 开启积分抗饱和优化  </span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="c1">// 一次性修改所有参数  </span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="k">const</span><span class="w"> </span><span class="n">pid</span><span class="o">::</span><span class="n">BasicPidParams</span><span class="o">::</span><span class="n">Params</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">  </span>
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="n">pid</span><span class="p">.</span><span class="n">params</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="p">;</span><span class="w">   </span>
+<span class="normal"><a href="#__codelineno-3-7">7</a></span>
+<span class="normal"><a href="#__codelineno-3-8">8</a></span>
+<span class="normal"><a href="#__codelineno-3-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">const</span><span class="w"> </span><span class="n">hw_pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="o">::</span><span class="n">Params</span><span class="w"> </span><span class="n">kBasicPidParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="p">.</span><span class="n">auto_reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="c1">// 不开启自动清零</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="p">.</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.6f</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="p">.</span><span class="n">ki</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">  </span><span class="p">.</span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="p">.</span><span class="n">max_interval_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="c1">// 两次调用间隔超过5ms，认为采样异常，若此时开启自动清零，则会将 PID 动态数据重置为初始值</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">  </span><span class="p">.</span><span class="n">out_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_pid</span><span class="o">::</span><span class="n">OutLimit</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="mf">-100.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">100.0f</span><span class="p">),</span><span class="w">  </span><span class="c1">// 开启输出限幅，限幅范围为[-100, 100]</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">  </span><span class="c1">// 其他优化项目</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<blockquote>
-<p>注意：一次性修改所有参数的用法中，如果 pid 中已经修改了部分参数，但 params 中未作对应的修改，即 params 采用默认值，那么 pid 的参数将会被覆写成默认值</p>
-</blockquote>
-<h4 id="调用-calc-函数进行计算">调用 <code>calc</code> 函数进行计算<a class="headerlink" href="#调用-calc-函数进行计算" title="链接到此节">&para;</a></h4>
-<p><code>cpp
- namespace pid = hello_world::pid;  
- pid::BasicPid pid = ...;  
- float ref = ...; // 参考值  
- float fdb = ...; // 反馈值  
- float ffd = ...; // 前馈值  
- float out = ...; // 存储输出值  
- // 不使用前馈值进行计算  
- pid.calc(&amp;ref, &amp;fdb, nullptr, &amp;out);  
- // 使用前馈值进行计算  
- pid.calc(&amp;ref, &amp;fdb, &amp;ffd, &amp;out);</code></p>
-<h4 id="监视数据">监视数据<a class="headerlink" href="#监视数据" title="链接到此节">&para;</a></h4>
-<p>提供了数据查看接口 <code>datas()</code>。</p>
+<p>为了减少内存占用，建议使用常量或局部变量。
+尽管 <code>BasicPid::Params</code> 类型与 <code>BasicPidParams</code> 类型相同，但还是建议使用 <code>BasicPid::Params</code> 类型。</p>
+<h4 id="修改实例化后的参数">修改实例化后的参数<a class="headerlink" href="#修改实例化后的参数" title="链接到此节">&para;</a></h4>
+<p>提供了修改参数的接口 <code>params()</code>。</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span>
 <span class="normal"><a href="#__codelineno-4-4">4</a></span>
 <span class="normal"><a href="#__codelineno-4-5">5</a></span>
 <span class="normal"><a href="#__codelineno-4-6">6</a></span>
-<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">pid</span><span class="p">;</span><span class="w">  </span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w"> </span><span class="n">pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="w"> </span><span class="n">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">  </span>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w"> </span><span class="n">pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="o">::</span><span class="n">Datas</span><span class="w"> </span><span class="n">debug_datas</span><span class="p">;</span><span class="w">  </span>
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">Task</span><span class="p">(){</span><span class="w">  </span>
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">   </span><span class="n">pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(...);</span><span class="w">  </span>
-<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">   </span><span class="n">debug_datas</span><span class="o">=</span><span class="n">pid</span><span class="p">.</span><span class="n">datas</span><span class="p">();</span><span class="w">  </span>
-<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w"> </span><span class="p">};</span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1">// 单个参数的修改</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">pid</span><span class="p">.</span><span class="n">params</span><span class="p">().</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="c1">// 设置比例系数为 10</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">pid</span><span class="p">.</span><span class="n">params</span><span class="p">().</span><span class="n">auto_reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// 开启自动清零</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="n">pid</span><span class="p">.</span><span class="n">params</span><span class="p">().</span><span class="n">inte_anti_windup</span><span class="p">.</span><span class="n">setParams</span><span class="p">(</span><span class="nb">true</span><span class="w"> </span><span class="p">,</span><span class="mf">-0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">);</span><span class="w"> </span><span class="c1">// 开启积分抗饱和优化</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="c1">// 一次性修改所有参数</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="k">const</span><span class="w"> </span><span class="n">hw_pid</span><span class="o">::</span><span class="n">BasicPidParams</span><span class="o">::</span><span class="n">Params</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="n">pid</span><span class="p">.</span><span class="n">params</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>注意：一次性修改所有参数的用法中，如果 pid 中已经修改了部分参数，但 params 中未作对应的修改，即 params 采用默认值，那么 pid 的参数将会被覆写成默认值</p>
+</blockquote>
+<h4 id="调用-calc-函数进行计算">调用 <code>calc</code> 函数进行计算<a class="headerlink" href="#调用-calc-函数进行计算" title="链接到此节">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span>
+<span class="normal"><a href="#__codelineno-5-7">7</a></span>
+<span class="normal"><a href="#__codelineno-5-8">8</a></span>
+<span class="normal"><a href="#__codelineno-5-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="w"> </span><span class="n">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="kt">float</span><span class="w"> </span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 参考值</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="kt">float</span><span class="w"> </span><span class="n">fdb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 反馈值</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="kt">float</span><span class="w"> </span><span class="n">ffd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 前馈值</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="kt">float</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 存储输出值</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="c1">// 不使用前馈值进行计算</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="n">pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="c1">// 使用前馈值进行计算</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="n">pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ffd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="监视数据">监视数据<a class="headerlink" href="#监视数据" title="链接到此节">&para;</a></h4>
+<p>提供了数据查看接口 <code>datas()</code>。</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span>
+<span class="normal"><a href="#__codelineno-6-4">4</a></span>
+<span class="normal"><a href="#__codelineno-6-5">5</a></span>
+<span class="normal"><a href="#__codelineno-6-6">6</a></span>
+<span class="normal"><a href="#__codelineno-6-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="w"> </span><span class="n">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">BasicPid</span><span class="o">::</span><span class="n">Datas</span><span class="w"> </span><span class="n">debug_datas</span><span class="p">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Task</span><span class="p">()</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="p">{</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">  </span><span class="n">pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(...);</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">  </span><span class="n">debug_datas</span><span class="o">=</span><span class="n">pid</span><span class="p">.</span><span class="n">datas</span><span class="p">();</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="multinodespid">MultiNodesPid<a class="headerlink" href="#multinodespid" title="链接到此节">&para;</a></h3>
-<p><code>MultiNodesPid</code> 依赖 <code>std::list</code> 实现，提供部分容器操作接口。为更好使用该类，请优先阅读<code>std::list</code> 的相关事项。</p>
+<p><code>MultiNodesPid</code> 依赖 <code>tools::list</code> 实现，提供部分容器操作接口。为更好使用该类，请优先阅读<code>tools::list</code> 的相关事项。</p>
 <h4 id="实例化与参数配置">实例化与参数配置<a class="headerlink" href="#实例化与参数配置" title="链接到此节">&para;</a></h4>
 <p>提供了四种构造函数，通用参数为多节点 PID 控制器的类型和输出限幅，不同的是指定节点数量和初始化数据的方式。其中，多节点 PID 控制器的输出限幅与其内部节点 PID 的输出限幅完全无关，即，其内部节点 PID 的输出限幅需要单独设置。</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-5-10">10</a></span>
-<span class="normal"><a href="#__codelineno-5-11">11</a></span>
-<span class="normal"><a href="#__codelineno-5-12">12</a></span>
-<span class="normal"><a href="#__codelineno-5-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">pid</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="c1">// 实例化三节点的串行 PID 控制器，多节点 PID 控制的输出限制为 -16000 ~ 16000，内部节点参数均为默认值</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="w"> </span><span class="nf">cascade_pid</span><span class="p">(</span><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPidType</span><span class="o">::</span><span class="n">kCascade</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="o">::</span><span class="n">OutLimit</span><span class="p">(</span><span class="nb">true</span><span class="err">，</span><span class="mi">-16000</span><span class="p">,</span><span class="w"> </span><span class="mi">16000</span><span class="p">),</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="c1">// 节点参数修改</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="n">multi_nodes_pid</span><span class="p">.</span><span class="n">paramsAt</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.6</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="n">multi_nodes_pid</span><span class="p">.</span><span class="n">paramsAt</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.6</span><span class="p">;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="n">multi_nodes_pid</span><span class="p">.</span><span class="n">paramsAt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">  </span><span class="p">.</span><span class="n">auto_reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">  </span><span class="p">.</span><span class="n">out_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pid</span><span class="o">::</span><span class="n">OutLimit</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="mi">-7</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">),</span><span class="w"> </span>
-<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="p">};</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="c1">// 实例化三节点的并行 PID 控制器，多节点 PID 控制的输出限制为 -16000 ~ 16000，内部节点参数在初始化时指定</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="k">const</span><span class="w"> </span><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="o">::</span><span class="n">Params</span><span class="w"> </span><span class="n">params_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{...},{...},{...}};</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="w"> </span><span class="nf">parallel_pid</span><span class="p">(</span><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPidType</span><span class="o">::</span><span class="n">kParallel</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="o">::</span><span class="n">OutLimit</span><span class="p">(</span><span class="nb">true</span><span class="err">，</span><span class="mi">-16000</span><span class="p">,</span><span class="w"> </span><span class="mi">16000</span><span class="p">),</span><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="o">::</span><span class="n">ParamsList</span><span class="p">(</span><span class="n">params_arr</span><span class="p">,</span><span class="n">params_arr</span><span class="o">+</span><span class="mi">3</span><span class="p">));</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1">// 实例化三节点的串行 PID 控制器，多节点 PID 控制的输出限制为 -16000 ~ 16000，内部节点参数均为默认值</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="w"> </span><span class="nf">cascade_pid</span><span class="p">(</span><span class="n">hw_pid</span><span class="o">::</span><span class="n">kMultiNodesPidTypeCascade</span><span class="p">,</span><span class="w"> </span><span class="n">hw_pid</span><span class="o">::</span><span class="n">OutLimit</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="mi">-16000</span><span class="p">,</span><span class="w"> </span><span class="mi">16000</span><span class="p">),</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="c1">// 节点参数修改</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="n">multi_nodes_pid</span><span class="p">.</span><span class="n">paramsAt</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.6</span><span class="p">;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="n">multi_nodes_pid</span><span class="p">.</span><span class="n">paramsAt</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.6</span><span class="p">;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="n">multi_nodes_pid</span><span class="p">.</span><span class="n">paramsAt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">  </span><span class="p">.</span><span class="n">auto_reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">  </span><span class="p">.</span><span class="n">out_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_pid</span><span class="o">::</span><span class="n">OutLimit</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="mi">-7</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">),</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="p">};</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="c1">// 实例化三节点的并行 PID 控制器，多节点 PID 控制的输出限制为 -16000 ~ 16000，内部节点参数在初始化时指定</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="k">const</span><span class="w"> </span><span class="n">hw_pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="o">::</span><span class="n">Params</span><span class="w"> </span><span class="n">params_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{...},</span><span class="w"> </span><span class="p">{...},</span><span class="w"> </span><span class="p">{...}};</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="w"> </span><span class="nf">parallel_pid</span><span class="p">(</span><span class="n">hw_pid</span><span class="o">::</span><span class="n">kMultiNodesPidTypeParallel</span><span class="p">,</span><span class="w"> </span><span class="n">hw_pid</span><span class="o">::</span><span class="n">OutLimit</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="mi">-16000</span><span class="p">,</span><span class="w"> </span><span class="mi">16000</span><span class="p">),</span><span class="w"> </span><span class="n">hw_pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="o">::</span><span class="n">ParamsList</span><span class="p">(</span><span class="n">params_arr</span><span class="p">,</span><span class="w"> </span><span class="n">params_arr</span><span class="o">+</span><span class="mi">3</span><span class="p">));</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="计算">计算<a class="headerlink" href="#计算" title="链接到此节">&para;</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-6-10">10</a></span>
-<span class="normal"><a href="#__codelineno-6-11">11</a></span>
-<span class="normal"><a href="#__codelineno-6-12">12</a></span>
-<span class="normal"><a href="#__codelineno-6-13">13</a></span>
-<span class="normal"><a href="#__codelineno-6-14">14</a></span>
-<span class="normal"><a href="#__codelineno-6-15">15</a></span>
-<span class="normal"><a href="#__codelineno-6-16">16</a></span>
-<span class="normal"><a href="#__codelineno-6-17">17</a></span>
-<span class="normal"><a href="#__codelineno-6-18">18</a></span>
-<span class="normal"><a href="#__codelineno-6-19">19</a></span>
-<span class="normal"><a href="#__codelineno-6-20">20</a></span>
-<span class="normal"><a href="#__codelineno-6-21">21</a></span>
-<span class="normal"><a href="#__codelineno-6-22">22</a></span>
-<span class="normal"><a href="#__codelineno-6-23">23</a></span>
-<span class="normal"><a href="#__codelineno-6-24">24</a></span>
-<span class="normal"><a href="#__codelineno-6-25">25</a></span>
-<span class="normal"><a href="#__codelineno-6-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">pid</span><span class="p">;</span><span class="w">  </span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="w"> </span><span class="n">two_nodes_cascade_pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">  </span>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="w"> </span><span class="n">two_nodes_parallel_pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">  </span>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">CascadeCalc</span><span class="p">(){</span><span class="w">  </span>
-<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">ref</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 参考值，请注意参考值的数组大小需要大于 1 ，否则会出现数组越界  </span>
-<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">fdb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 反馈值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界  </span>
-<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">ffd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 前馈值  </span>
-<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 存储输出值  </span>
-<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">  </span><span class="c1">// 不使用前馈值进行计算  </span>
-<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">  </span><span class="n">two_nodes_cascade_pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span><span class="w">  </span>
-<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">  </span><span class="c1">// 使用前馈值进行计算  </span>
-<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">  </span><span class="n">two_nodes_cascade_pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ffd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span><span class="w">  </span>
-<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">  </span><span class="c1">// 或者使用接口: cascadeCalc  </span>
-<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="p">};</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15"></a>
-<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="kt">void</span><span class="w"> </span><span class="nf">ParallelCacl</span><span class="p">(){</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">ref</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 参考值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界    </span>
-<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">fdb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 反馈值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界  </span>
-<a id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">ffd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 前馈值  </span>
-<a id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 存储输出值  </span>
-<a id="__codelineno-6-21" name="__codelineno-6-21"></a><span class="w">  </span><span class="c1">// 不使用前馈值进行计算  </span>
-<a id="__codelineno-6-22" name="__codelineno-6-22"></a><span class="w">  </span><span class="n">two_nodes_parallel_pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span><span class="w">  </span>
-<a id="__codelineno-6-23" name="__codelineno-6-23"></a><span class="w">  </span><span class="c1">// 使用前馈值进行计算  </span>
-<a id="__codelineno-6-24" name="__codelineno-6-24"></a><span class="w">  </span><span class="n">two_nodes_parallel_pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ffd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span><span class="w">  </span>
-<a id="__codelineno-6-25" name="__codelineno-6-25"></a><span class="w">  </span><span class="c1">// 或者使用接口: parallelCalc  </span>
-<a id="__codelineno-6-26" name="__codelineno-6-26"></a><span class="p">};</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="w"> </span><span class="n">two_nodes_cascade_pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="w"> </span><span class="n">two_nodes_parallel_pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">CascadeCalc</span><span class="p">()</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="p">{</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">ref</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 参考值，请注意参考值的数组大小需要大于 1 ，否则会出现数组越界</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">fdb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 反馈值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">ffd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 前馈值</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 存储输出值</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">  </span><span class="c1">// 不使用前馈值进行计算</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">  </span><span class="n">two_nodes_cascade_pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">  </span><span class="c1">// 使用前馈值进行计算</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">  </span><span class="n">two_nodes_cascade_pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ffd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">  </span><span class="c1">// 或者使用接口: cascadeCalc</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="p">};</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="kt">void</span><span class="w"> </span><span class="nf">ParallelCacl</span><span class="p">()</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="p">{</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">ref</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 参考值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">fdb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 反馈值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">ffd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 前馈值</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"> </span><span class="c1">// 存储输出值</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="w">  </span><span class="c1">// 不使用前馈值进行计算</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="w">  </span><span class="n">two_nodes_parallel_pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="w">  </span><span class="c1">// 使用前馈值进行计算</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a><span class="w">  </span><span class="n">two_nodes_parallel_pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">fdb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ffd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">);</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="w">  </span><span class="c1">// 或者使用接口: parallelCalc</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="数据监视">数据监视<a class="headerlink" href="#数据监视" title="链接到此节">&para;</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
-<span class="normal"><a href="#__codelineno-7-2">2</a></span>
-<span class="normal"><a href="#__codelineno-7-3">3</a></span>
-<span class="normal"><a href="#__codelineno-7-4">4</a></span>
-<span class="normal"><a href="#__codelineno-7-5">5</a></span>
-<span class="normal"><a href="#__codelineno-7-6">6</a></span>
-<span class="normal"><a href="#__codelineno-7-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">hello_world</span><span class="o">::</span><span class="nn">pid</span><span class="p">;</span><span class="w">  </span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="w"> </span><span class="n">multi_nodes_pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">  </span>
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="o">::</span><span class="n">Datas</span><span class="w"> </span><span class="n">debug_datas</span><span class="p">;</span><span class="w">  </span>
-<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Task</span><span class="p">(){</span><span class="w">  </span>
-<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">  </span><span class="n">multi_nodes_pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(...);</span><span class="w">  </span>
-<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="w">  </span><span class="n">debug_datas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">multi_nodes_pid</span><span class="p">.</span><span class="n">datasAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">  </span>
-<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="p">};</span><span class="w">  </span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span>
+<span class="normal"><a href="#__codelineno-9-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="w"> </span><span class="n">multi_nodes_pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">hw_pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="o">::</span><span class="n">Datas</span><span class="w"> </span><span class="n">debug_datas</span><span class="p">;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Task</span><span class="p">()</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="p">{</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">  </span><span class="n">multi_nodes_pid</span><span class="p">.</span><span class="n">calc</span><span class="p">(...);</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">  </span><span class="n">debug_datas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">multi_nodes_pid</span><span class="p">.</span><span class="n">datasAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<p>注意：由于使用 <code>std</code> 标准库链表，在 Ozone 中，不能通过数据监视窗口查看链表数据。</p>
-<h2 id="历史版本">历史版本<a class="headerlink" href="#历史版本" title="链接到此节">&para;</a></h2>
+<p>注意：由于使用链表，在 Ozone 中，不能通过数据监视窗口查看链表数据。</p>
+<h2 id="调试技巧">调试技巧<a class="headerlink" href="#调试技巧" title="链接到此节">&para;</a></h2>
+<p>进行 PID 调参时，可以通过如下方式进行在线调参（避免重烧代码）：</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Task</span><span class="p">()</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="p">{</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">hw_hello_world</span><span class="o">::</span><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="o">::</span><span class="n">Params</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pid_ptr</span><span class="o">-&gt;</span><span class="n">getParamsAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">  </span><span class="n">pid_ptr</span><span class="o">-&gt;</span><span class="n">getParamsAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="p">;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>或是</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">static</span><span class="w"> </span><span class="n">pid</span><span class="o">::</span><span class="n">MultiNodesPid</span><span class="o">::</span><span class="n">Params</span><span class="o">*</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Task</span><span class="p">()</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="p">{</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">  </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pid_ptr</span><span class="o">-&gt;</span><span class="n">getParamsAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>然后便可以在 Ozone 中，将 <code>params</code> 变量添加到观察窗口，然后变可以直接修改变量的值，通过以上方法修改的值会导致 PID 控制器中参数同时发送变化，从而实现在线调参的功能。</p>
+<h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">&para;</a></h2>
+<h3 id="版本说明">版本说明<a class="headerlink" href="#版本说明" title="链接到此节">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>版本号</th>
+<th>发布日期</th>
+<th>说明</th>
+<th>贡献者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-1.0.0-green"></td>
+<td>2024.02.24</td>
+<td>PID 算法文档</td>
+<td>周渝松</td>
+</tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-1.0.1-green"></td>
+<td>2024.07.28</td>
+<td>完善 PID 算法文档</td>
+<td>蔡坤镇</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -3808,7 +3922,7 @@ $$
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-24</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-28</span>
   </span>
 
     
