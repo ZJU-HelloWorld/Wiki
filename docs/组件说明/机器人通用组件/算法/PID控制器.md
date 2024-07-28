@@ -1,5 +1,7 @@
 # PID 控制器
 
+<img src = "https://img.shields.io/badge/version-1.0.1-green"> <sp> <img src = "https://img.shields.io/badge/author-ZhouShichan-lightgrey">
+
 ## 标准 PID
 
 PID（_Proportional-Integral-Derivative_）控制器是一种线性控制器，根据被控对象给定值 $r(t)$ 和实际值 $y(t)$ 的控制偏差
@@ -258,6 +260,14 @@ PID 组件提供 `BasicPid` 和 `MultiNodesPid`  两个类来实现 PID 控制�
 
 ## 快速开始
 
+在项目中引用头文件：
+
+```cpp
+#include "pid.hpp"
+
+namespace hw_pid = hello_world::pid;
+```
+
 ### BasicPid
 
 #### 实例化一个 PID 控制器
@@ -265,25 +275,25 @@ PID 组件提供 `BasicPid` 和 `MultiNodesPid`  两个类来实现 PID 控制�
 创建一个使用默认参数的 PID 控制器实例：
 
 ```cpp
-pid::BasicPid pid;
+hw_pid::BasicPid pid;
 ```
 
 创建一个指定 $K_p$ , $K_i$ , $K_d$ 而其他参数默认的 PID 控制器实例：
 
 ```cpp
-pid::BasicPid pid(0.6f, 0.1f, 0.0f);
+hw_pid::BasicPid pid(0.6f, 0.1f, 0.0f);
 ```
 
 创建一个指定所有参数的 PID 控制器实例：
 
 ```cpp
-const pid::BasicPid::Params kBasicPidParams={  
-  .auto_reset =false, // 不开启自动清零  
-  .kp = 0.6f,  
-  .ki = 0.0f,  
-  .kd = 0.0f,  
-  .max_interval_ms = 5, // 两次调用间隔超过5ms，认为采样异常，若此时开启自动清零，则会将 PID 动态数据重置为初始值  
-  .out_limit = pid::OutLimit(true, -100.0f, 100.0f),  // 开启输出限幅，限幅范围为[-100, 100]  
+const hw_pid::BasicPid::Params kBasicPidParams = {
+  .auto_reset = false, // 不开启自动清零
+  .kp = 0.6f,
+  .ki = 0.0f,
+  .kd = 0.0f,
+  .max_interval_ms = 5, // 两次调用间隔超过5ms，认为采样异常，若此时开启自动清零，则会将 PID 动态数据重置为初始值
+  .out_limit = hw_pid::OutLimit(true, -100.0f, 100.0f),  // 开启输出限幅，限幅范围为[-100, 100]
   // 其他优化项目
 };
 ```
@@ -297,29 +307,28 @@ const pid::BasicPid::Params kBasicPidParams={
 
 ```cpp
 // 单个参数的修改
-pid.params().kp = 10; // 设置比例系数为 10  
-pid.params().auto_reset = true; // 开启自动清零  
-pid.params().inte_anti_windup.setParams(true ,-0.5, 0.5); // 开启积分抗饱和优化  
-// 一次性修改所有参数  
-const pid::BasicPidParams::Params params = ...;  
-pid.params() = params;   
+pid.params().kp = 10; // 设置比例系数为 10
+pid.params().auto_reset = true; // 开启自动清零
+pid.params().inte_anti_windup.setParams(true ,-0.5, 0.5); // 开启积分抗饱和优化
+// 一次性修改所有参数
+const hw_pid::BasicPidParams::Params params = ...;
+pid.params() = params;
 ```
 
 > 注意：一次性修改所有参数的用法中，如果 pid 中已经修改了部分参数，但 params 中未作对应的修改，即 params 采用默认值，那么 pid 的参数将会被覆写成默认值
 
 #### 调用 `calc` 函数进行计算
 
- ```cpp
- namespace pid = hello_world::pid;  
- pid::BasicPid pid = ...;  
- float ref = ...; // 参考值  
- float fdb = ...; // 反馈值  
- float ffd = ...; // 前馈值  
- float out = ...; // 存储输出值  
- // 不使用前馈值进行计算  
- pid.calc(&ref, &fdb, nullptr, &out);  
- // 使用前馈值进行计算  
- pid.calc(&ref, &fdb, &ffd, &out);  
+```cpp
+hw_pid::BasicPid pid = ...;
+float ref = ...; // 参考值
+float fdb = ...; // 反馈值
+float ffd = ...; // 前馈值
+float out = ...; // 存储输出值
+// 不使用前馈值进行计算
+pid.calc(&ref, &fdb, nullptr, &out);
+// 使用前馈值进行计算
+pid.calc(&ref, &fdb, &ffd, &out);
 ```
 
 #### 监视数据
@@ -327,85 +336,114 @@ pid.params() = params;
 提供了数据查看接口 `datas()`。
 
 ```cpp
- namespace pid = hello_world::pid;  
- pid::BasicPid pid = ...;  
- pid::BasicPid::Datas debug_datas;  
- void Task(){  
-   pid.calc(...);  
-   debug_datas=pid.datas();  
- };
+hw_pid::BasicPid pid = ...;
+hw_pid::BasicPid::Datas debug_datas;
+void Task()
+{
+  pid.calc(...);
+  debug_datas=pid.datas();
+};
 ```
 
 ### MultiNodesPid
 
-`MultiNodesPid` 依赖 `std::list` 实现，提供部分容器操作接口。为更好使用该类，请优先阅读`std::list` 的相关事项。
+`MultiNodesPid` 依赖 `tools::list` 实现，提供部分容器操作接口。为更好使用该类，请优先阅读`tools::list` 的相关事项。
 
 #### 实例化与参数配置
 
 提供了四种构造函数，通用参数为多节点 PID 控制器的类型和输出限幅，不同的是指定节点数量和初始化数据的方式。其中，多节点 PID 控制器的输出限幅与其内部节点 PID 的输出限幅完全无关，即，其内部节点 PID 的输出限幅需要单独设置。
 
 ```cpp
-namespace pid = hello_world::pid;
 // 实例化三节点的串行 PID 控制器，多节点 PID 控制的输出限制为 -16000 ~ 16000，内部节点参数均为默认值
-pid::MultiNodesPid cascade_pid(pid::MultiNodesPidType::kCascade, pid::OutLimit(true，-16000, 16000), 3);
+hw_pid::MultiNodesPid cascade_pid(hw_pid::kMultiNodesPidTypeCascade, hw_pid::OutLimit(true, -16000, 16000), 3);
 // 节点参数修改
 multi_nodes_pid.paramsAt(0).kp = 0.6;
 multi_nodes_pid.paramsAt(1).kp = 0.6;
 multi_nodes_pid.paramsAt(2) = {
   .auto_reset = false,
-  .out_limit = pid::OutLimit(true,-7, 7), 
+  .out_limit = hw_pid::OutLimit(true, -7, 7),
 };
 // 实例化三节点的并行 PID 控制器，多节点 PID 控制的输出限制为 -16000 ~ 16000，内部节点参数在初始化时指定
-const pid::MultiNodesPid::Params params_arr[3] = {{...},{...},{...}};
-pid::MultiNodesPid parallel_pid(pid::MultiNodesPidType::kParallel, pid::OutLimit(true，-16000, 16000),pid::MultiNodesPid::ParamsList(params_arr,params_arr+3));
+const hw_pid::MultiNodesPid::Params params_arr[3] = {{...}, {...}, {...}};
+hw_pid::MultiNodesPid parallel_pid(hw_pid::kMultiNodesPidTypeParallel, hw_pid::OutLimit(true, -16000, 16000), hw_pid::MultiNodesPid::ParamsList(params_arr, params_arr+3));
 ```
 
 #### 计算
 
 ```cpp
- 
-namespace pid = hello_world::pid;  
-pid::MultiNodesPid two_nodes_cascade_pid = ...;  
-pid::MultiNodesPid two_nodes_parallel_pid = ...;  
-void CascadeCalc(){  
-  float ref[1] = ...; // 参考值，请注意参考值的数组大小需要大于 1 ，否则会出现数组越界  
-  float fdb[2] = ...; // 反馈值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界  
-  float ffd = ...; // 前馈值  
-  float out = ...; // 存储输出值  
-  // 不使用前馈值进行计算  
-  two_nodes_cascade_pid.calc(ref, fdb, nullptr, &out);  
-  // 使用前馈值进行计算  
-  two_nodes_cascade_pid.calc(ref, fdb, &ffd, &out);  
-  // 或者使用接口: cascadeCalc  
+hw_pid::MultiNodesPid two_nodes_cascade_pid = ...;
+hw_pid::MultiNodesPid two_nodes_parallel_pid = ...;
+void CascadeCalc()
+{
+  float ref[1] = ...; // 参考值，请注意参考值的数组大小需要大于 1 ，否则会出现数组越界
+  float fdb[2] = ...; // 反馈值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界
+  float ffd = ...; // 前馈值
+  float out = ...; // 存储输出值
+  // 不使用前馈值进行计算
+  two_nodes_cascade_pid.calc(ref, fdb, nullptr, &out);
+  // 使用前馈值进行计算
+  two_nodes_cascade_pid.calc(ref, fdb, &ffd, &out);
+  // 或者使用接口: cascadeCalc
 };
 
-void ParallelCacl(){
-  float ref[2] = ...; // 参考值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界    
-  float fdb[2] = ...; // 反馈值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界  
-  float ffd = ...; // 前馈值  
-  float out = ...; // 存储输出值  
-  // 不使用前馈值进行计算  
-  two_nodes_parallel_pid.calc(ref, fdb, nullptr, &out);  
-  // 使用前馈值进行计算  
-  two_nodes_parallel_pid.calc(ref, fdb, &ffd, &out);  
-  // 或者使用接口: parallelCalc  
+void ParallelCacl()
+{
+  float ref[2] = ...; // 参考值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界
+  float fdb[2] = ...; // 反馈值，请注意参考值的数组大小需要大于等于节点数量，否则会出现数组越界
+  float ffd = ...; // 前馈值
+  float out = ...; // 存储输出值
+  // 不使用前馈值进行计算
+  two_nodes_parallel_pid.calc(ref, fdb, nullptr, &out);
+  // 使用前馈值进行计算
+  two_nodes_parallel_pid.calc(ref, fdb, &ffd, &out);
+  // 或者使用接口: parallelCalc
 };
 ```
 
 #### 数据监视
 
 ```cpp
- 
-namespace pid = hello_world::pid;  
-pid::MultiNodesPid multi_nodes_pid = ...;  
-pid::MultiNodesPid::Datas debug_datas;  
-void Task(){  
-  multi_nodes_pid.calc(...);  
-  debug_datas = multi_nodes_pid.datasAt(0);  
-};  
+hw_pid::MultiNodesPid multi_nodes_pid = ...;
+hw_pid::MultiNodesPid::Datas debug_datas;
+void Task()
+{
+  multi_nodes_pid.calc(...);
+  debug_datas = multi_nodes_pid.datasAt(0);
+};
 ```
 
-注意：由于使用 `std` 标准库链表，在 Ozone 中，不能通过数据监视窗口查看链表数据。
+注意：由于使用链表，在 Ozone 中，不能通过数据监视窗口查看链表数据。
 
+## 调试技巧
 
-## 历史版本
+进行 PID 调参时，可以通过如下方式进行在线调参（避免重烧代码）：
+
+```cpp
+void Task()
+{
+  static hw_hello_world::pid::MultiNodesPid::Params params = pid_ptr->getParamsAt(0);
+  pid_ptr->getParamsAt(0) = params;
+}
+```
+
+或是
+
+```cpp
+static pid::MultiNodesPid::Params* params = nullptr;
+
+void Task()
+{
+  params = pid_ptr->getParamsAt(0);
+}
+```
+
+然后便可以在 Ozone 中，将 `params` 变量添加到观察窗口，然后变可以直接修改变量的值，通过以上方法修改的值会导致 PID 控制器中参数同时发送变化，从而实现在线调参的功能。
+
+## 附录
+
+### 版本说明
+
+| 版本号                                                         | 发布日期   | 说明              | 贡献者 |
+| -------------------------------------------------------------- | ---------- | ----------------- | ------ |
+| <img src = "https://img.shields.io/badge/version-1.0.0-green"> | 2024.02.24 | PID 算法文档      | 周渝松 |
+| <img src = "https://img.shields.io/badge/version-1.0.1-green"> | 2024.07.28 | 完善 PID 算法文档 | 蔡坤镇 |
