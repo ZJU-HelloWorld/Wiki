@@ -3410,7 +3410,8 @@
 <span class="normal"><a href="#__codelineno-0-79">79</a></span>
 <span class="normal"><a href="#__codelineno-0-80">80</a></span>
 <span class="normal"><a href="#__codelineno-0-81">81</a></span>
-<span class="normal"><a href="#__codelineno-0-82">82</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;can_tx_mgr.hpp&quot;</span>
+<span class="normal"><a href="#__codelineno-0-82">82</a></span>
+<span class="normal"><a href="#__codelineno-0-83">83</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;can_tx_mgr.hpp&quot;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;can_rx_mgr.hpp&quot;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="cm">/* 进一步包含其他头文件 */</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4"></a>
@@ -3490,8 +3491,9 @@
 <a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="cm">/* 错误回调函数 */</span>
 <a id="__codelineno-0-79" name="__codelineno-0-79"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_CAN_ErrorCallback</span><span class="p">(</span><span class="n">CAN_HandleTypeDef</span><span class="o">*</span><span class="w"> </span><span class="n">hcan</span><span class="p">)</span>
 <a id="__codelineno-0-80" name="__codelineno-0-80"></a><span class="p">{</span>
-<a id="__codelineno-0-81" name="__codelineno-0-81"></a><span class="w">  </span><span class="n">can_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">errorCallback</span><span class="p">(</span><span class="n">hcan</span><span class="p">);</span>
-<a id="__codelineno-0-82" name="__codelineno-0-82"></a><span class="p">}</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81"></a><span class="w">  </span><span class="n">can_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">errorCallback</span><span class="p">(</span><span class="n">hcan</span><span class="p">);</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82"></a><span class="w">  </span><span class="n">can_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">errorCallback</span><span class="p">(</span><span class="n">hcan</span><span class="p">);</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="22-fdcan">2.2 FDCAN<a class="headerlink" href="#22-fdcan" title="链接到此节">&para;</a></h3>
 <h4 id="外设驱动配置_1">外设驱动配置<a class="headerlink" href="#外设驱动配置_1" title="链接到此节">&para;</a></h4>
@@ -3581,7 +3583,14 @@
 <span class="normal"><a href="#__codelineno-1-71">71</a></span>
 <span class="normal"><a href="#__codelineno-1-72">72</a></span>
 <span class="normal"><a href="#__codelineno-1-73">73</a></span>
-<span class="normal"><a href="#__codelineno-1-74">74</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;fdcan_tx_mgr.hpp&quot;</span>
+<span class="normal"><a href="#__codelineno-1-74">74</a></span>
+<span class="normal"><a href="#__codelineno-1-75">75</a></span>
+<span class="normal"><a href="#__codelineno-1-76">76</a></span>
+<span class="normal"><a href="#__codelineno-1-77">77</a></span>
+<span class="normal"><a href="#__codelineno-1-78">78</a></span>
+<span class="normal"><a href="#__codelineno-1-79">79</a></span>
+<span class="normal"><a href="#__codelineno-1-80">80</a></span>
+<span class="normal"><a href="#__codelineno-1-81">81</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;fdcan_tx_mgr.hpp&quot;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;fdcan_rx_mgr.hpp&quot;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="cm">/* 进一步包含其他头文件 */</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a>
@@ -3655,6 +3664,13 @@
 <a id="__codelineno-1-72" name="__codelineno-1-72"></a><span class="p">{</span>
 <a id="__codelineno-1-73" name="__codelineno-1-73"></a><span class="w">  </span><span class="n">fdcan_tx_mang_ptr</span><span class="o">-&gt;</span><span class="n">txFifoEmptyCallback</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">);</span>
 <a id="__codelineno-1-74" name="__codelineno-1-74"></a><span class="p">}</span>
+<a id="__codelineno-1-75" name="__codelineno-1-75"></a>
+<a id="__codelineno-1-76" name="__codelineno-1-76"></a><span class="cm">/* 错误回调函数 */</span>
+<a id="__codelineno-1-77" name="__codelineno-1-77"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_FDCAN_ErrorStatusCallback</span><span class="p">(</span><span class="n">FDCAN_HandleTypeDef</span><span class="o">*</span><span class="w"> </span><span class="n">hfdcan</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ErrorStatusITs</span><span class="p">)</span>
+<a id="__codelineno-1-78" name="__codelineno-1-78"></a><span class="p">{</span>
+<a id="__codelineno-1-79" name="__codelineno-1-79"></a><span class="w">  </span><span class="n">fdcan_tx_mang_ptr</span><span class="o">-&gt;</span><span class="n">errorStatusCallback</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorStatusITs</span><span class="p">);</span>
+<a id="__codelineno-1-80" name="__codelineno-1-80"></a><span class="w">  </span><span class="n">fdcan_rx_mang_ptr</span><span class="o">-&gt;</span><span class="n">errorStatusCallback</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorStatusITs</span><span class="p">);</span>
+<a id="__codelineno-1-81" name="__codelineno-1-81"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="23-uart">2.3 UART<a class="headerlink" href="#23-uart" title="链接到此节">&para;</a></h3>
 <h4 id="外设驱动配置_2">外设驱动配置<a class="headerlink" href="#外设驱动配置_2" title="链接到此节">&para;</a></h4>
@@ -4301,7 +4317,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-28</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-08</span>
   </span>
 
     
