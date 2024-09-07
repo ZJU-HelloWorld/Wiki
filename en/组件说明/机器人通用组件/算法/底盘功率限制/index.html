@@ -3414,41 +3414,41 @@ $$
 若<span class="arithmatex">\(\alpha= 0\)</span>且<span class="arithmatex">\(\beta= 0\)</span>，则方程不成立 ，令<span class="arithmatex">\(k_l =0\)</span></p>
 <h4 id="连续性优化">连续性优化<a class="headerlink" href="#连续性优化" title="链接到此节">&para;</a></h4>
 <p>在初始的算法测试中，发现由于解的不连续性会导致机器人运动过程中出现卡顿现象，故考虑对解进行连续性优化：</p>
-<p>令待优化函数<span class="arithmatex">\(<span class="arithmatex">\(f\)</span>\)</span>有如下表达形式：
-$$
+<p>令待优化函数<span class="arithmatex">\(f\)</span>有如下表达形式：
+$$ {$$}
 f=a\cdot\sum_{N_{motor}}(\Omega<sup act="act">{act}<em j_1="j+1">{ref</em>-\Omega}</sup><em j="j">{ref</em>)}<sup act="act">2+b(k</sup><em j_1="j+1">{l</em>)^2
-$$
-其中}}-k_{l_{j+1}<span class="arithmatex">\(\Omega^{act}_{ref_{j+1}}\)</span>表示下一时刻实际执行的期望转速，<span class="arithmatex">\(\Omega^{act}_{ref_{j}}\)</span>表示上一时刻的执行期望转速，<span class="arithmatex">\(k^{act}_{l_{j+1}}\)</span>表示下一时刻实际计算的削减系数，<span class="arithmatex">\(k_{l_{j+1}}\)</span>表示当前时刻算法计算出的削减系数。</p>
+$$ {}}-k_{l_{j+1}<span class="arithmatex">\(<span class="arithmatex">\(}
+其中\)</span>\Omega^{act}_{ref_{j+1}}\)</span>表示下一时刻实际执行的期望转速，<span class="arithmatex">\(\Omega^{act}_{ref_{j}}\)</span>表示上一时刻的执行期望转速，<span class="arithmatex">\(k^{act}_{l_{j+1}}\)</span>表示下一时刻实际计算的削减系数，<span class="arithmatex">\(k_{l_{j+1}}\)</span>表示当前时刻算法计算出的削减系数。</p>
 <p>待优化函数<span class="arithmatex">\(f\)</span>为实际执行速度与上一时刻执行速度的距离和实际的削减系数和计算出的削减系数的距离组合，优化此函数，期望函数变化率最小，以达到实际执行的速度与上一时刻尽可能连续的目标。</p>
 <p>其中有：
-$$
+$$ {$$}
 \Omega<sup act="act">{act}<em j_1="j+1">{ref</em>=k}</sup><em j_1="j+1">{l</em>
-$$
+$$ {$$}
 整理后有：
-$$
+$$ {$$}
 f=a\cdot(k}}\Omega_{ref_{j+1}<sup act="act">{act}<em j_1="j+1">{l</em>-\Omega}}\Omega_{ref_{j+1}</sup><em j="j">{ref</em>)}<sup act="act">2+b(k</sup><em j_1="j+1">{l</em>)^2
-$$
-}}-k_{l_{j+1}<span class="arithmatex">\(f\)</span>对<span class="arithmatex">\(k^{act}_{l_{j+1}}\)</span>求导后，有如下结果：
-$$
+$$ {}}-k_{l_{j+1}<span class="arithmatex">\(<span class="arithmatex">(}
+<span class="arithmatex">\(f\)</span>对\)</span>k^{act}_{l_{j+1}}\)</span>求导后，有如下结果：
+$$ {$$}
 f'=a(\sum\Omega<sup act="act">2_{ref_{j+1}})k</sup><em j_1="j+1">{l</em>-a\sum\Omega}<sup act="act">{act}<em j="j">{ref</em>+b(k}}\Omega_{ref_{j+1}</sup><em j_1="j+1">{l</em>)=0
-$$
+$$ {$$}
 整理上式后，得到：
-$$
+$$ {$$}
 k}}-k_{l_{j+1}<sup act="act">{act}<em j_1="j+1">{l</em>=\frac{a\sum\Omega}</sup><em j="j">{ref</em>
-$$
-为了便于参数控制, 令}}\Omega_{ref_{j+1}}+bk_{l_{j+1}}}{a\sum\Omega^2_{ref_{j+1}}+b<span class="arithmatex">\(a=1\)</span>,经过多种测试后，对于参数<span class="arithmatex">\(b\)</span>的控制率有如下表达式：
-$$
+$$ {}}\Omega_{ref_{j+1}}+bk_{l_{j+1}}}{a\sum\Omega^2_{ref_{j+1}}+b<span class="arithmatex">\(<span class="arithmatex">\(}
+为了便于参数控制, 令\)</span>a=1\)</span>,经过多种测试后，对于参数<span class="arithmatex">\(b\)</span>的控制率有如下表达式：
+$$ {$$}
 b = 15000 * (1 -k_{l_{j+1}})^2
-$$
-表明，当削减系数趋近于1时，功率限制算法趋向于速度平滑，当削减系数趋近于0时，采用的削减系数会快速靠近期望削减系数，从而抑制功率消耗。（测试环境为不断给车辆一个较大的阶跃期望速度，观察控制效果，经过测试在2024赛季全向轮上，任意时给出阶跃速度可将缓冲能量抑制在5<span class="arithmatex">\(J\)</span>以上）</p>
+$$ {<span class="arithmatex">\(<span class="arithmatex">\(}
+表明，当削减系数趋近于1时，功率限制算法趋向于速度平滑，当削减系数趋近于0时，采用的削减系数会快速靠近期望削减系数，从而抑制功率消耗。（测试环境为不断给车辆一个较大的阶跃期望速度，观察控制效果，经过测试在2024赛季全向轮上，任意时给出阶跃速度可将缓冲能量抑制在5\)</span>J\)</span>以上）</p>
 <p>经实车测试证明，削减转速的整个控制过程均能达到降低功率的效果，并且能够以最大功率收敛控制能量。</p>
 <h2 id="参数调试方法与建议">参数调试方法与建议：<a class="headerlink" href="#参数调试方法与建议" title="链接到此节">&para;</a></h2>
 <p>1.3.0版功率限制代码，其主要核心思想为通过预测下一时刻的功率<span class="arithmatex">\(<span class="arithmatex">\(P_{pre}\)</span>\)</span>与当前计算的动态功率上限<span class="arithmatex">\(<span class="arithmatex">\(P_ref\)</span>\)</span>进行比较求出适当的速度削减系数<span class="arithmatex">\(<span class="arithmatex">\(k_{l}\)</span>\)</span>,等比例削减轮速，从而达到功率限制的效果。</p>
 <p>而预测功率的关键在于预测下一时刻的电流大小，本版本使用的电流模型为：
-$$
+$$ {$$}
 i_{ref_j}=k_{\Omega}\cdot \Omega_{ref_j}+k_a\cdot(\Omega_{ref_j}-\Omega_{j})
-$$
-可将其预测过程抽象为仅有<span class="arithmatex">\(<span class="arithmatex">\(K_p\)</span>\)</span>的并联PID控制器，输入为轮期望转速以及期望加速度，输出为期望电流。</p>
+$$ {<span class="arithmatex">\(<span class="arithmatex">\(}
+可将其预测过程抽象为仅有\)</span>\)</span>K_p$$的并联PID控制器，输入为轮期望转速以及期望加速度，输出为期望电流。</p>
 <p>速度环控制系数<span class="arithmatex">\(<span class="arithmatex">\(k_{\Omega}\)</span>\)</span>主要控制速度达到平稳阶段，收敛能量与期望收敛能量的距离。（即当发现收敛能量比设定收敛能量高，可适当加大<span class="arithmatex">\(<span class="arithmatex">\(k_{\Omega}\)</span>\)</span>，反之则降低）</p>
 <p>加速度环控制系数<span class="arithmatex">\(<span class="arithmatex">\(k_a\)</span>\)</span>主要控制轮子可用的瞬时加速度（车辆的加速爆发能力），<span class="arithmatex">\(<span class="arithmatex">\(k_a\)</span>\)</span>值越小，车辆爆发加速越高，同时消耗在加速上的能量也越多。<span class="arithmatex">\(<span class="arithmatex">\(\color{red}{对于此值，如过度减小，会导致加速过程中的功率难以控制，从而出现在加速过程中发生超功率现象，所以不建议过度减小此值。}\)</span>\)</span></p>
 <div class="arithmatex">\[\color{red}{并且加速过程容易出现打滑现象，过大的加速度并不利于能量的有效使用。}\]</div>
