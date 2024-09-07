@@ -3290,7 +3290,7 @@ M = k_{M}\cdot i_q
 <p>电机的电力学和动力学公式如下：
 $$
 \begin{align} 
-u\left ( t \right ) &amp;=Ri\left ( t \right )+L\frac{\partial i\left (t  \right ) }{\partial t}+e\ 
+u(t)&amp;=Ri(t)+L\frac{\partial{i}(t)}{\partial{t}}+e\ 
 J_{TM}\dot{\omega}<em TM="TM">M&amp;=T_M-T_L 
 \end{align}
 $$
@@ -3326,12 +3326,15 @@ I(s)&amp;=(K_2s+b)\Omega(s)
 $$
 则 <span class="arithmatex">(<span class="arithmatex">\(U和I、I和\Omega\)</span>\)</span>间的传递函数为:
 $$
-\begin{align} \frac{I\left ( s \right ) }{U\left ( s \right ) } &amp;= \frac{K_2s+b}{LK_2s^2+\left  (Lb+RK_2\right )s+Rb+K_1}\ \frac{\Omega\left ( s \right ) }{I\left ( s \right ) } &amp;= \frac{1}{K_2s+b} \end{align}
+\begin{align}
+\frac{I(s)}{U(s)}&amp;=\frac{K_2s+b}{LK_2s^2+(Lb+RK_2)s+Rb+K_1}\ 
+\frac{\Omega(s)}{I(s)}&amp;=\frac{1}{K_2s+b}
+\end{align}
 $$
 综上可将期望电流的计算模型抽象为：
 $$
 i</em>)
-$$}=k_{\Omega}\cdot \Omega_{ref_j}+k_a\cdot(\Omega_{ref_j}-\Omega_{j</p>
+$$}=k_{\Omega}\cdot\Omega_{ref_j}+k_a\cdot(\Omega_{ref_j}-\Omega_{j</p>
 <h4 id="功率计算">功率计算<a class="headerlink" href="#功率计算" title="链接到此节">&para;</a></h4>
 <p>考虑 C620 电调具有优良的转矩电流调控性能，认为实际转矩电流能够密切跟随给定的转矩电流目标值。而电机的转速是缓慢变化的过程，不能突变，1ms 控制周期内的变化忽略不计。给出电机目标转速后，使用下式预测一个控制周期（1ms）后单个电机的功率：</p>
 <div class="arithmatex">\[
@@ -3341,9 +3344,6 @@ P_{pred_j}= \hat k_{M}\cdot\Omega_j\cdot i_{ref_j}+\hat R\cdot i^2_{ref_j}
 <div class="arithmatex">\[
 P_{pred}=\hat k_{M}\sum_j \Omega_j\cdot  i_{ref_j}+\sum_j \hat R \cdot i_{ref_j}^2+P_0
 \]</div>
-<blockquote>
-<p>进行功率估计是为了得到更准确的预测模型，我们使用该模型进行下文所述的功率限制。</p>
-</blockquote>
 <h3 id="功率限制">功率限制<a class="headerlink" href="#功率限制" title="链接到此节">&para;</a></h3>
 <p>算法主要流程如下：</p>
 <p><a class="glightbox" href="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/al.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../%E5%BA%95%E7%9B%98%E5%8A%9F%E7%8E%87%E9%99%90%E5%88%B6.assets/al.png" /></a></p>
