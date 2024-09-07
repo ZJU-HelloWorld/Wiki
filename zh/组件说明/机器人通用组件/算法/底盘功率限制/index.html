@@ -3450,8 +3450,7 @@ i_{ref_j}=k_{\Omega}\cdot \Omega_{ref_j}+k_a\cdot(\Omega_{ref_j}-\Omega_{j})
 $$
 可将其预测过程抽象为仅有<span class="arithmatex">\(K_p\)</span>的并联PID控制器，输入为轮期望转速以及期望加速度，输出为期望电流。</p>
 <p>速度环控制系数<span class="arithmatex">\(k_{\Omega}\)</span>主要控制速度达到平稳阶段，收敛能量与期望收敛能量的距离。（即当发现收敛能量比设定收敛能量高，可适当加大<span class="arithmatex">\(k_{\Omega}\)</span>，反之则降低）</p>
-<p>加速度环控制系数<span class="arithmatex">\(k_a\)</span>主要控制轮子可用的瞬时加速度（车辆的加速爆发能力），<span class="arithmatex">\(k_a\)</span>值越小，车辆爆发加速越高，同时消耗在加速上的能量也越多。<span class="arithmatex">\(\color{red}{对于此值，如过度减小，会导致加速过程中的功率难以控制，从而出现在加速过程中发生超功率现象，所以不建议过度减小此值。}\)</span></p>
-<p><span class="arithmatex">\(\color{red}{并且加速过程容易出现打滑现象，过大的加速度并不利于能量的有效使用。}\)</span></p>
+<p>加速度环控制系数<span class="arithmatex">\(k_a\)</span>主要控制轮子可用的瞬时加速度（车辆的加速爆发能力），<span class="arithmatex">\(k_a\)</span>值越小，车辆爆发加速越高，同时消耗在加速上的能量也越多。对于此值，如过度减小，会导致加速过程中的功率难以控制，从而出现在加速过程中发生超功率现象，所以不建议过度减小此值。并且加速过程容易出现打滑现象，过大的加速度并不利于能量的有效使用。</p>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
 <p>组件源码仓库地址：<a href="https://github.com/ZJU-HelloWorld/HW-Components">https://github.com/ZJU-HelloWorld/HW-Components</a></p>
 <p>底盘功率限制算法依赖于 PID 控制器, 并且在实际应用中对于轮电机的控制也使用PID控制器。</p>
