@@ -3294,24 +3294,35 @@ u\left ( t \right ) &amp;=Ri\left ( t \right )+L\frac{\partial i\left (t  \right
 J_{TM}\dot{\omega}<em TM="TM">M&amp;=T_M-T_L 
 \end{align}
 $$
-其中，u为等效输入电压，i为电机等效电流，L为电枢电感，R为电机等效内阻，e为电磁电压,  $$ J</em>$$为动力单元整体的转动惯量， $$ T_M$$为电机产生的总扭矩， <span class="arithmatex">\(<span class="arithmatex">\(T_L\)</span>\)</span>为总的载荷扭矩， <span class="arithmatex">\(<span class="arithmatex">\(\dot{\omega }   _M\)</span>\)</span>为电机的角加速度。</p>
+其中，u为等效输入电压，i为电机等效电流，L为电枢电感，R为电机等效内阻，e为电磁电压,  $$ J</em>$$为动力单元整体的转动惯量， $$ T_M$$为电机产生的总扭矩， <span class="arithmatex">\(<span class="arithmatex">\(T_L\)</span>\)</span>为总的载荷扭矩， <span class="arithmatex">\(<span class="arithmatex">\(\dot{\omega}_M\)</span>\)</span>为电机的角加速度。</p>
 <p>此外，电机扭矩和电机当前电流存在比例关系，电磁压力e与电机角速度也存在比例关系： 
 $$
-\begin{align} e&amp;=K_E\omega_M\ T_M&amp;=K_Mi(t) \end{align}
+\begin{align} 
+e&amp;=K_E\omega_M\ 
+T_M&amp;=K_Mi(t) 
+\end{align}
 $$
 其中， <span class="arithmatex">\(<span class="arithmatex">\(K_M\)</span>\)</span>为电机机械常数， <span class="arithmatex">\(<span class="arithmatex">\(K_E\)</span>\)</span>为电机电力常数。</p>
 <p>总载荷扭矩与电机系统的转动惯量和电机系统的角加速度关系为：
 $$
-\begin{align}T_L=J_L\dot{\omega}_M+b_L\omega_M\end{align}
+\begin{align}
+T_L=J_L\dot{\omega}_M+b_L\omega_M
+\end{align}
 $$
 其中， $$ b_L$$ 为电机系统的摩擦系数。</p>
 <p>综上，输入电压和电流、电流和电机转速的关系为：
 $$
-\begin{align} u\left ( t \right ) &amp;=Ri\left ( t \right ) +L\dot{i}\left ( t \right )+K_E\omega_M\ i\left ( t \right )  &amp;=\frac{J_{TM}+J_L}{K_M}\dot{\omega}<em ref_j="ref_j">M+\frac{b_L}{K_M}\omega_M   \end{align}
+\begin{align} 
+u\left(t\right)&amp;=Ri\left(t\right)+L\dot{i}\left(t\right)+K_E\omega_M\ 
+i\left(t\right)&amp;=\frac{J_{TM}+J_L}{K_M}\dot{\omega}<em ref_j="ref_j">M+\frac{b_L}{K_M}\omega_M
+\end{align}
 $$
 现令 <span class="arithmatex">(<span class="arithmatex">\(K_1=K_E\)</span>\)</span>, <span class="arithmatex">(<span class="arithmatex">\(K_2=\frac{J_{TM}+J_L}{K_M}\)</span>\)</span>, <span class="arithmatex">(<span class="arithmatex">\(b=\frac{b_L}{K_M}\)</span>\)</span>,并对上式作拉普拉斯逆变换得到：
 $$
-\begin{align} U\left ( s \right ) &amp;=\left ( R +Ls \right ) I\left ( s \right ) +K_1\Omega \left ( s \right )\ I\left ( s \right )  &amp;=\left ( K_2s+b \right ) \Omega \left ( s \right ) \end{align}
+\begin{align} 
+U(s)&amp;=(R+Ls)I(s) +K_1\Omega(s)\ 
+I(s)&amp;=(K_2s+b)\Omega(s)
+\end{align}
 $$
 则 <span class="arithmatex">(<span class="arithmatex">\(U和I、I和\Omega\)</span>\)</span>间的传递函数为:
 $$
