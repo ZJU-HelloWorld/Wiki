@@ -3443,15 +3443,15 @@ $$ {<span class="arithmatex">\(<span class="arithmatex">\(}
 表明，当削减系数趋近于1时，功率限制算法趋向于速度平滑，当削减系数趋近于0时，采用的削减系数会快速靠近期望削减系数，从而抑制功率消耗。（测试环境为不断给车辆一个较大的阶跃期望速度，观察控制效果，经过测试在2024赛季全向轮上，任意时给出阶跃速度可将缓冲能量抑制在5\)</span>J\)</span>以上）</p>
 <p>经实车测试证明，削减转速的整个控制过程均能达到降低功率的效果，并且能够以最大功率收敛控制能量。</p>
 <h2 id="参数调试方法与建议">参数调试方法与建议：<a class="headerlink" href="#参数调试方法与建议" title="链接到此节">&para;</a></h2>
-<p>1.3.0版功率限制代码，其主要核心思想为通过预测下一时刻的功率<span class="arithmatex">\(<span class="arithmatex">\(P_{pre}\)</span>\)</span>与当前计算的动态功率上限<span class="arithmatex">\(<span class="arithmatex">\(P_ref\)</span>\)</span>进行比较求出适当的速度削减系数<span class="arithmatex">\(<span class="arithmatex">\(k_{l}\)</span>\)</span>,等比例削减轮速，从而达到功率限制的效果。</p>
+<p>1.3.0版功率限制代码，其主要核心思想为通过预测下一时刻的功率<span class="arithmatex">\(P_{pre}\)</span>与当前计算的动态功率上限<span class="arithmatex">\(P_{ref}\)</span>进行比较求出适当的速度削减系数<span class="arithmatex">\(<span class="arithmatex">\(k_{l}\)</span>\)</span>,等比例削减轮速，从而达到功率限制的效果。</p>
 <p>而预测功率的关键在于预测下一时刻的电流大小，本版本使用的电流模型为：
-$$ {$$}
+$$
 i_{ref_j}=k_{\Omega}\cdot \Omega_{ref_j}+k_a\cdot(\Omega_{ref_j}-\Omega_{j})
-$$ {<span class="arithmatex">\(<span class="arithmatex">\(}
-可将其预测过程抽象为仅有\)</span>\)</span>K_p$$的并联PID控制器，输入为轮期望转速以及期望加速度，输出为期望电流。</p>
-<p>速度环控制系数<span class="arithmatex">\(<span class="arithmatex">\(k_{\Omega}\)</span>\)</span>主要控制速度达到平稳阶段，收敛能量与期望收敛能量的距离。（即当发现收敛能量比设定收敛能量高，可适当加大<span class="arithmatex">\(<span class="arithmatex">\(k_{\Omega}\)</span>\)</span>，反之则降低）</p>
-<p>加速度环控制系数<span class="arithmatex">\(<span class="arithmatex">\(k_a\)</span>\)</span>主要控制轮子可用的瞬时加速度（车辆的加速爆发能力），<span class="arithmatex">\(<span class="arithmatex">\(k_a\)</span>\)</span>值越小，车辆爆发加速越高，同时消耗在加速上的能量也越多。<span class="arithmatex">\(<span class="arithmatex">\(\color{red}{对于此值，如过度减小，会导致加速过程中的功率难以控制，从而出现在加速过程中发生超功率现象，所以不建议过度减小此值。}\)</span>\)</span></p>
-<div class="arithmatex">\[\color{red}{并且加速过程容易出现打滑现象，过大的加速度并不利于能量的有效使用。}\]</div>
+$$
+可将其预测过程抽象为仅有<span class="arithmatex">\(K_p\)</span>的并联PID控制器，输入为轮期望转速以及期望加速度，输出为期望电流。</p>
+<p>速度环控制系数<span class="arithmatex">\(k_{\Omega}\)</span>主要控制速度达到平稳阶段，收敛能量与期望收敛能量的距离。（即当发现收敛能量比设定收敛能量高，可适当加大<span class="arithmatex">\(k_{\Omega}\)</span>，反之则降低）</p>
+<p>加速度环控制系数<span class="arithmatex">\(k_a\)</span>主要控制轮子可用的瞬时加速度（车辆的加速爆发能力），<span class="arithmatex">\(k_a\)</span>值越小，车辆爆发加速越高，同时消耗在加速上的能量也越多。<span class="arithmatex">\(\color{red}{对于此值，如过度减小，会导致加速过程中的功率难以控制，从而出现在加速过程中发生超功率现象，所以不建议过度减小此值。}\)</span></p>
+<p><span class="arithmatex">\(\color{red}{并且加速过程容易出现打滑现象，过大的加速度并不利于能量的有效使用。}\)</span></p>
 <h2 id="快速开始">快速开始<a class="headerlink" href="#快速开始" title="链接到此节">&para;</a></h2>
 <p>组件源码仓库地址：<a href="https://github.com/ZJU-HelloWorld/HW-Components">https://github.com/ZJU-HelloWorld/HW-Components</a></p>
 <p>底盘功率限制算法依赖于 PID 控制器, 并且在实际应用中对于轮电机的控制也使用PID控制器。</p>
