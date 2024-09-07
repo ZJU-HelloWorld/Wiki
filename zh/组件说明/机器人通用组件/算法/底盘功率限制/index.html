@@ -3291,25 +3291,31 @@ M = k_{M}\cdot i_q
 $$ {$$}
 \begin{align}
 u(t)&amp;=Ri(t)+L\frac{\partial{i}(t)}{\partial{t}}+e \ 
-J_{TM}\dot{\omega}_M&amp;=T_M-T_L 
+J_{TM}\dot{\omega}<em j="0">M&amp;=T_M-T_L 
 \end{align}
-$$ {<span class="arithmatex">\(<span class="arithmatex">\(}
-其中，\)</span>u\)</span>为等效输入电压，<span class="arithmatex">\(i\)</span>为电机等效电流，<span class="arithmatex">\(L\)</span>为电枢电感，<span class="arithmatex">\(R\)</span>为电机等效内阻，<span class="arithmatex">\(e\)</span>为电磁电压,  <span class="arithmatex">\(J_{TM}\)</span>为动力单元整体的转动惯量， <span class="arithmatex">\(T_M\)</span>为电机产生的总扭矩， <span class="arithmatex">\(T_L\)</span>为总的载荷扭矩， <span class="arithmatex">\(\dot{\omega}_M\)</span>为电机的角加速度。</p>
-<p>此外，电机扭矩和电机当前电流存在比例关系，电磁压力<span class="arithmatex">\(e\)</span>与电机角速度也存在比例关系： 
+$$ {<span class="arithmatex">(<span class="arithmatex">\(}
+其中，\)</span>u\)</span>为等效输入电压，<span class="arithmatex">\(i\)</span>为电机等效电流，<span class="arithmatex">\(L\)</span>为电枢电感，<span class="arithmatex">\(R\)</span>为电机等效内阻，<span class="arithmatex">\(e\)</span>为电磁电压,  <span class="arithmatex">\(J_{TM}\)</span>为动力单元整体的转动惯量， <span class="arithmatex">\(T_M\)</span>为电机产生的总扭矩， <span class="arithmatex">\(T_L\)</span>为总的载荷扭矩， <span class="arithmatex">\(\dot{\omega}_M\)</span>为电机的角加速度。
+$$
+\begin{align}
+u(k)&amp;=K_p[e(k)+\frac{1}{T_i}\sum^k</em>]\
+&amp;=K_pe(k)+K_i\sum^k_{j=0}e(j)T+K_d\frac{e(k)-e(k-1)}{T}
+\end{align}
+$$
+此外，电机扭矩和电机当前电流存在比例关系，电磁压力}e(j)T+T_d\frac{e(k)-e(k-1)}{T<span class="arithmatex">\(e\)</span>与电机角速度也存在比例关系： 
 $$
 \begin{align} 
 e&amp;=K_E\omega_M\ 
 T_M&amp;=K_Mi(t) 
 \end{align}
 $$
-其中， <span class="arithmatex">\(<span class="arithmatex">\(K_M\)</span>\)</span>为电机机械常数， <span class="arithmatex">\(<span class="arithmatex">\(K_E\)</span>\)</span>为电机电力常数。</p>
+其中， <span class="arithmatex">\(K_M\)</span>为电机机械常数， <span class="arithmatex">\(K_E\)</span>为电机电力常数。</p>
 <p>总载荷扭矩与电机系统的转动惯量和电机系统的角加速度关系为：
 $$
 \begin{align}
 T_L=J_L\dot{\omega}_M+b_L\omega_M
 \end{align}
 $$
-其中， $$ b_L$$ 为电机系统的摩擦系数。</p>
+其中， $ b_L$ 为电机系统的摩擦系数。</p>
 <p>综上，输入电压和电流、电流和电机转速的关系为：
 $$
 \begin{align} 
@@ -3317,14 +3323,14 @@ u\left(t\right)&amp;=Ri\left(t\right)+L\dot{i}\left(t\right)+K_E\omega_M\
 i\left(t\right)&amp;=\frac{J_{TM}+J_L}{K_M}\dot{\omega}<em ref_j="ref_j">M+\frac{b_L}{K_M}\omega_M
 \end{align}
 $$
-现令 <span class="arithmatex">(<span class="arithmatex">\(K_1=K_E\)</span>\)</span>, <span class="arithmatex">(<span class="arithmatex">\(K_2=\frac{J_{TM}+J_L}{K_M}\)</span>\)</span>, <span class="arithmatex">(<span class="arithmatex">\(b=\frac{b_L}{K_M}\)</span>\)</span>,并对上式作拉普拉斯逆变换得到：
+现令 <span class="arithmatex">\(K_1=K_E\)</span>, <span class="arithmatex">\(K_2=\frac{J_{TM}+J_L}{K_M}\)</span>, <span class="arithmatex">\(b=\frac{b_L}{K_M}\)</span>,并对上式作拉普拉斯逆变换得到：
 $$
 \begin{align} 
 U(s)&amp;=(R+Ls)I(s) +K_1\Omega(s)\ 
 I(s)&amp;=(K_2s+b)\Omega(s)
 \end{align}
 $$
-则 <span class="arithmatex">(<span class="arithmatex">\(U和I、I和\Omega\)</span>\)</span>间的传递函数为:
+则 <span class="arithmatex">\(U和I、I和\Omega\)</span>间的传递函数为:
 $$
 \begin{align}
 \frac{I(s)}{U(s)}&amp;=\frac{K_2s+b}{LK_2s^2+(Lb+RK_2)s+Rb+K_1}\ 
