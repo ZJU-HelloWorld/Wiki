@@ -3341,7 +3341,7 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="cm">/* do something */</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="12-拨弹盘所需的裁判系统反馈数据结构体">1.2 拨弹盘所需的裁判系统反馈数据（结构体）<a id="1.2"></a><a class="headerlink" href="#12-拨弹盘所需的裁判系统反馈数据结构体" title="链接到此节">&para;</a></h3>
+<h3 id="12-拨弹盘所需的裁判系统反馈数据结构体">1.2 拨弹盘所需的裁判系统反馈数据（结构体）<a class="headerlink" href="#12-拨弹盘所需的裁判系统反馈数据结构体" title="链接到此节">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -3409,10 +3409,10 @@
 <a id="__codelineno-6-5" name="__codelineno-6-5"></a>
 <a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="kt">bool</span><span class="w"> </span><span class="n">is_new_bullet_shot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">referee_ptr_</span><span class="o">-&gt;</span><span class="n">isOffline</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rfr_shooter_pkg_ptr_</span><span class="o">-&gt;</span><span class="n">isHandled</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// 检测到了一颗新的弹丸发射</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">      </span><span class="n">rfr_shooter_pkg_ptr_</span><span class="o">-&gt;</span><span class="n">setHandled</span><span class="p">();</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">      </span><span class="n">is_new_bullet_shot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rfr_shooter_pkg_ptr_</span><span class="o">-&gt;</span><span class="n">isHandled</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// 检测到了一颗新的弹丸发射</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span><span class="n">rfr_shooter_pkg_ptr_</span><span class="o">-&gt;</span><span class="n">setHandled</span><span class="p">();</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">    </span><span class="n">is_new_bullet_shot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="13-拨弹盘配置参数结构体">1.3 拨弹盘配置参数（结构体）<a class="headerlink" href="#13-拨弹盘配置参数结构体" title="链接到此节">&para;</a></h3>
@@ -3525,32 +3525,32 @@
 <span class="normal"><a href="#__codelineno-8-12">12</a></span>
 <span class="normal"><a href="#__codelineno-8-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1">// 在初始化结构体变量时直接修改成员值</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="o">::</span><span class="n">Config</span><span class="w"> </span><span class="n">kFeedConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">    </span><span class="p">.</span><span class="n">ang_ref_offset</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="mf">0.05f</span><span class="p">,</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="p">.</span><span class="n">ang_per_blt</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="p">.</span><span class="n">heat_per_bullet</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">    </span><span class="p">.</span><span class="n">stuck_curr_thre</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mf">14.5f</span><span class="p">,</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">    </span><span class="p">.</span><span class="n">resurrection_pos_err</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PI</span><span class="p">,</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">    </span><span class="p">.</span><span class="n">stuck_duration_thre</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">    </span><span class="p">.</span><span class="n">hold_duration_thre</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="p">.</span><span class="n">default_trigger_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">    </span><span class="p">.</span><span class="n">default_safe_num_blt</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5f</span><span class="p">,</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">  </span><span class="p">.</span><span class="n">ang_ref_offset</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="mf">0.05f</span><span class="p">,</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">  </span><span class="p">.</span><span class="n">ang_per_blt</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">  </span><span class="p">.</span><span class="n">heat_per_bullet</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">  </span><span class="p">.</span><span class="n">stuck_curr_thre</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mf">14.5f</span><span class="p">,</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">  </span><span class="p">.</span><span class="n">resurrection_pos_err</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PI</span><span class="p">,</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">  </span><span class="p">.</span><span class="n">stuck_duration_thre</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">  </span><span class="p">.</span><span class="n">hold_duration_thre</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">  </span><span class="p">.</span><span class="n">default_trigger_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">  </span><span class="p">.</span><span class="n">default_safe_num_blt</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5f</span><span class="p">,</span>
 <a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="p">}</span>
 <a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="w"> </span><span class="n">unique_feed</span><span class="p">(</span><span class="n">kFeedConfig</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="2-使用方法">2 使用方法<a class="headerlink" href="#2-使用方法" title="链接到此节">&para;</a></h2>
-<h3 id="21-拨弹盘的实例化与初始化">2.1 拨弹盘的实例化与初始化<a id="2.1"></a><a class="headerlink" href="#21-拨弹盘的实例化与初始化" title="链接到此节">&para;</a></h3>
+<h3 id="21-拨弹盘的实例化与初始化">2.1 拨弹盘的实例化与初始化<a class="headerlink" href="#21-拨弹盘的实例化与初始化" title="链接到此节">&para;</a></h3>
 <p><strong>【建议】</strong> 自己写一对 ins_feed.hpp 和 ins_feed.cpp 文件，依照<strong>全局单例</strong>的设计思想，定义拨弹盘的全局单例，并给出接口函数抛出拨弹盘实例指针。</p>
-<ol>
+<ul>
 <li>ins_feed.hpp</li>
-</ol>
+</ul>
 <p>在其中包含<code>feed.hpp</code>文件，并给出接口函数。</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;feed.hpp&quot;</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="o">*</span><span class="w"> </span><span class="nf">CreateFeed</span><span class="p">();</span>
 </code></pre></div></td></tr></table></div>
-<ol>
+<ul>
 <li>ins_feed.cpp</li>
-</ol>
+</ul>
 <p>在其中包含<code>ins_feed.hpp</code>，定义拨弹盘全局实例，注册<code>PID</code>和电机指针，实现接口函数。</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
@@ -3576,15 +3576,15 @@
 <span class="normal"><a href="#__codelineno-10-22">22</a></span>
 <span class="normal"><a href="#__codelineno-10-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ins_feed.hpp&quot;</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="o">::</span><span class="n">Config</span><span class="w"> </span><span class="n">kFeedConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">    </span><span class="p">.</span><span class="n">ang_ref_offset</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w">  </span>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="p">.</span><span class="n">ang_per_blt</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">   </span>
-<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">    </span><span class="p">.</span><span class="n">heat_per_bullet</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span>
-<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">    </span><span class="p">.</span><span class="n">stuck_curr_thre</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mf">13.5f</span><span class="p">,</span><span class="w">          </span>
-<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">    </span><span class="p">.</span><span class="n">resurrection_pos_err</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PI</span><span class="p">,</span><span class="w">  </span>
-<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">    </span><span class="p">.</span><span class="n">stuck_duration_thre</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">           </span>
-<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">    </span><span class="p">.</span><span class="n">hold_duration_thre</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">  </span>
-<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">    </span><span class="p">.</span><span class="n">default_trigger_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">    </span><span class="p">.</span><span class="n">default_safe_num_blt</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5f</span><span class="p">,</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">  </span><span class="p">.</span><span class="n">ang_ref_offset</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w">  </span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">  </span><span class="p">.</span><span class="n">ang_per_blt</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">   </span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">  </span><span class="p">.</span><span class="n">heat_per_bullet</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">  </span><span class="p">.</span><span class="n">stuck_curr_thre</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mf">13.5f</span><span class="p">,</span><span class="w">          </span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">  </span><span class="p">.</span><span class="n">resurrection_pos_err</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PI</span><span class="p">,</span><span class="w">  </span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">  </span><span class="p">.</span><span class="n">stuck_duration_thre</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">           </span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">  </span><span class="p">.</span><span class="n">hold_duration_thre</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">  </span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">  </span><span class="p">.</span><span class="n">default_trigger_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">  </span><span class="p">.</span><span class="n">default_safe_num_blt</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5f</span><span class="p">,</span>
 <a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="p">};</span>
 <a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="w"> </span><span class="n">unique_feed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="p">(</span><span class="n">kFeedConfig</span><span class="p">);</span>
 <a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="o">*</span><span class="w"> </span><span class="nf">CreateFeed</span><span class="p">()</span>
@@ -3599,7 +3599,7 @@
 <a id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="22-更新数据设定指令">2.2 更新数据，设定指令<a class="headerlink" href="#22-更新数据设定指令" title="链接到此节">&para;</a></h3>
-<p><strong>【要求】每个控制周期</strong>，用户都需要使用<a href="#2.1">#2.1 拨弹盘的实例化与初始化</a>创建的实例，按照顺序调用以下接口函数，更新数据，设定控制指令。</p>
+<p><strong>【要求】每个控制周期</strong>，用户都需要使用<a href="#21-拨弹盘的实例化与初始化">2.1 拨弹盘的实例化与初始化</a>创建的实例，按照顺序调用以下接口函数，更新数据，设定控制指令。</p>
 <p>（基本所有程序都做了防呆处理，即使用户没有每个控制周期都调用以下函数，程序也能正常运行，但是极不推荐这样做！！）</p>
 <h4 id="221-更新数据">2.2.1 更新数据<a class="headerlink" href="#221-更新数据" title="链接到此节">&para;</a></h4>
 <p>用户需要通过调用以下两个函数，来更新裁判系统数据和摩擦轮运行状态。</p>
@@ -3625,14 +3625,14 @@
 </code></pre></div></td></tr></table></div>
 <p>【说明】：</p>
 <ol>
-<li><code>updateRfrData()</code>用于更新拨弹盘所需的裁判系统反馈数据，不更新时，采用用户上一次的更新值或者默认值。（详见<a href="#1.2">#1.2 拨弹盘所需的裁判系统反馈数据（结构体）</a>）</li>
+<li><code>updateRfrData()</code>用于更新拨弹盘所需的裁判系统反馈数据，不更新时，采用用户上一次的更新值或者默认值。（详见<a href="#12-拨弹盘所需的裁判系统反馈数据结构体">1.2 拨弹盘所需的裁判系统反馈数据（结构体）</a>）</li>
 <li><code>setFricStatus()</code>用于设定摩擦轮运行状态，当且仅当摩擦轮正常运行时，拨弹盘<code>Feed</code>模块状态机才能进入<code>Working</code>模式正常工作。</li>
 </ol>
 <h4 id="222-设定控制指令">2.2.2 设定控制指令<a class="headerlink" href="#222-设定控制指令" title="链接到此节">&para;</a></h4>
 <p>用户需要根据自身需求设定控制指令。</p>
-<ol>
+<ul>
 <li>设定控制模式，若不设定，则采用上一次的设定值或者默认值。</li>
-</ol>
+</ul>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setCtrlMode</span><span class="p">(</span><span class="n">CtrlMode</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span><span class="w">  </span><span class="c1">// 设定控制模式</span>
 </code></pre></div></td></tr></table></div>
 <p>【说明】：形式参数<code>mode</code>的类型<code>CtrlMode</code>是一个定义在<code>hello_world::module</code>命名空间下的枚举类，如下</p>
@@ -3640,14 +3640,14 @@
 <span class="normal"><a href="#__codelineno-13-2">2</a></span>
 <span class="normal"><a href="#__codelineno-13-3">3</a></span>
 <span class="normal"><a href="#__codelineno-13-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">CtrlMode</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">  </span><span class="n">Manual</span><span class="p">,</span><span class="w">  </span><span class="c1">///&lt; 手动控制模式</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">  </span><span class="n">Auto</span><span class="p">,</span><span class="w">    </span><span class="c1">///&lt; 自动控制模式</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">  </span><span class="n">Manual</span><span class="p">,</span><span class="w">  </span><span class="c1">// 手动控制模式</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">  </span><span class="n">Auto</span><span class="p">,</span><span class="w">    </span><span class="c1">// 自动控制模式</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
-<ol>
-<li>设定热量 / 拨弹频率限制，若不设定，则采用上一次的设定值或者默认值。
-重载了三个函数来分别实现 <strong>禁止拨弹</strong>；<strong>允许拨弹，限制频率但不限制热量</strong>；<strong>允许拨弹，限制频率和热量</strong>。</li>
-</ol>
+<ul>
+<li>设定热量 / 拨弹频率限制，若不设定，则采用上一次的设定值或者默认值。</li>
+</ul>
+<p>重载了三个函数来分别实现 <strong>禁止拨弹</strong>；<strong>允许拨弹，限制频率但不限制热量</strong>；<strong>允许拨弹，限制频率和热量</strong>。</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
 <span class="normal"><a href="#__codelineno-14-2">2</a></span>
 <span class="normal"><a href="#__codelineno-14-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setTriggerLimit</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">is_trigger_allowed</span><span class="p">);</span>
@@ -3663,9 +3663,9 @@
 <a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">feed_ptr_</span><span class="o">-&gt;</span><span class="n">setTriggerLimit</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span><span class="w">  </span><span class="c1">// 允许拨弹，限制拨弹间隔 100ms，不限制热量</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="n">feed_ptr_</span><span class="o">-&gt;</span><span class="n">setTriggerLimit</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">);</span><span class="w">    </span><span class="c1">// 允许拨弹，限制拨弹间隔 100ms，限制安全热量对应的弹丸颗数为 1.5 颗</span>
 </code></pre></div></td></tr></table></div>
-<ol>
+<ul>
 <li>设定操作手 / 视觉指令发弹信号，若不设定，则默认不发弹。</li>
-</ol>
+</ul>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
 <span class="normal"><a href="#__codelineno-16-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setManualShootFlag</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">flag</span><span class="p">);</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setVisionShootFlag</span><span class="p">(</span><span class="n">hello_world</span><span class="o">::</span><span class="n">vision</span><span class="o">::</span><span class="n">Vision</span><span class="o">::</span><span class="n">ShootFlag</span><span class="w"> </span><span class="n">flag</span><span class="p">);</span>
@@ -3673,7 +3673,7 @@
 <p>【说明】</p>
 <ol>
 <li>同时设定两个发射指令时，拨弹盘根据控制模式<code>ctrl_mode_</code>是<code>hello_world::module::CtrlMode::Manual</code>还是<code>hello_world::module::CtrlMode::Auto</code>来决定听从操作手发弹信号还是视觉指令发弹信号。</li>
-<li>拨弹盘在每次控制周期内，处理完这两个发弹信号后，会将它们主动复位，以防止用户在设定一次发弹信号后不设定回<code>false</code>导致一直发弹的情况。</li>
+<li>拨弹盘在每次控制周期内，处理完这两个发弹信号后，会将它们主动复位，以防止用户下个周期不将发弹信号设置为<code>false</code>导致一直发弹的情况。</li>
 <li>视觉的<code>hello_world::vision::Vision::ShootFlag::kShootOnce</code>"发一颗弹"是一个上升沿触发的指令，即当且仅当上一时刻视觉指令为<code>hello_world::vision::Vision::ShootFlag::kNoShoot</code>且当前指令为<code>hello_world::vision::Vision::ShootFlag::kShootOnce</code>时，拨弹盘才会向前拨一发弹。因此，为了能准确识别上升沿，在视觉控制时，用户【必须】每个控制周期都调用<code>setVisionShootFlag()</code>。</li>
 </ol>
 <h3 id="23-运行拨弹盘模块状态机">2.3 运行拨弹盘模块状态机<a class="headerlink" href="#23-运行拨弹盘模块状态机" title="链接到此节">&para;</a></h3>
@@ -3706,22 +3706,22 @@
 <span class="normal"><a href="#__codelineno-19-6">6</a></span>
 <span class="normal"><a href="#__codelineno-19-7">7</a></span>
 <span class="normal"><a href="#__codelineno-19-8">8</a></span>
-<span class="normal"><a href="#__codelineno-19-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="w">  </span><span class="n">Config</span><span class="w"> </span><span class="o">&amp;</span><span class="nf">getConfig</span><span class="p">();</span><span class="w">             </span>
-<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Config</span><span class="w"> </span><span class="o">&amp;</span><span class="nf">getConfig</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="c1">// 获取当前配置 (适用于 const 实例)</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">  </span><span class="n">CtrlMode</span><span class="w"> </span><span class="nf">getCtrlMode</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="w">  </span><span class="n">StuckStatus</span><span class="w"> </span><span class="nf">getStuckStatus</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="nf">getAngRef</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="nf">getAngFdb</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">getTriggerCnt</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">getStuckForwardCnt</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">getStuckBackwardCnt</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="normal"><a href="#__codelineno-19-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">Config</span><span class="w"> </span><span class="o">&amp;</span><span class="nf">getConfig</span><span class="p">();</span><span class="w">             </span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="k">const</span><span class="w"> </span><span class="n">Config</span><span class="w"> </span><span class="o">&amp;</span><span class="nf">getConfig</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="c1">// 获取当前配置 (适用于 const 实例)</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="n">CtrlMode</span><span class="w"> </span><span class="nf">getCtrlMode</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="n">StuckStatus</span><span class="w"> </span><span class="nf">getStuckStatus</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="kt">float</span><span class="w"> </span><span class="nf">getAngRef</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="kt">float</span><span class="w"> </span><span class="nf">getAngFdb</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">getTriggerCnt</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">getStuckForwardCnt</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">getStuckBackwardCnt</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 <p>值得注意的是，拨弹盘模块中有三个计数器，专门供用户调试使用</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
-<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">trigger_cnt_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">         </span><span class="c1">// 拨弹计数器</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">stuck_forward_cnt_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">   </span><span class="c1">// 前向卡弹计数器</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">stuck_backward_cnt_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// 后向卡弹计数器</span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="kt">uint16_t</span><span class="w"> </span><span class="n">trigger_cnt_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">         </span><span class="c1">// 拨弹计数器</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="kt">uint16_t</span><span class="w"> </span><span class="n">stuck_forward_cnt_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">   </span><span class="c1">// 前向卡弹计数器</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="kt">uint16_t</span><span class="w"> </span><span class="n">stuck_backward_cnt_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// 后向卡弹计数器</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="附录">附录<a class="headerlink" href="#附录" title="链接到此节">&para;</a></h2>
 <h3 id="版本说明">版本说明<a class="headerlink" href="#版本说明" title="链接到此节">&para;</a></h3>
