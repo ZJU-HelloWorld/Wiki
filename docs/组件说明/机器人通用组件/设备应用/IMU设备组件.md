@@ -22,6 +22,39 @@ BMI088 为满足在剧烈震动环境下高性能消费类设备的所有需求�
 > ![image-20231212152356](IMU设备组件.assets/image-20231212152356.png)
 > 需要配置其中的 CS_Accel、CS1_Gyro、SPI1_CLK、SPI1_MOSI 与 SPI1_MISO 引脚
 
+### 模块化IMU组件说明
+
+模块化 IMU 组件建立在 BMI088 组件以及 AHRS 组件的基础上，将 IMU 的数据预处理、姿态解算、数据读取等功能封装为一个类。
+
+#### 工作状态
+
+```cpp
+enum class ImuStatus : uint8_t {
+  kHardwareNotInited,  ///< 硬件未初始化
+  kCalcingOffset,      ///< 正在计算零漂
+  kWorking,            ///< 正常工作
+};
+```
+
+`ImuStatus` 枚举类用于表示 IMU 目前的工作状态。
+
+在用户调用 `initHardware()` 前，IMU 处于 `kHardwareNotInited` 状态，不计算姿态，也不能读取相关数据。
+
+用户调用 `initHardware()` 后， IMU 进入`kCalcingOffset` 状态，开始计算零漂，根据当前零漂计算结果处理角速度，并输出姿态角等数据。
+
+零漂计算完成后， IMU 进入 `kWorking` 状态，正常输出各项数据。
+
+组件留有 `resetOffset()` 接口，可以让 IMU 回到 `kCalcingOffset` 状态，重新计算零漂。
+
+#### 数据预处理
+在正式工作前， IMU 会计算角速度计零漂，具体方法为：
+
+使用均值递推公式$A_{n}=A_{n-1}+\frac{x_n-A_{n-1}}{n}$计算角速度平均值，共计算 `sample_num` 次，作为零漂计算结果。在后续的计算中减去零漂，得到更加准确的角速度数据。
+
+在零漂计算过程中，默认设备处于静止状态，为保证不受到外部晃动的干扰，程序设置了 `gyro_stationary_threshold` 作为阈值，大于该阈值的数据不计入计算次数。
+
+对于加速度数据，设置了 `acc_threshold` 作为阈值，用于过滤短时撞击。
+
 ## 快速开始
 
 组件源码仓库地址：<https://github.com/ZJU-HelloWorld/HW-Components>
@@ -45,81 +78,126 @@ BMI088 为满足在剧烈震动环境下高性能消费类设备的所有需求�
 
 使用前需要做以下准备：
 
-* 在 `config.cmake` 文件中设置 `use_hwcomponents_devices_imu` 选项为 `ON`，开启该设备文件的编译，若为 `OFF` 则根驱动配置需求在 `CMakeLists.txt` 文件中重配置为 `ON`。
+* 在 `config.cmake` 文件中设置 `use_hwcomponents_devices_imu` 、 `use_hwcomponents_algorithms_ahrs` 和 `use_hwcomponents_tools` 选项为 `ON`，开启该设备文件的编译，若为 `OFF` 则根驱动配置需求在 `CMakeLists.txt` 文件中重配置为 `ON`。
 
-### 示例
+### 使用示例
+
+#### 1.参数配置
 
 在项目中引用头文件：
 
 ```cpp
 #include "imu.hpp"
-
-namespace hw_imu = hello_world::imu;
 ```
 
-实例化一个 BMI088 硬件配置结构体并进行相关配置，同时根据安装方式设定旋转矩阵，如：
+实例化一个 `ImuConfig` 结构体，该结构体包含了零漂计算、 `BMI088` 和 `Mahony` 的相关参数。其中大部分参数有默认值，`rot_mat_flatten`和`bmi088_hw_config`为必填项，需要根据实际情况进行修改:
 
 ```cpp
-hw_imu::BMI088HWConfig hw_config = {
-  .hspi = &hspi1,
-  .acc_cs_port = GPIOA,
-  .acc_cs_pin = GPIO_PIN_4,
-  .gyro_cs_port = GPIOB,
-  .gyro_cs_pin = GPIO_PIN_0,
+static const hello_world::imu::ImuConfig kImuConfig = {
+    .rot_mat_flatten = {
+      1, 0, 0,
+      0, 1, 0,
+      0, 0, 1},
+    .bmi088_hw_config = { // DM-MC-Board02控制板(h7)
+        .hspi = &hspi2,
+        .acc_cs_port = GPIOC,
+        .acc_cs_pin = GPIO_PIN_0,
+        .gyro_cs_port = GPIOC,
+        .gyro_cs_pin = GPIO_PIN_3,
+    },
 };
-
-float rot_mat_flatten[9] = {
-    1, 0, 0,
-    0, 1, 0,
-    0, 0, 1};
 ```
 
-实例化一个 BMI088 组件并放入对应硬件配置进行初始化，如：
+如果使用C板，则将`bmi088_hw_config`项设为：
 
 ```cpp
-hw_imu::BMI088* imu_ptr = nullptr;
-
-imu_ptr = new hw_imu::BMI088(hw_config, rot_mat_flatten);
+.bmi088_hw_config = { // C板
+    .hspi = &hspi1,
+    .acc_cs_port = GPIOA,
+    .acc_cs_pin = GPIO_PIN_4,
+    .gyro_cs_port = GPIOB,
+    .gyro_cs_pin = GPIO_PIN_0,
+},
 ```
-
-当有特殊需求时，还可以调整 BMI088 的配置，如：
+`ImuConfig`具有默认参数，因此可以对某些参数进行个别修改，但是需要保证结构体成员的前后顺序与结构体中的声明顺序相同，完整配置参数如下：
 
 ```cpp
-hw_imu::BMI088Config config = {
-    .acc_range = hw_imu::kBMI088AccRange3G,
-    .acc_odr = hw_imu::kBMI088AccOdr1600,
-    .acc_osr = hw_imu::kBMI088AccOsr4,
-    .gyro_range = hw_imu::kBMI088GyroRange1000Dps,
-    .gyro_odr_fbw = hw_imu::BMI088GyroOdrFbw1000_116,
+static const hello_world::imu::ImuConfig kImuConfig = {
+    /*/< 加速度阈值，用于过滤短时撞击，单位：m/s^2 */
+    .acc_threshold = 10.0f,
+    /*/< 角速度静止阈值，计算零漂时默认设备处于静止状态，滤去异常数据，单位：rad/s */
+    .gyro_stationary_threshold = 0.1f,
+    .sample_num = 1000,    ///< 零漂采样次数
+    .samp_freq = 1000.0f,  ///< 采样频率
+    .kp = 1.0f,            ///< Mahony 比例系数
+    .ki = 0.0f,            ///< Mahony 积分系数
+    .rot_mat_flatten = {
+        1, 0, 0,
+        0, 1, 0,
+        0, 0, 1},
+    .bmi088_hw_config = { // DM-MC-Board02控制板(h7)
+        .hspi = &hspi2,
+        .acc_cs_port = GPIOC,
+        .acc_cs_pin = GPIO_PIN_0,
+        .gyro_cs_port = GPIOC,
+        .gyro_cs_pin = GPIO_PIN_3,
+    },
+    .bmi088_config = {
+        .acc_range = hello_world::imu::kBMI088AccRange3G,
+        .acc_odr = hello_world::imu::kBMI088AccOdr1600,
+        .acc_osr = hello_world::imu::kBMI088AccOsr4,
+        .gyro_range = hello_world::imu::kBMI088GyroRange1000Dps,
+        .gyro_odr_fbw = hello_world::imu::kBMI088GyroOdrFbw1000_116,
+    },
 };
-
-imu_ptr = new hw_imu::BMI088(hw_config, rot_mat_flatten, config);
 ```
 
-- `BMI088Config` 具有默认参数，因此可以在需要对某些默认参数进行修改时进行个别修改，但是需要保证前后结构体成员前后的复制顺序需要与结构体中的声明顺序相同
-
-然后调用方法 `imuInit` 对 BMI088 的进行配置, 如：
+#### 2.实例化
+实例化一个IMU组件并放入对应配置进行初始化，如：
 
 ```cpp
-while (imu_ptr->imuInit() != hw_imu::kBMI088ErrStateNoErr) {
-}
+hello_world::imu::Imu unique_imu = hello_world::imu::Imu(kImuConfig);
 ```
 
-在配置成功后，可调用方法 `getData` 获取传感器数据，如：
+#### 3.初始化
+在正式使用前，调用 `initHardware()` 函数进行硬件初始化。
+
+> 该函数内部会阻塞运行，请不要在中断中调用。
+
+#### 4.数据更新
+硬件初始化完成后，定期调用 `update()` 函数更新数据，更新周期务必与 `samp_freq` 中配置的相同：
+
+> 如果之前没有调用initHardware函数，该函数会返回false
+
+#### 5.数据获取
+在配置成功后，可调用相关接口函数获取姿态、角速度、加速度、温度数据，相关接口如下：
 
 ```cpp
-float gyro_data[3], acc_data[3], temp;
-imu_ptr->getData(acc_data, gyro_data, &temp);
+/**
+  * @brief      判断 IMU 零漂是否计算完成
+  * @retval      bool: IMU 零漂是否计算完成
+  * @note        None
+  */
+bool isOffsetCalcFinished() { return status_ == Status::kWorking; };
+
+// 获取姿态角 (ZYX欧拉角)
+float roll() const;
+float pitch() const;
+float yaw() const;
+
+// 获取角速度 (去零漂)
+float gyro_roll() const;
+float gyro_pitch() const;
+float gyro_yaw() const;
+
+// 获取加速度 (过滤短时撞击)
+float acc_x() const;
+float acc_y() const;
+float acc_z() const;
+
+// 获取温度
+float temp() const;
 ```
-
-- 可以传入空指针 `nullptr` 作为参数，此时不会读取对应的数据
-
-> **注意：由于内部使用了硬件句柄，因此如果计划将实例作为全局变量时（全局变量初始化时对应的硬件句柄可能会还未初始化完毕），建议采取一下方法：**
->
-> 1. 声明指针，后续通过 **`new`** 的方式进行初始化。
-> 2. 声明指针，后续通过返回函数（CreateXXXIns）中的静态变量（因为该变量只有在**第一次调用**该函数时才会运行初始化程序）进行初始化。
-> 3. 使用无参构造函数，后续调用 **`init`** 方法进行初始化。
-> 4. 使用无参构造函数，后续使用**拷贝赋值函数**或是**移动赋值函数**进行初始化。
 
 ## 附录
 
@@ -129,7 +207,8 @@ imu_ptr->getData(acc_data, gyro_data, &temp);
 
 ### 版本说明
 
-| 版本号                                                       | 发布日期   | 说明               | 贡献者 |
-| ------------------------------------------------------------ | ---------- | ------------------ | ------ |
+| 版本号                                                         | 发布日期   | 说明            | 贡献者 |
+| -------------------------------------------------------------- | ---------- | --------------- | ------ |
 | <img src = "https://img.shields.io/badge/version-1.0.0-green"> | 2023.12.12 | IMU 组件（Cpp） | 蔡坤镇 |
-| <img src = "https://img.shields.io/badge/version-1.0.1-green"> | 2023.12.13 | 添加旋转配置 | 蔡坤镇 |
+| <img src = "https://img.shields.io/badge/version-1.0.1-green"> | 2023.12.13 | 添加旋转配置    | 蔡坤镇 |
+| <img src = "https://img.shields.io/badge/version-1.1.0-green"> | 2025.01.08 | 模块化组件      | 金乐天 |
