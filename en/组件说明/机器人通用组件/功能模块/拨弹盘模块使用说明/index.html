@@ -3306,7 +3306,7 @@
 
 
 <h1 id="拨弹盘模块使用说明">拨弹盘模块使用说明<a class="headerlink" href="#拨弹盘模块使用说明" title="链接到此节">&para;</a></h1>
-<p><a class="glightbox" href="https://img.shields.io/badge/version-0.9.0-green" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://img.shields.io/badge/version-0.9.0-green" /></a>
+<p><a class="glightbox" href="https://img.shields.io/badge/version-0.9.1-green" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://img.shields.io/badge/version-0.9.1-green" /></a>
 <a class="glightbox" href="https://img.shields.io/badge/author-LouKaiyang-lightgrey" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://img.shields.io/badge/author-LouKaiyang-lightgrey" /></a></p>
 <h2 id="1-基本知识">1 基本知识<a class="headerlink" href="#1-基本知识" title="链接到此节">&para;</a></h2>
 <p>模块化组件在<code>HW-Components</code>仓库中的<code>cpp25-dev-module_feat</code>分支，其中<code>modules</code>文件夹使用<code>git submodule</code>管理。</p>
@@ -3631,7 +3631,7 @@
 <h4 id="222-设定控制指令">2.2.2 设定控制指令<a class="headerlink" href="#222-设定控制指令" title="链接到此节">&para;</a></h4>
 <p>用户需要根据自身需求设定控制指令。</p>
 <ul>
-<li>设定控制模式，若不设定，则采用上一次的设定值或者默认值。</li>
+<li>（1）设定控制模式，若不设定，则采用上一次的设定值或者默认值。</li>
 </ul>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setCtrlMode</span><span class="p">(</span><span class="n">CtrlMode</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span><span class="w">  </span><span class="c1">// 设定控制模式</span>
 </code></pre></div></td></tr></table></div>
@@ -3645,26 +3645,42 @@
 <a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 <ul>
-<li>设定热量 / 拨弹频率限制，若不设定，则采用上一次的设定值或者默认值。</li>
+<li>（2）设定热量 / 拨弹频率限制，若不设定，则采用上一次的设定值或者默认值。</li>
 </ul>
-<p>重载了三个函数来分别实现 <strong>禁止拨弹</strong>；<strong>允许拨弹，限制频率但不限制热量</strong>；<strong>允许拨弹，限制频率和热量</strong>。</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
-<span class="normal"><a href="#__codelineno-14-2">2</a></span>
-<span class="normal"><a href="#__codelineno-14-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setTriggerLimit</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">is_trigger_allowed</span><span class="p">);</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setTriggerLimit</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">interval</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_heat_limited</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_trigger_allowed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setTriggerLimit</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">interval</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">safe_num</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_heat_limited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_trigger_allowed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<p>使用该函数可实现 <strong>1. 禁止拨弹</strong>；<strong>2. 允许拨弹，限制频率但不限制热量</strong>；<strong>3. 允许拨弹，限制频率和热量</strong>。</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="cm">/** </span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="cm"> * @brief       设定拨弹限制</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="cm"> * @param       is_trigger_allowed: 是否允许拨弹</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="cm"> * @param       is_heat_limited:    是否限制热量</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="cm"> * @param       safe_num:           安全热量值对应的弹丸个数</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="cm"> * @param       interval:           拨弹间隔时间, 单位 ms   </span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="cm"> * @note        该函数用于设定拨弹频率限制和热量限制。</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="cm"> *              当 is_trigger_allowed 为 false 时, 后续所有参数设置不起作用。</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="cm"> *              当 is_heat_limited 为 false 时, safe_num 参数设置不起作用。</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="cm"> */</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setTriggerLimit</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">is_trigger_allowed</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_heat_limited</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">safe_num</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">interval</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <p>具体用法如下所示</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
 <span class="normal"><a href="#__codelineno-15-3">3</a></span>
 <span class="normal"><a href="#__codelineno-15-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="o">*</span><span class="w"> </span><span class="n">feed_ptr_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateFeed</span><span class="p">();</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="n">feed_ptr_</span><span class="o">-&gt;</span><span class="n">setTriggerLimit</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="w">       </span><span class="c1">// 禁止拨弹</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">feed_ptr_</span><span class="o">-&gt;</span><span class="n">setTriggerLimit</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span><span class="w">  </span><span class="c1">// 允许拨弹，限制拨弹间隔 100ms，不限制热量</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="n">feed_ptr_</span><span class="o">-&gt;</span><span class="n">setTriggerLimit</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">);</span><span class="w">    </span><span class="c1">// 允许拨弹，限制拨弹间隔 100ms，限制安全热量对应的弹丸颗数为 1.5 颗</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="n">feed_ptr_</span><span class="o">-&gt;</span><span class="n">setTriggerLimit</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">       </span><span class="c1">// 禁止拨弹</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">feed_ptr_</span><span class="o">-&gt;</span><span class="n">setTriggerLimit</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w">    </span><span class="c1">// 允许拨弹，不限制热量，限制拨弹间隔 100ms</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="n">feed_ptr_</span><span class="o">-&gt;</span><span class="n">setTriggerLimit</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w">     </span><span class="c1">// 允许拨弹，限制安全热量对应的弹丸颗数为 1.5 颗，限制拨弹间隔 100ms</span>
 </code></pre></div></td></tr></table></div>
 <ul>
-<li>设定操作手 / 视觉指令发弹信号，若不设定，则默认不发弹。</li>
+<li>（3）设定操作手 / 视觉指令发弹信号，若不设定，则默认不发弹。</li>
 </ul>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
 <span class="normal"><a href="#__codelineno-16-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setManualShootFlag</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">flag</span><span class="p">);</span>
@@ -3741,6 +3757,12 @@
 <td>拨弹盘模块使用说明</td>
 <td>娄开杨</td>
 </tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-0.9.1-green"></td>
+<td>2025.01.10</td>
+<td>修改热量/频率限制部分</td>
+<td>娄开杨</td>
+</tr>
 </tbody>
 </table>
 
@@ -3765,7 +3787,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-12-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-10</span>
   </span>
 
     
