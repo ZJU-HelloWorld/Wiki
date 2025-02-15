@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../../assets/rm.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.2">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.d7758b05.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.8608ea7d.min.css">
       
         
         <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
@@ -3532,7 +3532,8 @@
 <span class="normal"><a href="#__codelineno-5-11">11</a></span>
 <span class="normal"><a href="#__codelineno-5-12">12</a></span>
 <span class="normal"><a href="#__codelineno-5-13">13</a></span>
-<span class="normal"><a href="#__codelineno-5-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1">// 被放在 hello_world::module::feed_impl 里</span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1">// 被放在 hello_world::module::feed_impl 里</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="k">struct</span><span class="w"> </span><span class="nc">FeedConfig</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">ang_ref_offset</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">          </span><span class="c1">// 拨盘电机目标角度偏移量, &gt;=0, 单位 rad(TODO 根据弹链长度调整)</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">ang_per_blt</span><span class="p">;</span><span class="w">                                 </span><span class="c1">// 1发弹丸拨盘的转动角度, &gt;0, 单位 rad (TODO 根据拨弹盘设计调整)</span>
@@ -3543,9 +3544,10 @@
 <a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">hold_duration_thre</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w">           </span><span class="c1">// 角度保持不变检测阈值时间, &gt;0, 单位 ms (在复活模式作为堵转检测的第二手段)</span>
 <a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">default_trigger_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span><span class="w">           </span><span class="c1">// 默认拨弹频率限制间隔时间, &gt;0, 单位 ms</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">default_safe_num_blt</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5f</span><span class="p">;</span><span class="w">          </span><span class="c1">// 默认安全热量值对应的弹丸个数, &gt;=0, 可以为小数</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="p">};</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="c1">// 被放在 Feed 类里</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="k">typedef</span><span class="w"> </span><span class="n">FeedConfig</span><span class="w"> </span><span class="n">Config</span><span class="p">;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">opt_prevent_stuck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">                    </span><span class="c1">// 是否开启防卡弹优化，开启后，每次拨弹之后拨弹盘会回退5度，仅建议42mm弹丸拨弹盘使用</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="p">};</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="c1">// 被放在 Feed 类里</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="k">typedef</span><span class="w"> </span><span class="n">FeedConfig</span><span class="w"> </span><span class="n">Config</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 <table>
 <thead>
@@ -3611,6 +3613,12 @@
 <td style="text-align: left;">默认安全热量值对应的弹丸个数，可以是小数。<br>若当前热量值加上<code>safe_num_blt * heat_per_blt</code>会超限，且未使用<code>setTriggerLimit</code>关闭热量限制时，则不允许前向拨动拨弹盘。<br></td>
 <td>在用户通过<code>setTriggerLimit</code>函数设置前，<code>safe_num_blt</code>等于<code>default_safe_num_blt</code>，否则一直等于上次用户的给定值。</td>
 </tr>
+<tr>
+<td style="text-align: center;"><code>opt_prevent_stuck</code></td>
+<td style="text-align: left;"><code>false</code></td>
+<td style="text-align: left;">是否开启防卡弹优化</td>
+<td>开启防卡弹优化后，拨弹盘每拨一颗弹丸后，拨弹盘期望角度会回转 1 度。回转时刻与<code>trigger_interval_</code>相关：距离上一次拨弹过了<code>trigger_interval_</code>时间后，角度才回转 1 度并保持。该优化仅建议42mm大弹丸拨弹盘开启。</td>
+</tr>
 </tbody>
 </table>
 <p>【使用示例】定义配置结构体变量，并用它初始化 <code>Feed</code> 实例</p>
@@ -3626,7 +3634,8 @@
 <span class="normal"><a href="#__codelineno-6-10">10</a></span>
 <span class="normal"><a href="#__codelineno-6-11">11</a></span>
 <span class="normal"><a href="#__codelineno-6-12">12</a></span>
-<span class="normal"><a href="#__codelineno-6-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1">// 在初始化结构体变量时直接修改成员值</span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1">// 在初始化结构体变量时直接修改成员值</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="o">::</span><span class="n">Config</span><span class="w"> </span><span class="n">kFeedConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">  </span><span class="p">.</span><span class="n">ang_ref_offset</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="mf">0.05f</span><span class="p">,</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">  </span><span class="p">.</span><span class="n">ang_per_blt</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
@@ -3637,8 +3646,9 @@
 <a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">  </span><span class="p">.</span><span class="n">hold_duration_thre</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
 <a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">  </span><span class="p">.</span><span class="n">default_trigger_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
 <a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">  </span><span class="p">.</span><span class="n">default_safe_num_blt</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5f</span><span class="p">,</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="p">}</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="w"> </span><span class="n">unique_feed</span><span class="p">(</span><span class="n">kFeedConfig</span><span class="p">);</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">  </span><span class="p">.</span><span class="n">opt_prevent_stuck</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="p">}</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="w"> </span><span class="n">unique_feed</span><span class="p">(</span><span class="n">kFeedConfig</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="2-使用方法">2 使用方法<a class="headerlink" href="#2-使用方法" title="链接到此节">&para;</a></h2>
 <h3 id="21-拨弹盘的实例化与初始化">2.1 拨弹盘的实例化与初始化<a class="headerlink" href="#21-拨弹盘的实例化与初始化" title="链接到此节">&para;</a></h3>
@@ -3677,7 +3687,8 @@
 <span class="normal"><a href="#__codelineno-8-20">20</a></span>
 <span class="normal"><a href="#__codelineno-8-21">21</a></span>
 <span class="normal"><a href="#__codelineno-8-22">22</a></span>
-<span class="normal"><a href="#__codelineno-8-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ins_feed.hpp&quot;</span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ins_feed.hpp&quot;</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="o">::</span><span class="n">Config</span><span class="w"> </span><span class="n">kFeedConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">  </span><span class="p">.</span><span class="n">ang_ref_offset</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w">  </span>
 <a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">  </span><span class="p">.</span><span class="n">ang_per_blt</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">   </span>
@@ -3688,18 +3699,19 @@
 <a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">  </span><span class="p">.</span><span class="n">hold_duration_thre</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">  </span>
 <a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">  </span><span class="p">.</span><span class="n">default_trigger_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
 <a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">  </span><span class="p">.</span><span class="n">default_safe_num_blt</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5f</span><span class="p">,</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="p">};</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="w"> </span><span class="n">unique_feed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="p">(</span><span class="n">kFeedConfig</span><span class="p">);</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="o">*</span><span class="w"> </span><span class="nf">CreateFeed</span><span class="p">()</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="p">{</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_feed_created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">is_feed_created</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="w">    </span><span class="n">unique_feed</span><span class="p">.</span><span class="n">registerPidFeed</span><span class="p">(</span><span class="n">CreatePidMotorFeed</span><span class="p">());</span><span class="w"> </span><span class="c1">// 注册MultiNodesPID指针</span>
-<a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="w">    </span><span class="n">unique_feed</span><span class="p">.</span><span class="n">registerMotorFeed</span><span class="p">(</span><span class="n">CreateMotorFeed</span><span class="p">());</span><span class="w">  </span><span class="c1">// 注册电机指针</span>
-<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="w">    </span><span class="n">is_feed_created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">unique_feed</span><span class="p">;</span>
-<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="p">};</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">  </span><span class="p">.</span><span class="n">opt_prevent_stuck</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="p">};</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="w"> </span><span class="n">unique_feed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="p">(</span><span class="n">kFeedConfig</span><span class="p">);</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="n">hello_world</span><span class="o">::</span><span class="k">module</span><span class="o">::</span><span class="n">Feed</span><span class="o">*</span><span class="w"> </span><span class="nf">CreateFeed</span><span class="p">()</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="p">{</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_feed_created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">is_feed_created</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="w">    </span><span class="n">unique_feed</span><span class="p">.</span><span class="n">registerPidFeed</span><span class="p">(</span><span class="n">CreatePidMotorFeed</span><span class="p">());</span><span class="w"> </span><span class="c1">// 注册MultiNodesPID指针</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="w">    </span><span class="n">unique_feed</span><span class="p">.</span><span class="n">registerMotorFeed</span><span class="p">(</span><span class="n">CreateMotorFeed</span><span class="p">());</span><span class="w">  </span><span class="c1">// 注册电机指针</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">    </span><span class="n">is_feed_created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">unique_feed</span><span class="p">;</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="22-更新数据设定指令">2.2 更新数据，设定指令<a class="headerlink" href="#22-更新数据设定指令" title="链接到此节">&para;</a></h3>
 <p><strong>【要求】每个控制周期</strong>，用户都需要使用<a href="#21-拨弹盘的实例化与初始化">2.1 拨弹盘的实例化与初始化</a>创建的实例，按照顺序调用以下接口函数，更新数据，设定控制指令。</p>
@@ -3866,6 +3878,12 @@
 <td>修改热量/频率限制部分；修复参数初值错误</td>
 <td>娄开杨</td>
 </tr>
+<tr>
+<td><img src = "https://img.shields.io/badge/version-0.9.2-green"></td>
+<td>2025.02.15</td>
+<td>防卡弹优化</td>
+<td>娄开杨</td>
+</tr>
 </tbody>
 </table>
 
@@ -3890,7 +3908,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-07</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-15</span>
   </span>
 
     
@@ -4060,7 +4078,7 @@
     <script id="__config" type="application/json">{"base": "../../../../..", "features": ["content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.indexes", "navigation.top", "header.autohide", "navigation.expand", "announce.dismiss"], "search": "../../../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.f13b1293.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
         <script src="../../../../../javascripts/mathjax.js"></script>
       
