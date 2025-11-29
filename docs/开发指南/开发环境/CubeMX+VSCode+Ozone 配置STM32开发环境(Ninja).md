@@ -144,7 +144,7 @@ openocd -v
 
 * 用 VS Code  打开工程文件夹，目录结构如下
     * 其中 `.mxproject` 可删去
-    * `CMakeLists.txt` 删去，后续换为提供的[模板](#cmakelists-%E6%A8%A1%E6%9D%BF)
+    * `CMakeLists.txt` 删去，后续换为提供的[模板](#cmakelists-sample)
     * `.ld` 为链接脚本文件，在链接时使用，本目录下的 `.ld` 规定了设备内存相关信息
     * `Core/` `Drivers/` 为 CubeMX 按照模板生成的文件，除 `Core/Src/main.c` 外一般不做改动
     * `cmake` 为 CubeMX 根据不同 stm32 型号生成的 cmake 配置文件
@@ -180,7 +180,7 @@ openocd -v
 
 ### 配置 CMake 工程
 
-* 添加 `CMakeLists.txt` [模板](#cmakelists-%E6%A8%A1%E6%9D%BF)至工程根目录，修改模板中的 `TODO` 内容，主要包括：
+* 添加 `CMakeLists.txt` [模板](#cmakelists-sample)至工程根目录，修改模板中的 `TODO` 内容，主要包括：
 
     * 工程名
     * 用户使用的文件夹
@@ -315,7 +315,7 @@ openocd -v
 
 ## 附录
 
-### CMakeLists 模板
+### CMakeLists 模板 {#cmakelists-sample}
 
 ```cmake
 # ##############################################################################

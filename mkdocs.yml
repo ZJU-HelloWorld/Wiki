@@ -162,28 +162,7 @@ plugins:
       # - social
       - search
       - awesome-pages
-      - i18n:
-          material_alternate: true
-          default_language: zh
-          docs_structure: suffix #folder
-          languages:
-            zh: 
-              name: 中文
-              build: true
-              site_name: Hello World 技术知识库
-            en: 
-              name: English
-              build: true 
-              site_name: Hello Wiki
-          nav_translations: 
-            en:
-              测试指南: Testing
-              贡献指南: Contribution
-              关于: About
-              开发指南: Development
-              入门: Getting Started
-              组件说明: Components Manual
-
+      # - i18n:
       - glightbox
       - git-revision-date-localized:
             enable_creation_date: true

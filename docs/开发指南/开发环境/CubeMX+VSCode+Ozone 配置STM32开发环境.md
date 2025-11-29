@@ -177,7 +177,7 @@ openocd -v
 
 ### 配置 CMake 工程
 
-* 添加 `CMakeLists.txt` [模板](#cmakelists-%E6%A8%A1%E6%9D%BF)至工程根目录，修改模板中的 `TODO` 内容，主要包括：
+* 添加 `CMakeLists.txt` [模板](#cmakelists-sample)至工程根目录，修改模板中的 `TODO` 内容，主要包括：
 
     * 工程名；
     * FPU 的使用开关；
@@ -337,7 +337,7 @@ openocd -v
 
 ## 附录
 
-### CMakeLists 模板
+### CMakeLists 模板 {#cmakelists-sample}
 
 推荐使用新版本
 
