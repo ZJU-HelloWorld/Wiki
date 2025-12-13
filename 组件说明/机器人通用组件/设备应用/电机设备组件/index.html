@@ -2405,22 +2405,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dm-j4310-2ecdm-j8006" class="md-nav__link">
+  <a href="#达妙电机" class="md-nav__link">
     <span class="md-ellipsis">
       
-        DM-J4310-2EC、DM-J8006
+        达妙电机
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="DM-J4310-2EC、DM-J8006">
+    <nav class="md-nav" aria-label="达妙电机">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#mf9025v2mg6012e-i36mg8016e-i6" class="md-nav__link">
+  <a href="#瓴控电机" class="md-nav__link">
     <span class="md-ellipsis">
       
-        MF9025v2、MG6012E-i36、MG8016E-i6
+        瓴控电机
       
     </span>
   </a>
@@ -2433,10 +2433,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#版本说明" class="md-nav__link">
+  <a href="#下载中心-上海瓴控科技有限公司" class="md-nav__link">
     <span class="md-ellipsis">
       
-        版本说明
+        下载中心-上海瓴控科技有限公司
       
     </span>
   </a>
@@ -3978,22 +3978,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dm-j4310-2ecdm-j8006" class="md-nav__link">
+  <a href="#达妙电机" class="md-nav__link">
     <span class="md-ellipsis">
       
-        DM-J4310-2EC、DM-J8006
+        达妙电机
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="DM-J4310-2EC、DM-J8006">
+    <nav class="md-nav" aria-label="达妙电机">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#mf9025v2mg6012e-i36mg8016e-i6" class="md-nav__link">
+  <a href="#瓴控电机" class="md-nav__link">
     <span class="md-ellipsis">
       
-        MF9025v2、MG6012E-i36、MG8016E-i6
+        瓴控电机
       
     </span>
   </a>
@@ -4006,10 +4006,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#版本说明" class="md-nav__link">
+  <a href="#下载中心-上海瓴控科技有限公司" class="md-nav__link">
     <span class="md-ellipsis">
       
-        版本说明
+        下载中心-上海瓴控科技有限公司
       
     </span>
   </a>
@@ -4109,141 +4109,40 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="p">};</span>
 </code></pre></div></td></tr></tbody></table></div>
 <p>实例化一个电机组件并放入对应电机参数进行初始化，建议再初始化后及时将其添加到 CAN 或 FDCAN 的发送与接收管理器中，如：</p>
-<div class="highlight"><table class="highlighttable"><tbody><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-2-10">10</a></span>
-<span class="normal"><a href="#__codelineno-2-11">11</a></span>
-<span class="normal"><a href="#__codelineno-2-12">12</a></span>
-<span class="normal"><a href="#__codelineno-2-13">13</a></span>
-<span class="normal"><a href="#__codelineno-2-14">14</a></span>
-<span class="normal"><a href="#__codelineno-2-15">15</a></span>
-<span class="normal"><a href="#__codelineno-2-16">16</a></span>
-<span class="normal"><a href="#__codelineno-2-17">17</a></span>
-<span class="normal"><a href="#__codelineno-2-18">18</a></span>
-<span class="normal"><a href="#__codelineno-2-19">19</a></span>
-<span class="normal"><a href="#__codelineno-2-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">hw_motor</span><span class="o">::</span><span class="n">Motor</span><span class="o">*</span><span class="w"> </span><span class="n">motor_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">hw_motor</span><span class="o">::</span><span class="n">M2006</span><span class="w"> </span><span class="nf">motor</span><span class="p">();</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">MotorInit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="p">{</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">  </span><span class="cm">/* 事先完成管理器的初始化 */</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">  </span><span class="n">motor_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">M3508</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">optional_params</span><span class="p">);</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">  </span><span class="n">motor</span><span class="p">.</span><span class="n">init</span><span class="p">(</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">OptionalParams</span><span class="p">{</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">              </span><span class="p">.</span><span class="n">angle_range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">AngleRange</span><span class="o">::</span><span class="n">kNegPiToPosPi</span><span class="p">,</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">              </span><span class="p">.</span><span class="n">max_torq_input_lim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">          </span><span class="p">});</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">  </span><span class="n">can_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="n">motor_ptr</span><span class="p">);</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">  </span><span class="n">can_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="o">&amp;</span><span class="n">motor</span><span class="p">);</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">  </span><span class="n">can_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addTransmitter</span><span class="p">(</span><span class="n">motor_ptr</span><span class="p">);</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">  </span><span class="n">can_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addTransmitter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">motor</span><span class="p">);</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18"></a>
-<a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="w">  </span><span class="cm">/* 事后调用接收管理器的开启接收 */</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tbody><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span>
+<span class="normal"><a href="#__codelineno-2-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1">//在ins_motor.cpp中</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">hw_motor</span><span class="o">::</span><span class="n">DM_J4310</span><span class="w"> </span><span class="nf">unique_motor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">optional_params</span><span class="p">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">hw_motor</span><span class="o">::</span><span class="n">Motor</span><span class="w"> </span><span class="o">*</span><span class="nf">CreateMotor</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">unique_motor</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="c1">//在comm_task.cpp中</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="n">fdcan1_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="n">CreateMotor</span><span class="p">());</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="n">fdcan1_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addTransmitter</span><span class="p">(</span><span class="n">CreateMotor</span><span class="p">());</span>
 </code></pre></div></td></tr></tbody></table></div>
 <p>接收与发送管理器的其他配置按要求进行，详见 <a href="https://zju-helloworld.github.io/Wiki/组件说明/嵌入式系统支持/板级支持包/通用通信驱动/">通用通信驱动</a> 中 CAN 或 FDCAN 部分的使用方法。</p>
-<p>当需要不同种电机一起初始化时，可以调用 <code>CreateMotor</code> 函数进行生成，如：</p>
-<div class="highlight"><table class="highlighttable"><tbody><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-3-10">10</a></span>
-<span class="normal"><a href="#__codelineno-3-11">11</a></span>
-<span class="normal"><a href="#__codelineno-3-12">12</a></span>
-<span class="normal"><a href="#__codelineno-3-13">13</a></span>
-<span class="normal"><a href="#__codelineno-3-14">14</a></span>
-<span class="normal"><a href="#__codelineno-3-15">15</a></span>
-<span class="normal"><a href="#__codelineno-3-16">16</a></span>
-<span class="normal"><a href="#__codelineno-3-17">17</a></span>
-<span class="normal"><a href="#__codelineno-3-18">18</a></span>
-<span class="normal"><a href="#__codelineno-3-19">19</a></span>
-<span class="normal"><a href="#__codelineno-3-20">20</a></span>
-<span class="normal"><a href="#__codelineno-3-21">21</a></span>
-<span class="normal"><a href="#__codelineno-3-22">22</a></span>
-<span class="normal"><a href="#__codelineno-3-23">23</a></span>
-<span class="normal"><a href="#__codelineno-3-24">24</a></span>
-<span class="normal"><a href="#__codelineno-3-25">25</a></span>
-<span class="normal"><a href="#__codelineno-3-26">26</a></span>
-<span class="normal"><a href="#__codelineno-3-27">27</a></span>
-<span class="normal"><a href="#__codelineno-3-28">28</a></span>
-<span class="normal"><a href="#__codelineno-3-29">29</a></span>
-<span class="normal"><a href="#__codelineno-3-30">30</a></span>
-<span class="normal"><a href="#__codelineno-3-31">31</a></span>
-<span class="normal"><a href="#__codelineno-3-32">32</a></span>
-<span class="normal"><a href="#__codelineno-3-33">33</a></span>
-<span class="normal"><a href="#__codelineno-3-34">34</a></span>
-<span class="normal"><a href="#__codelineno-3-35">35</a></span>
-<span class="normal"><a href="#__codelineno-3-36">36</a></span>
-<span class="normal"><a href="#__codelineno-3-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">hw_motor</span><span class="o">::</span><span class="n">Motor</span><span class="o">*</span><span class="w"> </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">hw_motor</span><span class="o">::</span><span class="n">MotorType</span><span class="w"> </span><span class="n">motor_type_ls</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">MotorType</span><span class="o">::</span><span class="n">kA1</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">MotorType</span><span class="o">::</span><span class="n">kDM_J4310</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">MotorType</span><span class="o">::</span><span class="n">kDM_J4310</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">MotorType</span><span class="o">::</span><span class="n">kM3508</span><span class="p">,</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="p">};</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="n">hw_motor</span><span class="o">::</span><span class="n">OptionalParams</span><span class="w"> </span><span class="n">optional_params_ls</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">        </span><span class="p">.</span><span class="n">input_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">InputType</span><span class="o">::</span><span class="n">kTorq</span><span class="p">,</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">        </span><span class="p">.</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">kDirFwd</span><span class="p">,</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">        </span><span class="p">.</span><span class="n">input_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">InputType</span><span class="o">::</span><span class="n">kTorq</span><span class="p">,</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">        </span><span class="p">.</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">kDirRev</span><span class="p">,</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">        </span><span class="p">.</span><span class="n">input_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">InputType</span><span class="o">::</span><span class="n">kTorq</span><span class="p">,</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">        </span><span class="p">.</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">kDirFwd</span><span class="p">,</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">        </span><span class="p">.</span><span class="n">input_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">InputType</span><span class="o">::</span><span class="n">kTorq</span><span class="p">,</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">        </span><span class="p">.</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">kDirRev</span><span class="p">,</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="p">};</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26"></a>
-<a id="__codelineno-3-27" name="__codelineno-3-27"></a><span class="kt">void</span><span class="w"> </span><span class="nf">MotorInit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<a id="__codelineno-3-28" name="__codelineno-3-28"></a><span class="p">{</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29"></a><span class="w">  </span><span class="cm">/* 事先完成管理器的初始化 */</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30"></a>
-<a id="__codelineno-3-31" name="__codelineno-3-31"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-32" name="__codelineno-3-32"></a><span class="w">    </span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_motor</span><span class="o">::</span><span class="n">CreateMotor</span><span class="p">(</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33"></a><span class="w">        </span><span class="n">motor_type_ls</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">optional_params_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-<a id="__codelineno-3-34" name="__codelineno-3-34"></a><span class="w">    </span><span class="n">can_rx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addReceiver</span><span class="p">(</span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-<a id="__codelineno-3-35" name="__codelineno-3-35"></a><span class="w">    </span><span class="n">can_tx_mgr_ptr</span><span class="o">-&gt;</span><span class="n">addTransmitter</span><span class="p">(</span><span class="n">motor_ptr_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-<a id="__codelineno-3-36" name="__codelineno-3-36"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-3-37" name="__codelineno-3-37"></a><span class="p">}</span>
-</code></pre></div></td></tr></tbody></table></div>
 <p>设定电机的输入（共四种输入方式：期望电流、期望输出力矩、报文原始输入、命令输入，不同的电机有不同的输入方式限制，详见各个电机组件的头文件），如：</p>
-<div class="highlight"><table class="highlighttable"><tbody><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kt">float</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">;</span><span class="w"> </span><span class="c1">// 输出端输出 0.1N·m 的力矩</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tbody><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kt">float</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">;</span><span class="w"> </span><span class="c1">// 输出端输出 0.1N·m 的力矩</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">setInput</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
 </code></pre></div></td></tr></tbody></table></div>
 <ul>
 <li>输入的类型由初始化时 <code>OptionalParams</code> 结构体中的 <code>input_type</code> 决定，可通过类方法 <code>get_input_type</code> 与 <code>set_input_type</code> 进行读取与重设定</li>
 </ul>
 <p>电机的发送与接收详见 <a href="https://zju-helloworld.github.io/Wiki/组件说明/嵌入式系统支持/板级支持包/通用通信驱动/">通用通信驱动</a> 中 CAN 或 FDCAN 部分的使用示例。</p>
 <p>接收到电机的反馈信号后，可以调用对应的类方法，获取电机的状态（包括输入电流，输出端力矩，输出端角度，输出端角速度等），如：</p>
-<div class="highlight"><table class="highlighttable"><tbody><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
-<span class="normal"><a href="#__codelineno-5-2">2</a></span>
-<span class="normal"><a href="#__codelineno-5-3">3</a></span>
-<span class="normal"><a href="#__codelineno-5-4">4</a></span>
-<span class="normal"><a href="#__codelineno-5-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">angle</span><span class="p">();</span><span class="w">                                </span><span class="c1">// 获取输出端角度</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">vel</span><span class="p">();</span><span class="w">                                  </span><span class="c1">// 获取输出端转速</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">torq</span><span class="p">();</span><span class="w">                                 </span><span class="c1">// 获取输出端的输出力矩</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">curr</span><span class="p">();</span><span class="w">                                 </span><span class="c1">// 获取电机的输入电流</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">hw_motor</span><span class="o">::</span><span class="n">M3508</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">motor_ptr</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">temp</span><span class="p">();</span><span class="w">  </span><span class="c1">// 获取电机温度（个别电机具有）</span>
+<div class="highlight"><table class="highlighttable"><tbody><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">angle</span><span class="p">();</span><span class="w">                                </span><span class="c1">// 获取输出端角度</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">vel</span><span class="p">();</span><span class="w">                                  </span><span class="c1">// 获取输出端转速</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">torq</span><span class="p">();</span><span class="w">                                 </span><span class="c1">// 获取输出端的输出力矩</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="n">motor_ptr</span><span class="o">-&gt;</span><span class="n">curr</span><span class="p">();</span><span class="w">                                 </span><span class="c1">// 获取电机的输入电流</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">hw_motor</span><span class="o">::</span><span class="n">M3508</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">motor_ptr</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">temp</span><span class="p">();</span><span class="w">  </span><span class="c1">// 获取电机温度（个别电机具有）</span>
 </code></pre></div></td></tr></tbody></table></div>
 <h2 id="3-调试技巧">3. 调试技巧<a class="headerlink" href="#3-调试技巧" title="链接到此节">¶</a></h2>
 <ol>
@@ -4268,11 +4167,10 @@
 <h3 id="宇树-go-m8010">宇树 GO-M8010<a class="headerlink" href="#宇树-go-m8010" title="链接到此节">¶</a></h3>
 <p><a href="../%E7%94%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/GO-M8010-6%E7%94%B5%E6%9C%BA%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C.pdf">GO-M8010 电机数据手册</a></p>
 <p><a href="../%E7%94%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/GO-M8010-6%E7%94%B5%E6%9C%BA%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8Cv1.2.pdf">GO-M8010 电机使用手册</a></p>
-<h3 id="dm-j4310-2ecdm-j8006">DM-J4310-2EC、DM-J8006<a class="headerlink" href="#dm-j4310-2ecdm-j8006" title="链接到此节">¶</a></h3>
-<p><a href="http://www.dmbot.cn/">达妙论坛</a></p>
-<h4 id="mf9025v2mg6012e-i36mg8016e-i6">MF9025v2、MG6012E-i36、MG8016E-i6<a class="headerlink" href="#mf9025v2mg6012e-i36mg8016e-i6" title="链接到此节">¶</a></h4>
-<p><a href="../%E7%94%B5%E6%9C%BA%E8%AE%BE%E5%A4%87%E7%BB%84%E4%BB%B6.assets/%E9%A2%86%E6%8E%A7%E7%94%B5%E6%9C%BA%E6%9D%90%E6%96%99.zip">领控电机附件</a></p>
-<h3 id="版本说明">版本说明<a class="headerlink" href="#版本说明" title="链接到此节">¶</a></h3>
+<h3 id="达妙电机">达妙电机<a class="headerlink" href="#达妙电机" title="链接到此节">¶</a></h3>
+<p><a href="https://gitee.com/kit-miao/damiao">达妙科技: 产品资料</a></p>
+<h4 id="瓴控电机">瓴控电机<a class="headerlink" href="#瓴控电机" title="链接到此节">¶</a></h4>
+<h3 id="下载中心-上海瓴控科技有限公司"><a href="http://www.lkmotor.cn/Download.aspx?ClassID=21">下载中心-上海瓴控科技有限公司</a><a class="headerlink" href="#下载中心-上海瓴控科技有限公司" title="链接到此节">¶</a></h3>
 <table>
 <thead>
 <tr>
@@ -4385,7 +4283,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2024年8月3日 02:27:56 UTC">2024-08-03</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025年12月13日 06:52:04 UTC">2025-12-13</span>
   </span>
 
     

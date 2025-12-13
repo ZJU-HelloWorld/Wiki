@@ -5167,9 +5167,7 @@
 </ol>
 <h4 id="h7-变量位置配置">H7 变量位置配置<a class="headerlink" href="#h7-变量位置配置" title="链接到此节">¶</a></h4>
 <p>对 H7 而言 DMA 可工作的区域<strong>必须大于 0x24000000</strong>（具体查看数据手册），因此需修改 CubeMx 生成的 STM32xxx_FLASH.ld 配置文件，具体方法为：</p>
-<ol>
-<li>在 <code>MEMORY</code> 中可看到 <code>RAM_D1</code> 区域满足位于 DMA 可工作范围内，将如下代码拷贝到 <code>SECTIONS</code> 之中（建议放 <code>._user_heap_stack</code> 后）</li>
-</ol>
+<p>在 <code>MEMORY</code> 中可看到 <code>RAM_D1</code> 区域满足位于 DMA 可工作范围内，将配置文件中的<code>.bss</code>和<code>.tbss</code>位置移动到<code>RAM_D1</code>中即可</p>
 <div class="highlight"><table class="highlighttable"><tbody><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -5185,29 +5183,82 @@
 <span class="normal"><a href="#__codelineno-3-13">13</a></span>
 <span class="normal"><a href="#__codelineno-3-14">14</a></span>
 <span class="normal"><a href="#__codelineno-3-15">15</a></span>
-<span class="normal"><a href="#__codelineno-3-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>/* Define output sections */
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span>
+<span class="normal"><a href="#__codelineno-3-24">24</a></span>
+<span class="normal"><a href="#__codelineno-3-25">25</a></span>
+<span class="normal"><a href="#__codelineno-3-26">26</a></span>
+<span class="normal"><a href="#__codelineno-3-27">27</a></span>
+<span class="normal"><a href="#__codelineno-3-28">28</a></span>
+<span class="normal"><a href="#__codelineno-3-29">29</a></span>
+<span class="normal"><a href="#__codelineno-3-30">30</a></span>
+<span class="normal"><a href="#__codelineno-3-31">31</a></span>
+<span class="normal"><a href="#__codelineno-3-32">32</a></span>
+<span class="normal"><a href="#__codelineno-3-33">33</a></span>
+<span class="normal"><a href="#__codelineno-3-34">34</a></span>
+<span class="normal"><a href="#__codelineno-3-35">35</a></span>
+<span class="normal"><a href="#__codelineno-3-36">36</a></span>
+<span class="normal"><a href="#__codelineno-3-37">37</a></span>
+<span class="normal"><a href="#__codelineno-3-38">38</a></span>
+<span class="normal"><a href="#__codelineno-3-39">39</a></span>
+<span class="normal"><a href="#__codelineno-3-40">40</a></span>
+<span class="normal"><a href="#__codelineno-3-41">41</a></span>
+<span class="normal"><a href="#__codelineno-3-42">42</a></span>
+<span class="normal"><a href="#__codelineno-3-43">43</a></span>
+<span class="normal"><a href="#__codelineno-3-44">44</a></span>
+<span class="normal"><a href="#__codelineno-3-45">45</a></span>
+<span class="normal"><a href="#__codelineno-3-46">46</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>/* Define output sections */
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a>SECTIONS
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a>{
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a>...
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a>/* ADD RAM_D1 section */
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a>.RAM_D1 :
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a>{
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a>. = ALIGN(4);
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a>*(.RAM_D1)
-<a id="__codelineno-3-11" name="__codelineno-3-11"></a>*(.RAM_D1.*)
-<a id="__codelineno-3-12" name="__codelineno-3-12"></a>. = ALIGN(4);
-<a id="__codelineno-3-13" name="__codelineno-3-13"></a>} &gt;RAM_D1
-<a id="__codelineno-3-14" name="__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a>...
-<a id="__codelineno-3-16" name="__codelineno-3-16"></a>}
-</code></pre></div></td></tr></tbody></table></div>
-<ol>
-<li>在需要 DMA 工作的变量的声明后补上 <code>__section("RAM_D1.&lt;VAR&gt;")</code>（<code>&lt;VAR&gt;</code>为变量名，为方便在 <code>*.map</code> 文件中查找），比如：</li>
-</ol>
-<div class="highlight"><table class="highlighttable"><tbody><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1">// uint8_t buf[32];</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="kt">uint8_t</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="mi">32</span><span class="p">]</span><span class="w"> </span><span class="n">__section</span><span class="p">(</span><span class="s">"RAM_D1.buf"</span><span class="p">);</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>/* Uninitialized data section */
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>  .tbss (NOLOAD) : ALIGN(4)
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>  {
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>     /* This is used by the startup in order to initialize the .bss secion */
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a>    _sbss = .;         /* define a global symbol at bss start */
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>    __bss_start__ = _sbss;
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a>    *(.tbss .tbss.*)
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>    . = ALIGN(4);
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a>    PROVIDE( __tbss_end = . );
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a>  } &gt;RAM_D1
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a>  PROVIDE( __tbss_start = ADDR(.tbss) );
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a>  PROVIDE( __tbss_size = __tbss_end - __tbss_start );
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a>  PROVIDE( __tbss_offset = ADDR(.tbss) - ADDR(.tdata) );
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a>  PROVIDE( __tls_base = __tdata_start );
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a>  PROVIDE( __tls_end = __tbss_end );
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a>  PROVIDE( __tls_size = __tls_end - __tls_base );
+<a id="__codelineno-3-24" name="__codelineno-3-24"></a>  PROVIDE( __tls_align = MAX(ALIGNOF(.tdata), ALIGNOF(.tbss)) );
+<a id="__codelineno-3-25" name="__codelineno-3-25"></a>  PROVIDE( __tls_size_align = (__tls_size + __tls_align - 1) &amp; ~(__tls_align - 1) );
+<a id="__codelineno-3-26" name="__codelineno-3-26"></a>  PROVIDE( __arm32_tls_tcb_offset = MAX(8, __tls_align) );
+<a id="__codelineno-3-27" name="__codelineno-3-27"></a>  PROVIDE( __arm64_tls_tcb_offset = MAX(16, __tls_align) );
+<a id="__codelineno-3-28" name="__codelineno-3-28"></a>
+<a id="__codelineno-3-29" name="__codelineno-3-29"></a>  .bss (NOLOAD) : ALIGN(4)
+<a id="__codelineno-3-30" name="__codelineno-3-30"></a>  {
+<a id="__codelineno-3-31" name="__codelineno-3-31"></a>    *(.bss)
+<a id="__codelineno-3-32" name="__codelineno-3-32"></a>    *(.bss*)
+<a id="__codelineno-3-33" name="__codelineno-3-33"></a>    *(COMMON)
+<a id="__codelineno-3-34" name="__codelineno-3-34"></a>
+<a id="__codelineno-3-35" name="__codelineno-3-35"></a>      . = ALIGN(4);
+<a id="__codelineno-3-36" name="__codelineno-3-36"></a>    _ebss = .;         /* define a global symbol at bss end */
+<a id="__codelineno-3-37" name="__codelineno-3-37"></a>    __bss_end__ = _ebss;
+<a id="__codelineno-3-38" name="__codelineno-3-38"></a>      PROVIDE( __bss_end = .);
+<a id="__codelineno-3-39" name="__codelineno-3-39"></a>  } &gt;RAM_D1
+<a id="__codelineno-3-40" name="__codelineno-3-40"></a>  PROVIDE( __non_tls_bss_start = ADDR(.bss) );
+<a id="__codelineno-3-41" name="__codelineno-3-41"></a>
+<a id="__codelineno-3-42" name="__codelineno-3-42"></a>  PROVIDE( __bss_start = __tbss_start );
+<a id="__codelineno-3-43" name="__codelineno-3-43"></a>  PROVIDE( __bss_size = __bss_end - __bss_start );
+<a id="__codelineno-3-44" name="__codelineno-3-44"></a>
+<a id="__codelineno-3-45" name="__codelineno-3-45"></a>...
+<a id="__codelineno-3-46" name="__codelineno-3-46"></a>}
 </code></pre></div></td></tr></tbody></table></div>
 <p>如此变量便可以编译到指定的位置上。</p>
 <blockquote>
@@ -5247,7 +5298,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2024年8月8日 05:57:01 UTC">2024-08-08</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025年12月13日 06:52:04 UTC">2025-12-13</span>
   </span>
 
     
