@@ -354,18 +354,30 @@ void Task()
 提供了四种构造函数，通用参数为多节点 PID 控制器的类型和输出限幅，不同的是指定节点数量和初始化数据的方式。其中，多节点 PID 控制器的输出限幅与其内部节点 PID 的输出限幅完全无关，即，其内部节点 PID 的输出限幅需要单独设置。
 
 ```cpp
-// 实例化三节点的串行 PID 控制器，多节点 PID 控制的输出限制为 -16000 ~ 16000，内部节点参数均为默认值
-hw_pid::MultiNodesPid cascade_pid(hw_pid::kMultiNodesPidTypeCascade, hw_pid::OutLimit(true, -16000, 16000), 3);
-// 节点参数修改
-multi_nodes_pid.paramsAt(0).kp = 0.6;
-multi_nodes_pid.paramsAt(1).kp = 0.6;
-multi_nodes_pid.paramsAt(2) = {
-  .auto_reset = false,
-  .out_limit = hw_pid::OutLimit(true, -7, 7),
+// 实例化两节点的串行 PID 控制器
+const hw_pid::OutLimit kOutLimit = hw_pid::OutLimit(true, -10.0f, 10.0f);
+const hw_pid::MultiNodesPid::ParamsList kPidParams = {
+    {
+        .auto_reset = true,
+        .kp = 32.0,
+        .ki = 0.001,
+        .kd = 0,
+        .out_limit = hw_pid::OutLimit(true, -5.0, 5.0),
+    },
+    {
+        .auto_reset = true,
+        .kp = 15.5,
+        .ki = 0,
+        .kd = 0,
+        .out_limit = kOutLimit,
+    },
 };
+const hw_pid::MultiNodesPid::Type kPidTypeCascade =
+    hw_pid::MultiNodesPid::Type::kCascade;
+hw_pid::MultiNodesPid unique_cascade_pid(kPidTypeCascade, kOutLimit,kPidParams);
 // 实例化三节点的并行 PID 控制器，多节点 PID 控制的输出限制为 -16000 ~ 16000，内部节点参数在初始化时指定
 const hw_pid::MultiNodesPid::Params params_arr[3] = {{...}, {...}, {...}};
-hw_pid::MultiNodesPid parallel_pid(hw_pid::kMultiNodesPidTypeParallel, hw_pid::OutLimit(true, -16000, 16000), hw_pid::MultiNodesPid::ParamsList(params_arr, params_arr+3));
+hw_pid::MultiNodesPid parallel_pid(hw_pid::MultiNodesPid::Type::kParallel, hw_pid::OutLimit(true, -16000, 16000), hw_pid::MultiNodesPid::ParamsList(params_arr, params_arr+3));
 ```
 
 #### 计算
@@ -421,7 +433,7 @@ void Task()
 ```cpp
 void Task()
 {
-  static hw_hello_world::pid::MultiNodesPid::Params params = pid_ptr->getParamsAt(0);
+  static hello_world::pid::MultiNodesPid::Params params = pid_ptr->getParamsAt(0);
   pid_ptr->getParamsAt(0) = params;
 }
 ```
@@ -429,7 +441,7 @@ void Task()
 或是
 
 ```cpp
-static pid::MultiNodesPid::Params* params = nullptr;
+static hello_world::pid::MultiNodesPid::Params* params = nullptr;
 
 void Task()
 {
